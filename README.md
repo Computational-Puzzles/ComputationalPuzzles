@@ -11,10 +11,14 @@ DATABASE_URL="postgresql://computational_puzzles:computational_puzzles@localhost
 ```
 Then run the following lines in the terminal
 ```bash
+docker-compose up -d db
 npm i
 npm run dev
 ```
-
+To add database manually
+```bash
+npx prisma studio
+```
 
 ## Start production server
 ```bash

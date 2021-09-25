@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npx prisma migrate dev && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^0.5.2-next.15",
-    "@prisma/client": "^3.0.2",
+    "@prisma/client": "^3.1.1",
+    "fs": "^0.0.1-security",
     "next": "11.1.2",
-    "next-auth": "^4.0.0-beta.2",
-    "prisma": "^3.0.2",
+    "next-auth": "^4.0.0",
+    "prisma": "^3.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "sass": "^1.42.0"
