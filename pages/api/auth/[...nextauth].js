@@ -38,14 +38,10 @@ const Auth = NextAuth({
 
         // If the user doesn't exist, create new user
         if (!user) {
-          const newUser = await createUser({
+          return Promise.resolve(await createUser({
             email: credentials.email,
             password: hashFunction(credentials.password),
-          })
-
-          console.log(newUser)
-
-          return Promise.resolve(newUser)
+          }))
         }
 
 
