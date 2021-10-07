@@ -48,7 +48,7 @@ model User {
   createdAt     DateTime  @default(now()) @map(name: "createdAt")
   updatedAt     DateTime  @default(now()) @map(name: "updatedAt")
 
-  Submission Submission[]
+  submissions Submission[]
   @@map(name: "users")
 }
 
@@ -69,7 +69,7 @@ model PuzzleType {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  Puzzle Puzzle[]
+  puzzles Puzzle[]
   @@map(name: "puzzle_types")
 }
 
@@ -108,4 +108,3 @@ model Submission {
 
   @@map(name: "submissions")
 }
-v
