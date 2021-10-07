@@ -8,7 +8,7 @@ generator client {
 }
 
 model Account {
-  id                 Int       @default(autoincrement()) @id
+  id                 Int       @id @default(autoincrement())
   compoundId         String    @unique @map(name: "compoundId")
   userId             Int       @map(name: "userId")
   providerType       String    @map(name: "providerType")
@@ -19,6 +19,7 @@ model Account {
   accessTokenExpires DateTime? @map(name: "accessTokenExpires")
   createdAt          DateTime  @default(now()) @map(name: "createdAt")
   updatedAt          DateTime  @default(now()) @map(name: "updatedAt")
+
   @@index([providerAccountId], name: "providerAccountId")
   @@index([providerId], name: "providerId")
   @@index([userId], name: "userId")
@@ -26,18 +27,19 @@ model Account {
 }
 
 model Session {
-  id           Int      @default(autoincrement()) @id
+  id           Int      @id @default(autoincrement())
   userId       Int      @map(name: "userId")
   expires      DateTime
   sessionToken String   @unique @map(name: "sessionToken")
   accessToken  String   @unique @map(name: "accessToken")
   createdAt    DateTime @default(now()) @map(name: "createdAt")
   updatedAt    DateTime @default(now()) @map(name: "updatedAt")
+
   @@map(name: "sessions")
 }
 
 model User {
-  id            Int       @default(autoincrement()) @id
+  id            Int       @id @default(autoincrement())
   email         String?   @unique
   password      String?
   name          String?
@@ -45,15 +47,65 @@ model User {
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "createdAt")
   updatedAt     DateTime  @default(now()) @map(name: "updatedAt")
+
+  Submission Submission[]
   @@map(name: "users")
 }
 
 model VerificationRequest {
-  id         Int      @default(autoincrement()) @id
+  id         Int      @id @default(autoincrement())
   identifier String
   token      String   @unique
   expires    DateTime
   createdAt  DateTime @default(now()) @map(name: "createdAt")
   updatedAt  DateTime @default(now()) @map(name: "updatedAt")
+
   @@map(name: "verificationRequests")
 }
+
+model PuzzleType {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  Puzzle Puzzle[]
+  @@map(name: "puzzle_types")
+}
+
+model Puzzle {
+  id              Int          @id @default(autoincrement())
+  name            String?      @unique
+  createdAt       DateTime     @default(now()) @map(name: "created_at")
+  updatedAt       DateTime     @updatedAt @map(name: "updated_at")
+  content         String?
+  imageUrl        String?      @map(name: "image_url")
+  exampleContent  String?      @map(name: "example_content")
+  exampleImageUrl String?      @map(name: "example_image_url")
+  isGenerated     Boolean      @map(name: "is_generated")
+  question        String
+  published       Boolean      @default(false)
+  variables       Json
+  type            PuzzleType   @relation(fields: [puzzleTypeId], references: [id])
+  puzzleTypeId    Int          @map(name: "puzzle_type_id")
+  submissions     Submission[]
+
+  @@map(name: "puzzles")
+}
+
+model Submission {
+  id         Int       @id @default(autoincrement())
+  name       String?   @unique
+  createdAt  DateTime  @default(now()) @map(name: "created_at")
+  updatedAt  DateTime  @updatedAt @map(name: "updated_at")
+  puzzle     Puzzle    @relation(fields: [puzzleId], references: [id])
+  puzzleId   Int       @map(name: "puzzle_id")
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int       @map(name: "user_id")
+  answer     String[]
+  isCorrect  Boolean[] @map(name: "is_correct")
+  randomSeed Int[]     @map(name: "random_seed")
+
+  @@map(name: "submissions")
+}
+v
