@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx prisma migrate dev && next dev",
+    "dev": "docker-compose up -d db && npx prisma migrate dev && next dev",
     "build": "next build",
     "start": "npx prisma generate && next start",
     "lint": "next lint"
