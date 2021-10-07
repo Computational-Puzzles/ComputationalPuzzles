@@ -86,7 +86,7 @@ model Puzzle {
   question        String
   published       Boolean      @default(false)
   variables       Json
-  type            PuzzleType   @relation(fields: [puzzleTypeId], references: [id])
+  puzzleType      PuzzleType   @relation(fields: [puzzleTypeId], references: [id])
   puzzleTypeId    Int          @map(name: "puzzle_type_id")
   submissions     Submission[]
 
