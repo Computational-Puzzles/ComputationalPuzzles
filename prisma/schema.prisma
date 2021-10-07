@@ -39,16 +39,16 @@ model Session {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  email         String?   @unique
+  id            Int          @id @default(autoincrement())
+  email         String?      @unique
   password      String?
   name          String?
-  emailVerified DateTime? @map(name: "emailVerified")
+  emailVerified DateTime?    @map(name: "emailVerified")
   image         String?
-  createdAt     DateTime  @default(now()) @map(name: "createdAt")
-  updatedAt     DateTime  @default(now()) @map(name: "updatedAt")
+  createdAt     DateTime     @default(now()) @map(name: "createdAt")
+  updatedAt     DateTime     @default(now()) @map(name: "updatedAt")
+  submissions   Submission[]
 
-  submissions Submission[]
   @@map(name: "users")
 }
 
@@ -68,8 +68,8 @@ model PuzzleType {
   name      String   @unique @db.VarChar(255)
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
+  puzzles   Puzzle[]
 
-  puzzles Puzzle[]
   @@map(name: "puzzle_types")
 }
 
@@ -95,7 +95,6 @@ model Puzzle {
 
 model Submission {
   id         Int       @id @default(autoincrement())
-  name       String?   @unique
   createdAt  DateTime  @default(now()) @map(name: "created_at")
   updatedAt  DateTime  @updatedAt @map(name: "updated_at")
   puzzle     Puzzle    @relation(fields: [puzzleId], references: [id])
