@@ -8,6 +8,8 @@ services:
       - "3000:3000"
     volumes:
       - app:/app
+    depends_on:
+      - db
     networks:
       - app_network
   
@@ -22,8 +24,6 @@ services:
     restart: always
     ports:
       - "5432:5432"
-    depends_on:
-      - app
     networks:
       - app_network
 
