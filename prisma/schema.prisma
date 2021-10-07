@@ -84,6 +84,7 @@ model Puzzle {
   exampleImageUrl String?      @map(name: "example_image_url")
   isGenerated     Boolean      @map(name: "is_generated")
   question        String
+  hint            String
   published       Boolean      @default(false)
   variables       Json
   puzzleType      PuzzleType   @relation(fields: [puzzleTypeId], references: [id])
@@ -101,7 +102,7 @@ model Submission {
   puzzleId   Int       @map(name: "puzzle_id")
   user       User      @relation(fields: [userId], references: [id])
   userId     Int       @map(name: "user_id")
-  answer     String[]
+  answers    String[]
   isCorrect  Boolean[] @map(name: "is_correct")
   randomSeed Int[]     @map(name: "random_seed")
 
