@@ -19,7 +19,6 @@ GITHUB_CLIENT_SECRET=977ed0034007c155e37c87635d2e71809a41a48b
 ```
 Then run the following lines in the terminal
 ```bash
-docker-compose up -d db
 npm i
 npm run dev
 ```
