@@ -8,14 +8,14 @@ const Home = () => {
     return (
       <>
         <h1>Logged in</h1>
-        <button onClick={() => signOut()}>Logout</button>
+        <button onClick={ () => signOut() }>Logout</button>
       </>
     )
-  }  
+  }
   return (
     <>
       <h1>Not logged in</h1>
-      <button onClick={() => signIn()}>Login</button>
+      <button onClick={ () => signIn() }>Login</button>
     </>
   )
 }
