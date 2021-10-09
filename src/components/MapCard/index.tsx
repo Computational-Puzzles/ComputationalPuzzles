@@ -10,11 +10,22 @@ type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({ title, desc, diff }) => {
+
+	const Diff = () => {
+		if (diff === 'Easy') {
+			return (<span className={styles.easy}>{diff}</span>);
+		} else if (diff === 'Medium') {
+			return (<span className={styles.medium}>{diff}</span>);
+		} else if (diff === 'Hard') {
+			return (<span className={styles.hard}>{diff}</span>);
+		}
+	}
+
 	return (
 		<div className={styles.card}>
 			<div className={styles.cardHeader}>
 				<p className={styles.title}>{title}</p>
-				<p className={styles.difficulty}>Difficulty: <span>{diff}</span></p>
+				<p className={styles.difficulty}>Difficulty: <Diff /> </p>
 			</div>
 			<p>{desc}</p>
 			<button>
