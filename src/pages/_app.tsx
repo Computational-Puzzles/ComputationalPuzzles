@@ -9,8 +9,8 @@ const MyApp: React.FC<AppProps> = ({
 	pageProps: { session, initStore, ...pageProps }
 }) => {
 	return (
-		<SessionProvider session={session}>
-		<Component {...pageProps} />
+		<SessionProvider session={ session }>
+			<Component { ...pageProps } />
 		</SessionProvider>
 	)
 };
