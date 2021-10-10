@@ -1,15 +1,14 @@
 import * as React from 'react';
 
-import Arrow from '../../assets/arrow.svg';
 import styles from './mapCard.module.scss';
 
-type CardProps = {
+export type MapCardProps = {
 	title: string;
 	desc: string;
 	diff: 'Easy' | 'Medium' | 'Hard';
 };
 
-const Card: React.FC<CardProps> = ({ title, desc, diff }) => {
+const Card: React.FC<MapCardProps> = ({ title, desc, diff }) => {
 
 	const Diff = () => {
 		if (diff === 'Easy') {
