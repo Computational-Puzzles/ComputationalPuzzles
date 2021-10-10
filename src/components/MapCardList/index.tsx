@@ -6,12 +6,10 @@ import type { MapCardProps } from '../MapCard';
 import styles from './MapCardList.module.scss';
 
 const MapCardList: React.FC<{cardList: MapCardProps[]}> = ({ cardList }) => {
-    console.log(cardList);
-
     return (
         <div className={styles.cardList}>
             {cardList.map((card, index) => {
-                return <MapCard {...card} key={`card ${index}`}/>
+                return <MapCard {...card} key={`card ${index + 1}`}/>
             })}
         </div>
     )
