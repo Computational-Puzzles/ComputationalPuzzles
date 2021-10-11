@@ -1,3 +1,6 @@
+# JetBrains IDEA
+.idea
+
 # next.js build output
 .next
 *.d.ts
