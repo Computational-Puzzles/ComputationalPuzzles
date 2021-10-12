@@ -1,10 +1,17 @@
 $primary-color: #f16b67;
+ 
+.cardHeightNone {
+    height: 168px;
+}
+
+.cardHeightButton {
+    height: 240px;
+}
 
 .card {
     background-color: white;
     border-radius: 11px;
     border: 2px solid black;
-    height: 240px;
     width: 448px;
     padding: 24px 20px;
     margin: 20px;

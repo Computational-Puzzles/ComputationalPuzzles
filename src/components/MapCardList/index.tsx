@@ -9,7 +9,7 @@ const MapCardList: React.FC<{cardList: MapCardProps[]}> = ({ cardList }) => {
     return (
         <div className={styles.cardList}>
             {cardList.map((card, index) => {
-                return <MapCard {...card} key={`card ${index + 1}`}/>
+                return <MapCard {...card}  type='list' key={`card ${index + 1}` }/>
             })}
         </div>
     )
