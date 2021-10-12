@@ -1,0 +1,12 @@
+.cardList {
+    width: 500px;
+    height: 100vh;
+    overflow: auto;
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+    }
+}
