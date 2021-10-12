@@ -1,3 +1,6 @@
+# development environment
+.vscode/
+
 # next.js build output
 .next
 
