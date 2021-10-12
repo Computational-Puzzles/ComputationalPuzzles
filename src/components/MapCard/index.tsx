@@ -27,6 +27,23 @@ const ConditionalCard: React.FC<{ type: 'list' | 'grid' }> = ({ type }) => {
 				</span>
 			</button>
 		)
+	} else if (type === 'grid') {
+		return (
+			<div className={styles.buttonWrap}>
+				<button>
+					<p>View Map</p>
+					<span className={styles.arrowBox}>
+						<Arrow />
+					</span>
+				</button>
+				<button>
+					<p>Solve Online</p>
+					<span className={styles.arrowBox}>
+						<Arrow />
+					</span>
+				</button>
+			</div>
+		)
 	}
 }
 
