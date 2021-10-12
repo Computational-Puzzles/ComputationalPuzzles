@@ -5,8 +5,8 @@ import styles from './mapCard.module.scss';
 export type MapCardProps = {
 	title: string;
 	desc: string;
-	diff: 'Easy' | 'Medium' | 'Hard';
-	type?: 'list' | 'grid';
+	diff: 'EASY' | 'MEDIUM' | 'HARD';
+	type?: 'LIST' | 'GRID';
 };
 
 const Arrow: React.FC = () => {
@@ -17,27 +17,30 @@ const Arrow: React.FC = () => {
 	);
 }
 
-const ConditionalCard: React.FC<{ type: 'list' | 'grid' }> = ({ type }) => {
-	if (type === 'list') {
+/**
+ * Show 1 or 2 buttons depending on the type of the card
+ */
+const Buttons: React.FC<{ type: 'LIST' | 'GRID' }> = ({ type }) => {
+	if (type === 'LIST') {
 		return (
 			<button>
-				<p>Solve Online</p>
+				Solve Online
 				<span className={styles.arrowBox}>
 					<Arrow />
 				</span>
 			</button>
 		)
-	} else if (type === 'grid') {
+	} else if (type === 'GRID') {
 		return (
 			<div className={styles.buttonWrap}>
 				<button>
-					<p>View Map</p>
+					View Map
 					<span className={styles.arrowBox}>
 						<Arrow />
 					</span>
 				</button>
 				<button>
-					<p>Solve Online</p>
+					Solve Online
 					<span className={styles.arrowBox}>
 						<Arrow />
 					</span>
@@ -47,26 +50,28 @@ const ConditionalCard: React.FC<{ type: 'list' | 'grid' }> = ({ type }) => {
 	}
 }
 
-const Card: React.FC<MapCardProps> = ({ title, desc, diff, type }) => {
-
-	const Diff = () => {
-		if (diff === 'Easy') {
-			return (<span className={styles.easy}>{diff}</span>);
-		} else if (diff === 'Medium') {
-			return (<span className={styles.medium}>{diff}</span>);
-		} else if (diff === 'Hard') {
-			return (<span className={styles.hard}>{diff}</span>);
-		}
+/**
+ * Adjust color of the difficulty text
+ */
+const Difficulty: React.FC<{ diff: 'EASY' | 'MEDIUM' | 'HARD' }> = ({ diff }) => {
+	if (diff === 'EASY') {
+		return (<span className={styles.easy}>{diff}</span>);
+	} else if (diff === 'MEDIUM') {
+		return (<span className={styles.medium}>{diff}</span>);
+	} else if (diff === 'HARD') {
+		return (<span className={styles.hard}>{diff}</span>);
 	}
+}
 
+const Card: React.FC<MapCardProps> = ({ title, desc, diff, type }) => {
 	return (
-		<div className={`${styles.card} ${type ? styles.cardHeightButton : styles.cardHeightNone}`}>
+		<div className={`${styles.card} ${type ? styles.cardHeightButton : styles.cardHeightDefault}`}>
 			<div className={styles.cardHeader}>
 				<p className={styles.title}>{title}</p>
-				<p className={styles.difficulty}>Difficulty: <Diff /> </p>
+				<p className={styles.difficulty}>Difficulty: <Difficulty diff={diff}/> </p>
 			</div>
-			<p>{desc}</p>
-			{type && <ConditionalCard type={type} />}
+			{desc}
+			{type && <Buttons type={type} />}
 		</div>
 	);
 }

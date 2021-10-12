@@ -1,20 +1,25 @@
 $primary-color: #f16b67;
+$green: #05C05B;
+$blue: #3BB2C8;
+$red: #D7222C;
+$white: white;
+$black: black;
  
-.cardHeightNone {
-    height: 168px;
+.cardHeightDefault {
+    height: 10.5rem;
 }
 
 .cardHeightButton {
-    height: 240px;
+    height: 15rem;
 }
 
 .card {
-    background-color: white;
+    background-color: $white;
     border-radius: 11px;
-    border: 2px solid black;
-    width: 448px;
-    padding: 24px 20px;
-    margin: 20px;
+    border: 0.13rem solid $black;
+    width: 28rem;
+    padding: 1.5rem 1.25rem;
+    margin: 1.25rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,57 +31,58 @@ $primary-color: #f16b67;
         align-items: flex-end;
 
         .title {
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: 900;
         }
 
         .difficulty {
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: 800;
             
             .easy {
-                color: #05C05B;
+                color: $green;
             }
 
             .medium {
-                color: #3BB2C8;
+                color: $blue;
             }
 
             .hard {
-                color: #D7222C;
+                color: $red;
             }
         }
     }
-    .buttonWrap {
+
+    button {
+        width: 8.875rem;
+        height: 2.5rem;
+        border-radius: 0.375rem;
+        border: none;
+        background-color: $primary-color;
+        color: $white;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-right: 1.25rem; // This will not affect 1 button case
 
-        button {
-            width: 142px;
-            height: 40px;
-            border-radius: 6px;
-            border: none;
-            background-color: $primary-color;
-            color: white;
+        .arrowBox {
+            width: 1.67rem;
+            height: 1.67rem;
+            left: 6.875rem;
+            top: 9rem;
+            background-color: $white;
+            border-radius: 4.26px;
             display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-right: 19px; // This will not affect 1 button case
 
-            .arrowBox {
-                width: 26.81px;
-                height: 26.81px;
-                left: 110px;
-                top: 143.7px;
-                background-color: #FFFFFF;
-                border-radius: 4.26456px;
-                display: flex;
-    
-                svg {
-                    margin: auto;
-                }
+            svg {
+                margin: auto;
             }
         }
     }
+}
+
+.buttonWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
