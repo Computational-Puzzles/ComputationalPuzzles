@@ -1,5 +1,6 @@
 # development environment
 .vscode/
+.idea
 
 # next.js build output
 .next

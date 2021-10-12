@@ -16,6 +16,8 @@ LINKEDIN_CLIENT_ID=notyetcreated
 LINKEDIN_CLIENT_SECRET=notyetcreated
 GITHUB_CLIENT_ID=Iv1.ed27403666d384d5
 GITHUB_CLIENT_SECRET=977ed0034007c155e37c87635d2e71809a41a48b
+JWT_SECRET=secret
+NEXTAUTH_URL=http://localhost:3000
 ```
 Then run the following lines in the terminal
 ```bash
