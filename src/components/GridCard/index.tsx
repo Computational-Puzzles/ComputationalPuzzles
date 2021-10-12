@@ -9,7 +9,7 @@ const GridCard: React.FC<{ cardList: MapCardProps[] }> = ({ cardList }) => {
     return (
         <div className={styles.cardGrid}>
             {cardList.map((card, index) => {
-                return <MapCard {...card} key={`card ${index}`}/>
+                return <MapCard {...card} type='grid' key={`card ${index}`}/>
             })}
         </div>
     );

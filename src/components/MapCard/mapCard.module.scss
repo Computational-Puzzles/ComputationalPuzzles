@@ -1,10 +1,17 @@
 $primary-color: #f16b67;
+ 
+.cardHeightNone {
+    height: 168px;
+}
+
+.cardHeightButton {
+    height: 240px;
+}
 
 .card {
     background-color: white;
     border-radius: 11px;
     border: 2px solid black;
-    height: 240px;
     width: 448px;
     padding: 24px 20px;
     margin: 20px;
@@ -41,29 +48,35 @@ $primary-color: #f16b67;
         }
     }
 
-    button {
-        width: 142px;
-        height: 40px;
-        border-radius: 6px;
-        border: none;
-        background-color: $primary-color;
-        color: white;
+    .buttonWrap {
         display: flex;
-        justify-content: space-evenly;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
 
-        // draw a square
-        .arrowBox {
-            width: 26.81px;
-            height: 26.81px;
-            left: 110px;
-            top: 143.7px;
-            background-color: #FFFFFF;
-            border-radius: 4.26456px;
+        button {
+            width: 142px;
+            height: 40px;
+            border-radius: 6px;
+            border: none;
+            background-color: $primary-color;
+            color: white;
             display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-right: 19px; // This will not affect 1 button case
 
-            svg {
-                margin: auto;
+            .arrowBox {
+                width: 26.81px;
+                height: 26.81px;
+                left: 110px;
+                top: 143.7px;
+                background-color: #FFFFFF;
+                border-radius: 4.26456px;
+                display: flex;
+    
+                svg {
+                    margin: auto;
+                }
             }
         }
     }
