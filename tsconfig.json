@@ -23,7 +23,8 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src",
+    "additional.d.ts",
   ],
   "exclude": [
     "node_modules"
