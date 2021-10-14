@@ -1,9 +1,33 @@
+@import "abstracts/_variables";
+@import "abstracts/_mixins";
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Nunito+Sans:wght@900&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+h1 {
+  font-size: 3.4rem;
+  line-height: 4.5rem;
+}
+
+h2 {
+  font-size: 2.6rem;
+  line-height: 3.6rem;
+}
+
+h3 {
+  font-size: 1.7rem;
+  line-height: 2.3rem;
 }
 
 a {
