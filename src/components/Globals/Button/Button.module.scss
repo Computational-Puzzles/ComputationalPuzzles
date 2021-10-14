@@ -1,0 +1,85 @@
+@import 'styles/abstracts/_variables';
+
+$btn-border-width: 0.2rem;
+$btn-font-weight: 700;
+
+.btn {
+  background-color: $transparent;
+  font-weight: $btn-font-weight;
+  display: inline-block;
+  text-align: center;
+  white-space: normal;
+  vertical-align: middle;
+  border: $btn-border-width solid transparent;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.45rem;
+  border-width: 0.1rem solid $transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.btnPrimary {
+  @extend .btn;
+  color: $white;
+  background-color: $primary-100;
+  border-color: $primary-100;
+  &:hover {
+    background-color: $primary-200;
+    border-color: $primary-200;
+  }
+}
+
+.btnSecondary {
+  @extend .btn;
+  color: $white;
+  background-color: $secondary-100;
+  border-color: $secondary-100;
+  &:hover {
+    background-color: $secondary-200;
+    border-color: $secondary-200;
+  }
+}
+
+.btnOutline {
+  @extend .btn;
+  color: $black;
+  background-color: $transparent;
+  border-color: $black;
+  &:hover {
+    background-color: $grey;
+  }
+
+  .arrowBox {
+    background-color: $transparent;
+  }
+}
+
+.btnFlexContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-between;
+}
+
+$content-height: 2rem;
+
+.arrowBox {
+  width: 2rem;
+  height: $content-height;
+  background-color: $white;
+  border-radius: 0.25rem;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.btnTextContainer {
+  height: $content-height;
+  display: flex;
+  align-items: center;
+}
+
+
+
