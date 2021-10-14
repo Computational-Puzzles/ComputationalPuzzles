@@ -1,13 +1,30 @@
 @import "abstracts/_variables";
 @import "abstracts/_mixins";
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Nunito+Sans:wght@900&display=swap');
+@font-face {
+  font-family: "Nunito";
+  src: url('../public/fonts/Nunito/Nunito-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url('../public/fonts/Nunito/Nunito-Regular.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url('../public/fonts/Nunito_Sans/NunitoSans-Black.ttf') format('truetype');
+  font-weight: 900;
+}
 
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: 'Nunito', sans-serif;
+  font-weight: 400;
   font-size: 14px;
 }
 
