@@ -3,9 +3,17 @@
 $btn-border-width: 0.2rem;
 $btn-font-weight: 700;
 
+.center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn {
-  background-color: $transparent;
+  font-family: 'Nunito', sans-serif;
   font-weight: $btn-font-weight;
+  background-color: $transparent;
   display: inline-block;
   text-align: center;
   white-space: normal;
@@ -57,28 +65,34 @@ $btn-font-weight: 700;
 }
 
 .btnFlexContent {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  @extend .center;
   align-content: space-between;
 }
 
 $content-height: 2rem;
 
 .arrowBox {
+  @extend .center;
   width: 2rem;
   height: $content-height;
   background-color: $white;
   border-radius: 0.25rem;
   margin-left: 1rem;
-  display: flex;
-  flex-direction: row;
 }
 
 .btnTextContainer {
   height: $content-height;
   display: flex;
   align-items: center;
+}
+
+.arrow {
+  @extend .center;
+  svg {
+    path {
+      fill: $black;
+    }
+  }
 }
 
 
