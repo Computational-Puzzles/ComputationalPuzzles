@@ -1,0 +1,10 @@
+@import 'styles/abstracts/_variables';
+
+.puzzleDescription {
+  z-index: 2;
+  background-color: $white;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
