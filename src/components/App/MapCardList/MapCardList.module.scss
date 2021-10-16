@@ -1,11 +1,11 @@
 .cardList {
-    width: 31.25rem;
-    height: 100vh;
-    overflow: auto;
+  width: 31.25rem;
+  height: 100vh;
+  overflow: auto;
 
-    .list {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
+  .list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 }
