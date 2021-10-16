@@ -3,20 +3,12 @@ import { sha256 } from 'hash.js';
 
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-import FacebookProvider from 'next-auth/providers/facebook';
-import LinkedinProvider from 'next-auth/providers/linkedin';
-import GithubProvider from 'next-auth/providers/github';
 
 import { PrismaClient } from '@prisma/client';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
-import {
-  google,
-  facebook,
-  github,
-  linkedin,
-  jwtSecret
-} from '../../../../config';
+import { env } from '../../../../next.config.js';
+const { google, jwtSecret } = env;
 
 const prisma = new PrismaClient();
 
@@ -45,11 +37,10 @@ const Auth = NextAuth({
         }
       },
       async authorize(credentials) {
-        const { createUser, getUserByEmail } = PrismaAdapter(prisma);
+        const { getUserByEmail } = PrismaAdapter(prisma);
 
         const user = await getUserByEmail(credentials.email);
 
-        // If the user doesn't exist, create new user
         if (!user) return null;
 
         const isPasswordCorrect =
@@ -65,18 +56,6 @@ const Auth = NextAuth({
       clientId: google.clientId,
       clientSecret: google.clientSecret
     }),
-    FacebookProvider({
-      clientId: facebook.clientId,
-      clientSecret: facebook.clientSecret
-    }),
-    LinkedinProvider({
-      clientId: linkedin.clientId,
-      clientSecret: linkedin.clientSecret
-    }),
-    GithubProvider({
-      clientId: github.clientId,
-      clientSecret: github.clientSecret
-    })
   ]
 });
 
