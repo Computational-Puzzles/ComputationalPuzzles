@@ -2,6 +2,9 @@ $transparent: rgba(#fff, 0);
 $black: #1F201F;
 $grey: #4B4B4B;
 $white: #FFFFFF;
+$green: #05C05B;
+$red: #D7222C;
+$yellow: #FFC32B;
 
 $primary-100: #F16B67;
 $primary-200: #ED4E4A;
@@ -11,8 +14,11 @@ $secondary-100: #3BB2C8;
 $secondary-200: #2E8595;
 $secondary-300: #1E6977;
 
-$green: #05C05B;
-$red: #D7222C;
-$yellow: #FFC32B;
+$primary: $primary-100;
+$secondary: $secondary-100;
+$success: $green;
+$warning: $yellow;
+$danger: $red;
+$info: $white;
 
 $shadow-color: rgba($black, 0.15);
