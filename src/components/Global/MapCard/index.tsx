@@ -64,9 +64,9 @@ const Buttons = ({ type }: { type: 'LIST' | 'GRID' }) => {
  */
 const Difficulty = ({ diff }: { diff: 'EASY' | 'MEDIUM' | 'HARD' }) => {
   if (diff === 'EASY') {
-    return <span className={styles.easy}>{diff}</span>;
+    return <span className={styles.easy}>Easy</span>;
   } else if (diff === 'MEDIUM') {
-    return <span className={styles.medium}>{diff}</span>;
+    return <span className={styles.medium}>Medium</span>;
   } else if (diff === 'HARD') {
     return <span className={styles.hard}>{diff}</span>;
   }
@@ -82,7 +82,7 @@ const Card = ({ title, desc, diff, type }: MapCardProps) => {
       <div className={styles.cardHeader}>
         <p className={styles.title}>{title}</p>
         <p className={styles.difficulty}>
-          Difficulty: <Difficulty diff={diff} />{' '}
+          Difficulty: <Difficulty diff={diff} />
         </p>
       </div>
       {desc}

@@ -28,7 +28,7 @@ $black: black;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 
     .title {
       font-size: 1.5rem;
@@ -37,7 +37,7 @@ $black: black;
 
     .difficulty {
       font-size: 0.875rem;
-      font-weight: 800;
+      font-weight: 700;
 
       .easy {
         color: $green;
