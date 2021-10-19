@@ -8,7 +8,7 @@ type LogoProps = {
   showType: boolean;
 };
 
-const Logo = ({ showMark, showType }: LogoProps): JSX.Element => {
+const Logo = ({ showMark, showType }: LogoProps) => {
   return (
     <div className={logoStyles.logo}>
       <div className={logoStyles.mark}>
