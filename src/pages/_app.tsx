@@ -2,7 +2,7 @@ import React from 'react';
 import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 
-import '../styles/globals.scss';
+import '../styles/globals.scss'
 
 const MyApp: React.FC<AppProps> = ({
   Component,
