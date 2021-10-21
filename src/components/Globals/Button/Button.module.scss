@@ -1,27 +1,21 @@
-@import 'styles/abstracts/_variables';
+@import 'src/styles/abstracts/_variables';
+@import 'src/styles/abstracts/_mixins/layout';
+@import 'src/styles/abstracts/_mixins/transitions';
 
 $btn-border-width: 0.2rem;
-$btn-font-weight: 700;
-
-.center {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
 
 .btn {
-  font-family: 'Nunito', sans-serif;
-  font-weight: $btn-font-weight;
+  @include center;
+  @include smooth-transition;
   background-color: $transparent;
-  display: inline-block;
-  text-align: center;
-  white-space: normal;
-  vertical-align: middle;
-  border: $btn-border-width solid transparent;
-  padding: 0.5rem 0.8rem;
-  border-radius: 0.45rem;
-  border-width: 0.1rem solid $transparent;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.5rem;
+
+  border: $btn-border-width solid $transparent;
+  border-radius: 0.48rem;
 
   &:hover {
     cursor: pointer;
@@ -31,8 +25,9 @@ $btn-font-weight: 700;
 .btnPrimary {
   @extend .btn;
   color: $white;
-  background-color: $primary-100;
-  border-color: $primary-100;
+  background-color: $primary;
+  border-color: $primary;
+
   &:hover {
     background-color: $primary-200;
     border-color: $primary-200;
@@ -42,8 +37,9 @@ $btn-font-weight: 700;
 .btnSecondary {
   @extend .btn;
   color: $white;
-  background-color: $secondary-100;
-  border-color: $secondary-100;
+  background-color: $secondary;
+  border-color: $secondary;
+
   &:hover {
     background-color: $secondary-200;
     border-color: $secondary-200;
@@ -55,8 +51,10 @@ $btn-font-weight: 700;
   color: $black;
   background-color: $transparent;
   border-color: $black;
+
   &:hover {
-    background-color: $grey;
+    color: $grey;
+    border-color: $transparent;
   }
 
   .arrowBox {
@@ -64,20 +62,31 @@ $btn-font-weight: 700;
   }
 }
 
-.btnFlexContent {
-  @extend .center;
-  align-content: space-between;
-}
-
 $content-height: 2rem;
 
 .arrowBox {
-  @extend .center;
-  width: 2rem;
+  @include center;
+  width: $content-height;
   height: $content-height;
   background-color: $white;
-  border-radius: 0.25rem;
-  margin-left: 1rem;
+  border-radius: 0.3rem;
+  margin-left: 0.5rem;
+
+  .arrow {
+    @include center;
+  }
+
+  .arrowPrimary svg {
+    fill: $primary;
+  }
+
+  .arrowSecondary svg {
+    fill: $secondary;
+  }
+
+  .arrowOutline svg {
+    fill: $black;
+  }
 }
 
 .btnTextContainer {
@@ -86,14 +95,10 @@ $content-height: 2rem;
   align-items: center;
 }
 
-.arrow {
-  @extend .center;
-  svg {
-    path {
-      fill: $black;
-    }
-  }
+// Arrow Rotation
+.arrowDown {
+  transform-origin: center;
+  transform: rotate(90deg);
 }
-
 
 
