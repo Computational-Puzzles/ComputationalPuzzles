@@ -1,7 +1,7 @@
 import React from 'react';
 import footerStyles from './Footer.module.scss';
 import productStyles from '../Product.module.scss';
-import {signIn} from "next-auth/react";
+import { signIn } from 'next-auth/react';
 
 const Footer = () => {
   return (
