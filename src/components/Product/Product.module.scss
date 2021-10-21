@@ -1,0 +1,10 @@
+@import "../../styles/abstracts/variables";
+
+.wrapper {
+  max-width: $max-product-content-width;
+  margin: 0 auto;
+}
+
+.sectionPadding {
+  padding: 6rem 0;
+}
