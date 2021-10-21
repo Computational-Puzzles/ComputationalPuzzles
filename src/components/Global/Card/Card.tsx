@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import styles from './mapCard.module.scss';
 
-export type MapCardProps = {
+export type CardProps = {
   title: string;
   desc: string;
   diff: 'EASY' | 'MEDIUM' | 'HARD';
@@ -34,23 +34,23 @@ const Buttons = ({ type }: { type: 'LIST' | 'GRID' }) => {
     return (
       <button>
         Solve Online
-        <span className={styles.arrowBox}>
+        <span className={ styles.arrowBox }>
           <Arrow />
         </span>
       </button>
     );
   } else if (type === 'GRID') {
     return (
-      <div className={styles.buttonWrap}>
+      <div className={ styles.buttonWrap }>
         <button>
           View Map
-          <span className={styles.arrowBox}>
+          <span className={ styles.arrowBox }>
             <Arrow />
           </span>
         </button>
         <button>
           Solve Online
-          <span className={styles.arrowBox}>
+          <span className={ styles.arrowBox }>
             <Arrow />
           </span>
         </button>
@@ -64,29 +64,28 @@ const Buttons = ({ type }: { type: 'LIST' | 'GRID' }) => {
  */
 const Difficulty = ({ diff }: { diff: 'EASY' | 'MEDIUM' | 'HARD' }) => {
   if (diff === 'EASY') {
-    return <span className={styles.easy}>Easy</span>;
+    return <span className={ styles.easy }>Easy</span>;
   } else if (diff === 'MEDIUM') {
-    return <span className={styles.medium}>Medium</span>;
+    return <span className={ styles.medium }>Medium</span>;
   } else if (diff === 'HARD') {
-    return <span className={styles.hard}>{diff}</span>;
+    return <span className={ styles.hard }>{ diff }</span>;
   }
 };
 
-const Card = ({ title, desc, diff, type }: MapCardProps) => {
+const Card = ({ title, desc, diff, type }: CardProps) => {
   return (
     <div
-      className={`${styles.card} ${
-        type ? styles.cardHeightButton : styles.cardHeightDefault
-      }`}
+      className={ `${styles.card} ${type ? styles.cardHeightButton : styles.cardHeightDefault
+        }` }
     >
-      <div className={styles.cardHeader}>
-        <p className={styles.title}>{title}</p>
-        <p className={styles.difficulty}>
-          Difficulty: <Difficulty diff={diff} />
+      <div className={ styles.cardHeader }>
+        <p className={ styles.title }>{ title }</p>
+        <p className={ styles.difficulty }>
+          Difficulty: <Difficulty diff={ diff } />
         </p>
       </div>
-      {desc}
-      {type && <Buttons type={type} />}
+      { desc }
+      { type && <Buttons type={ type } /> }
     </div>
   );
 };
