@@ -1,4 +1,5 @@
 @import "../../../styles/abstracts/variables";
+@import "../../../styles/abstracts/mixins";
 
 .landing {
   overflow: hidden;
@@ -15,10 +16,19 @@
     align-items: center;
     justify-content: space-between;
 
+    @include mobile() {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+
     h1 {
       margin-top: 0;
       margin-bottom: 2rem;
       font-size: 5rem;
+
+      @include mobile() {
+        font-size: 4rem;
+      }
     }
 
     p {
@@ -42,8 +52,13 @@
 
     .image {
       display: block;
-      width: 31.25rem;
+      max-width: 31.25rem;
       height: auto;
+
+      @include mobile() {
+        max-width: 20rem;
+        margin: 0 auto;
+      }
     }
   }
 
@@ -82,11 +97,19 @@
   .content {
     display: flex;
     flex-direction: row;
+
+    @include mobile() {
+      flex-direction: column;
+    }
   }
 
   .contentLeft {
     p {
       margin-right: 6rem;
+
+      @include mobile() {
+        margin-right: 0;
+      }
     }
 
     .image {
@@ -103,8 +126,16 @@
   .contentRight {
     margin-top: 5rem;
 
+    @include mobile() {
+      flex-direction: column-reverse;
+    }
+
     p {
       margin-left: 6rem;
+
+      @include mobile() {
+        margin-left: 0;
+      }
     }
 
     .image {
