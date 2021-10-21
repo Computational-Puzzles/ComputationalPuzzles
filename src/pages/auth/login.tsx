@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../../styles/login.module.scss";
-import Input from "../../components/Global/Input";
+import Input from "../../components/Global/Input/Input";
+import Logo from "../../components/Global/Logo/Logo";
 
 
 const Login: React.FC = () => {
@@ -13,27 +14,27 @@ const Login: React.FC = () => {
 
     return (
         <div className={styles.loginPage}>
-            <h1>Computational Puzzles for Kids</h1>
+            <Logo showMark={true} showType={true}/>
             <h2>Log In</h2>
             <form onSubmit={handleSubmit}>
-                <Input type={'text'}
-                       id={'username'}
-                       required={true}
-                       placeholder={'username'}
-                       labelText={'Username'}
-                />
-                <br/>
-                <Input
-                    type={'password'}
-                    id={'password'}
-                    required={true}
-                    placeholder={'password'}
-                    labelText={'Password'}
-                />
-                <br/>
-                <a href='#'>Forgot Password?</a>
-                <a href='#'>Don't have an account?</a>
-                <br/>
+                <div>
+                    <Input type={'text'}
+                           id={'username'}
+                           required={true}
+                           placeholder={'Username'}
+                    />
+                    <br/>
+                    <Input
+                        type={'password'}
+                        id={'password'}
+                        required={true}
+                        placeholder={'Password'}
+                    />
+                    <br/>
+                    <a href='#' className='left'>Forgot Password?</a>
+                    <a href='#' className='right'>Do not have an account?</a>
+                    <br/>
+                </div>
                 <button> Log In</button>
             </form>
 
