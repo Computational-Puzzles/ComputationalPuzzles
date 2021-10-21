@@ -1,4 +1,5 @@
 @import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
 
 .wrapper {
   max-width: $max-product-content-width;
@@ -7,4 +8,12 @@
 
 .sectionPadding {
   padding: 6rem 0;
+
+  @include mobile() {
+    padding: 6rem 1.5rem;
+  }
+
+  @include tablet() {
+    padding: 6rem 2rem;
+  }
 }

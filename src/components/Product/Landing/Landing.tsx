@@ -68,7 +68,7 @@ const Landing = () => {
           </div>
           <div className={`${landingStyles.content} ${landingStyles.contentRight}`}>
             <div className={landingStyles.image}>
-              <Image src={childImage2} alt={'child hiking with parent'} layout={'fill'} objectFit={'cover'} />
+              <Image src={childImage2} alt={'child stacking blocks'} layout={'fill'} objectFit={'cover'} />
             </div>
             <span>
               <p>

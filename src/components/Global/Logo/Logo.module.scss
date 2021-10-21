@@ -1,20 +1,26 @@
+@import "../../../styles/abstracts/mixins";
+
 .logo {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
 
-  & .mark {
+  .mark {
     width: 3rem;
     height: auto;
     display: block;
   }
 
-  & .type {
+  .type {
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 700;
     font-size: 1.35rem;
     margin-left: 1rem;
     white-space: nowrap;
+
+    @include mobile() {
+      display: none;
+    }
   }
 }
