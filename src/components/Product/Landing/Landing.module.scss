@@ -117,6 +117,8 @@
       position: relative;
       width: 150rem;
       height: 15rem;
+      border: $secondary 0.4rem solid;
+      border-radius: 2.4rem;
 
       img {
         border-radius: 2rem;
@@ -143,6 +145,8 @@
       position: relative;
       width: 120rem;
       height: 26rem;
+      border: $primary 0.4rem solid;
+      border-radius: 2.4rem;
 
       img {
         border-radius: 2rem;

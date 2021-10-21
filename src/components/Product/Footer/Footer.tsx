@@ -1,6 +1,7 @@
 import React from 'react';
 import footerStyles from './Footer.module.scss';
 import productStyles from '../Product.module.scss';
+import {signIn} from "next-auth/react";
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
       <div className={`${productStyles.wrapper} ${footerStyles.content}`}>
         <div className={footerStyles.exploreMore}>
           <h2>Interested in exploring more?</h2>
-          <button>Start Hunting</button>
+          <button onClick={() => signIn()}>Start Hunting</button>
         </div>
         <div className={footerStyles.links}>
           <span>

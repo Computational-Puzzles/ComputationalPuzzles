@@ -6,6 +6,7 @@ import logo from '../../../../public/assets/logo.png';
 import jigsaw from '../../../../public/assets/puzzle_dots.svg';
 import childImage1 from '../../../../public/assets/juliane-liebermann-unsplash.jpg';
 import childImage2 from '../../../../public/assets/markus-spiske-unsplash.jpg';
+import {signIn} from "next-auth/react";
 
 const Landing = () => {
   const whatIsThisRef = useRef(null);
@@ -35,7 +36,7 @@ const Landing = () => {
                 outdoors!
               </p>
               <div className={landingStyles.actions}>
-                <button>Start Hunting</button>
+                <button onClick={() => signIn()}>Start Hunting</button>
                 <button onClick={learnMoreButton}>Learn More</button>
               </div>
             </div>
@@ -72,7 +73,7 @@ const Landing = () => {
             </div>
             <span>
               <p>
-                This set of challenges is designed to lay the groundwork for
+                These sets of challenges are designed to lay the groundwork for
                 various aspects of computational thinking, while also providing
                 a great family outdoor activity in the process!
               </p>
