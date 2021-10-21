@@ -27,7 +27,7 @@
       font-size: 5rem;
 
       @include mobile() {
-        font-size: 4rem;
+        font-size: 12vw;
       }
     }
 
@@ -56,8 +56,7 @@
       height: auto;
 
       @include mobile() {
-        max-width: 20rem;
-        margin: 0 auto;
+        display: none;
       }
     }
   }
@@ -120,6 +119,10 @@
       border: $secondary 0.4rem solid;
       border-radius: 2.4rem;
 
+      @include mobile() {
+        width: 100%;
+      }
+
       img {
         border-radius: 2rem;
       }
@@ -147,6 +150,10 @@
       height: 26rem;
       border: $primary 0.4rem solid;
       border-radius: 2.4rem;
+
+      @include mobile() {
+        width: 100%;
+      }
 
       img {
         border-radius: 2rem;
