@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../../styles/login.module.scss";
-import Input from "../../components/Global/Input/Input";
+import Input from "../../components/Global/Input";
 import Logo from "../../components/Global/Logo/Logo";
 
 
