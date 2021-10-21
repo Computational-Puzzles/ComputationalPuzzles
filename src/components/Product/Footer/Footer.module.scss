@@ -34,7 +34,7 @@
     padding: 5rem 0;
 
     @include mobile() {
-      padding: 5rem 1rem;
+      padding: 5rem 1.5rem;
     }
 
     @include tablet() {
