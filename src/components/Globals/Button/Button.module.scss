@@ -1,0 +1,104 @@
+@import 'src/styles/abstracts/_variables';
+@import 'src/styles/abstracts/_mixins/layout';
+@import 'src/styles/abstracts/_mixins/transitions';
+
+$btn-border-width: 0.2rem;
+
+.btn {
+  @include center;
+  @include smooth-transition;
+  background-color: $transparent;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.5rem;
+
+  border: $btn-border-width solid $transparent;
+  border-radius: 0.48rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.btnPrimary {
+  @extend .btn;
+  color: $white;
+  background-color: $primary;
+  border-color: $primary;
+
+  &:hover {
+    background-color: $primary-200;
+    border-color: $primary-200;
+  }
+}
+
+.btnSecondary {
+  @extend .btn;
+  color: $white;
+  background-color: $secondary;
+  border-color: $secondary;
+
+  &:hover {
+    background-color: $secondary-200;
+    border-color: $secondary-200;
+  }
+}
+
+.btnOutline {
+  @extend .btn;
+  color: $black;
+  background-color: $transparent;
+  border-color: $black;
+
+  &:hover {
+    color: $grey;
+    border-color: $transparent;
+  }
+
+  .arrowBox {
+    background-color: $transparent;
+  }
+}
+
+$content-height: 2rem;
+
+.arrowBox {
+  @include center;
+  width: $content-height;
+  height: $content-height;
+  background-color: $white;
+  border-radius: 0.3rem;
+  margin-left: 0.5rem;
+
+  .arrow {
+    @include center;
+  }
+
+  .arrowPrimary svg {
+    fill: $primary;
+  }
+
+  .arrowSecondary svg {
+    fill: $secondary;
+  }
+
+  .arrowOutline svg {
+    fill: $black;
+  }
+}
+
+.btnTextContainer {
+  height: $content-height;
+  display: flex;
+  align-items: center;
+}
+
+// Arrow Rotation
+.arrowDown {
+  transform-origin: center;
+  transform: rotate(90deg);
+}
+
+
