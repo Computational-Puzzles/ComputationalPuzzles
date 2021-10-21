@@ -1,15 +1,31 @@
-.radio input{
+.gone{
   opacity: 0;
   position: fixed;
   width: 0;
 }
-.radio label {
+.normal {
   display: inline-block;
   padding: 10px 20px;
   font-family: "Nunito Sans", serif;
   font-size: 16px;
   border: 2px solid;
   border-radius: 9.7px;
+
+}
+.easy{
+  @extend .normal;
+  border-color: #05C05B;
+  color: #05C05B;
+}
+.medium{
+  @extend .normal;
+  border-color: #3BB2C8;
+  color: #3BB2C8;
+}
+.hard{
+  @extend .normal;
+  border-color: #D7222C;
+  color: #D7222C;
 }
 //.radio label:hover {
 //  background-color: green;

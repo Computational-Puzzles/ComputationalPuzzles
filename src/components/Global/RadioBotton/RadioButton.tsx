@@ -2,24 +2,31 @@ import styles from './RadioButton.module.scss';
 
 type RadioButtonProps = {
     id: string, /*radioEasy*/
-    name: string, /*fliter*/
-    value: string, /*Easy*/
-    color: string,
+    name: string, /*filter*/
+    difficulty: string, /*Easy>> */
 }
 
-const RadioButton = ({id, name, value, color}: RadioButtonProps)=> {
-
+const RadioButton = ({id, name, difficulty}: RadioButtonProps)=> {
+    let labelColor;
+    if(difficulty ==='Easy'){
+        labelColor = styles.easy;
+    }else if(difficulty ==='Medium'){
+        labelColor = styles.medium;
+    }else if(difficulty ==='Hard'){
+        labelColor = styles.hard;
+    }else{
+        labelColor = styles.normal;
+    }
     return(
         <div className= 'radio'>
-            <input
+            <input className={styles.gone}
                 type = 'radio'
                 id = {id}
                 name={name}
-                value={value}
+                value={difficulty}
             />
-            <label
-                htmlFor={id}>{value}
-                style="background-color:{color};"
+            <label htmlFor={id} className={labelColor}>
+                {difficulty}
             </label>
         </div>
     )
