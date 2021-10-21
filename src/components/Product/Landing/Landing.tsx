@@ -6,7 +6,7 @@ import logo from '../../../../public/assets/logo.png';
 import jigsaw from '../../../../public/assets/puzzle_dots.svg';
 import childImage1 from '../../../../public/assets/juliane-liebermann-unsplash.jpg';
 import childImage2 from '../../../../public/assets/markus-spiske-unsplash.jpg';
-import {signIn} from "next-auth/react";
+import { signIn } from 'next-auth/react';
 
 const Landing = () => {
   const whatIsThisRef = useRef(null);
@@ -57,19 +57,33 @@ const Landing = () => {
           className={`${productStyles.wrapper} ${productStyles.sectionPadding}`}
         >
           <h2>What is this?</h2>
-          <div className={`${landingStyles.content} ${landingStyles.contentLeft}`}>
+          <div
+            className={`${landingStyles.content} ${landingStyles.contentLeft}`}
+          >
             <p>
               As part of the Computational Thinking for Kids initiative,
               Computational Puzzles for Kids is a semi-online scavenger hunt
               that brings learning about computational thinking to the outdoors!
             </p>
             <div className={landingStyles.image}>
-              <Image src={childImage1} alt={'child hiking with parent'} layout={'fill'} objectFit={'cover'} />
+              <Image
+                src={childImage1}
+                alt={'child hiking with parent'}
+                layout={'fill'}
+                objectFit={'cover'}
+              />
             </div>
           </div>
-          <div className={`${landingStyles.content} ${landingStyles.contentRight}`}>
+          <div
+            className={`${landingStyles.content} ${landingStyles.contentRight}`}
+          >
             <div className={landingStyles.image}>
-              <Image src={childImage2} alt={'child stacking blocks'} layout={'fill'} objectFit={'cover'} />
+              <Image
+                src={childImage2}
+                alt={'child stacking blocks'}
+                layout={'fill'}
+                objectFit={'cover'}
+              />
             </div>
             <span>
               <p>
