@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import styles from "./Input.module.scss";
 
 type IndexProps = {
     type: 'text' | 'password',
@@ -14,6 +15,7 @@ const Index = ({type, id, required, placeholder, maxLength, labelText}: IndexPro
         <>
             <label htmlFor={id}>{labelText}</label>
             <input
+                className={styles.input}
                 type={type}
                 id={id}
                 required={required}
