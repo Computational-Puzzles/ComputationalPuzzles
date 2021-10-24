@@ -2,8 +2,6 @@
 @import 'src/styles/abstracts/_mixins/layout';
 @import 'src/styles/abstracts/_mixins/transitions';
 
-$btn-border-width: 0.15rem;
-
 .btn {
   @include center;
   @include smooth-transition;
@@ -62,12 +60,12 @@ $btn-border-width: 0.15rem;
   }
 }
 
-$content-height: 2rem;
+
 
 .arrowBox {
   @include center;
-  width: $content-height;
-  height: $content-height;
+  width: $btn-content-height;
+  height: $btn-content-height;
   background-color: $white;
   border-radius: 0.3rem;
   margin-left: 0.5rem;
@@ -90,7 +88,7 @@ $content-height: 2rem;
 }
 
 .btnTextContainer {
-  height: $content-height;
+  height: $btn-content-height;
   display: flex;
   align-items: center;
 }

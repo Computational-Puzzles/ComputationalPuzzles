@@ -13,31 +13,20 @@ type ButtonProps = {
 };
 
 const getButtonClass = (type: ButtonType) => {
-  if (type === 'primary') {
-    return styles.btnPrimary;
-  } else if (type === 'secondary') {
-    return styles.btnSecondary;
-  } else if (type === 'outline') {
-    return styles.btnOutline;
-  }
+  if (type === 'primary') return styles.btnPrimary;
+  if (type === 'secondary') return styles.btnSecondary;
+  if (type === 'outline') return styles.btnOutline;
 };
 
 const getArrowClass = (type: ButtonType) => {
-  if (type === 'primary') {
-    return styles.arrowPrimary;
-  } else if (type === 'secondary') {
-    return styles.arrowSecondary;
-  } else if (type === 'outline') {
-    return styles.arrowOutline;
-  }
+  if (type === 'primary') return styles.arrowPrimary;
+  if (type === 'secondary') return styles.arrowSecondary;
+  if (type === 'outline') return styles.arrowOutline;
 };
 
 const getArrowSvgRotation = (arrowDirection: ArrowDirectionType) => {
-  if (arrowDirection === 'right') {
-    return styles.arrowRight;
-  } else if (arrowDirection === 'down') {
-    return styles.arrowDown;
-  }
+  if (arrowDirection === 'right') return styles.arrowRight;
+  if (arrowDirection === 'down') return styles.arrowDown;
 };
 
 const getArrowSvg = (arrowDirection: ArrowDirectionType) => {
