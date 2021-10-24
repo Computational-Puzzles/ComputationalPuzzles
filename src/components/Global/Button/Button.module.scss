@@ -92,6 +92,10 @@
 }
 
 // Arrow Rotation
+.arrowRight {
+  transform-origin: center;
+}
+
 .arrowDown {
   transform-origin: center;
   transform: rotate(90deg);
