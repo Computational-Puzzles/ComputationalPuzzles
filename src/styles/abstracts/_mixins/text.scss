@@ -1,0 +1,32 @@
+@mixin font-regular {
+  font-family: 'Nunito', sans-serif;
+}
+
+@mixin font-header {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+@mixin font-body {
+  @include font-regular;
+  font-weight: 400;
+}
+
+@mixin font-button {
+  @include font-regular;
+  font-weight: 700;
+}
+
+@mixin font-header-bold {
+  @include font-header;
+  font-weight: 700;
+}
+
+@mixin font-header-extra-bold {
+  @include font-header;
+  font-weight: 800;
+}
+
+@mixin font-header-black {
+  @include font-header;
+  font-weight: 900;
+}
