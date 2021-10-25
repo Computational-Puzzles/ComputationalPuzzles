@@ -111,7 +111,7 @@ model Submission {
 }
 
 enum Difficulty {
-    EASY
-    MEDIUM
-    HARD
+  EASY
+  MEDIUM
+  HARD
 }
