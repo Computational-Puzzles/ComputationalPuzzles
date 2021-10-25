@@ -1,5 +1,6 @@
-import Card from "./Card/Card";
-import type { CardProps } from "./Card/Card";
+import Logo from './Logo/Logo';
+import Card from './Card/Card';
+import type { CardProps } from './Card/Card';
 
-export { Card };
+export { Logo, Card };
 export type { CardProps };

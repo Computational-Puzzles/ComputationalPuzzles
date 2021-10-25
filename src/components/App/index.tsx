@@ -1,7 +1,4 @@
-import CardGrid from "./CardGrid/CardGrid";
-import CardList from "./CardList/CardList";
+import CardGrid from './CardGrid/CardGrid';
+import CardList from './CardList/CardList';
 
-export {
-    CardGrid,
-    CardList
-};
+export { CardGrid, CardList };

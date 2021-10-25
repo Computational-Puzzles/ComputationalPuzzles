@@ -55,7 +55,7 @@ const Auth = NextAuth({
     GoogleProvider({
       clientId: google.clientId,
       clientSecret: google.clientSecret
-    }),
+    })
   ]
 });
 

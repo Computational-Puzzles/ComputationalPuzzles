@@ -1,9 +1,8 @@
-$primary-color: #f16b67;
-$green: #05c05b;
-$blue: #3bb2c8;
-$red: #d7222c;
-$white: white;
-$black: black;
+
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/abstracts/_mixins/text.scss';
+
+$btn-color: $primary-200;
 
 .cardHeightDefault {
   height: 10.5rem;
@@ -15,14 +14,15 @@ $black: black;
 
 .card {
   background-color: $white;
-  border-radius: 11px;
-  border: 0.13rem solid $black;
+  border-radius: 0.8rem;
+  border: 0.15rem solid $black;
   width: 28rem;
   padding: 1.5rem 1.25rem;
   margin: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @include font-body;
 
   .cardHeader {
     display: flex;
@@ -31,13 +31,14 @@ $black: black;
     align-items: center;
 
     .title {
-      font-size: 1.5rem;
-      font-weight: 900;
+      @include font-header-black;
+      font-size: 2rem;
+      margin: 0;
     }
 
     .difficulty {
-      font-size: 0.875rem;
-      font-weight: 700;
+      @include font-header-bold;
+      font-size: 1rem;
 
       .easy {
         color: $green;
@@ -56,23 +57,23 @@ $black: black;
   button {
     width: 8.875rem;
     height: 2.5rem;
-    border-radius: 0.375rem;
-    border: none;
-    background-color: $primary-color;
-    color: $white;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    border-radius: 0.375rem;
+    border: none;
+    color: $white;
+    background-color: $btn-color;
     margin-right: 1.25rem; // This will not affect 1 button case
 
     .arrowBox {
+      display: flex;
       width: 1.67rem;
       height: 1.67rem;
       left: 6.875rem;
       top: 9rem;
       background-color: $white;
       border-radius: 4.26px;
-      display: flex;
 
       svg {
         margin: auto;

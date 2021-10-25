@@ -1,0 +1,20 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  & .mark {
+    width: 3.5rem;
+    height: auto;
+    display: block;
+  }
+
+  & .type {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-left: 1rem;
+    white-space: nowrap;
+  }
+}
