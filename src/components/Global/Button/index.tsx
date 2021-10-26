@@ -54,7 +54,7 @@ const Arrow = ({ type, arrowDirection }: ArrowType) => {
   );
 };
 
-const Button = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
+const Index = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
   return (
     <button className={`${getButtonClass(type)}`} onClick={onClick}>
       <div className={styles.btnTextContainer}>{content}</div>
@@ -67,4 +67,4 @@ const Button = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
   );
 };
 
-export default Button;
+export default Index;
