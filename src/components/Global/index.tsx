@@ -1,3 +1,3 @@
-import Index from './Logo';
+import Logo from './Logo';
 
-export { Index };
+export { Logo };
