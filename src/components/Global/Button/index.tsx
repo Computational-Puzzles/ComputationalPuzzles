@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-type ButtonType = 'primary' | 'secondary' | 'outline';
+type ButtonType = 'primary' | 'secondary' | 'outline' | 'flat';
 type ArrowDirectionType = 'right' | 'down';
 type ArrowType = { type: ButtonType; arrowDirection: ArrowDirectionType };
 
@@ -16,12 +16,14 @@ const getButtonClass = (type: ButtonType) => {
   if (type === 'primary') return styles.btnPrimary;
   if (type === 'secondary') return styles.btnSecondary;
   if (type === 'outline') return styles.btnOutline;
+  if (type === 'flat') return styles.btnFlat;
 };
 
 const getArrowClass = (type: ButtonType) => {
   if (type === 'primary') return styles.arrowPrimary;
   if (type === 'secondary') return styles.arrowSecondary;
   if (type === 'outline') return styles.arrowOutline;
+  if (type === 'flat') return styles.arrowOutline;
 };
 
 const getArrowSvgRotation = (arrowDirection: ArrowDirectionType) => {

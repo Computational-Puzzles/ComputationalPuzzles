@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo } from '../../Global';
+import { Button, Logo } from '../../Global';
 import { signIn } from 'next-auth/react';
 import headerStyles from './Header.module.scss';
 import productStyles from '../Product.module.scss';
@@ -11,8 +11,13 @@ const Header = () => {
         <div className={`${productStyles.wrapper} ${headerStyles.content}`}>
           <Logo showMark={true} showType={true} />
           <div className={headerStyles.actions}>
-            <button onClick={() => signIn()}>Login</button>
-            <button onClick={() => signIn()}>Get Started</button>
+            <Button type={'flat'} content={'Login'} onClick={() => signIn()} />
+            <Button
+              type={'outline'}
+              content={'Get Started'}
+              arrowDirection={'right'}
+              onClick={() => signIn()}
+            />
           </div>
         </div>
       </header>

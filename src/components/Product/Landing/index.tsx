@@ -7,6 +7,7 @@ import jigsaw from '../../../../public/assets/puzzle_dots.svg';
 import childImage1 from '../../../../public/assets/juliane-liebermann-unsplash.jpg';
 import childImage2 from '../../../../public/assets/markus-spiske-unsplash.jpg';
 import { signIn } from 'next-auth/react';
+import { Button } from '../../Global';
 
 const Landing = () => {
   const whatIsThisRef = useRef(null);
@@ -36,8 +37,18 @@ const Landing = () => {
                 outdoors!
               </p>
               <div className={landingStyles.actions}>
-                <button onClick={() => signIn()}>Start Hunting</button>
-                <button onClick={learnMoreButton}>Learn More</button>
+                <Button
+                  type={'primary'}
+                  content={'Start Hunting'}
+                  arrowDirection={'right'}
+                  onClick={() => signIn()}
+                />
+                <Button
+                  type={'secondary'}
+                  content={'Learn More'}
+                  arrowDirection={'down'}
+                  onClick={learnMoreButton}
+                />
               </div>
             </div>
             <div className={landingStyles.image}>
@@ -92,8 +103,8 @@ const Landing = () => {
                 a great family outdoor activity in the process!
               </p>
               <p>
-                As a hunter, you&apos;ll be searching for hidden boxes in the
-                real world that lead you to various online challenges.
+                As a hunter, you&apos;ll be searching for qr codes in the real
+                world that lead you to various online challenges.
               </p>
             </span>
           </div>

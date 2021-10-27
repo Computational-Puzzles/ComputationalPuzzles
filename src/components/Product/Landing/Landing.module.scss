@@ -40,9 +40,20 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      font-size: 1.6rem;
+
+      @include mobile() {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
       & > * {
         margin-right: 2.25rem;
+
+        @include mobile() {
+          margin-right: 0;
+          margin-bottom: 2rem;
+        }
 
         &:last-child {
           margin-right: 0;

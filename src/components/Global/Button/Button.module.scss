@@ -10,10 +10,12 @@
   justify-content: space-between;
   align-content: space-between;
   align-items: center;
-  padding: 0.3rem 0.3rem 0.3rem 0.5rem;
+  padding: 0.3em 0.3em 0.3em 0.75em;
+  font-size: 1em;
+  white-space: nowrap;
 
   border: $btn-border-width solid $transparent;
-  border-radius: 0.48rem;
+  border-radius: 0.48em;
 
   &:hover {
     cursor: pointer;
@@ -51,8 +53,24 @@
   border-color: $black;
 
   &:hover {
-    color: $grey;
     border-color: $transparent;
+    background-color: $grey-transparency;
+  }
+
+  .arrowBox {
+    background-color: $transparent;
+  }
+}
+
+.btnFlat {
+  @extend .btn;
+  color: $black;
+  background-color: $transparent;
+  border-color: $transparent;
+
+  &:hover {
+    border-color: $transparent;
+    background-color: $grey-transparency;
   }
 
   .arrowBox {
@@ -65,11 +83,17 @@
   width: $btn-content-height;
   height: $btn-content-height;
   background-color: $white;
-  border-radius: 0.3rem;
-  margin-left: 0.5rem;
+  border-radius: 0.3em;
+  margin-left: 0.3em;
+  font-size: 1em;
 
   .arrow {
     @include center;
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
   }
 
   .arrowPrimary svg {
@@ -89,6 +113,7 @@
   height: $btn-content-height;
   display: flex;
   align-items: center;
+  margin-right: 0.45em;
 }
 
 // Arrow Rotation

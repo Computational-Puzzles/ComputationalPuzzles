@@ -1,5 +1,5 @@
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
-import Landing from './Landing/Landing';
+import Header from './Header';
+import Footer from './Footer';
+import Landing from './Landing';
 
 export { Header, Footer, Landing };
