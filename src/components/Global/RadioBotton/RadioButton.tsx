@@ -1,22 +1,35 @@
 import styles from './RadioButton.module.scss';
 
+
 type RadioButtonProps = {
     id: string, /*radioEasy*/
     name: string, /*filter*/
     difficulty: string, /*Easy>> */
+    handleRadioClick: (event: object) => void
+    isChecked: boolean
 }
+// function intialLableColor (){
+//
+// }
 
-const RadioButton = ({id, name, difficulty}: RadioButtonProps)=> {
+const RadioButton = ({id, name, difficulty, handleRadioClick, isChecked}: RadioButtonProps)=> {
     let labelColor;
+    //initial, nobody is clicking
+    //users are clicking
     if(difficulty ==='Easy'){
-        labelColor = styles.easy;
+        if(isChecked) labelColor = styles.easyChecked;
+        else labelColor = styles.easy;
     }else if(difficulty ==='Medium'){
-        labelColor = styles.medium;
+        if(isChecked) labelColor = styles.mediumChecked;
+        else labelColor = styles.medium;
     }else if(difficulty ==='Hard'){
-        labelColor = styles.hard;
+        if(isChecked) labelColor = styles.hardChecked;
+        else labelColor = styles.hard;
     }else{
         labelColor = styles.normal;
     }
+
+    //users are hovering: in css
     return(
         <div className= 'radio'>
             <input className={styles.gone}
@@ -24,8 +37,9 @@ const RadioButton = ({id, name, difficulty}: RadioButtonProps)=> {
                 id = {id}
                 name={name}
                 value={difficulty}
+                onChange={handleRadioClick}
             />
-            <label htmlFor={id} className={labelColor}>
+            <label className={labelColor} htmlFor={id}>
                 {difficulty}
             </label>
         </div>

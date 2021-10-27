@@ -1,6 +1,8 @@
 .gone{
+  position: absolute;
   opacity: 0;
-  position: fixed;
+  cursor: pointer;
+  height: 0;
   width: 0;
 }
 .normal {
@@ -11,7 +13,7 @@
   font-size: 16px;
   border: 2px solid;
   border-radius: 9.7px;
-
+  text-align: center;
 }
 .easy{
   @extend .normal;
@@ -28,13 +30,45 @@
   border-color: #D7222C;
   color: #D7222C;
 }
-//.radio label:hover {
-//  background-color: green;
-//}
-//.radio input:focus + label {
-//  border: 2px dashed green;
-//}
-//
+
+/*On mouse-clicked, add background color & make the text no border color*/
+
+.easy:focus {
+  @extend .normal;
+  background-color: #05C05B;
+  color: white;
+}
+.easyChecked {
+   @extend .normal;
+   background-color: #05C05B;
+   color: white;
+ }
+.mediumChecked {
+  @extend .normal;
+  background-color: #3BB2C8;
+  color: white;
+}
+.hardChecked {
+   @extend .normal;
+   background-color: #D7222C;
+   color: white;
+ }
+
+/*On mouse-over, add underline*/
+.easy:hover {
+  @extend .easy;
+  text-decoration: underline;
+}
+.medium:hover {
+  @extend .medium;
+  text-decoration: underline;
+}
+.hard:hover {
+  @extend .hard;
+  text-decoration: underline;
+}
+
+
 //.radio :checked + label {
 //  background-color: green;
 //  border-color: green;
