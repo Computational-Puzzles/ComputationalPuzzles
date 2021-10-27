@@ -1,6 +1,7 @@
 $transparent: rgba(#fff, 0);
 $black: #1f201f;
 $grey: #4b4b4b;
+$grey-transparency: rgba($grey, 0.05);
 $white: #ffffff;
 $green: #05c05b;
 $red: #d7222c;
@@ -24,7 +25,9 @@ $info: $white;
 
 $shadow-color: rgba($black, 0.15);
 
+// Product Pages
 $max-product-content-width: 1200px;
 
-$btn-border-width: 0.15rem;
-$btn-content-height: 2rem;
+// Buttons
+$btn-border-width: 0.15em;
+$btn-content-height: 2em;

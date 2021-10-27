@@ -2,6 +2,7 @@ import React from 'react';
 import footerStyles from './Footer.module.scss';
 import productStyles from '../Product.module.scss';
 import { signIn } from 'next-auth/react';
+import { Button } from '../../Global';
 
 const Footer = () => {
   return (
@@ -9,7 +10,12 @@ const Footer = () => {
       <div className={`${productStyles.wrapper} ${footerStyles.content}`}>
         <div className={footerStyles.exploreMore}>
           <h2>Interested in exploring more?</h2>
-          <button onClick={() => signIn()}>Start Hunting</button>
+          <Button
+            type={'primary'}
+            content={'Start Hunting'}
+            arrowDirection={'right'}
+            onClick={() => signIn()}
+          />
         </div>
         <div className={footerStyles.links}>
           <span>
