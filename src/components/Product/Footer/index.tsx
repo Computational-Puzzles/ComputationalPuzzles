@@ -1,8 +1,10 @@
 import React from 'react';
+import Image from 'next/image';
 import footerStyles from './Footer.module.scss';
 import productStyles from '../Product.module.scss';
 import { signIn } from 'next-auth/react';
 import { Button } from '../../Global';
+import ubcLogoFullBlack from '../../../../public/assets/UBC-logo-full-black.png';
 
 const Footer = () => {
   return (
@@ -17,7 +19,7 @@ const Footer = () => {
             onClick={() => signIn()}
           />
         </div>
-        <div className={footerStyles.links}>
+        <div className={footerStyles.details}>
           <span>
             Developed by: Dr. Bowen Hui, Opey Adeyemi, Mathew de Vin, Kiet Phan,
             Lydia Lin
@@ -40,6 +42,9 @@ const Footer = () => {
               View the Github
             </a>
           </div>
+        </div>
+        <div className={footerStyles.ubcLogo}>
+          <Image src={ubcLogoFullBlack} alt={'University of British Columbia Logo'} />
         </div>
       </div>
     </footer>
