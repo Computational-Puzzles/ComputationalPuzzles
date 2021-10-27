@@ -2,7 +2,7 @@
 @import '../../../styles/abstracts/mixins';
 
 .footer {
-  border-top: rgba($grey, 0.05) 1px solid;
+  border-top: $grey-transparency 1px solid;
 
   .exploreMore {
     display: flex;
@@ -18,8 +18,6 @@
 
     h2 {
       font-size: 3rem;
-      font-family: 'Nunito Sans', sans-serif;
-      font-weight: 900;
       margin: 0;
 
       @include mobile() {
