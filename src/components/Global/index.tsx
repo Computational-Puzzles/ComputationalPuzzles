@@ -1,3 +1,4 @@
 import Logo from './Logo/Logo';
+import Button from './Button';
 
-export { Logo };
+export { Button, Logo };
