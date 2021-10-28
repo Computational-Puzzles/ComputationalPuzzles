@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 const Home: React.FC = () => {
@@ -16,7 +16,6 @@ const Home: React.FC = () => {
     <>
       <h1>Not logged in</h1>
       <button onClick={() => signIn()}>Login</button>
-
     </>
   );
 };

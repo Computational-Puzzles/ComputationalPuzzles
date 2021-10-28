@@ -20,9 +20,7 @@ const Index = ({
   const [input, setInput] = useState('');
   return (
     <>
-      {labelText &&
-        <label htmlFor={id}>{labelText}</label>
-      }
+      {labelText && <label htmlFor={id}>{labelText}</label>}
       <input
         className={styles.input}
         type={type}

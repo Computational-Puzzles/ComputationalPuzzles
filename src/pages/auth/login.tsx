@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/login.module.scss';
+import styles from '../../styles/pages/login.module.scss';
 import { Input, Logo } from '../../components/Global';
 
 const Login = () => {
