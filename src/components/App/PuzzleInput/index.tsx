@@ -1,22 +1,39 @@
 import React from 'react';
 
 type PuzzleInputProps = {
-  type: 'text' | 'mcq';
+  type: 'TEXT' | 'MCQ';
   placeholder?: string;
   options?: string[];
-  setAnswer: () => void;
+  setAnswer: (value) => void;
 };
 
-const PuzzleInput = ({ type, placeholder, options, setAnswer }) => {
-  if (type === 'text') {
-    return <input placeholder={placeholder} onChange={e => setAnswer(e.currentTarget.value)} />;
-  } else if (type === 'mcq') {
+const PuzzleInput = ({
+  type,
+  placeholder,
+  options,
+  setAnswer
+}: PuzzleInputProps) => {
+  if (type === 'TEXT')
+    return (
+      // TODO: use Input component
+      <input
+        name={'puzzleAnswer'}
+        placeholder={placeholder}
+        onChange={e => setAnswer(e.currentTarget.value)}
+      />
+    );
+  if (type === 'MCQ') {
     return (
       <div>
         {options.map((option, i) => (
           <label key={`answerOption${i}`}>
             {option}
-            <input type="radio" value={option} onChange={e => setAnswer(e.currentTarget.value)}/>
+            <input
+              name={'puzzleAnswer'}
+              type="radio"
+              value={option}
+              onChange={e => setAnswer(e.currentTarget.value)}
+            />
           </label>
         ))}
       </div>

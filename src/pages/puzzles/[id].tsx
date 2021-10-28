@@ -5,6 +5,11 @@ import Button from '../../components/Global/Button';
 import Image from 'next/image';
 import PuzzleInput from '../../components/App/PuzzleInput';
 import styles from '../../styles/pages/PuzzlePage.module.scss';
+import { PrismaClient } from '@prisma/client';
+import { submitPuzzle } from '../../utils/puzzles';
+import { getSession, useSession } from 'next-auth/react';
+
+const prisma = new PrismaClient();
 
 const redirectBack = () => {
   // This depends on if they got here from doing a puzzle with a map or just from the list
@@ -12,47 +17,37 @@ const redirectBack = () => {
   alert('Redirect');
 };
 
-const PuzzlePage = ({
-  id,
-  name,
-  difficulty,
-  content,
-  imageUrl,
-  exampleContent,
-  exampleImageUrl,
-  question,
-  inputType,
-  variables
-}: PuzzleProps) => {
+const PuzzlePage = ({ puzzle }: { puzzle: PuzzleProps }) => {
   const [answer, setAnswer] = useState('');
-
-  const submitPuzzle = () => {
-    // TODO: can they do this without being logged in?
-    alert(`Submit Puzzle Answer ${answer}`);
-    // TODO: save a Submission object for this submission
-  };
+  const { data: session, status } = useSession();
+  const randomSeed = Math.random();
 
   return (
     <>
-      <Button type={'outline'} content={'Back'} onClick={redirectBack} />
+      <Button style={'outline'} content={'Back'} onClick={redirectBack} />
       <div>
-        <h2>{name}</h2>
-        <p>{difficulty}</p>
+        <h2>{puzzle.name}</h2>
+        <p>{puzzle.difficulty}</p>
       </div>
 
       <div className={styles.puzzleDisplay}>
-        <div>{content}</div>
+        <div>{puzzle.content}</div>
         <div>
-          <Image src={imageUrl} width={200} height={200} alt={'puzzle image'} />
+          <Image
+            src={puzzle.imageUrl}
+            width={200}
+            height={200}
+            alt={'puzzle image'}
+          />
         </div>
       </div>
 
       <h3>Example</h3>
       <div className={styles.puzzleDisplay}>
-        <div>{exampleContent}</div>
+        <div>{puzzle.exampleContent}</div>
         <div>
           <Image
-            src={exampleImageUrl}
+            src={puzzle.exampleImageUrl}
             width={200}
             height={200}
             alt={'example image'}
@@ -62,42 +57,59 @@ const PuzzlePage = ({
 
       <div>
         <h3>Quest</h3>
-        <p>{question}</p>
-        <PuzzleInput
-          type={inputType}
-          placeholder={'Enter your answer'}
-          options={variables.options}
-          setAnswer={setAnswer}
-        />
-        <Button type={'primary'} content={'Submit'} onClick={submitPuzzle} />
+        <p>{puzzle.question}</p>
+        <form action={`/api/puzzles/${puzzle.id}/submit`} method={'post'}>
+          {/*<input hidden={true} name={'userEmail'} value={session?.user.email}/>*/}
+          <input
+            hidden={true}
+            name={'userEmail'}
+            value={'opeyadeyemi@gmail.com'}
+          />
+          <input hidden={true} name={'puzzleId'} value={puzzle.id} />
+          <input hidden={true} name={'randomSeed'} value={puzzle.id} />
+          <PuzzleInput
+            type={puzzle.inputType}
+            placeholder={'Enter your answer'}
+            options={puzzle.variables?.options}
+            setAnswer={setAnswer}
+          />
+          {/* TODO: lock submission button unless logged in */}
+          <Button
+            style={'primary'}
+            type={'submit'}
+            content={'Submit'}
+            disabledMessage={
+              session?.user ? 'Please log in before submitting puzzles!' : null
+            }
+          />
+        </form>
       </div>
     </>
   );
 };
 
-const MOCK_PUZZLE_PAGE_DATA = {
-  id: 1,
-  name: 'Test Puzzle',
-  difficulty: 'EASY',
-  content: 'This is the puzzle content',
-  imageUrl: '/puzzleImages/test.jpg',
-  exampleContent: 'This is example content',
-  exampleImageUrl: '/puzzleImages/test.jpg',
-  isGenerated: '',
-  question: 'Answer the question?',
-  hint: '',
-  inputType: 'text',
-  published: false,
-  variables: {
-    options: ['A', 'B', 'C', 'D']
-  },
-  puzzleTypeId: 1
-};
-
 export const getServerSideProps: GetServerSideProps = async context => {
-  const id = context.query.id;
+  const session = await getSession(context);
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false
+  //     }
+  //   };
+  // }
+  const id = +context.query.id;
+  const puzzle = await prisma.puzzle.findUnique({
+    where: {
+      id
+    },
+    include: {
+      puzzleType: true
+    }
+  });
+
   return {
-    props: { ...MOCK_PUZZLE_PAGE_DATA }
+    props: { puzzle, session }
   };
 };
 
