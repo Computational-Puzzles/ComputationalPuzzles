@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './Header.module.scss';
 
-import { Logo } from '../';
+import { Logo } from '..';
 
 type HeaderProps = {
   profilePicture?: string;

@@ -1,4 +1,5 @@
-import Logo from './Logo/Logo';
-import Header from './Header/Header';
+import Logo from './Logo';
+import Button from './Button';
+import Header from './Header';
 
-export { Header, Logo };
+export { Button, Header, Logo };
