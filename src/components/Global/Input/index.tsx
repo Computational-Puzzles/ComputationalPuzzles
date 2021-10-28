@@ -20,7 +20,7 @@ const Index = ({
   const [input, setInput] = useState('');
   return (
     <>
-      {labelText !== null &&
+      {labelText &&
         <label htmlFor={id}>{labelText}</label>
       }
       <input
