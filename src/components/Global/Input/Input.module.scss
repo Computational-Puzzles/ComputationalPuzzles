@@ -1,6 +1,7 @@
+@import 'src/styles/abstracts/_mixins/text';
+
 .input {
-  font-size: 0.9rem;
-  font-weight: bold;
+  @include font-button;
   width: 100%;
   padding: 0.5rem 1rem;
   border: 2px solid #4b4b4b;
