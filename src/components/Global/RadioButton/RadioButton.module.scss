@@ -1,4 +1,4 @@
-.gone{
+.gone {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -9,36 +9,36 @@
   display: inline-block;
   padding: 10px 20px;
   margin: 10px 20px;
-  font-family: "Nunito Sans", serif;
+  font-family: 'Nunito Sans', serif;
   font-size: 16px;
   border: 2px solid;
   border-radius: 9.7px;
   text-align: center;
 }
-.easy{
+.easy {
   @extend .normal;
-  border-color: #05C05B;
-  color: #05C05B;
+  border-color: #05c05b;
+  color: #05c05b;
 
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }
-.medium{
+.medium {
   @extend .normal;
-  border-color: #3BB2C8;
-  color: #3BB2C8;
+  border-color: #3bb2c8;
+  color: #3bb2c8;
 
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }
-.hard{
+.hard {
   @extend .normal;
-  border-color: #D7222C;
-  color: #D7222C;
+  border-color: #d7222c;
+  color: #d7222c;
 
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -47,18 +47,18 @@
 .easyChecked {
   @extend .easy;
   text-decoration: initial;
-  background-color: #05C05B;
+  background-color: #05c05b;
   color: white;
 }
 .mediumChecked {
   @extend .medium;
   text-decoration: initial;
-  background-color: #3BB2C8;
+  background-color: #3bb2c8;
   color: white;
 }
-.hardChecked  {
+.hardChecked {
   @extend .hard;
   text-decoration: initial;
-  background-color: #D7222C;
+  background-color: #d7222c;
   color: white;
 }

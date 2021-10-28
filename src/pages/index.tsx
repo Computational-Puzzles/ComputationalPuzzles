@@ -1,5 +1,6 @@
 import React from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { Filter } from '../components/Global';
 
 const Home = () => {
   const { data: session, status } = useSession();
@@ -16,6 +17,7 @@ const Home = () => {
     <>
       <h1>Not logged in</h1>
       <button onClick={() => signIn()}>Login</button>
+      <Filter />
     </>
   );
 };
