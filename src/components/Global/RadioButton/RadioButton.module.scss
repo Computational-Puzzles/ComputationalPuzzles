@@ -19,57 +19,46 @@
   @extend .normal;
   border-color: #05C05B;
   color: #05C05B;
+
+  &:hover{
+    text-decoration: underline;
+  }
 }
 .medium{
   @extend .normal;
   border-color: #3BB2C8;
   color: #3BB2C8;
+
+  &:hover{
+    text-decoration: underline;
+  }
 }
 .hard{
   @extend .normal;
   border-color: #D7222C;
   color: #D7222C;
+
+  &:hover{
+    text-decoration: underline;
+  }
 }
-
-/*On mouse-clicked, add background color & make the text no border color*/
-
-.easy:focus {
-  @extend .normal;
+//checked style
+//easy:checked ~ label{
+.easyChecked {
+  @extend .easy;
+  text-decoration: initial;
   background-color: #05C05B;
   color: white;
 }
-.easyChecked {
-   @extend .normal;
-   background-color: #05C05B;
-   color: white;
- }
 .mediumChecked {
-  @extend .normal;
+  @extend .medium;
+  text-decoration: initial;
   background-color: #3BB2C8;
   color: white;
 }
-.hardChecked {
-   @extend .normal;
-   background-color: #D7222C;
-   color: white;
- }
-
-/*On mouse-over, add underline*/
-.easy:hover {
-  @extend .easy;
-  text-decoration: underline;
-}
-.medium:hover {
-  @extend .medium;
-  text-decoration: underline;
-}
-.hard:hover {
+.hardChecked  {
   @extend .hard;
-  text-decoration: underline;
+  text-decoration: initial;
+  background-color: #D7222C;
+  color: white;
 }
-
-
-//.radio :checked + label {
-//  background-color: green;
-//  border-color: green;
-//}

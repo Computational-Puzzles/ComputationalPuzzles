@@ -8,28 +8,22 @@ type RadioButtonProps = {
     handleRadioClick: (event: object) => void
     isChecked: boolean
 }
-// function intialLableColor (){
-//
-// }
-
-const RadioButton = ({id, name, difficulty, handleRadioClick, isChecked}: RadioButtonProps)=> {
-    let labelColor;
-    //initial, nobody is clicking
-    //users are clicking
+const getLabelColor = (difficulty: string, isChecked:boolean) =>{
     if(difficulty ==='Easy'){
-        if(isChecked) labelColor = styles.easyChecked;
-        else labelColor = styles.easy;
+        if(isChecked){return styles.easyChecked; }
+        else { return styles.easy;}
     }else if(difficulty ==='Medium'){
-        if(isChecked) labelColor = styles.mediumChecked;
-        else labelColor = styles.medium;
+        if(isChecked) return styles.mediumChecked;
+        else {return styles.medium;}
     }else if(difficulty ==='Hard'){
-        if(isChecked) labelColor = styles.hardChecked;
-        else labelColor = styles.hard;
+        if(isChecked) return styles.hardChecked;
+        else return styles.hard;
     }else{
-        labelColor = styles.normal;
+        return styles.normal;
     }
+}
 
-    //users are hovering: in css
+const Index = ({id, name, difficulty, handleRadioClick, isChecked}: RadioButtonProps)=> {
     return(
         <div className= 'radio'>
             <input className={styles.gone}
@@ -39,11 +33,11 @@ const RadioButton = ({id, name, difficulty, handleRadioClick, isChecked}: RadioB
                 value={difficulty}
                 onChange={handleRadioClick}
             />
-            <label className={labelColor} htmlFor={id}>
+            <label className={`${getLabelColor(difficulty,isChecked)}`} htmlFor={id}>
                 {difficulty}
             </label>
         </div>
     )
 }
 
-export default RadioButton;
+export default Index;
