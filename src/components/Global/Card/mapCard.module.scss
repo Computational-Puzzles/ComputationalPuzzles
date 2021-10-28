@@ -1,8 +1,6 @@
 @import '../../../styles/abstracts/variables';
 @import '../../../styles/abstracts/_mixins/text.scss';
 
-$btn-color: $primary-200;
-
 .cardHeightDefault {
   height: 10.5rem;
 }
@@ -53,36 +51,13 @@ $btn-color: $primary-200;
     }
   }
 
-  button {
-    width: 8.875rem;
-    height: 2.5rem;
+  .buttonWrap {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    border-radius: 0.375rem;
-    border: none;
-    color: $white;
-    background-color: $btn-color;
-    margin-right: 1.25rem; // This will not affect 1 button case
+    flex-wrap: wrap;
+    justify-content: flex-start;
 
-    .arrowBox {
-      display: flex;
-      width: 1.67rem;
-      height: 1.67rem;
-      left: 6.875rem;
-      top: 9rem;
-      background-color: $white;
-      border-radius: 4.26px;
-
-      svg {
-        margin: auto;
-      }
+    & > * {
+      margin-right: 1rem;
     }
   }
-}
-
-.buttonWrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
 }
