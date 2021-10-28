@@ -1,7 +1,7 @@
 import React from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-const Home: React.FC = () => {
+const Home = () => {
   const { data: session, status } = useSession();
 
   if (status === 'authenticated') {
