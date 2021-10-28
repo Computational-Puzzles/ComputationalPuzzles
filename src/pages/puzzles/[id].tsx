@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { PuzzleProps } from '../../../prisma/schemaTypes';
-import Button from '../../components/Globals/Button';
+import Button from '../../components/Global/Button';
 import Image from 'next/image';
 import PuzzleInput from '../../components/App/PuzzleInput';
 import styles from '../../styles/pages/PuzzlePage.module.scss';

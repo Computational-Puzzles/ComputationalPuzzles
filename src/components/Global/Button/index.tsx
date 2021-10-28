@@ -1,52 +1,39 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
+type ButtonType = 'primary' | 'secondary' | 'outline';
+type ArrowDirectionType = 'right' | 'down';
+type ArrowType = { type: ButtonType; arrowDirection: ArrowDirectionType };
+
 type ButtonProps = {
-  type: 'primary' | 'secondary' | 'outline';
+  type: ButtonType;
   content: string;
-  arrowDirection?: 'right' | 'down';
+  arrowDirection?: ArrowDirectionType;
   onClick: () => void;
 };
 
-const getButtonClass = (type: string) => {
-  if (type === 'primary') {
-    return styles.btnPrimary;
-  } else if (type === 'secondary') {
-    return styles.btnSecondary;
-  } else if (type === 'outline') {
-    return styles.btnOutline;
-  } else {
-    return '';
-  }
+const getButtonClass = (type: ButtonType) => {
+  if (type === 'primary') return styles.btnPrimary;
+  if (type === 'secondary') return styles.btnSecondary;
+  if (type === 'outline') return styles.btnOutline;
 };
 
-const getArrowClass = (type: string) => {
-  if (type === 'primary') {
-    return styles.arrowPrimary;
-  } else if (type === 'secondary') {
-    return styles.arrowSecondary;
-  } else if (type === 'outline') {
-    return styles.arrowOutline;
-  } else {
-    return '';
-  }
+const getArrowClass = (type: ButtonType) => {
+  if (type === 'primary') return styles.arrowPrimary;
+  if (type === 'secondary') return styles.arrowSecondary;
+  if (type === 'outline') return styles.arrowOutline;
 };
 
-const getArrowSvgRotation = arrowDirection => {
-  if (arrowDirection === 'right') {
-    return styles.arrowRight;
-  } else if (arrowDirection === 'down') {
-    return styles.arrowDown;
-  } else {
-    return '';
-  }
+const getArrowSvgRotation = (arrowDirection: ArrowDirectionType) => {
+  if (arrowDirection === 'right') return styles.arrowRight;
+  if (arrowDirection === 'down') return styles.arrowDown;
 };
 
-const getArrowSvg = arrowDirection => {
+const getArrowSvg = (arrowDirection: ArrowDirectionType) => {
   return (
     <svg
       width="15"
-      height="12"
+      height="15"
       viewBox="0 0 15 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +46,7 @@ const getArrowSvg = arrowDirection => {
   );
 };
 
-const Arrow = ({ arrowDirection, type }) => {
+const Arrow = ({ type, arrowDirection }: ArrowType) => {
   return (
     <div className={`${styles.arrow} ${getArrowClass(type)}`}>
       {getArrowSvg(arrowDirection)}
@@ -67,7 +54,7 @@ const Arrow = ({ arrowDirection, type }) => {
   );
 };
 
-const Button = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
+const Index = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
   return (
     <button className={`${getButtonClass(type)}`} onClick={onClick}>
       <div className={styles.btnTextContainer}>{content}</div>
@@ -80,4 +67,4 @@ const Button = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
   );
 };
 
-export default Button;
+export default Index;
