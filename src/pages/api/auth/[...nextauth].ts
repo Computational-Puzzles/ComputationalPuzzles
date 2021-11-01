@@ -10,10 +10,7 @@ import { checkHash } from '../../../utils/password';
 
 import { env } from '../../../../next.config.js';
 
-const {
-  google,
-  authSecret,
-} = env;
+const { google, authSecret } = env;
 
 const passwordMinLength = 8;
 
@@ -60,8 +57,8 @@ const Auth = NextAuth({
     }),
     GoogleProvider({
       clientId: google.clientId,
-      clientSecret: google.clientSecret,
-    }),
+      clientSecret: google.clientSecret
+    })
   ]
 });
 

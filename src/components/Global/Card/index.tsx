@@ -19,13 +19,28 @@ export type CardProps = {
 const Buttons = ({ type }: { type: CARD_TYPE }) => {
   if (type === 'list') {
     return (
-      <Button type='primary' content='Solve online' arrowDirection='right' onClick={ () => alert('Solve online') } />
+      <Button
+        type="primary"
+        content="Solve online"
+        arrowDirection="right"
+        onClick={() => alert('Solve online')}
+      />
     );
   } else if (type === 'grid') {
     return (
-      <div className={ styles.buttonWrap }>
-        <Button type='secondary' content='View map' arrowDirection='right' onClick={ () => alert('View map') } />
-        <Button type='primary' content='Solve online' arrowDirection='right' onClick={ () => alert('Solve online') } />
+      <div className={styles.buttonWrap}>
+        <Button
+          type="secondary"
+          content="View map"
+          arrowDirection="right"
+          onClick={() => alert('View map')}
+        />
+        <Button
+          type="primary"
+          content="Solve online"
+          arrowDirection="right"
+          onClick={() => alert('Solve online')}
+        />
       </div>
     );
   }
@@ -36,30 +51,31 @@ const Buttons = ({ type }: { type: CARD_TYPE }) => {
  */
 const Difficulty = ({ diff }: { diff: DIFFICULTY }) => {
   if (diff === 'easy') {
-    return <span className={ styles.easy }>Easy</span>;
+    return <span className={styles.easy}>Easy</span>;
   }
   if (diff === 'medium') {
-    return <span className={ styles.medium }>Medium</span>;
+    return <span className={styles.medium}>Medium</span>;
   }
   if (diff === 'hard') {
-    return <span className={ styles.hard }>Hard</span>;
+    return <span className={styles.hard}>Hard</span>;
   }
 };
 
 const Card = ({ title, desc, diff, type }: CardProps) => {
   return (
     <div
-      className={ `${styles.card} ${type ? styles.cardHeightButton : styles.cardHeightDefault
-        }` }
+      className={`${styles.card} ${
+        type ? styles.cardHeightButton : styles.cardHeightDefault
+      }`}
     >
-      <div className={ styles.cardHeader }>
-        <p className={ styles.title }>{ title }</p>
-        <p className={ styles.difficulty }>
-          Difficulty: <Difficulty diff={ diff } />
+      <div className={styles.cardHeader}>
+        <p className={styles.title}>{title}</p>
+        <p className={styles.difficulty}>
+          Difficulty: <Difficulty diff={diff} />
         </p>
       </div>
-      { desc }
-      { type && <Buttons type={ type } /> }
+      {desc}
+      {type && <Buttons type={type} />}
     </div>
   );
 };
