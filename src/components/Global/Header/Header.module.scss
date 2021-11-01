@@ -32,8 +32,8 @@ $bar-color: $primary-200;
         align-items: center;
 
         button {
-          height: 4.8rem;
           @include smooth-transition;
+          height: 4.8rem;
           border: none;
           border-bottom: 0.35rem solid $white;
           display: flex;
@@ -43,8 +43,8 @@ $bar-color: $primary-200;
           cursor: pointer;
 
           span {
-            font-size: 1.2rem;
             @include font-header-bold;
+            font-size: 1.2rem;
             margin: 0 0.5rem;
           }
         }
