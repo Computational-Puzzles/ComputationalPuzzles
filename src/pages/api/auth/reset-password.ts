@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import checkPassword, { hashFunction } from '../../../utils/checkPassword';
+import { hashFunction, checkHash } from '../../../utils/password';
 
-type resetPasswordProps = {
+export type resetPasswordProps = {
   email: string;
   oldPassword: string;
   newPassword: string;
@@ -44,7 +44,7 @@ const resetPasswordHandler = async (
     return;
   }
 
-  if (!checkPassword(oldPassword, user.password)) {
+  if (!checkHash(oldPassword, user.password)) {
     res.status(400).json({
       message: 'Old password is incorrect'
     });

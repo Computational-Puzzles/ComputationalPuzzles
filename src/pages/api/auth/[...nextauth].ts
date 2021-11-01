@@ -2,22 +2,18 @@ import NextAuth from 'next-auth';
 
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-import FacebookProvider from 'next-auth/providers/facebook';
-import LinkedinProvider from 'next-auth/providers/linkedin';
-import GithubProvider from 'next-auth/providers/github';
 
 import { PrismaClient } from '@prisma/client';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
-import checkPassword from '../../../utils/checkPassword';
+import { checkHash } from '../../../utils/password';
 
-import {
+import { env } from '../../../../next.config.js';
+
+const {
   google,
-  facebook,
-  github,
-  linkedin,
-  authSecret
-} from '../../../../config';
+  authSecret,
+} = env;
 
 const passwordMinLength = 8;
 
@@ -53,7 +49,7 @@ const Auth = NextAuth({
 
         if (!user) return null;
 
-        const isPasswordCorrect = checkPassword(
+        const isPasswordCorrect = checkHash(
           credentials.password,
           user.password as string
         );
@@ -66,18 +62,6 @@ const Auth = NextAuth({
       clientId: google.clientId,
       clientSecret: google.clientSecret,
     }),
-    FacebookProvider({
-      clientId: facebook.clientId,
-      clientSecret: facebook.clientSecret
-    }),
-    LinkedinProvider({
-      clientId: linkedin.clientId,
-      clientSecret: linkedin.clientSecret
-    }),
-    GithubProvider({
-      clientId: github.clientId,
-      clientSecret: github.clientSecret
-    })
   ]
 });
 

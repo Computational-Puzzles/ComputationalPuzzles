@@ -4,11 +4,9 @@ export const hashFunction = (secret: string) => {
   return sha256().update(secret).digest('hex');
 };
 
-const checkPassword = (checkingPassword: string, hashedPassword: string) => {
-  if (hashFunction(checkingPassword) === hashedPassword) {
+export const checkHash = (checker: string, hash: string) => {
+  if (hashFunction(checker) === hash) {
     return true;
   }
   return false;
 };
-
-export default checkPassword;
