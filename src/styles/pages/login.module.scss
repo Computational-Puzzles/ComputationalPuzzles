@@ -1,36 +1,31 @@
-.loginPage {
-  max-width: 400px;
+.logoLogin{
   margin: 0 auto;
+  width: 25rem;
+}
+.box1 {
+  width: 20rem;
+  margin: 0 auto;
+}
+.box2 {
+  font-size: 2.3rem;
   text-align: center;
 }
+.box3{
+  padding:  0 0 1.5rem 0;
+}
 
-.loginPage label {
-  text-align: left;
-  display: block;
-}
-.loginPage h1 {
-  font-size: 25px;
-  margin-bottom: 30px;
-}
-.loginPage h2 {
-  font-size: 30px;
-}
-.loginPage input {
-  //text-align: center;
-  width: 100%;
-  padding: 6px 10px;
-  margin: auto;
-  border: 1px solid;
-  box-sizing: border-box;
-  display: block;
-  border-radius: 28px;
-}
-.loginPage button {
+.button {
   width: 100%;
   background-color: coral;
   color: white;
   border: 0;
-  padding: 8px;
+  padding: 0.5rem;
   border-radius: 8px;
   cursor: pointer;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
 }

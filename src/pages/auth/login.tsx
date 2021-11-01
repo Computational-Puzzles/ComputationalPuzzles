@@ -9,35 +9,45 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginPage}>
-      <Logo showMark={true} showType={true} />
-      <h2>Log In</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Input
-            type={'text'}
-            id={'username'}
-            required={true}
-            placeholder={'Username'}
-          />
-          <br />
-          <Input
-            type={'password'}
-            id={'password'}
-            required={true}
-            placeholder={'Password'}
-          />
-          <br />
-          <a href="#" className="left">
-            Forgot Password?
-          </a>
-          <a href="#" className="right">
-            Do not have an account?
-          </a>
-          <br />
-        </div>
-        <button> Log In</button>
-      </form>
+    <div >
+      <div className={styles.logoLogin}>
+        <Logo showMark={true} showType={true} />
+      </div>
+      <div className={styles.box1}>
+        <h2 className={styles.box2}>Log In</h2>
+        <form onSubmit={handleSubmit} >
+          <div >
+            <div className={styles.box3}>
+              <Input
+                  type={'text'}
+                  id={'username'}
+                  required={true}
+                  placeholder={'Username'}
+              />
+            </div>
+            <div className={styles.box3}>
+              <Input
+                  type={'password'}
+                  id={'password'}
+                  required={true}
+                  placeholder={'Password'}
+              />
+            </div>
+            <div className={styles.container}>
+              {/*TODO: delete this tag or link to a password recovery page*/}
+              <a href="#" >
+                Forgot Password?
+              </a>
+              {/*TODO: change the link to the sign up page*/}
+              <a href="#" >
+                Do not have an account?
+              </a>
+            </div>
+          </div>
+          <button className={styles.button}> Log In</button>
+        </form>
+      </div>
+
     </div>
   );
 };
