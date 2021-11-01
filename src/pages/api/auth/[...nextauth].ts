@@ -1,5 +1,4 @@
 import NextAuth from 'next-auth';
-import { sha256 } from 'hash.js';
 
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
@@ -10,23 +9,26 @@ import GithubProvider from 'next-auth/providers/github';
 import { PrismaClient } from '@prisma/client';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
+import checkPassword from '../../../utils/checkPassword';
+
 import {
   google,
   facebook,
   github,
   linkedin,
-  jwtSecret
+  authSecret
 } from '../../../../config';
+
+const passwordMinLength = 8;
 
 const prisma = new PrismaClient();
 
-const hashFunction = (secret: string) => {
-  return sha256().update(secret).digest('hex');
-};
-
 const Auth = NextAuth({
-  session: { jwt: true },
-  secret: jwtSecret,
+  adapter: PrismaAdapter(prisma),
+  session: {
+    jwt: true
+  },
+  secret: authSecret,
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -41,29 +43,28 @@ const Auth = NextAuth({
           label: 'Password',
           type: 'password',
           required: true,
-          minLength: 8
+          minLength: passwordMinLength
         }
       },
       async authorize(credentials) {
-        const { createUser, getUserByEmail } = PrismaAdapter(prisma);
+        const { getUserByEmail } = PrismaAdapter(prisma);
 
         const user = await getUserByEmail(credentials.email);
 
-        // If the user doesn't exist, create new user
         if (!user) return null;
 
-        const isPasswordCorrect =
-          hashFunction(credentials.password) === user.password;
-        if (!isPasswordCorrect) {
-          return null;
-        }
+        const isPasswordCorrect = checkPassword(
+          credentials.password,
+          user.password as string
+        );
+        if (!isPasswordCorrect) return null;
 
         return user;
       }
     }),
     GoogleProvider({
       clientId: google.clientId,
-      clientSecret: google.clientSecret
+      clientSecret: google.clientSecret,
     }),
     FacebookProvider({
       clientId: facebook.clientId,

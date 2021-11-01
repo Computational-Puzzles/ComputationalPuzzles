@@ -8,7 +8,7 @@ const requireEnv = [
   'LINKEDIN_CLIENT_SECRET',
   'GITHUB_CLIENT_ID',
   'GITHUB_CLIENT_SECRET',
-  'JWT_SECRET',
+  'AUTH_SECRET'
 ];
 
 requireEnv.forEach(env => {
@@ -34,4 +34,4 @@ export const github = {
   clientId: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
 };
-export const jwtSecret = process.env.JWTSECRET;
+export const authSecret = process.env.AUTH_SECRET;
