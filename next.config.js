@@ -1,11 +1,14 @@
 const requireEnv = [
-  'DATABASE_URL',
-  'GOOGLE_CLIENT_ID',
-  'GOOGLE_CLIENT_SECRET',
-  'JWT_SECRET',
+  'NEXT_PUBLIC_DATABASE_URL',
+  'NEXT_PUBLIC_GOOGLE_CLIENT_ID',
+  'NEXT_PUBLIC_GOOGLE_CLIENT_SECRET',
+  'NEXT_PUBLIC_AUTH_SECRET',
+  'NEXT_PUBLIC_BASE_URL',
 ];
 
+
 requireEnv.forEach(env => {
+  if (this) return; // check if this has already loaded
   if (!process.env[env]) {
     throw new Error(`Missing environment variable ${env}`);
   }
@@ -14,11 +17,12 @@ requireEnv.forEach(env => {
 module.exports = {
   reactStrictMode: true,
   env: {
-    databaseUrl: process.env.DATABASE_URL,
+    databaseUrl: process.env.NEXT_PUBLIC_DATABASE_URL,
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     },
-    jwtSecret: process.env.JWT_SECRET,
+    authSecret: process.env.NEXT_PUBLIC_AUTH_SECRET,
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   }
 }

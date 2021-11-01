@@ -10,6 +10,7 @@
 }
 
 .card {
+  @include font-body;
   background-color: $white;
   border-radius: 0.8rem;
   border: 0.15rem solid $black;
@@ -19,7 +20,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  @include font-body;
 
   .cardHeader {
     display: flex;

@@ -4,15 +4,8 @@ import { Button } from '../';
 
 import styles from './mapCard.module.scss';
 
-type HARD = 'hard';
-type MEDIUM = 'medium';
-type EASY = 'easy';
-type DIFFICULTY = EASY | MEDIUM | HARD;
-
-type CARD_LIST = 'list';
-type CARD_GRID = 'grid';
-type CARD_TYPE = CARD_LIST | CARD_GRID;
-
+type DIFFICULTY = 'hard' | 'medium' | 'easy';
+type CARD_TYPE = 'list' | 'grid';
 export type CardProps = {
   title: string;
   desc: string;
