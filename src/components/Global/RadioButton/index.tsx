@@ -1,34 +1,46 @@
 import styles from './RadioButton.module.scss';
+import React from 'react';
 
 type RadioButtonProps = {
   id: string /*radioEasy*/;
   name: string /*filter*/;
-  difficulty: string /*Easy>> */;
+  difficulty: 'Hard' | 'Medium' | 'Easy';
   checked: boolean;
-  setChecked: (wasChecked: any) => void;
+  setChecked:
+    | React.Dispatch<React.SetStateAction<boolean>>
+    | ((wasChecked: boolean) => void);
 };
 const getLabelColor = (difficulty: string, isChecked: boolean) => {
-  // console.log(difficulty + " "+ isChecked);
   if (difficulty === 'Easy') {
-    if (isChecked) {
-      // console.log(isChecked + " in rdobtn @1@");
-      return styles.easyChecked;
-    } else {
-      // console.log(isChecked + " in rdobtn @2@");
-      return styles.easy;
-    }
+    if (isChecked) return styles.easyChecked;
+    else return styles.easy;
   } else if (difficulty === 'Medium') {
     if (isChecked) return styles.mediumChecked;
-    else {
-      return styles.medium;
-    }
+    else return styles.medium;
   } else if (difficulty === 'Hard') {
     if (isChecked) return styles.hardChecked;
     else return styles.hard;
   } else {
     return styles.normal;
   }
+
+  // if(isChecked){
+  //   labelColor_Checked(difficulty);
+  // }else{
+  //   labelColor_notChecked(difficulty);
+  // }
 };
+// const labelColor_Checked = (difficulty: string) => {
+//   if (difficulty === 'Easy') return styles.easyChecked;
+//   else if (difficulty === 'Medium') return styles.mediumChecked;
+//   else if (difficulty === 'Hard') return styles.hardChecked;
+// };
+// const labelColor_notChecked = (difficulty: string) => {
+//   if (difficulty === 'Easy') return styles.easy;
+//   else if (difficulty === 'Medium') return styles.medium;
+//   else if (difficulty === 'Hard') return styles.hard;
+//   else return styles.normal;
+// };
 
 const RadioButton = ({
   id,
