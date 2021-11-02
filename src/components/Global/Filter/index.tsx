@@ -13,21 +13,21 @@ const Filter = () => {
         <RadioButton
           id={'radioEasy'}
           name={'filter'}
-          difficulty={'Easy'}
+          difficulty={'easy'}
           checked={easyChecked}
           setChecked={setEasyChecked}
         />
         <RadioButton
           id={'radioMedium'}
           name={'filter'}
-          difficulty={'Medium'}
+          difficulty={'medium'}
           checked={mediumChecked}
           setChecked={setMediumChecked}
         />
         <RadioButton
           id={'radioHard'}
           name={'filter'}
-          difficulty={'Hard'}
+          difficulty={'hard'}
           checked={hardChecked}
           setChecked={setHardChecked}
         />
