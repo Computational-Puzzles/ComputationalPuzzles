@@ -1,7 +1,9 @@
 @import 'src/styles/abstracts/_mixins/text';
+@import 'src/styles/abstracts/_variables';
 
 .input {
   @include font-button;
+  color: $black;
   font-size: 0.875rem;
   width: 100%;
   padding: 0.5rem 1rem;
