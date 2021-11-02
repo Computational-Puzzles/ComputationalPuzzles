@@ -7,10 +7,10 @@
 }
 .normal {
   display: inline-block;
-  padding: 10px 20px;
-  margin: 10px 20px;
+  padding: 0.625rem 1.25rem;
+  margin: 0.625rem 1.25rem;
   font-family: 'Nunito Sans', serif;
-  font-size: 16px;
+  //font-size: 1rem;
   border: 2px solid;
   border-radius: 9.7px;
   text-align: center;
@@ -42,8 +42,6 @@
     text-decoration: underline;
   }
 }
-//checked style
-//easy:checked ~ label{
 .easyChecked {
   @extend .easy;
   text-decoration: initial;
