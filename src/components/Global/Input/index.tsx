@@ -9,7 +9,7 @@ type IndexProps = {
   maxLength?: number;
   labelText?: string;
 };
-const Index = ({
+const Input = ({
   type,
   id,
   required,
@@ -35,4 +35,4 @@ const Index = ({
   );
 };
 
-export default Index;
+export default Input;
