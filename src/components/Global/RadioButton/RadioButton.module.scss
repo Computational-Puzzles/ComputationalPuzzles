@@ -1,3 +1,6 @@
+@import 'src/styles/abstracts/_variables';
+@import 'src/styles/abstracts/_mixins/text';
+
 .gone {
   position: absolute;
   opacity: 0;
@@ -6,58 +9,49 @@
   width: 0;
 }
 .normal {
+  @include font-regular;
   display: inline-block;
   padding: 0.625rem 1.25rem;
   margin: 0.625rem 1.25rem;
-  font-family: 'Nunito Sans', serif;
-  //font-size: 1rem;
-  border: 2px solid;
-  border-radius: 9.7px;
+  border: 0.125rem solid;
+  border-radius: 0.625rem;
   text-align: center;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .easy {
   @extend .normal;
-  border-color: #05c05b;
-  color: #05c05b;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  border-color: $green;
+  color: $green;
 }
 .medium {
   @extend .normal;
-  border-color: #3bb2c8;
-  color: #3bb2c8;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  border-color: $secondary-100;
+  color: $secondary-100;
 }
 .hard {
   @extend .normal;
-  border-color: #d7222c;
-  color: #d7222c;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  border-color: $red;
+  color: $red;
 }
 .easyChecked {
   @extend .easy;
   text-decoration: initial;
-  background-color: #05c05b;
-  color: white;
+  background-color: $green;
+  color: $white;
 }
 .mediumChecked {
   @extend .medium;
   text-decoration: initial;
-  background-color: #3bb2c8;
-  color: white;
+  background-color: $secondary-100;
+  color: $white;
 }
 .hardChecked {
   @extend .hard;
   text-decoration: initial;
-  background-color: #d7222c;
-  color: white;
+  background-color: $red;
+  color: $white;
 }
