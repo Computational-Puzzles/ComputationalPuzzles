@@ -1,17 +1,17 @@
-.logoLogin{
+.logoLogin {
   margin: 0 auto;
   width: 25rem;
 }
-.box1 {
-  width: 20rem;
+.mainSec {
   margin: 0 auto;
+  width: 20rem;
 }
-.box2 {
+.title {
   font-size: 2.3rem;
   text-align: center;
 }
-.box3{
-  padding:  0 0 1.5rem 0;
+.inputs {
+  padding: 0 0 1.5rem 0;
 }
 
 .button {
@@ -23,7 +23,7 @@
   border-radius: 8px;
   cursor: pointer;
 }
-.container{
+.container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
