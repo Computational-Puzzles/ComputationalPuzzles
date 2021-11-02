@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
 
-const Index = () => {
+const Filter = () => {
   const [easyChecked, setEasyChecked] = useState(false);
   const [mediumChecked, setMediumChecked] = useState(false);
   const [hardChecked, setHardChecked] = useState(false);
@@ -35,11 +35,11 @@ const Index = () => {
       <button
         onClick={() =>
           alert(
-            'easy' +
+            'easy ' +
               easyChecked +
-              '//med' +
+              '//med ' +
               mediumChecked +
-              '//hard' +
+              '//hard ' +
               hardChecked
           )
         }
@@ -50,4 +50,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Filter;
