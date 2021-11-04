@@ -1,29 +1,38 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-type ButtonType = 'primary' | 'secondary' | 'outline' | 'flat';
+type ButtonStyle = 'primary' | 'secondary' | 'outline' | 'flat';
+type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonType = 'button' | 'submit' | 'reset';
 type ArrowDirectionType = 'right' | 'down';
-type ArrowType = { type: ButtonType; arrowDirection: ArrowDirectionType };
+type ArrowType = { style: ButtonStyle; arrowDirection: ArrowDirectionType };
 
 type ButtonProps = {
-  type: ButtonType;
+  style: ButtonStyle;
+  type?: ButtonType;
+  size?: ButtonSize;
   content: string;
   arrowDirection?: ArrowDirectionType;
   onClick: () => void;
 };
 
-const getButtonClass = (type: ButtonType) => {
-  if (type === 'primary') return styles.btnPrimary;
-  if (type === 'secondary') return styles.btnSecondary;
-  if (type === 'outline') return styles.btnOutline;
-  if (type === 'flat') return styles.btnFlat;
+const getButtonClass = (style: ButtonStyle) => {
+  if (style === 'primary') return styles.btnPrimary;
+  if (style === 'secondary') return styles.btnSecondary;
+  if (style === 'outline') return styles.btnOutline;
+  if (style === 'flat') return styles.btnFlat;
 };
 
-const getArrowClass = (type: ButtonType) => {
-  if (type === 'primary') return styles.arrowPrimary;
-  if (type === 'secondary') return styles.arrowSecondary;
-  if (type === 'outline') return styles.arrowOutline;
-  if (type === 'flat') return styles.arrowOutline;
+const getButtonSizeClass = (size: ButtonSize) => {
+  if (size === 'sm') return styles.btnSm;
+  if (size === 'md') return styles.btnMd;
+  if (size === 'lg') return styles.btnLg;
+};
+
+const getArrowClass = (style: ButtonStyle) => {
+  if (style === 'primary') return styles.arrowPrimary;
+  if (style === 'secondary') return styles.arrowSecondary;
+  if (style === 'outline' || style === 'flat') return styles.arrowOutline;
 };
 
 const getArrowSvgRotation = (arrowDirection: ArrowDirectionType) => {
@@ -48,25 +57,41 @@ const getArrowSvg = (arrowDirection: ArrowDirectionType) => {
   );
 };
 
-const Arrow = ({ type, arrowDirection }: ArrowType) => {
+const Arrow = ({ style, arrowDirection }: ArrowType) => {
   return (
-    <div className={`${styles.arrow} ${getArrowClass(type)}`}>
+    <div className={`${styles.arrow} ${getArrowClass(style)}`}>
       {getArrowSvg(arrowDirection)}
     </div>
   );
 };
 
-const Index = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
+const Button = ({
+  style,
+  type,
+  size,
+  content,
+  arrowDirection,
+  onClick
+}: ButtonProps) => {
+  if (!type) type = 'button';
+  if (!size) size = 'md';
+
   return (
-    <button className={`${getButtonClass(type)}`} onClick={onClick}>
-      <div className={styles.btnTextContainer}>{content}</div>
-      {arrowDirection && (
-        <div className={styles.arrowBox}>
-          <Arrow arrowDirection={arrowDirection} type={type} />
-        </div>
-      )}
+    <button
+      className={`${getButtonSizeClass(size)} ${styles.removeBtnDefault}`}
+      onClick={onClick}
+      type={type}
+    >
+      <div className={`${getButtonClass(style)}`}>
+        <div className={styles.btnTextContainer}>{content}</div>
+        {arrowDirection && (
+          <div className={styles.arrowBox}>
+            <Arrow arrowDirection={arrowDirection} style={style} />
+          </div>
+        )}
+      </div>
     </button>
   );
 };
 
-export default Index;
+export default Button;

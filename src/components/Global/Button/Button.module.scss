@@ -2,6 +2,23 @@
 @import 'src/styles/abstracts/_mixins/layout';
 @import 'src/styles/abstracts/_mixins/transitions';
 
+.removeBtnDefault {
+  background-color: $transparent;
+  border: none;
+}
+
+.btnSm {
+  font-size: 0.8rem;
+}
+
+.btnMd {
+  font-size: 1rem;
+}
+
+.btnLg {
+  font-size: 1.5rem;
+}
+
 .btn {
   @include center;
   @include smooth-transition;
@@ -11,11 +28,10 @@
   align-content: space-between;
   align-items: center;
   padding: 0.3em 0.3em 0.3em 0.75em;
-  font-size: 1em;
   white-space: nowrap;
 
   border: $btn-border-width solid $transparent;
-  border-radius: 0.48em;
+  border-radius: 0.4em;
 
   &:hover {
     cursor: pointer;
@@ -117,6 +133,7 @@
 }
 
 // Arrow Rotation
+
 .arrowRight {
   transform-origin: center;
 }
