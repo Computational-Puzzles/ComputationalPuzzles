@@ -1,0 +1,63 @@
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/abstracts/_mixins/text.scss';
+
+.cardHeightDefault {
+  height: 10.5rem;
+}
+
+.cardHeightButton {
+  height: 15rem;
+}
+
+.card {
+  @include font-body;
+  background-color: $white;
+  border-radius: 0.8rem;
+  border: 0.15rem solid $black;
+  width: 28rem;
+  padding: 1.5rem 1.25rem;
+  margin: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .cardHeader {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      @include font-header-black;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .difficulty {
+      @include font-header-bold;
+      font-size: 1rem;
+
+      .easy {
+        color: $green;
+      }
+
+      .medium {
+        color: $blue;
+      }
+
+      .hard {
+        color: $red;
+      }
+    }
+  }
+
+  .buttonWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    & > * {
+      margin-right: 1rem;
+    }
+  }
+}
