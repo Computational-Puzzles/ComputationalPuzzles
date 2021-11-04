@@ -9,7 +9,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.25rem;
 
     @include mobile() {
       flex-direction: column;
@@ -29,7 +28,6 @@
   .content {
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
     padding: 5rem 0;
 
     @include mobile() {
