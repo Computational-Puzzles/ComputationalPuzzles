@@ -1,10 +1,12 @@
 $transparent: rgba(#fff, 0);
 $black: #1f201f;
 $grey: #4b4b4b;
+$grey-transparency: rgba($grey, 0.05);
 $white: #ffffff;
 $green: #05c05b;
 $red: #d7222c;
 $yellow: #ffc32b;
+$blue: #3bb2c8;
 
 $primary-100: #f16b67;
 $primary-200: #ed4e4a;
@@ -25,5 +27,5 @@ $shadow-color: rgba($black, 0.15);
 
 // Buttons
 
-$btn-border-width: 0.15rem;
-$btn-content-height: 2rem;
+$btn-border-width: 0.15em;
+$btn-content-height: 2em;

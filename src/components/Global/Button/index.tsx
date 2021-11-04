@@ -1,29 +1,38 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-type ButtonStyle = 'primary' | 'secondary' | 'outline';
+type ButtonStyle = 'primary' | 'secondary' | 'outline' | 'flat';
+type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonType = 'button' | 'submit' | 'reset';
 type ArrowDirectionType = 'right' | 'down';
 type ArrowType = { style: ButtonStyle; arrowDirection: ArrowDirectionType };
 
 type ButtonProps = {
   style: ButtonStyle;
-  type?: 'button' | 'submit' | 'reset';
+  type?: ButtonType;
+  size?: ButtonSize;
   content: string;
   arrowDirection?: ArrowDirectionType;
-  onClick?: () => void;
-  disabledMessage?: string; // if set, this button will be disabled and this will be displayed when clicked
+  onClick: () => void;
 };
 
 const getButtonClass = (style: ButtonStyle) => {
   if (style === 'primary') return styles.btnPrimary;
   if (style === 'secondary') return styles.btnSecondary;
   if (style === 'outline') return styles.btnOutline;
+  if (style === 'flat') return styles.btnFlat;
+};
+
+const getButtonSizeClass = (size: ButtonSize) => {
+  if (size === 'sm') return styles.btnSm;
+  if (size === 'md') return styles.btnMd;
+  if (size === 'lg') return styles.btnLg;
 };
 
 const getArrowClass = (style: ButtonStyle) => {
   if (style === 'primary') return styles.arrowPrimary;
   if (style === 'secondary') return styles.arrowSecondary;
-  if (style === 'outline') return styles.arrowOutline;
+  if (style === 'outline' || style === 'flat') return styles.arrowOutline;
 };
 
 const getArrowSvgRotation = (arrowDirection: ArrowDirectionType) => {
@@ -59,25 +68,28 @@ const Arrow = ({ style, arrowDirection }: ArrowType) => {
 const Button = ({
   style,
   type,
+  size,
   content,
   arrowDirection,
   onClick
 }: ButtonProps) => {
-  if (!type) {
-    type = 'button';
-  }
+  if (!type) type = 'button';
+  if (!size) size = 'md';
+
   return (
     <button
-      className={`${getButtonClass(style)}`}
-      type={type}
+      className={`${getButtonSizeClass(size)} ${styles.removeBtnDefault}`}
       onClick={onClick}
+      type={type}
     >
-      <div className={styles.btnTextContainer}>{content}</div>
-      {arrowDirection && (
-        <div className={styles.arrowBox}>
-          <Arrow arrowDirection={arrowDirection} style={style} />
-        </div>
-      )}
+      <div className={`${getButtonClass(style)}`}>
+        <div className={styles.btnTextContainer}>{content}</div>
+        {arrowDirection && (
+          <div className={styles.arrowBox}>
+            <Arrow arrowDirection={arrowDirection} style={style} />
+          </div>
+        )}
+      </div>
     </button>
   );
 };
