@@ -3,6 +3,7 @@ import {CardGrid, Header} from '../../../components/App';
 import {GetServerSideProps} from 'next';
 import {PrismaClient, Puzzle, Difficulty} from '@prisma/client';
 import {Filter, PuzzleCardProps} from "../../../components/Global";
+import { MapRenderer } from '../../../components/App';
 
 const prisma = new PrismaClient();
 
@@ -29,7 +30,20 @@ const PuzzleMap = (
             <Header/>
             <Filter />
             <CardGrid cardList={puzzleCardProps}/>
-            Puzzle Map
+          <div>Puzzle Map</div>
+          <MapRenderer markers={[{
+            anchor: [49.805, -119.4778],
+            zoom: 13
+          }, {
+            anchor: [49.8, -119.4778],
+            zoom: 13
+          }, {
+            anchor: [49.81, -119.47784],
+            zoom: 13
+          }, {
+            anchor: [50.88, -119.477829],
+            zoom: 8
+          }]} />
         </>
     );
 };
