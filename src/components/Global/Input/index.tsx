@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Input.module.scss';
 
-type IndexProps = {
+type InputProps = {
   type: 'text' | 'password';
   id: string;
   required: boolean;
@@ -16,7 +16,7 @@ const Input = ({
   placeholder,
   maxLength,
   labelText
-}: IndexProps) => {
+}: InputProps) => {
   const [input, setInput] = useState('');
   return (
     <>
