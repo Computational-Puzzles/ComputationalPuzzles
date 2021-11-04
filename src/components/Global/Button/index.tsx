@@ -1,27 +1,28 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-type ButtonType = 'primary' | 'secondary' | 'outline';
+type ButtonStyle = 'primary' | 'secondary' | 'outline';
 type ArrowDirectionType = 'right' | 'down';
-type ArrowType = { type: ButtonType; arrowDirection: ArrowDirectionType };
+type ArrowType = { style: ButtonStyle; arrowDirection: ArrowDirectionType };
 
 type ButtonProps = {
-  type: ButtonType;
+  style: ButtonStyle;
+  type?: 'button' | 'submit' | 'reset';
   content: string;
   arrowDirection?: ArrowDirectionType;
   onClick: () => void;
 };
 
-const getButtonClass = (type: ButtonType) => {
-  if (type === 'primary') return styles.btnPrimary;
-  if (type === 'secondary') return styles.btnSecondary;
-  if (type === 'outline') return styles.btnOutline;
+const getButtonClass = (style: ButtonStyle) => {
+  if (style === 'primary') return styles.btnPrimary;
+  if (style === 'secondary') return styles.btnSecondary;
+  if (style === 'outline') return styles.btnOutline;
 };
 
-const getArrowClass = (type: ButtonType) => {
-  if (type === 'primary') return styles.arrowPrimary;
-  if (type === 'secondary') return styles.arrowSecondary;
-  if (type === 'outline') return styles.arrowOutline;
+const getArrowClass = (style: ButtonStyle) => {
+  if (style === 'primary') return styles.arrowPrimary;
+  if (style === 'secondary') return styles.arrowSecondary;
+  if (style === 'outline') return styles.arrowOutline;
 };
 
 const getArrowSvgRotation = (arrowDirection: ArrowDirectionType) => {
@@ -46,25 +47,36 @@ const getArrowSvg = (arrowDirection: ArrowDirectionType) => {
   );
 };
 
-const Arrow = ({ type, arrowDirection }: ArrowType) => {
+const Arrow = ({ style, arrowDirection }: ArrowType) => {
   return (
-    <div className={`${styles.arrow} ${getArrowClass(type)}`}>
+    <div className={`${styles.arrow} ${getArrowClass(style)}`}>
       {getArrowSvg(arrowDirection)}
     </div>
   );
 };
 
-const Index = ({ type, content, arrowDirection, onClick }: ButtonProps) => {
+const Button = ({
+  style,
+  type,
+  content,
+  arrowDirection,
+  onClick
+}: ButtonProps) => {
+  if (!type) type = 'button';
   return (
-    <button className={`${getButtonClass(type)}`} onClick={onClick}>
+    <button
+      className={`${getButtonClass(style)}`}
+      onClick={onClick}
+      type={type}
+    >
       <div className={styles.btnTextContainer}>{content}</div>
       {arrowDirection && (
         <div className={styles.arrowBox}>
-          <Arrow arrowDirection={arrowDirection} type={type} />
+          <Arrow arrowDirection={arrowDirection} style={style} />
         </div>
       )}
     </button>
   );
 };
 
-export default Index;
+export default Button;
