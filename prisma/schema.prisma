@@ -93,6 +93,7 @@ model Puzzle {
   exampleImageUrl String?      @map(name: "example_image_url")
   isGenerated     Boolean      @map(name: "is_generated")
   question        String
+  inputType       InputType    @default(TEXT) @map(name: "input_type")
   hint            String
   published       Boolean      @default(false)
   variables       Json
@@ -122,4 +123,9 @@ enum Difficulty {
   EASY
   MEDIUM
   HARD
+}
+
+enum InputType {
+    TEXT
+    MCQ
 }
