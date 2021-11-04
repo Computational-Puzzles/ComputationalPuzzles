@@ -4,10 +4,10 @@ import { maptiler } from 'pigeon-maps/providers';
 import { Geocoder } from '@maptiler/geocoder';
 import mapRendererStyles from './MapRenderer.module.scss';
 
-const MAPTILES_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
+const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 
 const mapTilerProvider = maptiler(
-  MAPTILES_ACCESS_TOKEN,
+  MAPTILER_ACCESS_TOKEN,
   'outdoor'
 );
 
@@ -26,7 +26,7 @@ const MapRenderer = ({ markers }: MapRendererProps) => {
   const [geocoderSearchValue, setGeocoderSearchValue] = useState<string>('');
   const [geocoderGeocodedPlace, setGeocoderGeocodedPlace] = useState<string>('');
   let geocoder = new Geocoder({
-    key: MAPTILES_ACCESS_TOKEN
+    key: MAPTILER_ACCESS_TOKEN
   });
   
   const [center, setCenter] = useState<Anchor>([
