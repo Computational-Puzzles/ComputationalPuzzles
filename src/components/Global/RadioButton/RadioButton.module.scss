@@ -1,0 +1,57 @@
+@import 'src/styles/abstracts/_variables';
+@import 'src/styles/abstracts/_mixins/text';
+
+.gone {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.normal {
+  @include font-regular;
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  margin: 0.625rem 1.25rem;
+  border: 0.125rem solid;
+  border-radius: 0.625rem;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.easy {
+  @extend .normal;
+  border-color: $green;
+  color: $green;
+}
+.medium {
+  @extend .normal;
+  border-color: $secondary-100;
+  color: $secondary-100;
+}
+.hard {
+  @extend .normal;
+  border-color: $red;
+  color: $red;
+}
+.easyChecked {
+  @extend .easy;
+  text-decoration: initial;
+  background-color: $green;
+  color: $white;
+}
+.mediumChecked {
+  @extend .medium;
+  text-decoration: initial;
+  background-color: $secondary-100;
+  color: $white;
+}
+.hardChecked {
+  @extend .hard;
+  text-decoration: initial;
+  background-color: $red;
+  color: $white;
+}
