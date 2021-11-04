@@ -1,0 +1,19 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.wrapper {
+  max-width: $max-product-content-width;
+  margin: 0 auto;
+}
+
+.sectionPadding {
+  padding: 6rem 0;
+
+  @include mobile() {
+    padding: 6rem 1.5rem;
+  }
+
+  @include tablet() {
+    padding: 6rem 2rem;
+  }
+}
