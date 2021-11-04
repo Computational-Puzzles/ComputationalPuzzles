@@ -1,30 +1,34 @@
 import * as React from 'react';
 
 import { Button } from '../';
+import Link from 'next/link';
 
-import styles from './mapCard.module.scss';
+import styles from './PuzzleCard.module.scss';
 
 type DIFFICULTY = 'hard' | 'medium' | 'easy';
 type CARD_TYPE = 'list' | 'grid';
-export type CardProps = {
+export type PuzzleCardProps = {
   title: string;
   desc: string;
   diff: DIFFICULTY;
   type?: CARD_TYPE;
+  link: string;
 };
 
 /**
  * Show 1 or 2 buttons depending on the type of the card
  */
-const Buttons = ({ type }: { type: CARD_TYPE }) => {
+const Buttons = ({ type, link }: { type: CARD_TYPE, link: string }) => {
   if (type === 'list') {
     return (
-      <Button
-        style="primary"
-        content="Solve online"
-        arrowDirection="right"
-        onClick={() => alert('Solve online')}
-      />
+      <Link href={link} passHref>
+        <Button
+          style="primary"
+          content="Solve online"
+          arrowDirection="right"
+          onClick={() => null}
+        />
+      </Link>
     );
   } else if (type === 'grid') {
     return (
@@ -35,12 +39,14 @@ const Buttons = ({ type }: { type: CARD_TYPE }) => {
           arrowDirection="right"
           onClick={() => alert('View map')}
         />
-        <Button
-          style="primary"
-          content="Solve online"
-          arrowDirection="right"
-          onClick={() => alert('Solve online')}
-        />
+        <Link href={link} passHref>
+          <Button
+              style="primary"
+              content="Solve online"
+              arrowDirection="right"
+              onClick={() => null}
+          />
+        </Link>
       </div>
     );
   }
@@ -61,7 +67,7 @@ const Difficulty = ({ diff }: { diff: DIFFICULTY }) => {
   }
 };
 
-const Card = ({ title, desc, diff, type }: CardProps) => {
+const PuzzleCard = ({ title, desc, diff, type, link }: PuzzleCardProps) => {
   return (
     <div
       className={`${styles.card} ${
@@ -75,9 +81,9 @@ const Card = ({ title, desc, diff, type }: CardProps) => {
         </p>
       </div>
       {desc}
-      {type && <Buttons type={type} />}
+      {type && <Buttons type={type} link={link} />}
     </div>
   );
 };
 
-export default Card;
+export default PuzzleCard;

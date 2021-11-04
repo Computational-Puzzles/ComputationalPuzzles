@@ -1,10 +1,8 @@
 import Logo from './Logo';
 import Button from './Button';
-import Header from './Header';
-import Card from './Card';
+import Card from './PuzzleCard';
 
-import type { CardProps } from './Card';
+import type { PuzzleCardProps } from './PuzzleCard';
 
-
-export { Button, Card, Header, Logo };
-export type { CardProps };
+export { Button, Card, Logo };
+export type { PuzzleCardProps };
