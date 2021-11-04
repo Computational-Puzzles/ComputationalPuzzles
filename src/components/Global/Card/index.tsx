@@ -20,7 +20,7 @@ const Buttons = ({ type }: { type: CARD_TYPE }) => {
   if (type === 'list') {
     return (
       <Button
-        type="primary"
+        style="primary"
         content="Solve online"
         arrowDirection="right"
         onClick={() => alert('Solve online')}
@@ -30,13 +30,13 @@ const Buttons = ({ type }: { type: CARD_TYPE }) => {
     return (
       <div className={styles.buttonWrap}>
         <Button
-          type="secondary"
+          style="secondary"
           content="View map"
           arrowDirection="right"
           onClick={() => alert('View map')}
         />
         <Button
-          type="primary"
+          style="primary"
           content="Solve online"
           arrowDirection="right"
           onClick={() => alert('Solve online')}
