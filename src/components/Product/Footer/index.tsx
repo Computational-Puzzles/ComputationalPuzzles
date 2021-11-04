@@ -13,7 +13,7 @@ const Footer = () => {
         <div className={footerStyles.exploreMore}>
           <h2>Interested in exploring more?</h2>
           <Button
-            type={'primary'}
+            style={'primary'}
             content={'Start Hunting'}
             arrowDirection={'right'}
             onClick={() => signIn()}

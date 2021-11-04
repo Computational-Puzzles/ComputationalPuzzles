@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { PuzzleProps } from '../../../../../prisma/schemaTypes';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 type submitPuzzleProps = {
@@ -54,13 +53,13 @@ const submitPuzzleHandler = async (
   }
 
   const isCorrect = checkPuzzleAnswer(puzzle, randomSeed, puzzleAnswer);
-  const submission = await prisma.submission.create({
+  await prisma.submission.create({
     data: {
       puzzleId: puzzle.id,
       userId: user.id,
       answers: [puzzleAnswer],
       isCorrect: [isCorrect],
-      randomSeed: [randomSeed]
+      randomSeed: [+randomSeed]
     }
   });
 

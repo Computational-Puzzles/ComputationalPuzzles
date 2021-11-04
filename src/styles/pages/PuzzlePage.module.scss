@@ -1,6 +1,10 @@
 @import 'src/styles/abstracts/_variables';
 @import 'src/styles/abstracts/_mixins/layout';
 
+.wrapper {
+  @include wrapper;
+}
+
 .puzzleDisplay {
   display: flex;
   flex-direction: row;

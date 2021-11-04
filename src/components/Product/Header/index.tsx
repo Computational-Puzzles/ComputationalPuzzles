@@ -11,9 +11,9 @@ const Header = () => {
         <div className={`${productStyles.wrapper} ${headerStyles.content}`}>
           <Logo showMark={true} showType={true} />
           <div className={headerStyles.actions}>
-            <Button type={'flat'} content={'Login'} onClick={() => signIn()} />
+            <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
             <Button
-              type={'outline'}
+              style={'outline'}
               content={'Get Started'}
               arrowDirection={'right'}
               onClick={() => signIn()}
