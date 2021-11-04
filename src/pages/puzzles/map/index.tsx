@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapRenderer } from '../../../components/Global';
+import { MapRenderer } from '../../../components/App';
 
 const PuzzleMap = () => {
   return (
