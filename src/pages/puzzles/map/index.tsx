@@ -2,7 +2,7 @@ import React from 'react';
 import {CardGrid, Header} from '../../../components/App';
 import {GetServerSideProps} from 'next';
 import {PrismaClient, Puzzle, Difficulty} from '@prisma/client';
-import {PuzzleCardProps} from "../../../components/Global";
+import {Filter, PuzzleCardProps} from "../../../components/Global";
 
 const prisma = new PrismaClient();
 
@@ -27,6 +27,7 @@ const PuzzleMap = (
     return (
         <>
             <Header/>
+            <Filter />
             <CardGrid cardList={puzzleCardProps}/>
             Puzzle Map
         </>

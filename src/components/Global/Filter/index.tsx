@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
+import { Input } from '../index';
 
 const Filter = () => {
   const [easyChecked, setEasyChecked] = useState(false);
@@ -10,6 +11,7 @@ const Filter = () => {
   return (
     <div>
       <form className={styles.filter}>
+        <Input type={'text'} id={'filterSearch'} required={true} />
         <RadioButton
           id={'radioEasy'}
           name={'filter'}
@@ -32,20 +34,6 @@ const Filter = () => {
           setChecked={setHardChecked}
         />
       </form>
-      <button
-        onClick={() =>
-          alert(
-            'easy ' +
-              easyChecked +
-              '//med ' +
-              mediumChecked +
-              '//hard ' +
-              hardChecked
-          )
-        }
-      >
-        :DDDDDDDD
-      </button>
     </div>
   );
 };
