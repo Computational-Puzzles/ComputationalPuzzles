@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import { Header, Footer, Landing } from '../components/Product';
+import { Header, Footer, LandingContent } from '../components/Product';
 
 const Home: React.FC = () => {
   const { data: session, status } = useSession();
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-      <Landing />
+      <LandingContent />
       <Footer />
     </>
   );

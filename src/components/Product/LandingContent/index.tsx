@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
-import productStyles from '../Product.module.scss';
-import landingStyles from './Landing.module.scss';
+import productStyles from '../../../styles/pages/Product.module.scss';
+import landingStyles from './LandingContent.module.scss';
 import logo from '../../../../public/assets/logo.png';
 import jigsaw from '../../../../public/assets/puzzle_dots.svg';
 import childImage1 from '../../../../public/assets/juliane-liebermann-unsplash.jpg';
@@ -9,7 +9,7 @@ import childImage2 from '../../../../public/assets/markus-spiske-unsplash.jpg';
 import { signIn } from 'next-auth/react';
 import { Button } from '../../Global';
 
-const Landing = () => {
+const LandingContent = () => {
   const whatIsThisRef = useRef(null);
 
   const learnMoreButton = () => {
@@ -114,4 +114,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default LandingContent;

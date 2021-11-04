@@ -1,5 +1,5 @@
-@import '../../styles/abstracts/variables';
-@import '../../styles/abstracts/mixins';
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
 
 .wrapper {
   max-width: $max-product-content-width;

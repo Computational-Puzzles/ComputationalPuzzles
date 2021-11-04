@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Logo } from '../../Global';
 import { signIn } from 'next-auth/react';
 import headerStyles from './Header.module.scss';
-import productStyles from '../Product.module.scss';
+import productStyles from '../../../styles/pages/Product.module.scss';
 
 const Header = () => {
   return (
