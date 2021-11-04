@@ -1,0 +1,88 @@
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/abstracts/mixins';
+
+.footer {
+  border-top: $grey-transparency 1px solid;
+
+  .exploreMore {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.25rem;
+
+    @include mobile() {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    h2 {
+      font-size: 3rem;
+      margin: 0;
+
+      @include mobile() {
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    padding: 5rem 0;
+
+    @include mobile() {
+      padding: 5rem 1.5rem;
+    }
+
+    @include tablet() {
+      padding: 5rem 2rem;
+    }
+  }
+
+  .details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6rem;
+
+    @include mobile() {
+      flex-direction: column;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      @include mobile() {
+        margin-top: 2rem;
+      }
+
+      a {
+        color: $primary-300;
+
+        &:hover {
+          color: $primary-100;
+        }
+      }
+
+      & > * {
+        margin-right: 3.125rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .ubcLogo {
+    display: block;
+    width: 20rem;
+    height: auto;
+    margin: 3rem auto 0;
+  }
+}
