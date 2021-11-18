@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Map, ZoomControl, Marker } from 'pigeon-maps';
+import React, { Dispatch, SetStateAction } from 'react';
+import { Map, Marker, ZoomControl } from 'pigeon-maps';
 import { maptiler } from 'pigeon-maps/providers';
-import { Geocoder } from '@maptiler/geocoder';
 import mapRendererStyles from './MapRenderer.module.scss';
 import { CardProps } from '../../Global';
 
@@ -27,36 +26,12 @@ type MapRendererProps = {
   markers: Marker[];
   userMarker: Marker;
   mapCenter: Anchor;
+  setMapCenter: Dispatch<SetStateAction<Anchor>>;
 };
 
-const MapRenderer = ({ markers, userMarker, mapCenter }: MapRendererProps) => {
-  const [geocoderSearchValue, setGeocoderSearchValue] = useState<string>('');
-  const [geocoderGeocodedPlace, setGeocoderGeocodedPlace] =
-    useState<string>('');
-  let geocoder = new Geocoder({
-    key: MAPTILER_ACCESS_TOKEN
-  });
-
-  const [center, setCenter] = useState<Anchor>([49.882114, -119.477829]);
-  const [zoom, setZoom] = useState<number>(16);
-
-  useEffect(() => {
-    setCenter(mapCenter);
-  }, [mapCenter]);
-
+const MapRenderer = ({ markers, userMarker, mapCenter, setMapCenter }: MapRendererProps) => {
   const setMapFocus = (marker: Marker): void => {
-    setCenter(marker.anchor);
-    setZoom(marker.zoom);
-  };
-
-  const onGeocoderSearch = (): void => {
-    setGeocoderSearchValue(geocoderSearchValue);
-    geocoder.geocode(geocoderSearchValue).then(results => {
-      const response = results.features[0];
-      setGeocoderGeocodedPlace(`${response.place_name} ${response.center}`);
-      setCenter([response.center[1], response.center[0]]);
-      setZoom(16);
-    });
+    setMapCenter(marker.anchor);
   };
 
   return (
@@ -64,13 +39,11 @@ const MapRenderer = ({ markers, userMarker, mapCenter }: MapRendererProps) => {
       <Map
         provider={mapTilerProvider}
         dprs={[1, 2]}
-        center={center}
-        zoom={zoom}
+        center={mapCenter}
         animateMaxScreens={20}
         attribution={false}
-        onBoundsChanged={({ center, zoom }) => {
-          setCenter(center);
-          setZoom(zoom);
+        onBoundsChanged={({ center }) => {
+          setMapCenter(center);
         }}
       >
         {markers.map((marker, index) => (
@@ -91,17 +64,6 @@ const MapRenderer = ({ markers, userMarker, mapCenter }: MapRendererProps) => {
         )}
         <ZoomControl />
       </Map>
-      <div>
-        <input
-          type="search"
-          value={geocoderSearchValue}
-          onChange={event => setGeocoderSearchValue(event.target.value)}
-        />
-        <button type="button" onClick={onGeocoderSearch}>
-          Search
-        </button>
-        {geocoderGeocodedPlace}
-      </div>
     </div>
   );
 };
