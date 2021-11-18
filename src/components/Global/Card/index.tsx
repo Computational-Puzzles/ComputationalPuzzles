@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import { Button } from '../';
 
-import styles from './mapCard.module.scss';
+import styles from './Card.module.scss';
 
-type DIFFICULTY = 'hard' | 'medium' | 'easy';
+type DIFFICULTY = 'HARD' | 'MEDIUM' | 'EASY';
 type CARD_TYPE = 'list' | 'grid';
 export type CardProps = {
-  title: string;
-  desc: string;
-  diff: DIFFICULTY;
+  name: string;
+  content: string;
+  difficulty: DIFFICULTY;
   type?: CARD_TYPE;
 };
 
@@ -49,19 +49,19 @@ const Buttons = ({ type }: { type: CARD_TYPE }) => {
 /**
  * Adjust color of the difficulty text
  */
-const Difficulty = ({ diff }: { diff: DIFFICULTY }) => {
-  if (diff === 'easy') {
+const Difficulty = ({ difficulty }: { difficulty: DIFFICULTY }) => {
+  if (difficulty === 'EASY') {
     return <span className={styles.easy}>Easy</span>;
   }
-  if (diff === 'medium') {
+  if (difficulty === 'MEDIUM') {
     return <span className={styles.medium}>Medium</span>;
   }
-  if (diff === 'hard') {
+  if (difficulty === 'HARD') {
     return <span className={styles.hard}>Hard</span>;
   }
 };
 
-const Card = ({ title, desc, diff, type }: CardProps) => {
+const Card = ({ name, content, difficulty, type }: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
@@ -69,12 +69,12 @@ const Card = ({ title, desc, diff, type }: CardProps) => {
       }`}
     >
       <div className={styles.cardHeader}>
-        <p className={styles.title}>{title}</p>
+        <p className={styles.title}>{name}</p>
         <p className={styles.difficulty}>
-          Difficulty: <Difficulty diff={diff} />
+          Difficulty: <Difficulty difficulty={difficulty} />
         </p>
       </div>
-      {desc}
+      {content}
       {type && <Buttons type={type} />}
     </div>
   );

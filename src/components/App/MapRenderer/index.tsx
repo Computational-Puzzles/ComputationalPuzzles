@@ -33,12 +33,12 @@ const MapRenderer = ({ markers }: MapRendererProps) => {
     49.882114, -119.477829
   ]);
   const [yourAnchor, setYourAnchor] = useState<Marker>(null);
-  const [zoom, setZoom] = useState<number>(13);
+  const [zoom, setZoom] = useState<number>(16);
   
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const anchor: Anchor = [position.coords.latitude, position.coords.longitude];
-      const zoom = 13;
+      const zoom = 16;
       setCenter(anchor);
       setZoom(zoom);
       setYourAnchor({anchor, zoom});
@@ -56,7 +56,7 @@ const MapRenderer = ({ markers }: MapRendererProps) => {
       const response = results.features[0];
       setGeocoderGeocodedPlace(`${response.place_name} ${response.center}`);
       setCenter([response.center[1], response.center[0]]);
-      setZoom(13);
+      setZoom(16);
     });
   }
 
@@ -84,7 +84,7 @@ const MapRenderer = ({ markers }: MapRendererProps) => {
         ))}
         {yourAnchor && (
           <Marker
-            width={50}
+            width={40}
             color={'red'}
             anchor={yourAnchor.anchor}
             onClick={() => setMapFocus(yourAnchor)}
