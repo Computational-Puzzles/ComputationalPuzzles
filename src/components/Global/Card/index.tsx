@@ -2,40 +2,14 @@ import * as React from 'react';
 
 import { Button } from '../';
 
-import styles from './mapCard.module.scss';
+import styles from './Card.module.scss';
 import { CARD_TYPE, CardProps, DIFFICULTY } from '../../../types/cards';
 
-/**
- * Show 1 or 2 buttons depending on the type of the card
- */
-const Buttons = ({ type, link }: { type: CARD_TYPE; link: string }) => {
-  if (type === 'list') {
-    return (
-      <Button
-        style="primary"
-        content="Solve online"
-        arrowDirection="right"
-        link={link}
-      />
-    );
-  } else if (type === 'grid') {
-    return (
-      <div className={styles.buttonWrap}>
-        <Button
-          style="secondary"
-          content="View map"
-          arrowDirection="right"
-          onClick={() => alert('View map')}
-        />
-        <Button
-          style="primary"
-          content="Solve online"
-          arrowDirection="right"
-          link={link}
-        />
-      </div>
-    );
-  }
+type ButtonAction = {
+  text: string;
+  style: ButtonStyle;
+  action?: () => any;
+  link?: string;
 };
 
 /**
@@ -53,11 +27,11 @@ const Difficulty = ({ difficulty }: { difficulty: DIFFICULTY }) => {
   }
 };
 
-const Card = ({ name, content, difficulty, type, link }: CardProps) => {
+const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
-        type ? styles.cardHeightButton : styles.cardHeightDefault
+        buttonActions ? styles.cardHeightButton : styles.cardHeightDefault
       }`}
     >
       <div className={styles.cardHeader}>
@@ -67,7 +41,20 @@ const Card = ({ name, content, difficulty, type, link }: CardProps) => {
         </p>
       </div>
       {content}
-      {type && <Buttons type={type} link={link} />}
+      <div className={styles.cardFooter}>
+        <div className={styles.buttonWrap}>
+          {buttonActions.map((buttonAction, index) => (
+            <Button
+              key={`card_buttons_${index}`}
+              style={buttonAction.style}
+              link={buttonAction.link}
+              onClick={buttonAction.action}
+              content={buttonAction.text}
+              arrowDirection="right"
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
