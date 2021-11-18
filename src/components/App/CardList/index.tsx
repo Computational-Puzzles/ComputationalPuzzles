@@ -1,15 +1,19 @@
 import * as React from 'react';
 
-import { Card } from '../../Global';
 import type { CardProps } from '../../Global';
+import { Card } from '../../Global';
 
 import styles from './CardList.module.scss';
 
-const CardList = ({ cardList }: { cardList: CardProps[] }) => {
+type CardListProps = {
+  cardList: CardProps[];
+};
+
+const CardList = ({ cardList }: CardListProps) => {
   return (
     <div className={styles.cardList}>
       {cardList.map((card, index) => {
-        return <Card {...card} type="list" key={`card ${index + 1}`} />;
+        return <Card key={`card ${index + 1}`} {...card} type="list" />;
       })}
     </div>
   );

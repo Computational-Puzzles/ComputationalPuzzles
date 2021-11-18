@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-type ButtonStyle = 'primary' | 'secondary' | 'outline' | 'flat';
+export type ButtonStyle = 'primary' | 'secondary' | 'outline' | 'flat';
 type ButtonSize = 'sm' | 'md' | 'lg';
 type ButtonType = 'button' | 'submit' | 'reset';
 type ArrowDirectionType = 'right' | 'down';

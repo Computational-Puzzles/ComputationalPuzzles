@@ -111,6 +111,8 @@ model PuzzleInstance {
   longitude   Float
   latitude    Float
   address     String
+
+  @@map(name: "puzzle_instances")
 }
 
 model Submission {

@@ -3,47 +3,21 @@ import * as React from 'react';
 import { Button } from '../';
 
 import styles from './Card.module.scss';
+import { ButtonStyle } from '../Button';
 
 type DIFFICULTY = 'HARD' | 'MEDIUM' | 'EASY';
 type CARD_TYPE = 'list' | 'grid';
+type ButtonAction = {
+  text: string;
+  style: ButtonStyle;
+  action: () => any;
+};
 export type CardProps = {
   name: string;
   content: string;
   difficulty: DIFFICULTY;
   type?: CARD_TYPE;
-};
-
-/**
- * Show 1 or 2 buttons depending on the type of the card
- */
-const Buttons = ({ type }: { type: CARD_TYPE }) => {
-  if (type === 'list') {
-    return (
-      <Button
-        style="primary"
-        content="Solve online"
-        arrowDirection="right"
-        onClick={() => alert('Solve online')}
-      />
-    );
-  } else if (type === 'grid') {
-    return (
-      <div className={styles.buttonWrap}>
-        <Button
-          style="secondary"
-          content="View map"
-          arrowDirection="right"
-          onClick={() => alert('View map')}
-        />
-        <Button
-          style="primary"
-          content="Solve online"
-          arrowDirection="right"
-          onClick={() => alert('Solve online')}
-        />
-      </div>
-    );
-  }
+  buttonActions?: ButtonAction[];
 };
 
 /**
@@ -61,11 +35,11 @@ const Difficulty = ({ difficulty }: { difficulty: DIFFICULTY }) => {
   }
 };
 
-const Card = ({ name, content, difficulty, type }: CardProps) => {
+const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
-        type ? styles.cardHeightButton : styles.cardHeightDefault
+        buttonActions ? styles.cardHeightButton : styles.cardHeightDefault
       }`}
     >
       <div className={styles.cardHeader}>
@@ -75,7 +49,19 @@ const Card = ({ name, content, difficulty, type }: CardProps) => {
         </p>
       </div>
       {content}
-      {type && <Buttons type={type} />}
+      <div className={styles.cardFooter}>
+        <div className={styles.buttonWrap}>
+          {buttonActions.map((buttonAction, index) => (
+            <Button
+              key={`card_buttons_${index}`}
+              style={buttonAction.style}
+              onClick={buttonAction.action}
+              content={buttonAction.text}
+              arrowDirection="right"
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
