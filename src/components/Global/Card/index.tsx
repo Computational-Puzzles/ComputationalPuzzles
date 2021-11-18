@@ -41,19 +41,19 @@ const Buttons = ({ type, link }: { type: CARD_TYPE; link: string }) => {
 /**
  * Adjust color of the difficulty text
  */
-const Difficulty = ({ diff }: { diff: DIFFICULTY }) => {
-  if (diff === 'easy') {
+const Difficulty = ({ difficulty }: { difficulty: DIFFICULTY }) => {
+  if (difficulty === 'EASY') {
     return <span className={styles.easy}>Easy</span>;
   }
-  if (diff === 'medium') {
+  if (difficulty === 'MEDIUM') {
     return <span className={styles.medium}>Medium</span>;
   }
-  if (diff === 'hard') {
+  if (difficulty === 'HARD') {
     return <span className={styles.hard}>Hard</span>;
   }
 };
 
-const Card = ({ title, desc, diff, type, link }: CardProps) => {
+const Card = ({ name, content, difficulty, type, link }: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
@@ -61,12 +61,12 @@ const Card = ({ title, desc, diff, type, link }: CardProps) => {
       }`}
     >
       <div className={styles.cardHeader}>
-        <p className={styles.title}>{title}</p>
+        <p className={styles.title}>{name}</p>
         <p className={styles.difficulty}>
-          Difficulty: <Difficulty diff={diff} />
+          Difficulty: <Difficulty difficulty={difficulty} />
         </p>
       </div>
-      {desc}
+      {content}
       {type && <Buttons type={type} link={link} />}
     </div>
   );

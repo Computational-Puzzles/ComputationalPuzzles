@@ -18,19 +18,19 @@ const PuzzleMap = ({ puzzles }: PuzzleMapTypes) => {
           markers={[
             {
               anchor: [49.805, -119.4778],
-              zoom: 13
+              zoom: 16
             },
             {
               anchor: [49.8, -119.4778],
-              zoom: 13
+              zoom: 16
             },
             {
               anchor: [49.81, -119.47784],
-              zoom: 13
+              zoom: 16
             },
             {
               anchor: [50.88, -119.477829],
-              zoom: 8
+              zoom: 16
             }
           ]}
         />
