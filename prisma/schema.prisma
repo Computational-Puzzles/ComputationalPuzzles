@@ -98,7 +98,7 @@ model Puzzle {
   variables       Json
   puzzleType      PuzzleType   @relation(fields: [puzzleTypeId], references: [id])
   puzzleTypeId    Int          @map(name: "puzzle_type_id")
-  locations       PuzzleInstance[]
+  puzzleInstances PuzzleInstance[]
 
   @@map(name: "puzzles")
 }
