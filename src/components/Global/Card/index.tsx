@@ -5,7 +5,7 @@ import { Button } from '../';
 import styles from './Card.module.scss';
 import { ButtonStyle } from '../Button';
 
-type DIFFICULTY = 'HARD' | 'MEDIUM' | 'EASY';
+export type DIFFICULTY = 'HARD' | 'MEDIUM' | 'EASY';
 type CARD_TYPE = 'list' | 'grid';
 type ButtonAction = {
   text: string;
