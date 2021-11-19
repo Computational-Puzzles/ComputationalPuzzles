@@ -16,19 +16,24 @@ const Admin = () => {
     return <div>Loading...</div>;
   }
 
-  const email = session.user.email;
+  const email = session?.user?.email;
   if (status === 'authenticated' && email.split('@')[1] === 'ubc.ca') {
-    return <>
-    <h1> ADMIN PAGE 🤓 </h1>
-      <QRGenerator />
-    </>; // This will need adjustment since it's just a prototype
+    return (
+      <>
+        <h1> ADMIN PAGE 🤓 </h1>
+        {/** TODO: Create Header for admin page  */}
+        <QRGenerator />
+      </>
+    ); // This will need adjustment since it's just a prototype
   }
 
-  return <>
-    You are not authenticated <br />
-    <button onClick={ () => Router.push('/') }>Home</button>
-  </>;
-
+  return (
+    <>
+      {/** TODO: Create Header for admin page  */}
+      You are not authenticated <br />
+      <button onClick={() => Router.push('/')}>Home</button>
+    </>
+  );
 };
 
 export default Admin;
