@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styles from './QRGenerator.module.scss';
 import { useQRCode } from 'react-qrcodes';
 
 const QRCode = ({ text }: { text: string }) => {
@@ -24,20 +25,18 @@ const QRCode = ({ text }: { text: string }) => {
 const QRGenerator = () => {
   const [text, setText] = React.useState('');
   return (
-    <>
+    <div className={styles.qrWrapper}>
+      {/** TODO: Implement the Input component when it's merged */}
       <input
-        style={{ width: 100, height: 20 }}
-        type="text"
+        className={styles.input}
+        type="text" // TODO: discuss about the url stuff and change this to url if needed
         onChange={e => setText(e.currentTarget.value)}
         value={text}
-        placeholder="Information"
+        placeholder="Paste the link here 🙋🏻‍♂️"
       />
-      <br />
-      <br />
-      <br />
-      <br />
+      {/** Might create a pointing down arrow */}
       {text && <QRCode text={text} />}
-    </>
+    </div>
   );
 };
 

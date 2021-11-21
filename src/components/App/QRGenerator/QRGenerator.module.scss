@@ -1,0 +1,17 @@
+@import '../../../styles/abstracts/_mixins/text.scss';
+
+.qrWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .input {
+    @include font-header-bold;
+    height: 3rem;
+    width: 30rem;
+    margin-bottom: 4rem;
+    padding: 0.7rem;
+    font-size: large;
+  }
+}
