@@ -1,4 +1,4 @@
-import Axios from "./axios";
+import Axios from './axios';
 
 export const isAdmin = async (email: string) => {
   if (!email) return false;
@@ -10,4 +10,4 @@ export const isAdmin = async (email: string) => {
   } catch (error) {
     return false;
   }
-}
+};

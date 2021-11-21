@@ -18,7 +18,7 @@ const Admin = () => {
   React.useEffect(() => {
     const checkAdmin = async () => {
       setValidAdmin(await isAdmin(email));
-    }
+    };
     checkAdmin();
   }, [email]);
 
@@ -27,24 +27,22 @@ const Admin = () => {
   }
 
   if (status === 'authenticated') {
-    return (
-      validAdmin ? (
-        <>
-          <h1> ADMIN PAGE 🤓 </h1>
-          {/** TODO: Create Header for admin page  */ }
-          <QRGenerator />
-        </>
-      ) : (
-        <h1> You are not allowed here </h1>
-      )
+    return validAdmin ? (
+      <>
+        <h1> ADMIN PAGE 🤓 </h1>
+        {/** TODO: Create Header for admin page  */}
+        <QRGenerator />
+      </>
+    ) : (
+      <h1> You are not allowed here </h1>
     ); // This will need adjustment since it's just a prototype
   }
 
   return (
     <>
-      {/** TODO: Create Header for admin page  */ }
+      {/** TODO: Create Header for admin page  */}
       You are not authenticated <br />
-      <button onClick={ () => Router.push('/') }>Home</button>
+      <button onClick={() => Router.push('/')}>Home</button>
     </>
   );
 };
