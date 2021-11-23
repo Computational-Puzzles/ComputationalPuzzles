@@ -98,17 +98,29 @@ model Puzzle {
   variables       Json
   puzzleType      PuzzleType   @relation(fields: [puzzleTypeId], references: [id])
   puzzleTypeId    Int          @map(name: "puzzle_type_id")
-  submissions     Submission[]
+  puzzleInstances PuzzleInstance[]
 
   @@map(name: "puzzles")
+}
+
+model PuzzleInstance {
+  id          Int          @id @default(autoincrement())
+  puzzle      Puzzle       @relation(fields: [puzzleId], references: [id])
+  puzzleId    Int          @map(name: "puzzle_id")
+  submissions Submission[]
+  longitude   Float
+  latitude    Float
+  address     String
+
+  @@map(name: "puzzle_instances")
 }
 
 model Submission {
   id         Int       @id @default(autoincrement())
   createdAt  DateTime  @default(now()) @map(name: "created_at")
   updatedAt  DateTime  @updatedAt @map(name: "updated_at")
-  puzzle     Puzzle    @relation(fields: [puzzleId], references: [id])
-  puzzleId   Int       @map(name: "puzzle_id")
+  puzzleInstance     PuzzleInstance    @relation(fields: [puzzleInstanceId], references: [id])
+  puzzleInstanceId   Int       @map(name: "puzzle_instance_id")
   user       User      @relation(fields: [userId], references: [id])
   userId     Int       @map(name: "user_id")
   answers    String[]

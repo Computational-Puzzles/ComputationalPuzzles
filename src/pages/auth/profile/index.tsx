@@ -14,7 +14,6 @@ const ProfilePage = () => {
   const [confirmPass, setConfirmPass] = React.useState('');
 
   const handleChangePassword = () => {
-
     const email = session?.user?.email;
 
     if (!email || !oldPass || !password || !confirmPass) return;
@@ -23,9 +22,9 @@ const ProfilePage = () => {
     resetPassword({
       email,
       oldPassword: oldPass,
-      newPassword: password,
+      newPassword: password
     });
-  }
+  };
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -36,55 +35,55 @@ const ProfilePage = () => {
   return (
     <>
       <h1>Profile</h1>
-      { status === 'authenticated' && (
+      {status === 'authenticated' && (
         <>
           <h2>Information</h2>
           <p>
-            <strong>Name:</strong> { session.user.name }
+            <strong>Name:</strong> {session.user.name}
             <br />
-            <strong>Email:</strong> { session.user.email }
+            <strong>Email:</strong> {session.user.email}
             <br />
-            { session.user.image && (
+            {session.user.image && (
               <>
                 <strong>Profile image:</strong>
                 <Image
                   alt="profile image"
-                  loader={ () => userImage }
-                  src={ userImage }
-                  width={ 200 }
-                  height={ 200 }
+                  loader={() => userImage}
+                  src={userImage}
+                  width={200}
+                  height={200}
                 />
                 <br />
               </>
-            ) }
+            )}
           </p>
 
           <h2>Reset password</h2>
-          <form onSubmit={ () => handleChangePassword() }>
+          <form onSubmit={() => handleChangePassword()}>
             <input
               type="password"
               placeholder="Old password"
-              value={ oldPass }
-              onChange={ (e) => setOldPass(e.target.value) }
+              value={oldPass}
+              onChange={e => setOldPass(e.target.value)}
             />
             <input
               type="password"
               placeholder="New password"
-              minLength={ passwordMinLength }
-              value={ password }
-              onChange={ (e) => setPassword(e.target.value) }
+              minLength={passwordMinLength}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <input
               type="password"
               placeholder="Confirm new password"
-              minLength={ passwordMinLength }
-              value={ confirmPass }
-              onChange={ (e) => setConfirmPass(e.target.value) }
+              minLength={passwordMinLength}
+              value={confirmPass}
+              onChange={e => setConfirmPass(e.target.value)}
             />
             <button type="submit">Reset password</button>
           </form>
         </>
-      ) }
+      )}
     </>
   );
 };

@@ -1,24 +1,19 @@
 import React from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { Header, Footer, LandingContent } from '../components/Product';
 
-const Home = () => {
+const Home: React.FC = () => {
   const { data: session, status } = useSession();
-    console.log('session', session);
-    console.log('status', status);
 
   if (status === 'authenticated') {
-    return (
-      <>
-          <h1>Logged in as</h1>
-          <p> {session.user.email}</p>
-          <button onClick={() => signOut()}>Logout</button>
-      </>
-    );
+    // Then redirect the user to the app pages
   }
+
   return (
     <>
-      <h1>Not logged in</h1>
-      <button onClick={() => signIn()}>Login</button>
+      <Header />
+      <LandingContent />
+      <Footer />
     </>
   );
 };
