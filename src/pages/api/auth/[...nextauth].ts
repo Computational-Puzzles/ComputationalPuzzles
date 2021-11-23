@@ -24,7 +24,10 @@ const Auth = NextAuth({
   session: {
     jwt: true
   },
-  secret: authSecret,
+  secret: process.env.AUTH_SECRET,
+  jwt:{
+    secret: process.env.JWT_SECRET,
+  },
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -43,6 +46,8 @@ const Auth = NextAuth({
         }
       },
       async authorize(credentials) {
+        //authorize is a required function to do the verification, and this is a callback
+        // it needs to return sth. Return a user if we may login. Return null/false if we may not.
         const { getUserByEmail } = PrismaAdapter(prisma);
 
         const user = await getUserByEmail(credentials.email);
@@ -62,7 +67,19 @@ const Auth = NextAuth({
       clientId: google.clientId,
       clientSecret: google.clientSecret,
     }),
-  ]
+  ],
+  pages:{
+    signIn: '../../auth/login',
+  },
+  callbacks: {
+    async jwt({ token, account }) {
+      // Persist the OAuth access_token to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token
+      }
+      return token
+    }
+  },
 });
 
 export default Auth;
