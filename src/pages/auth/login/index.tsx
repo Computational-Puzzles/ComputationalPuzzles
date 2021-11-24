@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
-import {NextApiRequest, NextApiResponse} from "next";
 import {getProviders, signIn, getSession, getCsrfToken, useSession, signOut} from "next-auth/react"
-import {getToken} from "next-auth/jwt";
-// import {jwtSecret} from "../../../../config";
-import { env } from '../../../../next.config.js';
 import {Logo} from "../../../components/Global";
-import {session} from "next-auth/server/routes";
+import {useRouter} from "next/router";
 
 
 export default function LoginPage({ providers, csrfToken }) {
@@ -13,27 +9,12 @@ export default function LoginPage({ providers, csrfToken }) {
     const [password, setPassword] = useState(''); //is this a bad idea?
     const {data: session, status}= useSession();
     const passwordMinLength = 8;
+    const {error} = useRouter().query;
 
     console.log(session);
-    const handleLogin = (event)=>{
-        if(email.length === 0)
-            signIn("google");
-        else
-            signIn("credentials", {email: email, password: password });
-    }
     const loginWithCredentials = (event) =>{
         //check1: password length & email format >>input attributes are doing for me
-        // if(password.length < 8){
-        //     alert('Password has minimum length of 8. Please try retyping your password.');
-        //     event.preventDefault();
-        //     return false;
-        // }
-
         //check2: incorrect email or password:(error page) https://next-auth.js.org/providers/credentials
-        // if(){
-        //     event.preventDefault();
-        //     return false;
-        // }else
             signIn("credentials", {email: email, password: password });
     }
     const loginWithGoogle = (event) =>{
@@ -41,10 +22,10 @@ export default function LoginPage({ providers, csrfToken }) {
     }
   return (
       <div>
-
-        <Logo showMark={true} showType={true}/>
-        <h1>Login</h1>
-          <form onSubmit={ ()=>loginWithCredentials(event)/*event => event.preventDefault()*/}>
+          <Logo showMark={true} showType={true}/>
+          <h1>Login</h1>
+          {error && <SignInError error = {error} />}
+          <form onSubmit={ ()=>loginWithCredentials(event)}>  {/*the purpose of this form is to check (1)email format (2)pw minLength*/}
               <input type={'email'} placeholder={'Email'} onChange={ (event)=> setEmail(event.target.value)}/>
               <br/>
               <input type={'password'} placeholder={'password'} minLength={passwordMinLength} onChange={ (event)=> setPassword(event.target.value)}/>
@@ -63,9 +44,28 @@ export default function LoginPage({ providers, csrfToken }) {
   )
 }
 
+const errors = {
+    Signin: "Try signing with a different account.",
+    OAuthSignin: "Try signing with a different account.",
+    OAuthCallback: "Try signing with a different account.",
+    OAuthCreateAccount: "Try signing with a different account.",
+    EmailCreateAccount: "Try signing with a different account.",
+    Callback: "Try signing with a different account.",
+    OAuthAccountNotLinked:
+        "To confirm your identity, sign in with the same account you used originally.",
+    EmailSignin: "Check your email address.",
+    CredentialsSignin:
+        "Sign in failed. Check the details you provided are correct.",
+    default: "Unable to sign in.",
+}
+const SignInError = ({ error }) => {
+    const errorMessage = error && (errors[error] ?? errors.default);
+    return <div>{errorMessage}</div>;
+};
+
 // This is the recommended way for Next.js 9.3 or newer
 export async function getServerSideProps(context) {
-  const {req, res} = context;
+  //const {req, res} = context;
   const session = await getSession(context);
    if (session) {
        //need to fix this, this is incorrect: blocks to reach this page no matter logged in or not

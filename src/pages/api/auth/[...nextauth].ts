@@ -62,6 +62,7 @@ const Auth = NextAuth({
   ],
   pages:{
     signIn: '/auth/login',
+    error: '/auth/login',
   }
 });
 
