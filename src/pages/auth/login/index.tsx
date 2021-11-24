@@ -7,71 +7,75 @@ import { env } from '../../../../next.config.js';
 import {Logo} from "../../../components/Global";
 import {session} from "next-auth/server/routes";
 
+
 export default function LoginPage({ providers, csrfToken }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState(''); //is this a bad idea?
     const {data: session, status}= useSession();
+    const passwordMinLength = 8;
 
     console.log(session);
+    const handleLogin = (event)=>{
+        if(email.length === 0)
+            signIn("google");
+        else
+            signIn("credentials", {email: email, password: password });
+    }
+    const loginWithCredentials = (event) =>{
+        //check1: password length & email format >>input attributes are doing for me
+        // if(password.length < 8){
+        //     alert('Password has minimum length of 8. Please try retyping your password.');
+        //     event.preventDefault();
+        //     return false;
+        // }
+
+        //check2: incorrect email or password:(error page) https://next-auth.js.org/providers/credentials
+        // if(){
+        //     event.preventDefault();
+        //     return false;
+        // }else
+            signIn("credentials", {email: email, password: password });
+    }
+    const loginWithGoogle = (event) =>{
+        signIn("google");
+    }
   return (
       <div>
+
         <Logo showMark={true} showType={true}/>
         <h1>Login</h1>
-          <input type={'text'} placeholder={'Email'} onChange={ (event)=> setEmail(event.target.value)}/>
-          <br/>
-          <input type={'text'} placeholder={'password'} onChange={ (event)=> setPassword(event.target.value)}/>
-        {/*<form method="post" action="/api/auth/callback/credentials">*/}
-        {/*  <input name="csrfToken" type="hidden" defaultValue={csrfToken} />*/}
-        {/*  <input type={'text'} placeholder={'Email'} onChange={ (event)=> setUsername(event.target.value)}/>*/}
-        {/*  <br/>*/}
-        {/*  <input type={'text'} placeholder={'password'} onChange={ (event)=> setUsername(event.target.value)}/>*/}
-        {/*</form>*/}
-        {/*{*/}
-        {/*  Object.values(providers).map((provider) => (*/}
+          <form onSubmit={ ()=>loginWithCredentials(event)/*event => event.preventDefault()*/}>
+              <input type={'email'} placeholder={'Email'} onChange={ (event)=> setEmail(event.target.value)}/>
+              <br/>
+              <input type={'password'} placeholder={'password'} minLength={passwordMinLength} onChange={ (event)=> setPassword(event.target.value)}/>
+              <br/>
+              <input type={'hidden'}/>
+              <button >Sign in with Credentials</button>
+          </form>
+              <br/>
+              <button onClick={ ()=> loginWithGoogle(event)}>Sign in with Google</button>
+              <br/>
+              <a href={'/'}>home</a>
+              <br/>
+              <button onClick={ ()=> signOut()}>Sign out</button>
 
-
-        {/*      <div key={provider.name}>*/}
-        {/*        <p>{provider.name}</p> <p>{provider.id}</p>*/}
-        {/*        <button onClick={() => signIn(provider.id)}>*/}
-        {/*          Sign in with {provider.name}*/}
-        {/*        </button>*/}
-
-        {/*      </div>*/}
-        {/*  ))}*/}
-          <br/>
-        <button onClick={ ()=> {const x = signIn("credentials", {email: email, password: password }); console.log(x);}}>Sign in with Credentials</button>
-          <br/>
-        <button onClick={ ()=> {const x = signIn("google"); console.log( x);}}>Sign in with Google</button>
-          <br/>
-          <a href={'/'}>home</a>
-          <br/>
-          <button onClick={ ()=> signOut()}>Sign out</button>
       </div>
   )
 }
 
 // This is the recommended way for Next.js 9.3 or newer
 export async function getServerSideProps(context) {
-  const {JWT_SECRET} = env;
-  // const secret = authSecret;
   const {req, res} = context;
-  const session = await getSession({req});
-
-
-  // If there is a session, a response, and a access token for this session,
-  // this if-statement will redirect user back to home page (page/index.tsx)
-  // so we don't run into the problem where users re-logging in again*n
-  // if(session && res && getToken({req, secret})){
-  //   res.writeHead(302, {
-  //     Location: "/", //redirect back to home page
-  //   });
-  //   res.end()
-  //   return;
-  // }
+  const session = await getSession(context);
    if (session) {
+       //need to fix this, this is incorrect: blocks to reach this page no matter logged in or not
+       console.log("Session", JSON.stringify(session, null, 2))
     return {
-      redirect: { destination: "/" },
-    };
+      redirect: {
+          destination: "/",
+          permanent: false,
+      },
+    }
   }
   return {
     // session: undefined,
