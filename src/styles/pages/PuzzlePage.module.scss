@@ -1,28 +1,97 @@
 @import 'src/styles/abstracts/_variables';
 @import 'src/styles/abstracts/_mixins/layout';
+@import 'src/styles/abstracts/_mixins/text';
 
 .wrapper {
   @include wrapper;
+  margin: 0 5rem;
 }
 
-.puzzleDisplay {
+.cardSpacer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card {
+  @include font-body;
+  background-color: $white;
+  border-radius: 0.8rem;
+  border: 0.15rem solid $black;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 65vh;
-  .textContent {
 
+  .text {
+    width: 100%;
+    padding: 2rem 2rem;
+
+    .cardHeader {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+
+      .title {
+        margin: 0;
+      }
+    }
+
+    .cardContent {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: normal;
+    }
   }
 
   .image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
 
+    img {
+      border-radius: 0.8rem;
+    }
   }
 }
 
-.quest {
+.difficulty {
+  @include font-header-bold;
+  font-size: 1rem;
 
+  .easy {
+    color: $green;
+  }
+
+  .medium {
+    color: $blue;
+  }
+
+  .hard {
+    color: $red;
+  }
 }
 
-.question {
+.hint {
+  color: $grey;
+}
 
+.quest {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    margin: 0 auto;
+  }
+
+  .question {
+    @include font-header-bold;
+  }
 }

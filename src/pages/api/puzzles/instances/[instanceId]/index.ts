@@ -7,14 +7,14 @@ const getPuzzleInstanceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const { puzzleInstanceId, verbose } = req.query as {
-    puzzleInstanceId: string;
+  const { instanceId, verbose } = req.query as {
+    instanceId: string;
     verbose: string;
   };
 
   const verboseBool = verbose.toLowerCase() === 'true';
 
-  if (!puzzleInstanceId) {
+  if (!instanceId) {
     return res.status(400).json({
       message: 'Please provide a puzzle instance id.'
     });
@@ -25,7 +25,7 @@ const getPuzzleInstanceHandler = async (
     if (verboseBool) {
       puzzleInstance = await prisma.puzzleInstance.findUnique({
         where: {
-          id: +puzzleInstanceId
+          id: +instanceId
         },
         include: {
           puzzle: {
@@ -38,7 +38,7 @@ const getPuzzleInstanceHandler = async (
     } else {
       puzzleInstance = await prisma.puzzleInstance.findUnique({
         where: {
-          id: +puzzleInstanceId
+          id: +instanceId
         }
       });
     }

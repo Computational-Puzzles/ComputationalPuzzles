@@ -45,15 +45,6 @@ const submitPuzzleHandler = async (
   }
 
   const isCorrect = checkPuzzleAnswer(puzzle, randomSeed, answer);
-  // const submission = await prisma.submission.create({
-  //   data: {
-  //     puzzleInstanceId: puzzleInstanceId,
-  //     userId: user.id,
-  //     answers: [answer],
-  //     isCorrect: [isCorrect],
-  //     randomSeed: [+randomSeed]
-  //   }
-  // });
 
   const submission = await prisma.submission.upsert({
     where: {
