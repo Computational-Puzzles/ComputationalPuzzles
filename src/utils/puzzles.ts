@@ -1,18 +1,52 @@
-const submitPuzzle = (session, puzzle, answer) => {
-    if (!session) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false
-            }
-        };
-    }
-    alert('Hi');
-    // TODO: can they do this without being logged in?
-    alert(`Submit Puzzle Answer ${answer}`);
-    alert(`${puzzle}`);
-    alert(`${session?.user}`);
-    // TODO: save a Submission object for this submission
+import axios from 'axios';
+import { Puzzle, PuzzleInstance } from '@prisma/client';
+import { User } from 'next-auth';
+
+export type puzzleSubmissionProps = {
+  answer: string;
+  puzzleInstanceId: number;
+  puzzleId: number;
+  randomSeed: number;
+  userEmail: string;
 };
 
-export { submitPuzzle }
+const submitPuzzleInstance = async (
+  answer: string,
+  puzzleInstance: PuzzleInstance,
+  puzzle: Puzzle,
+  randomSeed: number,
+  user: User
+) => {
+  const puzzleSubmissionDetails = {
+    answer: answer,
+    puzzleInstanceId: puzzleInstance.id,
+    puzzleId: puzzle.id,
+    randomSeed: randomSeed,
+    userEmail: user.email
+  } as puzzleSubmissionProps;
+
+  axios.post('/api/puzzles/instances/submit', puzzleSubmissionDetails).then(
+    response => {
+      console.log(response.status);
+      alert(response.data.message);
+    },
+    error => {
+      // TODO: proper alerts
+      console.log(error);
+      console.log(error.status);
+      alert('Oh no - errors.');
+    }
+  );
+};
+
+const checkPuzzleAnswer = (
+  puzzle: Puzzle,
+  randomSeed: number,
+  puzzleAnswer: string
+) => {
+  const trueAnswer = puzzle.variables['answer'];
+  if (!trueAnswer) return false;
+  return trueAnswer === puzzleAnswer;
+};
+
+export { submitPuzzleInstance, checkPuzzleAnswer };

@@ -3,18 +3,29 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getSession, useSession } from 'next-auth/react';
-import { PrismaClient } from '@prisma/client';
-import { PuzzleProps } from '../../../prisma/schemaTypes';
+import { Prisma, Puzzle, PuzzleInstance, PuzzleType } from '@prisma/client';
 import Button from '../../components/Global/Button';
 import PuzzleInput from '../../components/App/PuzzleInput';
 import styles from '../../styles/pages/PuzzlePage.module.scss';
+import { submitPuzzleInstance } from '../../utils/puzzles';
+import { User } from 'next-auth';
+import axios from 'axios';
 
-const prisma = new PrismaClient();
+type puzzlePageProps = {
+  puzzleInstance: PuzzleInstance;
+  puzzle: Puzzle;
+  puzzleType: PuzzleType;
+};
 
-const PuzzlePage = ({ puzzle }: { puzzle: PuzzleProps }) => {
+const PuzzlePage = ({
+  puzzleInstance,
+  puzzle,
+  puzzleType
+}: puzzlePageProps) => {
   const [answer, setAnswer] = useState('');
   const { data: session, status } = useSession();
   const randomSeed = Math.random();
+  const user = session?.user as User;
 
   return (
     <main>
@@ -26,6 +37,11 @@ const PuzzlePage = ({ puzzle }: { puzzle: PuzzleProps }) => {
       <section>
         <h2>{puzzle.name}</h2>
         <p>{puzzle.difficulty}</p>
+        <p>
+          {puzzleInstance.address} ({puzzleInstance.longitude},{' '}
+          {puzzleInstance.latitude})
+        </p>
+        <p>{puzzleInstance.hint}</p>
         <div className={styles.puzzleDisplay}>
           <div>{puzzle.content}</div>
           <div>
@@ -55,24 +71,27 @@ const PuzzlePage = ({ puzzle }: { puzzle: PuzzleProps }) => {
       <section>
         <h3>Quest</h3>
         <p>{puzzle.question}</p>
-        <form action={`/api/puzzles/${puzzle.id}/submit`} method={'post'}>
-          <input hidden={true} name={'userEmail'} value={session?.user.email} />
-          <input hidden={true} name={'puzzleId'} value={puzzle.id} />
-          <input hidden={true} name={'randomSeed'} value={randomSeed} />
-          <PuzzleInput
-            type={puzzle.inputType}
-            placeholder={'Enter your answer'}
-            options={puzzle.variables?.options}
-            setAnswer={setAnswer}
-          />
-          {/* TODO: lock submission button unless logged in */}
-          <Button
-            style={'primary'}
-            type={'submit'}
-            content={'Submit'}
-            onClick={() => alert('Alert Message')}
-          />
-        </form>
+        <PuzzleInput
+          type={puzzle.inputType}
+          placeholder={'Enter your answer'}
+          options={puzzle.variables['options']}
+          setAnswer={setAnswer}
+        />
+        {/* TODO: lock submission button unless logged in */}
+        <Button
+          style={'primary'}
+          type={'submit'}
+          content={'Submit'}
+          onClick={() =>
+            submitPuzzleInstance(
+              answer,
+              puzzleInstance,
+              puzzle,
+              randomSeed,
+              user
+            )
+          }
+        />
       </section>
     </main>
   );
@@ -80,18 +99,15 @@ const PuzzlePage = ({ puzzle }: { puzzle: PuzzleProps }) => {
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getSession(context);
-  const id = +context.query.id;
-  const puzzle = await prisma.puzzle.findUnique({
-    where: {
-      id
-    },
-    include: {
-      puzzleType: true
-    }
-  });
-
+  const id = +context.query.instanceId;
+  const puzzleInstance: Prisma.PuzzleInstanceInclude = await axios.get(
+    `/api/puzzles/instances/${id}?verbose=true`
+  );
+  const puzzle = puzzleInstance.puzzle;
+  // @ts-ignore
+  const puzzleType = puzzleInstance.puzzle.puzzleType;
   return {
-    props: { puzzle, session }
+    props: { puzzleInstance, puzzle, puzzleType, session }
   };
 };
 
