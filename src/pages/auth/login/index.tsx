@@ -11,16 +11,11 @@ import { useRouter } from 'next/router';
 import styles from '../../../styles/pages/login.module.scss';
 
 export default function LoginPage({ providers, csrfToken }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState(''); //is this a bad idea?
   const { data: session, status } = useSession();
   const passwordMinLength = 8;
   const { error } = useRouter().query;
 
   console.log(session);
-  const loginWithCredentials = event => {
-    signIn('credentials', { email: email, password: password });
-  };
   const loginWithGoogle = event => {
     signIn('google');
   };
@@ -32,38 +27,21 @@ export default function LoginPage({ providers, csrfToken }) {
       <div className={styles.mainSec}>
         <h2 className={styles.title}>Login</h2>
         {error && <SignInError error={error} />}
-        <form>
+        <form method="post" action="/api/auth/callback/credentials">
           <div className={styles.inputContainer}>
-            <Input
-              type={'email'}
-              id={'email'}
-              required={false}
-              placeholder={'Email'}
-              setInputVal={setEmail}
-            />
-            <Input
-              type={'password'}
-              id={'password'}
-              required={false}
-              placeholder={'Password'}
-              minLength={passwordMinLength}
-              setInputVal={setPassword}
-            />
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+            <Input type={'email'} id={'email'} required={true} placeholder={'Email'}/>
+            <Input type={'password'} id={'password'} required={true} minLength={passwordMinLength} placeholder={'Password'}/>
           </div>
           <p className={styles.link}>
-            <a href={'/auth/signup'}>Don't have an account?</a>
+            <a href={'/auth/signup'}>Do not have an account?</a>
           </p>
           <div className={styles.container}>
+            <button type="submit" className={styles.button}> Sign in with Credentials</button>
             <button
-              className={styles.button}
-              onSubmit={() => loginWithCredentials(event)}
-            >
-              Sign in with Credentials
-            </button>
-            <button
-              type={'button'}
-              className={styles.button}
-              onClick={() => loginWithGoogle(event)}
+                type={'button'}
+                className={styles.button}
+                onClick={() => loginWithGoogle(event)}
             >
               Sign in with Google
             </button>
@@ -98,8 +76,6 @@ export async function getServerSideProps(context) {
   //const {req, res} = context;
   const session = await getSession(context);
   if (session) {
-    //need to fix this, this is incorrect: blocks to reach this page no matter logged in or not
-    console.log('Session', JSON.stringify(session, null, 2));
     return {
       redirect: {
         destination: '/',
