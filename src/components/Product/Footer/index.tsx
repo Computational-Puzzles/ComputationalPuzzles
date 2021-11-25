@@ -44,7 +44,10 @@ const Footer = () => {
           </div>
         </div>
         <div className={footerStyles.ubcLogo}>
-          <Image src={ubcLogoFullBlack} alt={'University of British Columbia Logo'} />
+          <Image
+            src={ubcLogoFullBlack}
+            alt={'University of British Columbia Logo'}
+          />
         </div>
       </div>
     </footer>

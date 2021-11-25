@@ -39,12 +39,14 @@ const LandingContent = () => {
               <div className={landingStyles.actions}>
                 <Button
                   style={'primary'}
+                  size={'lg'}
                   content={'Start Hunting'}
                   arrowDirection={'right'}
                   onClick={() => signIn()}
                 />
                 <Button
                   style={'secondary'}
+                  size={'lg'}
                   content={'Learn More'}
                   arrowDirection={'down'}
                   onClick={learnMoreButton}

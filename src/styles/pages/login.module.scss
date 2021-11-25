@@ -1,0 +1,31 @@
+.logoLogin {
+  margin: 0 auto;
+  width: 25rem;
+}
+.mainSec {
+  margin: 0 auto;
+  width: 20rem;
+}
+.title {
+  font-size: 2.3rem;
+  text-align: center;
+}
+.inputs {
+  padding: 0 0 1.5rem 0;
+}
+
+.button {
+  width: 100%;
+  background-color: coral;
+  color: white;
+  border: 0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
+}
