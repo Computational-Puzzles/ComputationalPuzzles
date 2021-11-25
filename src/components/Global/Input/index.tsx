@@ -9,7 +9,6 @@ type InputProps = {
   maxLength?: number;
   minLength?: number;
   labelText?: string;
-  labelHeader?: string;
   setInputVal?: React.Dispatch<React.SetStateAction<string>>;
 };
 const Input = ({
@@ -20,38 +19,27 @@ const Input = ({
   maxLength,
   minLength,
   labelText,
-  labelHeader,
   setInputVal
 }: InputProps) => {
   const [input, setInput] = useState('');
   return (
     <>
-      <div className={styles.container}>
-        {labelText && (
-          <label htmlFor={id} className={styles.labelText}>
-            {labelText}
-          </label>
-        )}
-        {labelHeader && (
-            <label htmlFor={id} className={styles.labelHeader}>
-              {labelHeader}
-            </label>
-        )}
-        <input
-          className={styles.input}
-          type={type}
-          id={id}
-          required={required}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          minLength={minLength}
-          value={input}
-          onChange={event => {
-            setInput(event.target.value);
-            setInputVal(event.target.value);
-          }}
-        />
-      </div>
+      {labelText && <label htmlFor={id}>{labelText}</label>}
+      <input
+        className={styles.input}
+        type={type}
+        id={id}
+        name={id}
+        required={required}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        minLength={minLength}
+        value={input}
+        onChange={event => {
+          setInput(event.target.value);
+          setInputVal && setInputVal(event.target.value);
+        }}
+      />
     </>
   );
 };
