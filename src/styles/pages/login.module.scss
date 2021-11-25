@@ -1,3 +1,6 @@
+@import 'src/styles/abstracts/_variables';
+@import 'src/styles/abstracts/_mixins/text';
+
 .logoLogin {
   margin: 0 auto;
   width: 25rem;
@@ -10,18 +13,29 @@
   font-size: 2.3rem;
   text-align: center;
 }
-.inputs {
-  padding: 0 0 1.5rem 0;
+.link {
+  font-size: 0.8rem;
+  margin: 0.9rem 0 1.2rem 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.inputContainer{
+  height: 6.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .button {
   width: 100%;
-  background-color: coral;
-  color: white;
+  background-color: $primary;
+  color: $white;
   border: 0;
-  padding: 0.5rem;
+  padding: 0.4rem;
+  box-sizing: border-box;
   border-radius: 0.5rem;
   cursor: pointer;
+  margin: 0.3rem 0.1rem;
 }
 .container {
   display: flex;
