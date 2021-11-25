@@ -1,5 +1,5 @@
 import React from 'react';
-import {signIn, signOut, useSession} from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { Header, Footer, LandingContent } from '../components/Product';
 
 const Home: React.FC = () => {
@@ -14,9 +14,8 @@ const Home: React.FC = () => {
       <Header />
       <LandingContent />
       <Footer />
-        <button onClick={ ()=> signOut()}>sign Out</button>
-        <button onClick={ ()=> signIn()}>Login</button>
-
+      <button onClick={() => signOut()}>sign Out</button>
+      <button onClick={() => signIn()}>Login</button>
     </>
   );
 };
