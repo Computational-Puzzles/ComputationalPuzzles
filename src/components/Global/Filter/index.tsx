@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
-import { Button } from '../index';
 
-const Filter = () => {
+type FilterProps = {
+  setFilterFields: React.Dispatch<React.SetStateAction<object>>;
+};
+const Filter = ({ setFilterFields }: FilterProps) => {
   const [easyChecked, setEasyChecked] = useState(false);
   const [mediumChecked, setMediumChecked] = useState(false);
   const [hardChecked, setHardChecked] = useState(false);
-  const [searchVal, setSearchVal] = useState('');
 
   return (
     <div>
@@ -17,37 +18,45 @@ const Filter = () => {
           name={'filter'}
           difficulty={'easy'}
           checked={easyChecked}
-          setChecked={setEasyChecked}
+          onClick={() => {
+            setEasyChecked(wasChecked => !wasChecked);
+            setFilterFields({
+              easy: !easyChecked,
+              medium: mediumChecked,
+              hard: hardChecked
+            });
+          }}
         />
         <RadioButton
           id={'radioMedium'}
           name={'filter'}
           difficulty={'medium'}
           checked={mediumChecked}
-          setChecked={setMediumChecked}
+          onClick={() => {
+            setMediumChecked(wasChecked => !wasChecked);
+            setFilterFields({
+              easy: easyChecked,
+              medium: !mediumChecked,
+              hard: hardChecked
+            });
+          }}
         />
         <RadioButton
           id={'radioHard'}
           name={'filter'}
           difficulty={'hard'}
           checked={hardChecked}
-          setChecked={setHardChecked}
+          onClick={() => {
+            setHardChecked(wasChecked => !wasChecked);
+            setFilterFields({
+              easy: easyChecked,
+              medium: mediumChecked,
+              hard: !hardChecked
+            });
+          }}
         />
       </form>
-      <Button
-        style={'outline'}
-        content={'Search'}
-        onClick={() => {
-          alert(
-            'easy ' +
-              easyChecked +
-              '//med ' +
-              mediumChecked +
-              '//hard ' +
-              hardChecked
-          );
-        }}
-      />
+      {/*{console.log("e "+ easyChecked+ " / m"+ mediumChecked+" /h"+hardChecked)}*/}
     </div>
   );
 };
