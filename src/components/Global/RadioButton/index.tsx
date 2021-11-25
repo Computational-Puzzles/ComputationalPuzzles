@@ -4,14 +4,19 @@ import styles from './RadioButton.module.scss';
 type DIFFICULTY = 'easy' | 'medium' | 'hard';
 
 type RadioButtonProps = {
-  id: string /*radioEasy*/;
-  name: string /*filter*/;
+  id: string;
+  name: string;
   difficulty: DIFFICULTY;
   checked: boolean;
   setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const getLabelColor = (difficulty: DIFFICULTY, isChecked: boolean) => {
-  return isChecked ? styles[`${difficulty}Checked`] : styles[`${difficulty}`];
+  if (difficulty === 'easy')
+    return isChecked ? styles.easyChecked + ' ' + styles.easy : styles.easy;
+  if (difficulty === 'medium')
+    return isChecked ? styles.mediumChecked + ' ' + styles.medium : styles.medium;
+  if (difficulty === 'hard')
+    return isChecked ? styles.hardChecked + ' ' + styles.hard : styles.hard;
 };
 
 const RadioButton = ({
@@ -30,7 +35,7 @@ const RadioButton = ({
         name={name}
         value={difficulty}
         onClick={() => {
-          setChecked(!checked);
+          setChecked(wasChecked => !wasChecked);
         }}
       />
       <label className={`${getLabelColor(difficulty, checked)}`} htmlFor={id}>

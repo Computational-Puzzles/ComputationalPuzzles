@@ -38,19 +38,16 @@
   color: $red;
 }
 .easyChecked {
-  @extend .easy;
   text-decoration: initial;
   background-color: $green;
   color: $white;
 }
 .mediumChecked {
-  @extend .medium;
   text-decoration: initial;
   background-color: $secondary-100;
   color: $white;
 }
 .hardChecked {
-  @extend .hard;
   text-decoration: initial;
   background-color: $red;
   color: $white;

@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
+import { Button, Input } from '../index';
 
 const Filter = () => {
   const [easyChecked, setEasyChecked] = useState(false);
   const [mediumChecked, setMediumChecked] = useState(false);
   const [hardChecked, setHardChecked] = useState(false);
+  const [searchVal, setSearchVal] = useState('');
 
   return (
     <div>
       <form className={styles.filter}>
+        <Input
+          type={'text'}
+          id={'search'}
+          placeholder={'Search'}
+          required={false}
+          setInputVal={setSearchVal}
+        />
         <RadioButton
           id={'radioEasy'}
           name={'filter'}
@@ -32,8 +41,10 @@ const Filter = () => {
           setChecked={setHardChecked}
         />
       </form>
-      <button
-        onClick={() =>
+      <Button
+        style={'outline'}
+        content={'Search'}
+        onClick={() => {
           alert(
             'easy ' +
               easyChecked +
@@ -41,11 +52,9 @@ const Filter = () => {
               mediumChecked +
               '//hard ' +
               hardChecked
-          )
-        }
-      >
-        :DDDDDDDD
-      </button>
+          );
+        }}
+      />
     </div>
   );
 };
