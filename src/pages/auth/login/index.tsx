@@ -50,7 +50,9 @@ export default function LoginPage({ providers, csrfToken }) {
               setInputVal={setPassword}
             />
           </div>
-          <p className={styles.link}><a href={'/auth/signup'} >Don't have an account?</a></p>
+          <p className={styles.link}>
+            <a href={'/auth/signup'}>Don't have an account?</a>
+          </p>
           <div className={styles.container}>
             <button
               className={styles.button}
@@ -84,7 +86,7 @@ const errors = {
   EmailSignin: 'Check your email address.',
   CredentialsSignin:
     'Sign in failed. Check the details you provided are correct.',
-  default: 'Unable to sign in.',
+  default: 'Unable to sign in.'
 };
 const SignInError = ({ error }) => {
   const errorMessage = error && (errors[error] ?? errors.default);

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Router from 'next/router';
 import { signUp } from '../../../services';
-import { Logo,Input } from '../../../components/Global';
-import styles from "../../../styles/pages/signup.module.scss";
+import { Logo, Input } from '../../../components/Global';
+import styles from '../../../styles/pages/signup.module.scss';
 
 const SignUpPage = () => {
   const { data: session, status } = useSession();
@@ -41,12 +41,36 @@ const SignUpPage = () => {
         <h2 className={styles.title}>Sign Up Page</h2>
         <form onSubmit={() => handleSignUp(event)}>
           <div className={styles.inputContainer}>
-            <Input type={'email'} id={'email'} required={true} placeholder={'Email'} setInputVal={setEmail}/>
-            <Input type={'password'} id={'password'} required={true} minLength={passwordMinLength} placeholder={'password'} setInputVal={setPassword}/>
-            <Input type={'password'} id={'repeatPassword'} required={true} minLength={passwordMinLength} placeholder={'repeat password'} setInputVal={setRepeatPw}/>
+            <Input
+              type={'email'}
+              id={'email'}
+              required={true}
+              placeholder={'Email'}
+              setInputVal={setEmail}
+            />
+            <Input
+              type={'password'}
+              id={'password'}
+              required={true}
+              minLength={passwordMinLength}
+              placeholder={'password'}
+              setInputVal={setPassword}
+            />
+            <Input
+              type={'password'}
+              id={'repeatPassword'}
+              required={true}
+              minLength={passwordMinLength}
+              placeholder={'repeat password'}
+              setInputVal={setRepeatPw}
+            />
           </div>
-          <p className={styles.link}><a href={'/auth/login'} >Already have an account?</a></p>
-          <button type="submit" className={styles.button}>Sign Up</button>
+          <p className={styles.link}>
+            <a href={'/auth/login'}>Already have an account?</a>
+          </p>
+          <button type="submit" className={styles.button}>
+            Sign Up
+          </button>
         </form>
       </div>
     </>

@@ -60,9 +60,9 @@ const Auth = NextAuth({
       clientSecret: google.clientSecret
     })
   ],
-  pages:{
+  pages: {
     signIn: '/auth/login',
-    error: '/auth/login',
+    error: '/auth/login'
   }
 });
 
