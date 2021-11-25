@@ -14,7 +14,6 @@ const submitPuzzleHandler = async (
   const { answer, puzzleInstanceId, puzzleId, randomSeed, userEmail } =
     req.body as puzzleSubmissionProps;
 
-  // const { puzzleAnswer, randomSeed, puzzleId, userEmail } = req.body as submitPuzzleProps;
   if (!userEmail || !randomSeed || !puzzleId || !answer) {
     return res.status(400).json({
       message: 'User email, puzzle answer, and puzzle id are required!'
