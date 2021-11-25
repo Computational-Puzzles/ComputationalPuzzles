@@ -2,7 +2,7 @@ import React from 'react';
 import { useSession } from 'next-auth/react';
 import { Header, Footer, LandingContent } from '../components/Product';
 
-const Home = () => {
+const Home: React.FC = () => {
   const { data: session, status } = useSession();
 
   if (status === 'authenticated') {
