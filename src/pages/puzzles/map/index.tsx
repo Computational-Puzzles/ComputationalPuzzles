@@ -13,14 +13,15 @@ type PuzzleMapTypes = {
   puzzleInstances: PuzzleInstance[];
 };
 
-const PuzzleMap = ({puzzleInstances}: PuzzleMapTypes) => {
+const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
   const [userMarker, setUserMarker] = useState<Marker>(null);
   const [mapCenter, setMapCenter] = useState<Anchor>(null);
-  const [displayPuzzleInstances, setDisplayPuzzleInstances] = useState<PuzzleInstance[]>([]);
-  const [difficultySelected, setDifficultySelected] = useState<{ easy: boolean, medium: boolean, hard: boolean }>(
-    {easy: true, medium: true, hard: true}
-  );
-  
+  const [difficultySelected, setDifficultySelected] = useState<{
+    EASY: boolean;
+    MEDIUM: boolean;
+    HARD: boolean;
+  }>({ EASY: true, MEDIUM: true, HARD: true });
+
   useEffect((): void => {
     navigator.geolocation.getCurrentPosition(position => {
       const anchor: Anchor = [
@@ -28,21 +29,17 @@ const PuzzleMap = ({puzzleInstances}: PuzzleMapTypes) => {
         position.coords.longitude
       ];
       const zoom = 16;
-      setUserMarker({anchor, zoom});
+      setUserMarker({ anchor, zoom });
       setMapCenter(anchor);
     });
   }, []);
-  
-  useEffect((): void => {
-    setDisplayPuzzleInstances(puzzleInstances);
-  }, [puzzleInstances]);
-  
+
   const setMapCenterFromInstanceIndex = (instanceIndex: number): void => {
-    const puzzleInstance = displayPuzzleInstances[instanceIndex];
+    const puzzleInstance = puzzleInstances[instanceIndex];
     const anchor: Anchor = [puzzleInstance.latitude, puzzleInstance.longitude];
     setMapCenter(anchor);
   };
-  
+
   const getDistanceFromCenter = useCallback(
     (anchor: Anchor): number => {
       const distLatitude = anchor[0] - mapCenter[0];
@@ -51,56 +48,61 @@ const PuzzleMap = ({puzzleInstances}: PuzzleMapTypes) => {
     },
     [mapCenter]
   );
-  
+
   useEffect((): void => {
     if (mapCenter) {
-      displayPuzzleInstances.sort(
+      puzzleInstances.sort(
         (a, b) =>
           getDistanceFromCenter([a.latitude, a.longitude]) -
           getDistanceFromCenter([b.latitude, b.longitude])
       );
     }
-  }, [mapCenter, getDistanceFromCenter, displayPuzzleInstances]);
-  
-  const onDifficultyFilterChange = (event) => {
+  }, [mapCenter, getDistanceFromCenter, puzzleInstances]);
+
+  const onDifficultyFilterChange = (event): void => {
     const checked = event.target.checked;
     const value = event.target.value;
     let tempDiffSelected = difficultySelected;
     tempDiffSelected[value] = checked;
-    setDifficultySelected(tempDiffSelected);
-  }
-  
-  useEffect((): void => {
-    setDisplayPuzzleInstances(puzzleInstances.map(instance => {
-      for (let difficulty in difficultySelected) {
-        if (difficultySelected[difficulty] && instance.puzzle.difficulty === difficulty.toUpperCase()) {
-          return instance;
-        }
-      }
-    }));
-  }, [puzzleInstances, difficultySelected]);
-  
+    setDifficultySelected({ ...tempDiffSelected });
+  };
+
   return (
     <main className={puzzleMapStyles.map}>
       <h2>Puzzles Map</h2>
-      <MapGeocoder setMapCenter={setMapCenter}/>
+      <MapGeocoder setMapCenter={setMapCenter} />
       <div>
         <label>
-          <input type='checkbox' value={'easy'} defaultChecked={true} onChange={onDifficultyFilterChange}/>
+          <input
+            type="checkbox"
+            value={'EASY'}
+            defaultChecked={true}
+            onChange={onDifficultyFilterChange}
+          />
           Easy
         </label>
         <label>
-          <input type='checkbox' value={'medium'} defaultChecked={true} onChange={onDifficultyFilterChange}/>
+          <input
+            type="checkbox"
+            value={'MEDIUM'}
+            defaultChecked={true}
+            onChange={onDifficultyFilterChange}
+          />
           Medium
         </label>
         <label>
-          <input type='checkbox' value={'hard'} defaultChecked={true} onChange={onDifficultyFilterChange}/>
+          <input
+            type="checkbox"
+            value={'HARD'}
+            defaultChecked={true}
+            onChange={onDifficultyFilterChange}
+          />
           Hard
         </label>
       </div>
       <div className={puzzleMapStyles.content}>
         <MapRenderer
-          markers={displayPuzzleInstances.map(instance => {
+          markers={puzzleInstances.filter(instance => difficultySelected[instance.puzzle.difficulty] === true).map(instance => {
             return {
               anchor: [instance.latitude, instance.longitude],
               zoom: 16
@@ -113,9 +115,10 @@ const PuzzleMap = ({puzzleInstances}: PuzzleMapTypes) => {
         <div>
           Nearest Puzzles From Map Center
           <CardList
-            cardList={displayPuzzleInstances.map((instance, index) => {
+            cardList={puzzleInstances.filter(instance => difficultySelected[instance.puzzle.difficulty] === true).map((instance, index) => {
               return {
                 ...instance.puzzle,
+                content: instance.puzzle.content + ' at ' + instance.address,
                 buttonActions: [
                   {
                     text: 'Solve Online',
@@ -148,7 +151,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     );
     puzzleInstance.puzzle = puzzle.data;
   }
-  
+
   return {
     props: {
       puzzleInstances
