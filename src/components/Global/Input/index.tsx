@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import styles from './Input.module.scss';
 
 type InputProps = {
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'email';
   id: string;
   required: boolean;
   placeholder?: string;
   maxLength?: number;
+  minLength?: number;
   labelText?: string;
   setInputVal: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -16,6 +17,7 @@ const Input = ({
   required,
   placeholder,
   maxLength,
+  minLength,
   labelText,
   setInputVal
 }: InputProps) => {
@@ -30,6 +32,7 @@ const Input = ({
         required={required}
         placeholder={placeholder}
         maxLength={maxLength}
+        minLength={minLength}
         value={input}
         onChange={event => {
           setInput(event.target.value);
