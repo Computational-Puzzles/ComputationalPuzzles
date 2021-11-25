@@ -10,13 +10,14 @@ const ErrorDisplay = ({
   message: string;
 }) => {
   return (
-    <div className={styles.center}>
-      <div className={styles.contentWrapper}>
-        <Logo showMark={true} showType={true} />
-        <span className={styles.seperator} />
-        <div className={styles.textWrapper}>
-          <p className={styles.errorCode}> Error code: {errorCode} </p>
-          <p className={styles.msg}> {message} </p>
+    <div className={ styles.center }>
+      <div className={ styles.contentWrapper }>
+        <div className={ styles.logo }>
+          <Logo showMark={ true } showType={ true } />
+        </div>
+        <div className={ styles.textWrapper }>
+          <p className={ styles.errorCode }> Error { errorCode } </p>
+          <p className={ styles.msg }> { message } </p>
         </div>
       </div>
     </div>
