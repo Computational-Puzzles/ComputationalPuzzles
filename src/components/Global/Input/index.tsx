@@ -8,6 +8,7 @@ type InputProps = {
   placeholder?: string;
   maxLength?: number;
   labelText?: string;
+  setInputVal: React.Dispatch<React.SetStateAction<string>>;
 };
 const Input = ({
   type,
@@ -15,7 +16,8 @@ const Input = ({
   required,
   placeholder,
   maxLength,
-  labelText
+  labelText,
+  setInputVal
 }: InputProps) => {
   const [input, setInput] = useState('');
   return (
@@ -29,7 +31,10 @@ const Input = ({
         placeholder={placeholder}
         maxLength={maxLength}
         value={input}
-        onChange={event => setInput(event.target.value)}
+        onChange={event => {
+          setInput(event.target.value);
+          setInputVal(event.target.value);
+        }}
       />
     </>
   );
