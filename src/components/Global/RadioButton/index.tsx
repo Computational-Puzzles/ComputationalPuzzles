@@ -13,11 +13,13 @@ type RadioButtonProps = {
 const getLabelColor = (difficulty: DIFFICULTY, isChecked: boolean) => {
   if (difficulty === 'easy')
     return isChecked ? styles.easyChecked + ' ' + styles.easy : styles.easy;
-  else if (difficulty === 'medium')
+  if (difficulty === 'medium')
     return isChecked
       ? styles.mediumChecked + ' ' + styles.medium
       : styles.medium;
-  else return isChecked ? styles.hardChecked + ' ' + styles.hard : styles.hard;
+  if(difficulty === 'hard')
+      return isChecked
+          ? styles.hardChecked + ' ' + styles.hard : styles.hard;
 };
 
 const RadioButton = ({
