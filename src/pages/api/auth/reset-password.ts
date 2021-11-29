@@ -1,13 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { hashFunction, checkHash } from '../../../utils/password';
-
-export type resetPasswordProps = {
-  email: string;
-  oldPassword: string;
-  newPassword: string;
-};
+import { checkHash, hashFunction } from '../../../utils/password';
+import { resetPasswordProps } from '../../../types/api/auth/reset-password';
 
 const prisma = new PrismaClient();
 

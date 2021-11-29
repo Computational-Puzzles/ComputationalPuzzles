@@ -3,15 +3,7 @@ import * as React from 'react';
 import { Button } from '../';
 
 import styles from './mapCard.module.scss';
-
-type DIFFICULTY = 'hard' | 'medium' | 'easy';
-type CARD_TYPE = 'list' | 'grid';
-export type CardProps = {
-  title: string;
-  desc: string;
-  diff: DIFFICULTY;
-  type?: CARD_TYPE;
-};
+import { CARD_TYPE, CardProps, DIFFICULTY } from '../../../types/cards';
 
 /**
  * Show 1 or 2 buttons depending on the type of the card

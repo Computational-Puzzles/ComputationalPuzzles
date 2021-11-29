@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Input.module.scss';
+import { InputProps } from '../../../types/global';
 
-type InputProps = {
-  type: 'text' | 'password';
-  id: string;
-  required: boolean;
-  placeholder?: string;
-  maxLength?: number;
-  labelText?: string;
-};
 const Input = ({
   type,
   id,
