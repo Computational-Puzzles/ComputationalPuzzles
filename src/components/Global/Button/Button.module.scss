@@ -1,6 +1,7 @@
 @import 'src/styles/abstracts/_variables';
 @import 'src/styles/abstracts/_mixins/layout';
 @import 'src/styles/abstracts/_mixins/transitions';
+@import 'src/styles/abstracts/_mixins/text';
 
 .removeBtnDefault {
   background-color: $transparent;
@@ -22,6 +23,7 @@
 
 .btn {
   @include center;
+  @include font-button;
   @include smooth-transition;
   background-color: $transparent;
   display: flex;

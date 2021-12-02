@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Button } from '../';
-import Link from 'next/link';
 
 import styles from './PuzzleCard.module.scss';
 
@@ -18,17 +17,15 @@ export type PuzzleCardProps = {
 /**
  * Show 1 or 2 buttons depending on the type of the card
  */
-const Buttons = ({ type, link }: { type: CARD_TYPE, link: string }) => {
+const Buttons = ({ type, link }: { type: CARD_TYPE; link: string }) => {
   if (type === 'list') {
     return (
-      <Link href={link} passHref>
-        <Button
-          style="primary"
-          content="Solve online"
-          arrowDirection="right"
-          onClick={() => null}
-        />
-      </Link>
+      <Button
+        style="primary"
+        content="Solve online"
+        arrowDirection="right"
+        link={link}
+      />
     );
   } else if (type === 'grid') {
     return (
@@ -39,14 +36,12 @@ const Buttons = ({ type, link }: { type: CARD_TYPE, link: string }) => {
           arrowDirection="right"
           onClick={() => alert('View map')}
         />
-        <Link href={link} passHref>
-          <Button
-              style="primary"
-              content="Solve online"
-              arrowDirection="right"
-              onClick={() => null}
-          />
-        </Link>
+        <Button
+          style="primary"
+          content="Solve online"
+          arrowDirection="right"
+          link={link}
+        />
       </div>
     );
   }

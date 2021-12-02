@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import productStyles from '../../../styles/pages/Product.module.scss';
 import landingStyles from './LandingContent.module.scss';
 import logo from '../../../../public/assets/logo.png';
@@ -37,15 +36,13 @@ const LandingContent = () => {
                 outdoors!
               </p>
               <div className={landingStyles.actions}>
-                <Link href={'/puzzles/map'} passHref>
-                  <Button
-                    style={'primary'}
-                    size={'lg'}
-                    content={'Start Hunting'}
-                    arrowDirection={'right'}
-                    onClick={() => null}
-                  />
-                </Link>
+                <Button
+                  style={'primary'}
+                  size={'lg'}
+                  content={'Start Hunting'}
+                  arrowDirection={'right'}
+                  link={'/puzzles/map'}
+                />
                 <Button
                   style={'secondary'}
                   size={'lg'}

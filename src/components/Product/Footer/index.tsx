@@ -4,7 +4,6 @@ import footerStyles from './Footer.module.scss';
 import productStyles from '../../../styles/pages/Product.module.scss';
 import { Button } from '../../Global';
 import ubcLogoFullBlack from '../../../../public/assets/UBC-logo-full-black.png';
-import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -12,14 +11,12 @@ const Footer = () => {
       <div className={`${productStyles.wrapper} ${footerStyles.content}`}>
         <div className={footerStyles.exploreMore}>
           <h2>Interested in exploring more?</h2>
-          <Link href={'/puzzles/map'} passHref>
-            <Button
-              style={'primary'}
-              content={'Start Hunting'}
-              arrowDirection={'right'}
-              onClick={() => null}
-            />
-          </Link>
+          <Button
+            style={'primary'}
+            content={'Start Hunting'}
+            arrowDirection={'right'}
+            link={'/puzzles/map'}
+          />
         </div>
         <div className={footerStyles.details}>
           <span>

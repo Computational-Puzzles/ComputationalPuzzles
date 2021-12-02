@@ -7,50 +7,39 @@ import logoStyles from './Logo.module.scss';
 type LogoProps = {
   showMark: boolean;
   showType: boolean;
-  link: boolean;
+  link?: boolean;
+};
+
+const LogoContent = ({ showMark, showType }: LogoProps) => {
+  return (
+    <div className={logoStyles.logo}>
+      <div className={logoStyles.mark}>
+        {showMark && (
+          <Image
+            src={logo}
+            alt={'computational puzzles logo'}
+            layout={'responsive'}
+          />
+        )}
+      </div>
+      {showType && (
+        <span className={logoStyles.type}>Computational Puzzles for Kids</span>
+      )}
+    </div>
+  );
 };
 
 const Logo = ({ showMark, showType, link }: LogoProps) => {
   if (link) {
     return (
       <Link href={'/'} passHref>
-        <div className={logoStyles.logo}>
-          <div className={logoStyles.mark}>
-            {showMark && (
-              <Image
-                src={logo}
-                alt={'computational puzzles logo'}
-                layout={'responsive'}
-              />
-            )}
-          </div>
-          {showType && (
-            <span className={logoStyles.type}>
-              Computational Puzzles for Kids
-            </span>
-          )}
-        </div>
+        <a>
+          <LogoContent showMark={showMark} showType={showType} />
+        </a>
       </Link>
     );
   } else {
-    return (
-      <div className={logoStyles.logo}>
-        <div className={logoStyles.mark}>
-          {showMark && (
-            <Image
-              src={logo}
-              alt={'computational puzzles logo'}
-              layout={'responsive'}
-            />
-          )}
-        </div>
-        {showType && (
-          <span className={logoStyles.type}>
-            Computational Puzzles for Kids
-          </span>
-        )}
-      </div>
-    );
+    return <LogoContent showMark={showMark} showType={showType} />;
   }
 };
 

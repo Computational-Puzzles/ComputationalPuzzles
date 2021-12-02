@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { getSession, useSession } from 'next-auth/react';
 import { PrismaClient } from '@prisma/client';
 import { PuzzleProps } from '../../../prisma/schemaTypes';
@@ -19,9 +18,7 @@ const PuzzlePage = ({ puzzle }: { puzzle: PuzzleProps }) => {
   return (
     <main>
       <section>
-        <Link href={'/puzzles/map'} passHref>
-          <Button style={'outline'} content={'Map'} onClick={() => null} />
-        </Link>
+        <Button style={'outline'} content={'Map'} link={'/puzzles/map'} />
       </section>
       <section>
         <h2>{puzzle.name}</h2>
