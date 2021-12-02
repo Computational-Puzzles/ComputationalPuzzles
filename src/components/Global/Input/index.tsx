@@ -23,9 +23,9 @@ const Input = ({
           </label>
         )}
         {labelHeader && (
-            <label htmlFor={id} className={styles.labelHeader}>
-              {labelHeader}
-            </label>
+          <label htmlFor={id} className={styles.labelHeader}>
+            {labelHeader}
+          </label>
         )}
         <input
           className={styles.input}
