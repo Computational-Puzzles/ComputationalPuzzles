@@ -8,6 +8,7 @@ import {
   Marker,
   PuzzleInstance
 } from '../../../components/App/MapRenderer';
+import { Header } from '../../../components/Global';
 
 type PuzzleMapTypes = {
   puzzleInstances: PuzzleInstance[];
@@ -69,45 +70,55 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
 
   return (
     <main className={puzzleMapStyles.map}>
-      <h2>Puzzles Map</h2>
-      <MapGeocoder setMapCenter={setMapCenter} />
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            value={'EASY'}
-            defaultChecked={true}
-            onChange={onDifficultyFilterChange}
-          />
-          Easy
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value={'MEDIUM'}
-            defaultChecked={true}
-            onChange={onDifficultyFilterChange}
-          />
-          Medium
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value={'HARD'}
-            defaultChecked={true}
-            onChange={onDifficultyFilterChange}
-          />
-          Hard
-        </label>
+      <Header />
+      <div className={puzzleMapStyles.subHeader}>
+        <div className={puzzleMapStyles.leftContent}>
+          <h1>Puzzles Map</h1>
+          <MapGeocoder setMapCenter={setMapCenter} />
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value={'EASY'}
+              defaultChecked={true}
+              onChange={onDifficultyFilterChange}
+            />
+            Easy
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value={'MEDIUM'}
+              defaultChecked={true}
+              onChange={onDifficultyFilterChange}
+            />
+            Medium
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              value={'HARD'}
+              defaultChecked={true}
+              onChange={onDifficultyFilterChange}
+            />
+            Hard
+          </label>
+        </div>
       </div>
       <div className={puzzleMapStyles.content}>
         <MapRenderer
-          markers={puzzleInstances.filter(instance => difficultySelected[instance.puzzle.difficulty] === true).map(instance => {
-            return {
-              anchor: [instance.latitude, instance.longitude],
-              zoom: 16
-            };
-          })}
+          markers={puzzleInstances
+            .filter(
+              instance =>
+                difficultySelected[instance.puzzle.difficulty] === true
+            )
+            .map(instance => {
+              return {
+                anchor: [instance.latitude, instance.longitude],
+                zoom: 16
+              };
+            })}
           userMarker={userMarker}
           mapCenter={mapCenter}
           setMapCenter={setMapCenter}
@@ -115,24 +126,29 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
         <div>
           Nearest Puzzles From Map Center
           <CardList
-            cardList={puzzleInstances.filter(instance => difficultySelected[instance.puzzle.difficulty] === true).map((instance, index) => {
-              return {
-                ...instance.puzzle,
-                content: instance.puzzle.content + ' at ' + instance.address,
-                buttonActions: [
-                  {
-                    text: 'Solve Online',
-                    style: 'primary',
-                    action: () => alert('Solve online')
-                  },
-                  {
-                    text: 'View On Map',
-                    style: 'secondary',
-                    action: () => setMapCenterFromInstanceIndex(index)
-                  }
-                ]
-              };
-            })}
+            cardList={puzzleInstances
+              .filter(
+                instance =>
+                  difficultySelected[instance.puzzle.difficulty] === true
+              )
+              .map((instance, index) => {
+                return {
+                  ...instance.puzzle,
+                  content: instance.puzzle.content + ' at ' + instance.address,
+                  buttonActions: [
+                    {
+                      text: 'Solve Online',
+                      style: 'primary',
+                      action: () => alert('Solve online')
+                    },
+                    {
+                      text: 'View On Map',
+                      style: 'secondary',
+                      action: () => setMapCenterFromInstanceIndex(index)
+                    }
+                  ]
+                };
+              })}
           />
         </div>
       </div>

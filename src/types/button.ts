@@ -6,6 +6,11 @@ export type ArrowType = {
   style: ButtonStyle;
   arrowDirection: ArrowDirectionType;
 };
+export type ButtonAction = {
+  text: string;
+  style: ButtonStyle;
+  action: () => any;
+};
 
 export type ButtonContentProps = {
   style: ButtonStyle;

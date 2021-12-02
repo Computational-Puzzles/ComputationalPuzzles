@@ -9,3 +9,17 @@
     flex-grow: 1;
   }
 }
+
+.subHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .leftContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem
+  }
+}
