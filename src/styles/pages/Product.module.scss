@@ -2,8 +2,7 @@
 @import '../abstracts/mixins';
 
 .wrapper {
-  max-width: $max-product-content-width;
-  margin: 0 auto;
+  @include wrapper;
 }
 
 .sectionPadding {

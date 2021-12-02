@@ -2,9 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import footerStyles from './Footer.module.scss';
 import productStyles from '../../../styles/pages/Product.module.scss';
-import { signIn } from 'next-auth/react';
 import { Button } from '../../Global';
 import ubcLogoFullBlack from '../../../../public/assets/UBC-logo-full-black.png';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -12,12 +12,14 @@ const Footer = () => {
       <div className={`${productStyles.wrapper} ${footerStyles.content}`}>
         <div className={footerStyles.exploreMore}>
           <h2>Interested in exploring more?</h2>
-          <Button
-            style={'primary'}
-            content={'Start Hunting'}
-            arrowDirection={'right'}
-            onClick={() => signIn()}
-          />
+          <Link href={'/puzzles/map'} passHref>
+            <Button
+              style={'primary'}
+              content={'Start Hunting'}
+              arrowDirection={'right'}
+              onClick={() => null}
+            />
+          </Link>
         </div>
         <div className={footerStyles.details}>
           <span>

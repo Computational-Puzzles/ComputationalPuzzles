@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import productStyles from '../../../styles/pages/Product.module.scss';
 import landingStyles from './LandingContent.module.scss';
 import logo from '../../../../public/assets/logo.png';
 import jigsaw from '../../../../public/assets/puzzle_dots.svg';
 import childImage1 from '../../../../public/assets/juliane-liebermann-unsplash.jpg';
 import childImage2 from '../../../../public/assets/markus-spiske-unsplash.jpg';
-import { signIn } from 'next-auth/react';
 import { Button } from '../../Global';
 
 const LandingContent = () => {
@@ -37,13 +37,15 @@ const LandingContent = () => {
                 outdoors!
               </p>
               <div className={landingStyles.actions}>
-                <Button
-                  style={'primary'}
-                  size={'lg'}
-                  content={'Start Hunting'}
-                  arrowDirection={'right'}
-                  onClick={() => signIn()}
-                />
+                <Link href={'/puzzles/map'} passHref>
+                  <Button
+                    style={'primary'}
+                    size={'lg'}
+                    content={'Start Hunting'}
+                    arrowDirection={'right'}
+                    onClick={() => null}
+                  />
+                </Link>
                 <Button
                   style={'secondary'}
                   size={'lg'}

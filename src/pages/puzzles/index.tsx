@@ -1,7 +1,41 @@
 import React from 'react';
+import { CardList, Header } from '../../components/App';
+import { GetServerSideProps } from 'next';
+import { Difficulty, PrismaClient, Puzzle } from '@prisma/client';
+import { PuzzleCardProps } from '../../components/Global';
 
-const PuzzleList = () => {
-  return <div>Puzzle List</div>;
+const prisma = new PrismaClient();
+
+const getPuzzleDifficulty = (difficulty: Difficulty) => {
+  if (difficulty === 'EASY') return 'easy';
+  if (difficulty === 'MEDIUM') return 'medium';
+  if (difficulty === 'HARD') return 'hard';
 };
 
-export default PuzzleList;
+const PuzzleMap = ({ puzzles }: { puzzles: Puzzle[] }) => {
+  const puzzleCardProps = puzzles.map(puzzle => {
+    return {
+      title: puzzle.name,
+      desc: puzzle.content,
+      diff: getPuzzleDifficulty(puzzle.difficulty),
+      link: `/puzzles/${puzzle.id}`
+    } as PuzzleCardProps;
+  });
+  return (
+    <>
+      <Header />
+      <CardList cardList={puzzleCardProps} />
+      Puzzle Map
+    </>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const puzzles = await prisma.puzzle.findMany();
+
+  return {
+    props: { puzzles }
+  };
+};
+
+export default PuzzleMap;

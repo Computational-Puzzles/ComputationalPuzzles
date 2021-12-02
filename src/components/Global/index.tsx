@@ -1,10 +1,11 @@
 import Logo from './Logo';
 import Button from './Button';
+import Card from './PuzzleCard';
+import RadioButton from './RadioButton';
+import Filter from './Filter';
 import Input from './Input';
-import Header from './Header';
-import Card from './Card';
 
-import type { CardProps } from './Card';
+import type { PuzzleCardProps } from './PuzzleCard';
 
-export { Button, Card, Header, Logo, Input };
-export type { CardProps };
+export { Button, Card, Logo, RadioButton, Filter, Input };
+export type { PuzzleCardProps };
