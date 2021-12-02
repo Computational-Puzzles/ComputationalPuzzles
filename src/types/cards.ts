@@ -5,4 +5,5 @@ export type CardProps = {
   desc: string;
   diff: DIFFICULTY;
   type?: CARD_TYPE;
+  link: string;
 };

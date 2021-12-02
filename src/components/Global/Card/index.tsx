@@ -67,7 +67,7 @@ const Card = ({ title, desc, diff, type, link }: CardProps) => {
         </p>
       </div>
       {desc}
-      {type && <Buttons type={type} link={link}/>}
+      {type && <Buttons type={type} link={link} />}
     </div>
   );
 };

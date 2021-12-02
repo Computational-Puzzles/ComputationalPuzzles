@@ -9,7 +9,7 @@ const Header = () => {
     <>
       <header className={headerStyles.header}>
         <div className={`${productStyles.wrapper} ${headerStyles.content}`}>
-          <Logo showMark={true} showType={true} link={true}/>
+          <Logo showMark={true} showType={true} link={true} />
           <div className={headerStyles.actions}>
             <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
             <Button
