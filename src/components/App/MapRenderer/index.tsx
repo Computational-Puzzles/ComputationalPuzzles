@@ -29,7 +29,12 @@ type MapRendererProps = {
   setMapCenter: Dispatch<SetStateAction<Anchor>>;
 };
 
-const MapRenderer = ({ markers, userMarker, mapCenter, setMapCenter }: MapRendererProps) => {
+const MapRenderer = ({
+  markers,
+  userMarker,
+  mapCenter,
+  setMapCenter
+}: MapRendererProps) => {
   const setMapFocus = (marker: Marker): void => {
     setMapCenter(marker.anchor);
   };
