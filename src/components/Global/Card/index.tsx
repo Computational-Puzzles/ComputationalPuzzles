@@ -11,19 +11,20 @@ export type CardProps = {
   desc: string;
   diff: DIFFICULTY;
   type?: CARD_TYPE;
+  link: string;
 };
 
 /**
  * Show 1 or 2 buttons depending on the type of the card
  */
-const Buttons = ({ type }: { type: CARD_TYPE }) => {
+const Buttons = ({ type, link }: { type: CARD_TYPE; link: string }) => {
   if (type === 'list') {
     return (
       <Button
         style="primary"
         content="Solve online"
         arrowDirection="right"
-        onClick={() => alert('Solve online')}
+        link={link}
       />
     );
   } else if (type === 'grid') {
@@ -39,7 +40,7 @@ const Buttons = ({ type }: { type: CARD_TYPE }) => {
           style="primary"
           content="Solve online"
           arrowDirection="right"
-          onClick={() => alert('Solve online')}
+          link={link}
         />
       </div>
     );
@@ -61,7 +62,7 @@ const Difficulty = ({ diff }: { diff: DIFFICULTY }) => {
   }
 };
 
-const Card = ({ title, desc, diff, type }: CardProps) => {
+const Card = ({ title, desc, diff, type, link }: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
@@ -75,7 +76,7 @@ const Card = ({ title, desc, diff, type }: CardProps) => {
         </p>
       </div>
       {desc}
-      {type && <Buttons type={type} />}
+      {type && <Buttons type={type} link={link}/>}
     </div>
   );
 };

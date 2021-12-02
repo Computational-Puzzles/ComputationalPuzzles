@@ -1,5 +1,12 @@
+@import "src/styles/abstracts/_variables";
+
 @mixin center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin wrapper {
+  max-width: $max-product-content-width;
+  margin: 0 auto;
 }
