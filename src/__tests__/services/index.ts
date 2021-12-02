@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
 it('is a default test', () => {
-    expect(1 + 1).toBe(2);
+  expect(1 + 1).toBe(2);
 });

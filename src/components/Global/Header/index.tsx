@@ -2,10 +2,7 @@ import * as React from 'react';
 import styles from './Header.module.scss';
 
 import { Logo } from '..';
-
-type HeaderProps = {
-  profilePicture?: string;
-};
+import { HeaderProps } from '../../../types/global';
 
 const Header = ({ profilePicture }: HeaderProps) => {
   const [activeTab, setActiveTab] = React.useState<0 | 1>(0);
