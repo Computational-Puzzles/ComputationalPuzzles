@@ -1,20 +1,12 @@
 import React from 'react';
 import styles from './Button.module.scss';
-
-export type ButtonStyle = 'primary' | 'secondary' | 'outline' | 'flat';
-type ButtonSize = 'sm' | 'md' | 'lg';
-type ButtonType = 'button' | 'submit' | 'reset';
-type ArrowDirectionType = 'right' | 'down';
-type ArrowType = { style: ButtonStyle; arrowDirection: ArrowDirectionType };
-
-type ButtonProps = {
-  style: ButtonStyle;
-  type?: ButtonType;
-  size?: ButtonSize;
-  content: string;
-  arrowDirection?: ArrowDirectionType;
-  onClick: () => void;
-};
+import {
+  ArrowDirectionType,
+  ArrowType,
+  ButtonProps,
+  ButtonSize,
+  ButtonStyle
+} from '../../../types/button';
 
 const getButtonClass = (style: ButtonStyle) => {
   if (style === 'primary') return styles.btnPrimary;

@@ -3,22 +3,7 @@ import * as React from 'react';
 import { Button } from '../';
 
 import styles from './Card.module.scss';
-import { ButtonStyle } from '../Button';
-
-export type DIFFICULTY = 'HARD' | 'MEDIUM' | 'EASY';
-type CARD_TYPE = 'list' | 'grid';
-type ButtonAction = {
-  text: string;
-  style: ButtonStyle;
-  action: () => any;
-};
-export type CardProps = {
-  name: string;
-  content: string;
-  difficulty: DIFFICULTY;
-  type?: CARD_TYPE;
-  buttonActions?: ButtonAction[];
-};
+import { CARD_TYPE, CardProps, DIFFICULTY } from '../../../types/cards';
 
 /**
  * Adjust color of the difficulty text
