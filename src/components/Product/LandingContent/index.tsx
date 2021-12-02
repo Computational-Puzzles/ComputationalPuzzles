@@ -41,6 +41,7 @@ const LandingContent = () => {
                   size={'lg'}
                   content={'Start Hunting'}
                   arrowDirection={'right'}
+                  onClick={() => alert('Hi')}
                   link={'/puzzles/map'}
                 />
                 <Button

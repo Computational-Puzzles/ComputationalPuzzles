@@ -20,7 +20,7 @@ export type ButtonContentProps = {
 };
 
 export type ButtonProps = ButtonContentProps &
-  ({ onClick: () => void; link?: never } | { onClick?: never; link: string });
+  ({ onClick: () => void; link?: string } | { onClick?: () => void; link: string });
 
 const getButtonClass = (style: ButtonStyle) => {
   if (style === 'primary') return styles.btnPrimary;
@@ -103,7 +103,7 @@ const Button = ({
   if (link) {
     return (
       <Link href={link}>
-        <a className={`${getButtonSizeClass(size)} ${styles.removeBtnDefault}`}>
+        <a className={`${getButtonSizeClass(size)} ${styles.removeBtnDefault}`} onClick={onClick}>
           <ButtonContent
             style={style}
             content={content}
