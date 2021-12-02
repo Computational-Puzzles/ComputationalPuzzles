@@ -3,12 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../../../public/assets/logo.jpg';
 import logoStyles from './Logo.module.scss';
-
-type LogoProps = {
-  showMark: boolean;
-  showType: boolean;
-  link?: boolean;
-};
+import { LogoProps } from '../../../types/global';
 
 const LogoContent = ({ showMark, showType }: LogoProps) => {
   return (

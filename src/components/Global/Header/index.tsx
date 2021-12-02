@@ -3,13 +3,9 @@ import styles from './Header.module.scss';
 
 import Link from 'next/link';
 import Image from 'next/image';
-
-import { Logo } from '../../Global';
 import { useRouter } from 'next/router';
-
-type HeaderProps = {
-  profilePicture?: string;
-};
+import { Logo } from '..';
+import { HeaderProps } from '../../../types/global';
 
 const Header = ({ profilePicture }: HeaderProps) => {
   const [activeTab, setActiveTab] = React.useState<0 | 1>(0);

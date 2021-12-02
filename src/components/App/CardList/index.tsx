@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { Card } from '../../Global';
-import type { CardProps } from '../../Global';
 
 import styles from './CardList.module.scss';
+import { CardProps } from '../../../types/cards';
 
 const CardList = ({ cardList }: { cardList: CardProps[] }) => {
   return (

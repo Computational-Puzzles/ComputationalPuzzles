@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Input.module.scss';
+import { InputProps } from '../../../types/global';
 
-type InputProps = {
-  type: 'text' | 'password' | 'email';
-  id: string;
-  required: boolean;
-  placeholder?: string;
-  maxLength?: number;
-  minLength?: number;
-  labelText?: string;
-  labelHeader?: string;
-  setInputVal?: React.Dispatch<React.SetStateAction<string>>;
-};
 const Input = ({
   type,
   id,
@@ -33,9 +23,9 @@ const Input = ({
           </label>
         )}
         {labelHeader && (
-            <label htmlFor={id} className={styles.labelHeader}>
-              {labelHeader}
-            </label>
+          <label htmlFor={id} className={styles.labelHeader}>
+            {labelHeader}
+          </label>
         )}
         <input
           className={styles.input}
