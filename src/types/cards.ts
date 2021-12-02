@@ -1,8 +1,11 @@
-export type DIFFICULTY = 'hard' | 'medium' | 'easy';
+import { ButtonAction } from './button';
+
+export type DIFFICULTY = 'HARD' | 'MEDIUM' | 'EASY';
 export type CARD_TYPE = 'list' | 'grid';
 export type CardProps = {
-  title: string;
-  desc: string;
-  diff: DIFFICULTY;
+  name: string;
+  content: string;
+  difficulty: DIFFICULTY;
   type?: CARD_TYPE;
+  buttonActions?: ButtonAction[];
 };

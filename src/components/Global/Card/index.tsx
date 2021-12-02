@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from '../';
 
 import styles from './Card.module.scss';
-import { CARD_TYPE, CardProps, DIFFICULTY } from '../../../types/cards';
+import { CardProps, DIFFICULTY } from '../../../types/cards';
 
 /**
  * Adjust color of the difficulty text
