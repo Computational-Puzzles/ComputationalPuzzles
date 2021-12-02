@@ -32,6 +32,12 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
       const zoom = 16;
       setUserMarker({ anchor, zoom });
       setMapCenter(anchor);
+    }, () => {
+      const anchor: Anchor = [
+        49.88307,
+        -119.48568
+      ];
+      setMapCenter(anchor);
     });
   }, []);
 
