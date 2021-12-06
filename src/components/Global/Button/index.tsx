@@ -1,8 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 import styles from './Button.module.scss';
 import {
   ArrowDirectionType,
   ArrowType,
+  ButtonContentProps,
   ButtonProps,
   ButtonSize,
   ButtonStyle
@@ -57,33 +59,65 @@ const Arrow = ({ style, arrowDirection }: ArrowType) => {
   );
 };
 
+const ButtonContent = ({
+  style,
+  content,
+  arrowDirection
+}: ButtonContentProps) => {
+  return (
+    <div className={`${getButtonClass(style)}`}>
+      <div className={styles.btnTextContainer}>{content}</div>
+      {arrowDirection && (
+        <div className={styles.arrowBox}>
+          <Arrow arrowDirection={arrowDirection} style={style} />
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Button = ({
   style,
   type,
   size,
   content,
   arrowDirection,
-  onClick
+  onClick,
+  link
 }: ButtonProps) => {
   if (!type) type = 'button';
   if (!size) size = 'md';
 
-  return (
-    <button
-      className={`${getButtonSizeClass(size)} ${styles.removeBtnDefault}`}
-      onClick={onClick}
-      type={type}
-    >
-      <div className={`${getButtonClass(style)}`}>
-        <div className={styles.btnTextContainer}>{content}</div>
-        {arrowDirection && (
-          <div className={styles.arrowBox}>
-            <Arrow arrowDirection={arrowDirection} style={style} />
-          </div>
-        )}
-      </div>
-    </button>
-  );
+  if (link) {
+    return (
+      <Link href={link}>
+        <a
+          className={`${getButtonSizeClass(size)} ${styles.removeBtnDefault}`}
+          onClick={onClick}
+        >
+          <ButtonContent
+            style={style}
+            content={content}
+            arrowDirection={arrowDirection}
+          />
+        </a>
+      </Link>
+    );
+  } else {
+    return (
+      <button
+        className={`${getButtonSizeClass(size)} ${styles.removeBtnDefault}`}
+        onClick={onClick}
+        type={type}
+      >
+        <ButtonContent
+          style={style}
+          content={content}
+          arrowDirection={arrowDirection}
+        />
+      </button>
+    );
+  }
 };
 
 export default Button;

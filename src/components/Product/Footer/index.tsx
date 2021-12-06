@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import footerStyles from './Footer.module.scss';
 import productStyles from '../../../styles/pages/Product.module.scss';
-import { signIn } from 'next-auth/react';
 import { Button } from '../../Global';
 import ubcLogoFullBlack from '../../../../public/assets/UBC-logo-full-black.png';
 
@@ -16,7 +15,7 @@ const Footer = () => {
             style={'primary'}
             content={'Start Hunting'}
             arrowDirection={'right'}
-            onClick={() => signIn()}
+            link={'/puzzles/map'}
           />
         </div>
         <div className={footerStyles.details}>

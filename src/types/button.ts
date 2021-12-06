@@ -7,11 +7,16 @@ export type ArrowType = {
   arrowDirection: ArrowDirectionType;
 };
 
-export type ButtonProps = {
+export type ButtonContentProps = {
   style: ButtonStyle;
   type?: ButtonType;
   size?: ButtonSize;
   content: string;
   arrowDirection?: ArrowDirectionType;
-  onClick: () => void;
 };
+
+export type ButtonProps = ButtonContentProps &
+  (
+    | { onClick: () => void; link?: string }
+    | { onClick?: () => void; link: string }
+  );
