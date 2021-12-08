@@ -19,7 +19,9 @@ const Header = ({ profilePicture }: HeaderProps) => {
           <div className={styles.tabs}>
             <Link href={'/puzzles/map'} passHref>
               <button
-                className={router.asPath === '/puzzles/map' ? styles.active : ''}
+                className={
+                  router.asPath === '/puzzles/map' ? styles.active : ''
+                }
                 onClick={() => setActiveTab(0)}
               >
                 <span>Puzzles Map</span>

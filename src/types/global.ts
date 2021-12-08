@@ -7,7 +7,7 @@ export type HeaderProps = {
 export type LogoProps = {
   showMark: boolean;
   showType: boolean;
-  link?: boolean
+  link?: boolean;
 };
 
 export type InputProps = {
