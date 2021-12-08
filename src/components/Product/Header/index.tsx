@@ -9,14 +9,14 @@ const Header = () => {
     <>
       <header className={headerStyles.header}>
         <div className={`${productStyles.wrapper} ${headerStyles.content}`}>
-          <Logo showMark={true} showType={true} />
+          <Logo showMark={true} showType={true} link={true} />
           <div className={headerStyles.actions}>
             <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
             <Button
               style={'outline'}
               content={'Get Started'}
               arrowDirection={'right'}
-              onClick={() => signIn()}
+              link={'/puzzles/map'}
             />
           </div>
         </div>
