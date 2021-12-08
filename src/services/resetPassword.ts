@@ -1,5 +1,5 @@
 import Axios from './axios';
-import type { resetPasswordProps } from '../pages/api/auth/reset-password';
+import type { resetPasswordProps } from '../types/api/auth/reset-password';
 
 /**
  * This will reset the password of the user

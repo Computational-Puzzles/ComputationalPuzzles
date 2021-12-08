@@ -1,0 +1,28 @@
+@import 'src/styles/abstracts/_mixins/text';
+@import 'src/styles/abstracts/_variables';
+
+.container {
+  display: flex;
+  align-items: center;
+}
+.labelText {
+  box-sizing: border-box;
+  margin: 0 0.5rem;
+}
+.labelHeader {
+  @include font-header-black;
+  box-sizing: border-box;
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+}
+.input {
+  @include font-button;
+  color: $black;
+  font-size: 0.875rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 2px solid #4b4b4b;
+  box-sizing: border-box;
+  border-radius: 999px;
+  flex: 1;
+}

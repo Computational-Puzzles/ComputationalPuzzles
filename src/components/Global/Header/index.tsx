@@ -1,39 +1,44 @@
 import * as React from 'react';
 import styles from './Header.module.scss';
 
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Logo } from '..';
-
-type HeaderProps = {
-  profilePicture?: string;
-};
+import { HeaderProps } from '../../../types/global';
 
 const Header = ({ profilePicture }: HeaderProps) => {
   const [activeTab, setActiveTab] = React.useState<0 | 1>(0);
+  const router = useRouter();
 
   return (
     <div className={styles.header}>
       <div className={styles.content}>
         <div className={styles.left}>
-          <Logo showMark={true} showType={true} />
+          <Logo showMark={true} showType={true} link={true} />
           <div className={styles.tabs}>
-            <button
-              className={activeTab === 0 && styles.active}
-              onClick={() => setActiveTab(0)}
-            >
-              <span>Puzzles Map</span>
-            </button>
-            <button
-              className={activeTab === 1 && styles.active}
-              onClick={() => setActiveTab(1)}
-            >
-              <span>Puzzles List</span>
-            </button>
+            <Link href={'/puzzles/map'} passHref>
+              <button
+                className={router.asPath === '/puzzles/map' && styles.active}
+                onClick={() => setActiveTab(0)}
+              >
+                <span>Puzzles Map</span>
+              </button>
+            </Link>
+            <Link href={'/puzzles'} passHref>
+              <button
+                className={router.asPath === '/puzzles' && styles.active}
+                onClick={() => setActiveTab(1)}
+              >
+                <span>Puzzles List</span>
+              </button>
+            </Link>
           </div>
         </div>
         <div className={styles.right}>
-          <button> Profile </button>
+          <Link href={'../auth/profile'}>Profile</Link>
           {profilePicture ? (
-            <img
+            <Image
               className={styles.profileImg}
               src={profilePicture}
               alt="profile"

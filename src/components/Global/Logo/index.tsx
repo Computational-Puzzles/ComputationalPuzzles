@@ -1,14 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import logo from '../../../../public/assets/logo.jpg';
 import logoStyles from './Logo.module.scss';
+import { LogoProps } from '../../../types/global';
 
-type LogoProps = {
-  showMark: boolean;
-  showType: boolean;
-};
-
-const Logo = ({ showMark, showType }: LogoProps) => {
+const LogoContent = ({ showMark, showType }: LogoProps) => {
   return (
     <div className={logoStyles.logo}>
       <div className={logoStyles.mark}>
@@ -25,6 +22,20 @@ const Logo = ({ showMark, showType }: LogoProps) => {
       )}
     </div>
   );
+};
+
+const Logo = ({ showMark, showType, link }: LogoProps) => {
+  if (link) {
+    return (
+      <Link href={'/'} passHref>
+        <a>
+          <LogoContent showMark={showMark} showType={showType} />
+        </a>
+      </Link>
+    );
+  } else {
+    return <LogoContent showMark={showMark} showType={showType} />;
+  }
 };
 
 export default Logo;
