@@ -6,7 +6,6 @@ import logo from '../../../../public/assets/logo.png';
 import jigsaw from '../../../../public/assets/puzzle_dots.svg';
 import childImage1 from '../../../../public/assets/juliane-liebermann-unsplash.jpg';
 import childImage2 from '../../../../public/assets/markus-spiske-unsplash.jpg';
-import { signIn } from 'next-auth/react';
 import { Button } from '../../Global';
 
 const LandingContent = () => {
@@ -42,7 +41,7 @@ const LandingContent = () => {
                   size={'lg'}
                   content={'Start Hunting'}
                   arrowDirection={'right'}
-                  onClick={() => signIn()}
+                  link={'/puzzles/map'}
                 />
                 <Button
                   style={'secondary'}
