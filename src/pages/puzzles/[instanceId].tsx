@@ -10,14 +10,14 @@ import { submitPuzzleInstance } from '../../utils/puzzles';
 import { User } from 'next-auth';
 import { getPuzzleInstance } from '../../services/puzzleInstance';
 import Header from '../../components/Global/Header';
+import { PuzzleInstanceCustom } from '../../types/api/puzzles/instances/puzzleInstance';
 
 type puzzlePageProps = {
-  puzzleInstance: Prisma.PuzzleInstanceInclude;
+  puzzleInstance: PuzzleInstanceCustom;
 };
 
 const PuzzlePage = ({ puzzleInstance }: puzzlePageProps) => {
-  const puzzle = puzzleInstance.puzzle as Puzzle;
-  // @ts-ignore
+  const puzzle = puzzleInstance.puzzle as Puzzle & Prisma.PuzzleInclude;
   const puzzleType = puzzleInstance.puzzle.puzzleType as PuzzleType;
   const randomSeed = Math.random();
 
@@ -107,7 +107,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getSession(context);
   const id = +context.query.instanceId;
 
-  const puzzleInstance: Prisma.PuzzleInstanceInclude = await getPuzzleInstance(
+  const puzzleInstance: PuzzleInstanceCustom = await getPuzzleInstance(
     id,
     true
   );

@@ -1,14 +1,7 @@
 import axios from 'axios';
 import { Puzzle, PuzzleInstance } from '@prisma/client';
 import { User } from 'next-auth';
-
-export type puzzleSubmissionProps = {
-  answer: string;
-  puzzleInstanceId: number;
-  puzzleId: number;
-  randomSeed: number;
-  userEmail: string;
-};
+import type { puzzleSubmissionProps } from '../types/api/puzzles/submission';
 
 const submitPuzzleInstance = async (
   answer: string,
