@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Input.module.scss';
+import { InputProps } from '../../../types/global';
 
-type InputProps = {
-  type: 'text' | 'password' | 'email';
-  id: string;
-  required: boolean;
-  placeholder?: string;
-  maxLength?: number;
-  minLength?: number;
-  labelText?: string;
-  setInputVal?: React.Dispatch<React.SetStateAction<string>>;
-};
 const Input = ({
   type,
   id,
