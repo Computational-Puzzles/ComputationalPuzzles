@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSession } from 'next-auth/react';
 import { Header, Footer, LandingContent } from '../components/Product';
-import Filter from '../components/Global/Filter';
 
 const Home: React.FC = () => {
   const { data: session, status } = useSession();
@@ -15,7 +14,6 @@ const Home: React.FC = () => {
       <Header />
       <LandingContent />
       <Footer />
-      <Filter />
     </>
   );
 };
