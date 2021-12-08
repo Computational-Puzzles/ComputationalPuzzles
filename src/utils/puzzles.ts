@@ -21,7 +21,10 @@ const submitPuzzleInstance = async (
   axios.post('/api/puzzles/instances/submit', puzzleSubmissionDetails).then(
     response => {
       console.log(response.status);
-      alert(response.data.message);
+      const correctnessMessage = response.data.submission.isCorrect.at(-1)
+        ? 'Correct! Nice work!'
+        : 'Almost there! Try Again.';
+      alert(`${response.data.message} - ${correctnessMessage}`);
     },
     error => {
       // TODO: proper alerts

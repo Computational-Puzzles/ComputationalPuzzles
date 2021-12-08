@@ -3,14 +3,14 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { getSession, useSession } from 'next-auth/react';
 import { Prisma, Puzzle, PuzzleType } from '@prisma/client';
-import Button from '../../components/Global/Button';
-import PuzzleInput from '../../components/App/PuzzleInput';
-import styles from '../../styles/pages/PuzzlePage.module.scss';
-import { submitPuzzleInstance } from '../../utils/puzzles';
+import Button from '../../../components/Global/Button';
+import PuzzleInput from '../../../components/App/PuzzleInput';
+import styles from '../../../styles/pages/PuzzlePage.module.scss';
+import { submitPuzzleInstance } from '../../../utils/puzzles';
 import { User } from 'next-auth';
-import { getPuzzleInstance } from '../../services/puzzleInstance';
-import Header from '../../components/Global/Header';
-import { PuzzleInstanceCustom } from '../../types/api/puzzles/instances/puzzleInstance';
+import { getPuzzleInstance } from '../../../services/puzzleInstance';
+import Header from '../../../components/Global/Header';
+import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 
 type puzzlePageProps = {
   puzzleInstance: PuzzleInstanceCustom;

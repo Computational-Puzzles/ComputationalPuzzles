@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import {
-  checkPuzzleAnswer,
-  puzzleSubmissionProps
-} from '../../../../utils/puzzles';
+import { checkPuzzleAnswer } from '../../../../utils/puzzles';
+import type { puzzleSubmissionProps } from '../../../../types/api/puzzles/submission';
 
 const prisma = new PrismaClient();
 
@@ -80,5 +78,3 @@ const submitPuzzleHandler = async (
 };
 
 export default submitPuzzleHandler;
-
-
