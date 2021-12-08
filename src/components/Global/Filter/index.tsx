@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
 
 type FilterProps = {
-  setFilterFields: React.Dispatch<React.SetStateAction<object>>;
+  setFilterFields?: React.Dispatch<React.SetStateAction<object>>;
 };
 const Filter = ({ setFilterFields }: FilterProps) => {
   const [easyChecked, setEasyChecked] = useState(false);
   const [mediumChecked, setMediumChecked] = useState(false);
   const [hardChecked, setHardChecked] = useState(false);
+
+  useEffect(() => {
+    setFilterFields &&
+      setFilterFields({
+        easy: easyChecked,
+        medium: mediumChecked,
+        hard: hardChecked
+      });
+  }, [easyChecked, mediumChecked, hardChecked]);
 
   return (
     <div>
@@ -20,11 +29,6 @@ const Filter = ({ setFilterFields }: FilterProps) => {
           checked={easyChecked}
           onClick={() => {
             setEasyChecked(wasChecked => !wasChecked);
-            setFilterFields({
-              easy: !easyChecked,
-              medium: mediumChecked,
-              hard: hardChecked
-            });
           }}
         />
         <RadioButton
@@ -34,11 +38,6 @@ const Filter = ({ setFilterFields }: FilterProps) => {
           checked={mediumChecked}
           onClick={() => {
             setMediumChecked(wasChecked => !wasChecked);
-            setFilterFields({
-              easy: easyChecked,
-              medium: !mediumChecked,
-              hard: hardChecked
-            });
           }}
         />
         <RadioButton
@@ -48,15 +47,9 @@ const Filter = ({ setFilterFields }: FilterProps) => {
           checked={hardChecked}
           onClick={() => {
             setHardChecked(wasChecked => !wasChecked);
-            setFilterFields({
-              easy: easyChecked,
-              medium: mediumChecked,
-              hard: !hardChecked
-            });
           }}
         />
       </form>
-      {/*{console.log("e "+ easyChecked+ " / m"+ mediumChecked+" /h"+hardChecked)}*/}
     </div>
   );
 };
