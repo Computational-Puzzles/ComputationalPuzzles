@@ -18,6 +18,5 @@ export type InputProps = {
   maxLength?: number;
   minLength?: number;
   labelText?: string;
-  labelHeader?: string;
   setInputVal?: Dispatch<SetStateAction<string>>;
 };
