@@ -42,9 +42,16 @@ const getPuzzleInstanceHandler = async (
         }
       });
     }
-    return res.status(200).json({
-      puzzleInstance
-    });
+
+    if (puzzleInstance) {
+      return res.status(200).json({
+        puzzleInstance
+      });
+    } else {
+      return res.status(404).json({
+        message: `PuzzleInstance(${instanceId}) could not be found.`
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       message: error.message
