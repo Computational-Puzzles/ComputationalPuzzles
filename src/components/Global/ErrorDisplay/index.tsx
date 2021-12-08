@@ -13,8 +13,8 @@ const ErrorDisplay = ({
   return (
     <div className={styles.center}>
       <div className={styles.contentWrapper}>
-        <div className={styles.logo} onClick={ () => Router.push('/') } >
-          <Logo showMark={true} showType={true} />
+        <div className={styles.logo}>
+          <Logo showMark={true} showType={true} link={true} />
         </div>
         <div className={styles.textWrapper}>
           <p className={styles.errorCode}> Error {errorCode} </p>
