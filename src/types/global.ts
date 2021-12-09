@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
+export type DIFFICULTY = 'hard' | 'medium' | 'easy';
+
 export type HeaderProps = {
   profilePicture?: string;
 };
