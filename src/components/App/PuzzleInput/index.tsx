@@ -1,11 +1,5 @@
 import React from 'react';
-
-type PuzzleInputProps = {
-  type: 'TEXT' | 'MCQ';
-  placeholder?: string;
-  options?: string[];
-  setAnswer: (value) => void;
-};
+import { PuzzleInputProps } from '../../../types/puzzle';
 
 const PuzzleInput = ({
   type,

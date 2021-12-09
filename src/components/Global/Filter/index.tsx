@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
+import { FilterProps } from '../../../types/filter';
 
-type FilterProps = {
-  setFilterFields?: React.Dispatch<React.SetStateAction<object>>;
-};
 const Filter = ({ setFilterFields }: FilterProps) => {
   const [easyChecked, setEasyChecked] = useState(false);
   const [mediumChecked, setMediumChecked] = useState(false);
