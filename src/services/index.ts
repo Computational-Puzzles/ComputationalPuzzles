@@ -4,10 +4,4 @@ import { getAllPuzzles } from './puzzle';
 import { getPuzzleInstance } from './puzzleInstance';
 import { isAdmin } from './admin';
 
-export {
-  signUp,
-  resetPassword,
-  getAllPuzzles,
-  getPuzzleInstance,
-  isAdmin
-};
+export { signUp, resetPassword, getAllPuzzles, getPuzzleInstance, isAdmin };

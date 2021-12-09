@@ -32,8 +32,8 @@ const Admin = () => {
       return (
         <>
           <h1> ADMIN PAGE 🤓 </h1>
-          {/** TODO: Create Header for admin page  */ }
-          <div className={ styles.contentWrap }>
+          {/** TODO: Create Header for admin page  */}
+          <div className={styles.contentWrap}>
             <QRGenerator />
             <PuzzleGenerate />
           </div>
@@ -41,15 +41,17 @@ const Admin = () => {
       );
     } else {
       validAdmin === false && Router.push('/403');
-    }; // This will need adjustment since it's just a prototype
+    } // This will need adjustment since it's just a prototype
   }
 
   return (
-    status === 'unauthenticated' && <>
-      {/** TODO: Create Header for admin page  */ }
-      You are not authenticated <br />
-      <button onClick={ () => Router.push('/') }>Home</button>
-    </>
+    status === 'unauthenticated' && (
+      <>
+        {/** TODO: Create Header for admin page  */}
+        You are not authenticated <br />
+        <button onClick={() => Router.push('/')}>Home</button>
+      </>
+    )
   );
 };
 

@@ -3,9 +3,4 @@ import CardList from './CardList';
 import QRGenerator from './QRGenerator';
 import PuzzleGenerate from './PuzzleGenerate';
 
-export {
-  CardGrid,
-  CardList,
-  QRGenerator,
-  PuzzleGenerate,
-};
+export { CardGrid, CardList, QRGenerator, PuzzleGenerate };
