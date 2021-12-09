@@ -1,4 +1,5 @@
-export type DIFFICULTY = 'hard' | 'medium' | 'easy';
+import { DIFFICULTY } from './global';
+
 export type CARD_TYPE = 'list' | 'grid';
 export type CardProps = {
   title: string;

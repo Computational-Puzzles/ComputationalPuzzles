@@ -19,7 +19,9 @@ const Header = ({ profilePicture }: HeaderProps) => {
           <div className={styles.tabs}>
             <Link href={'/puzzles/map'} passHref>
               <button
-                className={router.asPath === '/puzzles/map' && styles.active}
+                className={
+                  router.asPath === '/puzzles/map' ? styles.active : ''
+                }
                 onClick={() => setActiveTab(0)}
               >
                 <span>Puzzles Map</span>
@@ -27,7 +29,7 @@ const Header = ({ profilePicture }: HeaderProps) => {
             </Link>
             <Link href={'/puzzles'} passHref>
               <button
-                className={router.asPath === '/puzzles' && styles.active}
+                className={router.asPath === '/puzzles' ? styles.active : ''}
                 onClick={() => setActiveTab(1)}
               >
                 <span>Puzzles List</span>
@@ -36,7 +38,7 @@ const Header = ({ profilePicture }: HeaderProps) => {
           </div>
         </div>
         <div className={styles.right}>
-          <Link href={'../auth/profile'}>Profile</Link>
+          <Link href={'/auth/profile'}>Profile</Link>
           {profilePicture ? (
             <Image
               className={styles.profileImg}

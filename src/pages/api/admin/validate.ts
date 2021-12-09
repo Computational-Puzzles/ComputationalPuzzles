@@ -20,8 +20,12 @@ const adminValidate = async (req: NextApiRequest, res: NextApiResponse) => {
         type: 'admin'
       }
     });
-    if (account.length > 0) {
+    if (account.length === 1) {
       res.status(200).json(user);
+    } else if (account.length > 1) {
+      res.status(500).json({
+        message: 'Multiple admin accounts found'
+      });
     } else {
       res.status(403).json(user);
     }

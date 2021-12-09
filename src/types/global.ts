@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
+export type DIFFICULTY = 'hard' | 'medium' | 'easy';
+
 export type HeaderProps = {
   profilePicture?: string;
 };
@@ -7,7 +9,7 @@ export type HeaderProps = {
 export type LogoProps = {
   showMark: boolean;
   showType: boolean;
-  link?: boolean
+  link?: boolean;
 };
 
 export type InputProps = {
@@ -18,6 +20,5 @@ export type InputProps = {
   maxLength?: number;
   minLength?: number;
   labelText?: string;
-  labelHeader?: string;
   setInputVal?: Dispatch<SetStateAction<string>>;
 };
