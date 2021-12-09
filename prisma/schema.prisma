@@ -128,7 +128,7 @@ model Submission {
   isCorrect        Boolean[]      @map(name: "is_correct")
   randomSeed       Float[]        @map(name: "random_seed")
 
-  @@unique([puzzleInstanceId, userId])
+  @@unique([puzzleInstanceId, userId], map: "puzzleInstanceId_userId")
   @@map(name: "submissions")
 }
 

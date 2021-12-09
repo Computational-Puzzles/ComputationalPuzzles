@@ -27,6 +27,7 @@ const QRGenerator = () => {
   return (
     <div className={styles.qrWrapper}>
       {/** TODO: Implement the Input component when it's merged */}
+      <h2> Create QRCode </h2>
       <input
         className={styles.input}
         type="text" // TODO: discuss about the url stuff and change this to url if needed

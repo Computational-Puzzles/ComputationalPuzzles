@@ -5,7 +5,7 @@ export const isAdmin = async (email: string) => {
   try {
     const res = await Axios.post(`api/admin/validate?email=${email}`);
     if (res.status === 200) {
-      return true;
+      return true;           
     }
   } catch (error) {
     return false;

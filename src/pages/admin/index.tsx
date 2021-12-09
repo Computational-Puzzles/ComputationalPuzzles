@@ -1,12 +1,13 @@
 import * as React from 'react';
+import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
-import { QRGenerator } from '../../components/App';
-import { isAdmin } from '../../services/admin';
+import { PuzzleGenerate, QRGenerator } from '../../components/App';
+import { isAdmin } from '../../services';
 
 const Admin = () => {
   const { data: session, status } = useSession();
-  const [validAdmin, setValidAdmin] = React.useState(false);
+  const [validAdmin, setValidAdmin] = React.useState(null);
 
   React.useEffect(() => {
     if (status === 'unauthenticated') {
@@ -19,7 +20,7 @@ const Admin = () => {
     const checkAdmin = async () => {
       setValidAdmin(await isAdmin(email));
     };
-    checkAdmin();
+    email && checkAdmin();
   }, [email]);
 
   if (status === 'loading') {
@@ -32,11 +33,14 @@ const Admin = () => {
         <>
           <h1> ADMIN PAGE 🤓 </h1>
           {/** TODO: Create Header for admin page  */ }
-          <QRGenerator />
+          <div className={ styles.contentWrap }>
+            <QRGenerator />
+            <PuzzleGenerate />
+          </div>
         </>
       );
     } else {
-      Router.push('/403');
+      validAdmin === false && Router.push('/403');
     }; // This will need adjustment since it's just a prototype
   }
 
