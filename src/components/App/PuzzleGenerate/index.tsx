@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
 import { Button } from '../../Global';
 import { getAllPuzzles } from '../../../services';
+import {createPuzzleInstance} from "../../../services/puzzleInstance";
 
 const PuzzleGenerate = () => {
   const handleSubmit = event => {
@@ -14,6 +15,7 @@ const PuzzleGenerate = () => {
     const puzzle = event.target[4].value;
 
     console.log(hint, latitude, longitude, address, puzzle);
+    createPuzzleInstance(puzzle, longitude, latitude, address, hint).then(r => console.log(r));
   };
 
   const [puzzleList, setPuzzleList] = useState([]);
@@ -38,9 +40,9 @@ const PuzzleGenerate = () => {
         <div>
           {puzzleList.length > 0 && (
             <select className={styles.selections}>
-              <optgroup label="Choose a puzzle from the                                                        puzzles below">
+              <optgroup label="Choose a puzzle from the puzzles below">
                 {puzzleList.map((puzzle, index) => (
-                  <option value={puzzle.name} key={`puzzle${index}`}>
+                  <option value={puzzle.id} key={`puzzle${index}`}>
                     {puzzle.name}
                   </option>
                 ))}
