@@ -2,8 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
 import { Button } from '../../Global';
-import { getAllPuzzles } from '../../../services';
-import {createPuzzleInstance} from "../../../services/puzzleInstance";
+import { getAllPuzzles, createPuzzleInstance } from '../../../services';
 
 const PuzzleGenerate = () => {
   const handleSubmit = event => {
@@ -15,7 +14,9 @@ const PuzzleGenerate = () => {
     const puzzle = event.target[4].value;
 
     console.log(hint, latitude, longitude, address, puzzle);
-    createPuzzleInstance(puzzle, longitude, latitude, address, hint).then(r => console.log(r));
+    createPuzzleInstance(puzzle, longitude, latitude, address, hint).then(puzzleInstance =>
+      console.log(puzzleInstance)
+    );
   };
 
   const [puzzleList, setPuzzleList] = useState([]);
@@ -51,7 +52,6 @@ const PuzzleGenerate = () => {
           )}
         </div>
         <div>
-          {/* <input type='submit' value='Submit' /> */}
           <Button
             style="primary"
             type="submit"

@@ -1,5 +1,5 @@
 import Axios from './axios';
-import {PuzzleInstance} from "@prisma/client";
+import { PuzzleInstance } from '@prisma/client';
 
 const getPuzzleInstance = async (
   puzzleInstanceId: number,
@@ -53,10 +53,10 @@ const createPuzzleInstance = async (
       return res.data;
     }
   } catch (error) {
-      return {
-        name: '500',
-        message: error.response.data.message
-      } as Error;
+    return {
+      name: '500',
+      message: error.response.data.message
+    } as Error;
   }
 };
 

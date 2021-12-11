@@ -23,10 +23,11 @@ const createPuzzleHandler = async (
   });
 
   if (!puzzle) {
-    return res.status(400).json({
+    return res.status(404).json({
       message: 'Puzzle not found.'
     });
   }
+
   const puzzleInstance = await prisma.puzzleInstance.create({
     data: {
       puzzleId: +puzzleId,

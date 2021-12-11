@@ -8,7 +8,7 @@ import PuzzleInput from '../../../components/App/PuzzleInput';
 import styles from '../../../styles/pages/PuzzlePage.module.scss';
 import { submitPuzzleInstance } from '../../../utils/puzzles';
 import { User } from 'next-auth';
-import { getPuzzleInstance } from '../../../services/puzzleInstance';
+import { getPuzzleInstance } from '../../../services';
 import Header from '../../../components/Global/Header';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 
@@ -122,7 +122,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
           destination: '/500',
           permanent: false
         }
-      }
+      };
     }
   }
 
