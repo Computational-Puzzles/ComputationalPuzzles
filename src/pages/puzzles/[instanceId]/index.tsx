@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { getSession, useSession } from 'next-auth/react';
-import { Prisma, Puzzle, PuzzleType } from '@prisma/client';
+import { Prisma, Puzzle, PuzzleType, Submission } from '@prisma/client';
 import Button from '../../../components/Global/Button';
 import PuzzleInput from '../../../components/App/PuzzleInput';
 import styles from '../../../styles/pages/PuzzlePage.module.scss';
-import { submitPuzzleInstance } from '../../../utils/puzzles';
 import { User } from 'next-auth';
-import { getPuzzleInstance } from '../../../services/puzzleInstance';
+import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
 import Header from '../../../components/Global/Header';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 
@@ -24,6 +23,41 @@ const PuzzlePage = ({ puzzleInstance }: puzzlePageProps) => {
   const [answer, setAnswer] = useState('');
   const { data: session, status } = useSession();
   const user = session?.user as User;
+
+  const handleSubmit = async (
+    answer,
+    puzzleInstance,
+    puzzle,
+    randomSeed,
+    user
+  ) => {
+    // check if logged in
+    const isLoggedIn = true;
+    if (isLoggedIn) {
+      const submission = await submitPuzzleInstance(
+        answer,
+        puzzleInstance,
+        puzzle,
+        randomSeed,
+        user
+      );
+
+      if ((submission as Error).message) {
+        // TODO: handle errors from submitting
+        alert(submission.message);
+      }
+
+      if ((submission as Submission).isCorrect) {
+        const correctnessMessage = submission.isCorrect.at(-1)
+          ? 'Correct! Nice work!'
+          : 'Almost there! Try Again.';
+        alert(`${correctnessMessage}`);
+      }
+    } else {
+      alert('You must be logged in to submit puzzles!');
+      // TODO: should be an alert dialog w/ link to login page
+    }
+  };
 
   return (
     <>
@@ -88,13 +122,7 @@ const PuzzlePage = ({ puzzleInstance }: puzzlePageProps) => {
             type={'submit'}
             content={'Submit'}
             onClick={() =>
-              submitPuzzleInstance(
-                answer,
-                puzzleInstance,
-                puzzle,
-                randomSeed,
-                user
-              )
+              handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
             }
           />
         </section>
@@ -122,7 +150,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
           destination: '/500',
           permanent: false
         }
-      }
+      };
     }
   }
 
