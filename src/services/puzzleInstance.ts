@@ -14,16 +14,16 @@ const getPuzzleInstance = async (
       return res.data.puzzleInstance;
     }
   } catch (error) {
-    if(error.response.status === 404) {
+    if (error.response.status === 404) {
       return {
         name: '404',
-        message: error.response.data.message,
-      } as Error
+        message: error.response.data.message
+      } as Error;
     } else {
       return {
         name: '500',
-        message: error.response.data.message,
-      } as Error
+        message: error.response.data.message
+      } as Error;
     }
   }
 };
