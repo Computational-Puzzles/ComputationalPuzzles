@@ -16,7 +16,7 @@ const Input = ({
 
   useEffect(() => {
     setInputVal && setInputVal(input);
-  }, [input]);
+  }, [input, setInputVal]);
   return (
     <>
       <div className={styles.container}>
