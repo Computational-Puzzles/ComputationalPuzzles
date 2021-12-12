@@ -12,7 +12,6 @@ const SignUpPage = () => {
   const [repeatPw, setRepeatPw] = useState('');
   const passwordMinLength = 8;
 
-  console.log('session ', session);
   const handleSignUp = event => {
     if (password !== repeatPw) {
       alert(
@@ -53,7 +52,7 @@ const SignUpPage = () => {
               id={'password'}
               required={true}
               minLength={passwordMinLength}
-              placeholder={'password'}
+              placeholder={'Password'}
               setInputVal={setPassword}
             />
             <Input
@@ -61,7 +60,7 @@ const SignUpPage = () => {
               id={'repeatPassword'}
               required={true}
               minLength={passwordMinLength}
-              placeholder={'repeat password'}
+              placeholder={'Repeat Password'}
               setInputVal={setRepeatPw}
             />
           </div>
