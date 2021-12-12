@@ -14,6 +14,9 @@ const PuzzleGenerate = () => {
 
   const handleSubmit = () => {
     console.log(hint, latitude, longitude, address, puzzle);
+    createPuzzleInstance(puzzle, longitude, latitude, address, hint).then(puzzleInstance =>
+      console.log(puzzleInstance)
+    );
   };
 
   useEffect(() => {

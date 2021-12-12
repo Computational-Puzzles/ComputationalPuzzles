@@ -1,4 +1,5 @@
 import Axios from './axios';
+import { PuzzleInstance } from '@prisma/client';
 
 const getPuzzleInstance = async (
   puzzleInstanceId: number,
@@ -14,9 +15,49 @@ const getPuzzleInstance = async (
       return res.data.puzzleInstance;
     }
   } catch (error) {
-    return null;
+    if (error.response.status === 404) {
+      return {
+        name: '404',
+        message: error.response.data.message
+      } as Error;
+    } else {
+      return {
+        name: '500',
+        message: error.response.data.message
+      } as Error;
+    }
   }
-  return null;
 };
 
-export { getPuzzleInstance };
+const createPuzzleInstance = async (
+  puzzleId: number,
+  longitude: number,
+  latitude: number,
+  address: string,
+  hint?: string
+) => {
+  const createPuzzleInstanceData = {
+    puzzleId,
+    longitude,
+    latitude,
+    address,
+    hint
+  } as PuzzleInstance;
+
+  try {
+    const res = await Axios.post(
+      `api/puzzles/instances/create`,
+      createPuzzleInstanceData
+    );
+    if (res.status === 200) {
+      return res.data;
+    }
+  } catch (error) {
+    return {
+      name: '500',
+      message: error.response.data.message
+    } as Error;
+  }
+};
+
+export { getPuzzleInstance, createPuzzleInstance };

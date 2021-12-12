@@ -8,7 +8,7 @@ import PuzzleInput from '../../../components/App/PuzzleInput';
 import styles from '../../../styles/pages/PuzzlePage.module.scss';
 import { submitPuzzleInstance } from '../../../utils/puzzles';
 import { User } from 'next-auth';
-import { getPuzzleInstance } from '../../../services/puzzleInstance';
+import { getPuzzleInstance } from '../../../services';
 import Header from '../../../components/Global/Header';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 
@@ -107,10 +107,24 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getSession(context);
   const id = +context.query.instanceId;
 
-  const puzzleInstance: PuzzleInstanceCustom = await getPuzzleInstance(
+  const puzzleInstance: PuzzleInstanceCustom | Error = await getPuzzleInstance(
     id,
     true
   );
+
+  if ((puzzleInstance as Error).message) {
+    const error = puzzleInstance as Error;
+    if (error.name === '404') {
+      return { notFound: true };
+    } else {
+      return {
+        redirect: {
+          destination: '/500',
+          permanent: false
+        }
+      };
+    }
+  }
 
   return {
     props: { puzzleInstance, session }
