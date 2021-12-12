@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   getProviders,
   signIn,
@@ -15,9 +14,9 @@ export default function LoginPage({ providers, csrfToken }) {
   const passwordMinLength = 8;
   const { error } = useRouter().query;
 
-  console.log(session);
   const loginWithGoogle = event => {
     signIn('google');
+    // TODO: save session into db
   };
   return (
     <>
@@ -27,21 +26,37 @@ export default function LoginPage({ providers, csrfToken }) {
       <div className={styles.mainSec}>
         <h2 className={styles.title}>Login</h2>
         {error && <SignInError error={error} />}
-        <form method="post" action="/api/auth/callback/credentials">
+        <form method="post" action="/api/auth/callback/credentials"> {/*TODO: save session into db*/}
           <div className={styles.inputContainer}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-            <Input type={'email'} id={'email'} required={true} placeholder={'Email'}/>
-            <Input type={'password'} id={'password'} required={true} minLength={passwordMinLength} placeholder={'Password'}/>
+            <Input
+              type={'email'}
+              id={'email'}
+              required={true}
+              placeholder={'Email'}
+            />
+            <Input
+              type={'password'}
+              id={'password'}
+              required={true}
+              minLength={passwordMinLength}
+              placeholder={'Password'}
+            />
           </div>
           <p className={styles.link}>
             <a href={'/auth/signup'}>Do not have an account?</a>
           </p>
           <div className={styles.container}>
-            <button type="submit" className={styles.button}> Sign in with Credentials</button>
             <button
-                type={'button'}
-                className={styles.button}
-                onClick={() => loginWithGoogle(event)}
+              type='submit'
+              className={styles.button}
+            >
+              Sign in with Credentials
+            </button>
+            <button
+              type='button'
+              className={styles.button}
+              onClick={() => loginWithGoogle(event)}
             >
               Sign in with Google
             </button>
@@ -71,7 +86,6 @@ const SignInError = ({ error }) => {
   return <div>{errorMessage}</div>;
 };
 
-// This is the recommended way for Next.js 9.3 or newer
 export async function getServerSideProps(context) {
   //const {req, res} = context;
   const session = await getSession(context);
@@ -84,7 +98,6 @@ export async function getServerSideProps(context) {
     };
   }
   return {
-    // session: undefined,
     props: {
       providers: await getProviders(),
       csrfToken: await getCsrfToken(context)
