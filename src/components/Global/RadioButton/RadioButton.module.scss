@@ -9,10 +9,10 @@
   width: 0;
 }
 .normal {
-  @include font-regular;
+  @include font-button;
   display: inline-block;
   padding: 0.625rem 1.25rem;
-  margin: 0.625rem 1.25rem;
+  margin: 0;
   border: 0.125rem solid;
   border-radius: 0.625rem;
   text-align: center;

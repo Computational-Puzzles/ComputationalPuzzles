@@ -1,60 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
-import { Button, Input } from '../index';
+import { FilterProps } from '../../../types/filter';
 
-const Filter = () => {
+const Filter = ({ setFilterFields }: FilterProps) => {
   const [easyChecked, setEasyChecked] = useState(false);
   const [mediumChecked, setMediumChecked] = useState(false);
   const [hardChecked, setHardChecked] = useState(false);
-  const [searchVal, setSearchVal] = useState('');
+
+  useEffect(() => {
+    setFilterFields &&
+      setFilterFields({
+        easy: easyChecked,
+        medium: mediumChecked,
+        hard: hardChecked
+      });
+  }, [easyChecked, mediumChecked, hardChecked]);
 
   return (
     <div>
       <form className={styles.filter}>
-        <Input
-          type={'text'}
-          id={'search'}
-          placeholder={'Search'}
-          required={false}
-          setInputVal={setSearchVal}
-        />
         <RadioButton
           id={'radioEasy'}
           name={'filter'}
           difficulty={'easy'}
           checked={easyChecked}
-          setChecked={setEasyChecked}
+          onClick={() => {
+            setEasyChecked(wasChecked => !wasChecked);
+          }}
         />
         <RadioButton
           id={'radioMedium'}
           name={'filter'}
           difficulty={'medium'}
           checked={mediumChecked}
-          setChecked={setMediumChecked}
+          onClick={() => {
+            setMediumChecked(wasChecked => !wasChecked);
+          }}
         />
         <RadioButton
           id={'radioHard'}
           name={'filter'}
           difficulty={'hard'}
           checked={hardChecked}
-          setChecked={setHardChecked}
+          onClick={() => {
+            setHardChecked(wasChecked => !wasChecked);
+          }}
         />
       </form>
-      <Button
-        style={'outline'}
-        content={'Search'}
-        onClick={() => {
-          alert(
-            'easy ' +
-              easyChecked +
-              '//med ' +
-              mediumChecked +
-              '//hard ' +
-              hardChecked
-          );
-        }}
-      />
     </div>
   );
 };

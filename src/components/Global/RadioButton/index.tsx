@@ -1,15 +1,8 @@
 import React from 'react';
 import styles from './RadioButton.module.scss';
+import { RadioButtonProps } from '../../../types/radioButton';
+import { DIFFICULTY } from '../../../types/global';
 
-type DIFFICULTY = 'easy' | 'medium' | 'hard';
-
-type RadioButtonProps = {
-  id: string;
-  name: string;
-  difficulty: DIFFICULTY;
-  checked: boolean;
-  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
-};
 const getLabelColor = (difficulty: DIFFICULTY, isChecked: boolean) => {
   if (difficulty === 'easy')
     return isChecked ? styles.easyChecked + ' ' + styles.easy : styles.easy;
@@ -26,7 +19,7 @@ const RadioButton = ({
   name,
   difficulty,
   checked,
-  setChecked
+  onClick
 }: RadioButtonProps) => {
   return (
     <div className="radio">
@@ -36,9 +29,7 @@ const RadioButton = ({
         id={id}
         name={name}
         value={difficulty}
-        onClick={() => {
-          setChecked(wasChecked => !wasChecked);
-        }}
+        onClick={onClick}
       />
       <label className={`${getLabelColor(difficulty, checked)}`} htmlFor={id}>
         {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}

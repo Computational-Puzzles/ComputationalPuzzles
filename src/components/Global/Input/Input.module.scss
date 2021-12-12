@@ -1,6 +1,14 @@
 @import 'src/styles/abstracts/_mixins/text';
 @import 'src/styles/abstracts/_variables';
 
+.container {
+  display: flex;
+  align-items: center;
+}
+.label {
+  box-sizing: border-box;
+  margin: 0 0.5rem;
+}
 .input {
   @include font-button;
   color: $black;
@@ -10,4 +18,5 @@
   border: 2px solid #4b4b4b;
   box-sizing: border-box;
   border-radius: 999px;
+  flex: 1;
 }
