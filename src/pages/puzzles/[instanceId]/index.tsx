@@ -122,7 +122,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
           destination: '/500',
           permanent: false
         }
-      }
+      };
     }
   }
 

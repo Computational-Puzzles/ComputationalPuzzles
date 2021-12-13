@@ -1,5 +1,4 @@
 @import 'src/styles/abstracts/_variables';
-@import 'src/styles/abstracts/_mixins/text';
 
 .logoLogin {
   margin: 0 auto;
@@ -13,19 +12,18 @@
   font-size: 2.3rem;
   text-align: center;
 }
+.inputContainer {
+  height: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .link {
   font-size: 0.8rem;
   margin: 0.9rem 0 1.2rem 0;
   padding: 0;
   box-sizing: border-box;
 }
-.inputContainer {
-  height: 6.2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .button {
   width: 100%;
   background-color: $primary;
@@ -36,10 +34,4 @@
   border-radius: 0.5rem;
   cursor: pointer;
   margin: 0.3rem 0.1rem;
-}
-.container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  font-size: 0.75rem;
 }

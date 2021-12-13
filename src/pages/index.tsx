@@ -8,7 +8,6 @@ const Home: React.FC = () => {
   if (status === 'authenticated') {
     // Then redirect the user to the app pages
   }
-
   return (
     <>
       <Header />
