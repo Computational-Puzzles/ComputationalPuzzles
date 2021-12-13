@@ -87,7 +87,6 @@ const SignInError = ({ error }) => {
 };
 
 export async function getServerSideProps(context) {
-  //const {req, res} = context;
   const session = await getSession(context);
   if (session) {
     return {
@@ -104,16 +103,3 @@ export async function getServerSideProps(context) {
     }
   };
 }
-
-/*
-read files:
-node_modules\next-auth\react\index.d.ts
-    -getSession:
-    -getCsrfToken
-    -getProviders
-    -signIn
-    -signOut
-    -SessionProvider
-node_modules\next-auth\providers\index.d.ts
-    -provider (type defined)
-*/
