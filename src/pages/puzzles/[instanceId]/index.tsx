@@ -5,13 +5,12 @@ import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
 import { Prisma, Puzzle } from '@prisma/client';
 import { Button, Header } from '../../../components/Global';
-import { PuzzleInput } from '../../../components/App';
+import { PuzzleInput, FeedbackGif } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 import styles from '../../../styles/pages/PuzzlePage.module.scss';
 import { HandledError } from '../../../types/error';
 import { initializeRandomGifSrc } from '../../../services/feedbackGif';
-import FeedbackGif from '../../../components/App/FeedbackGif';
 import { FeedbackGifList } from '../../../types/feedbackGif';
 import { getRandomGifSrc } from '../../../utils/feedbackGif';
 
