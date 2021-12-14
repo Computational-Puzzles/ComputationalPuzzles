@@ -39,7 +39,7 @@ const submitPuzzleInstance = async (
   } as puzzleSubmissionProps;
 
   try {
-    const res = await axios.post(
+    const res = await Axios.post(
       '/api/puzzles/instances/submit',
       puzzleSubmissionDetails
     );
