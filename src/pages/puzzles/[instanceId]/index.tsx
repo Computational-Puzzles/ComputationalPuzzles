@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
-import { Prisma, Puzzle, PuzzleType, Submission } from '@prisma/client';
+import { Prisma, Puzzle, Submission } from '@prisma/client';
 import { Button, Header } from '../../../components/Global';
 import { PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
@@ -17,12 +17,11 @@ const PuzzlePage = ({
   puzzleInstance: PuzzleInstanceCustom;
 }) => {
   const puzzle = puzzleInstance.puzzle as Puzzle & Prisma.PuzzleInclude;
-  const puzzleType = puzzleInstance.puzzle.puzzleType as PuzzleType;
   const randomSeed = Math.random();
-
   const [answer, setAnswer] = useState('');
   const { data: session, status } = useSession();
   const user = session?.user as User;
+  const isAuthenticated = status === 'authenticated';
 
   const handleSubmit = async (
     answer,
@@ -31,7 +30,7 @@ const PuzzlePage = ({
     randomSeed,
     user
   ) => {
-    if (status === 'authenticated') {
+    if (isAuthenticated) {
       const submission = await submitPuzzleInstance(
         answer,
         puzzleInstance,
@@ -114,14 +113,22 @@ const PuzzlePage = ({
             options={puzzle.variables['options']}
             setAnswer={setAnswer}
           />
-          <Button
-            style={'primary'}
-            type={'submit'}
-            content={'Submit'}
-            onClick={() =>
-              handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
-            }
-          />
+          {isAuthenticated ? (
+            <Button
+              style={'primary'}
+              type={'submit'}
+              content={'Submit'}
+              onClick={() =>
+                handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
+              }
+            />
+          ) : (
+            <Button
+              style={'primary'}
+              content={'Login to Submit'}
+              onClick={() => signIn()}
+            />
+          )}
         </section>
       </main>
     </>
