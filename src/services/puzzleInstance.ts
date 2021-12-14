@@ -3,6 +3,7 @@ import { Puzzle, PuzzleInstance } from '@prisma/client';
 import { User } from 'next-auth';
 import { puzzleSubmissionProps } from '../types/api/puzzles/submission';
 import axios from 'axios';
+import {handleServiceError} from "../utils/error";
 
 const getPuzzleInstance = async (
   puzzleInstanceId: number,
@@ -18,7 +19,7 @@ const getPuzzleInstance = async (
       return res.data.puzzleInstance;
     }
   } catch (error) {
-    return handleError(error.response.status, error.response.data.message);
+    return handleServiceError(error.response.status, error.response.data.message);
   }
 };
 
@@ -46,21 +47,7 @@ const submitPuzzleInstance = async (
       return res.data.submission;
     }
   } catch (error) {
-    return handleError(error.response.status, error.response.data.message);
-  }
-};
-
-const handleError = (status, message) => {
-  if (status === 404) {
-    return {
-      name: '404',
-      message: message || 'Not Found.'
-    } as Error;
-  } else {
-    return {
-      name: '500',
-      message: message || 'Server Error.'
-    } as Error;
+    return handleServiceError(error.response.status, error.response.data.message);
   }
 };
 
