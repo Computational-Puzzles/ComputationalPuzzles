@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Filter, Input } from '../index';
 import styles from './SearchAndFilter.module.scss';
-
-type SearchAndFilterProps = {
-  setSearchNFilterVal?: React.Dispatch<React.SetStateAction<object>>;
-};
+import {SearchAndFilterProps} from '../../../types/searchAndFilter'
 
 const SearchAndFilter = ({ setSearchNFilterVal }: SearchAndFilterProps) => {
   const [searchText, setSearchText] = useState('');
