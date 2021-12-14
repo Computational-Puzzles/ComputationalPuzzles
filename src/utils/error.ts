@@ -22,4 +22,4 @@ const handleServiceError = (status, message?) => {
   }
 };
 
-export {handleServiceError};
+export { handleServiceError };

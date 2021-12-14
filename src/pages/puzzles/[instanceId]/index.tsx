@@ -9,10 +9,13 @@ import { PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 import styles from '../../../styles/pages/PuzzlePage.module.scss';
-import {HandledError} from "../../../types/error";
+import { HandledError } from '../../../types/error';
 
-
-const PuzzlePage = ({puzzleInstance}: {puzzleInstance: PuzzleInstanceCustom}) => {
+const PuzzlePage = ({
+  puzzleInstance
+}: {
+  puzzleInstance: PuzzleInstanceCustom;
+}) => {
   const puzzle = puzzleInstance.puzzle as Puzzle & Prisma.PuzzleInclude;
   const puzzleType = puzzleInstance.puzzle.puzzleType as PuzzleType;
   const randomSeed = Math.random();
