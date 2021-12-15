@@ -6,5 +6,16 @@ import Input from './Input';
 import Header from './Header';
 import Card from './Card';
 import ErrorDisplay from './ErrorDisplay';
+import LogStatusButton from './LogStatusButton';
 
-export { Button, Card, Header, Logo, Input, RadioButton, Filter, ErrorDisplay };
+export {
+  Button,
+  Card,
+  Header,
+  Logo,
+  Input,
+  RadioButton,
+  Filter,
+  ErrorDisplay,
+  LogStatusButton
+};

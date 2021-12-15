@@ -1,29 +1,60 @@
 import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
-import { getSession, useSession } from 'next-auth/react';
-import { Prisma, Puzzle, PuzzleType } from '@prisma/client';
-import Button from '../../../components/Global/Button';
-import PuzzleInput from '../../../components/App/PuzzleInput';
-import styles from '../../../styles/pages/PuzzlePage.module.scss';
-import { submitPuzzleInstance } from '../../../utils/puzzles';
+import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
-import { getPuzzleInstance } from '../../../services';
-import Header from '../../../components/Global/Header';
+import { Prisma, Puzzle, Submission } from '@prisma/client';
+import { Button, Header } from '../../../components/Global';
+import { PuzzleInput } from '../../../components/App';
+import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
+import styles from '../../../styles/pages/PuzzlePage.module.scss';
+import { HandledError } from '../../../types/error';
 
-type puzzlePageProps = {
+const PuzzlePage = ({
+  puzzleInstance
+}: {
   puzzleInstance: PuzzleInstanceCustom;
-};
-
-const PuzzlePage = ({ puzzleInstance }: puzzlePageProps) => {
+}) => {
   const puzzle = puzzleInstance.puzzle as Puzzle & Prisma.PuzzleInclude;
-  const puzzleType = puzzleInstance.puzzle.puzzleType as PuzzleType;
   const randomSeed = Math.random();
-
   const [answer, setAnswer] = useState('');
   const { data: session, status } = useSession();
   const user = session?.user as User;
+  const isAuthenticated = status === 'authenticated';
+
+  const handleSubmit = async (
+    answer,
+    puzzleInstance,
+    puzzle,
+    randomSeed,
+    user
+  ) => {
+    if (isAuthenticated) {
+      const submission = await submitPuzzleInstance(
+        answer,
+        puzzleInstance,
+        puzzle,
+        randomSeed,
+        user
+      );
+
+      if ((submission as HandledError).error) {
+        // TODO: handle errors from submitting
+        alert(submission.message);
+      }
+
+      if ((submission as Submission).isCorrect) {
+        const correctnessMessage = submission.isCorrect.at(-1)
+          ? 'Correct! Nice work!'
+          : 'Almost there! Try Again.';
+        alert(`${correctnessMessage}`);
+      }
+    } else {
+      alert('You must be logged in to submit puzzles!');
+      // TODO: should be an alert dialog w/ link to login page
+    }
+  };
 
   return (
     <>
@@ -82,21 +113,22 @@ const PuzzlePage = ({ puzzleInstance }: puzzlePageProps) => {
             options={puzzle.variables['options']}
             setAnswer={setAnswer}
           />
-          {/* TODO: lock submission button unless logged in */}
-          <Button
-            style={'primary'}
-            type={'submit'}
-            content={'Submit'}
-            onClick={() =>
-              submitPuzzleInstance(
-                answer,
-                puzzleInstance,
-                puzzle,
-                randomSeed,
-                user
-              )
-            }
-          />
+          {isAuthenticated ? (
+            <Button
+              style={'primary'}
+              type={'submit'}
+              content={'Submit'}
+              onClick={() =>
+                handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
+              }
+            />
+          ) : (
+            <Button
+              style={'primary'}
+              content={'Login to Submit'}
+              onClick={() => signIn()}
+            />
+          )}
         </section>
       </main>
     </>
@@ -112,8 +144,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     true
   );
 
-  if ((puzzleInstance as Error).message) {
-    const error = puzzleInstance as Error;
+  if ((puzzleInstance as HandledError).error) {
+    const error = puzzleInstance as HandledError;
     if (error.name === '404') {
       return { notFound: true };
     } else {
