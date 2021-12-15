@@ -4,4 +4,11 @@ import { getAllPuzzles } from './puzzle';
 import { getPuzzleInstance, createPuzzleInstance } from './puzzleInstance';
 import { isAdmin } from './admin';
 
-export { signUp, resetPassword, getAllPuzzles, getPuzzleInstance, createPuzzleInstance, isAdmin };
+export {
+  signUp,
+  resetPassword,
+  getAllPuzzles,
+  getPuzzleInstance,
+  createPuzzleInstance,
+  isAdmin
+};

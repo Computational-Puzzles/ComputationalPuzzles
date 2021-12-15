@@ -14,9 +14,13 @@ const PuzzleGenerate = () => {
 
   const handleSubmit = () => {
     console.log(hint, latitude, longitude, address, puzzleId);
-    createPuzzleInstance(parseInt(puzzleId), parseInt(longitude), parseInt(latitude), address, hint).then(puzzleInstance =>
-      console.log(puzzleInstance)
-    );
+    createPuzzleInstance(
+      parseInt(puzzleId),
+      parseInt(longitude),
+      parseInt(latitude),
+      address,
+      hint
+    ).then(puzzleInstance => console.log(puzzleInstance));
   };
 
   useEffect(() => {
@@ -30,35 +34,63 @@ const PuzzleGenerate = () => {
 
   return (
     <>
-      <div className={ styles.form }>
+      <div className={styles.form}>
         <h2> Make a puzzle instance </h2>
-        <Input type='text' id='puzzleHint' required={ true } placeholder='Hint' setInputVal={ setHint } />
-        <div className={ styles.puzzleLocation }>
-          <Input type='text' id='puzzleLatitude' required={ true } placeholder='Latitude' setInputVal={ setLatitude } />
-          <Input type='text' id='puzzleLongitude' required={ true } placeholder='Longitude' setInputVal={ setLongitude } />
-          <Input type='text' id='puzzleAddress' required={ true } placeholder='Address' setInputVal={ setAddress } />
+        <Input
+          type="text"
+          id="puzzleHint"
+          required={true}
+          placeholder="Hint"
+          setInputVal={setHint}
+        />
+        <div className={styles.puzzleLocation}>
+          <Input
+            type="text"
+            id="puzzleLatitude"
+            required={true}
+            placeholder="Latitude"
+            setInputVal={setLatitude}
+          />
+          <Input
+            type="text"
+            id="puzzleLongitude"
+            required={true}
+            placeholder="Longitude"
+            setInputVal={setLongitude}
+          />
+          <Input
+            type="text"
+            id="puzzleAddress"
+            required={true}
+            placeholder="Address"
+            setInputVal={setAddress}
+          />
         </div>
         <div>
-          { puzzleList.length > 0 && (
-            <select className={ styles.selections } value={ puzzleId } onChange={ (e) => setPuzzleId(e.currentTarget.value) } >
+          {puzzleList.length > 0 && (
+            <select
+              className={styles.selections}
+              value={puzzleId}
+              onChange={e => setPuzzleId(e.currentTarget.value)}
+            >
               <optgroup label="Choose a puzzle from the puzzles below">
-                { puzzleList.map((puzzle, index) => (
-                  <option value={ puzzle.id } key={ `puzzle${index}` }>
-                    { puzzle.name }
+                {puzzleList.map((puzzle, index) => (
+                  <option value={puzzle.id} key={`puzzle${index}`}>
+                    {puzzle.name}
                   </option>
-                )) }
+                ))}
               </optgroup>
             </select>
-          ) }
+          )}
         </div>
         <div>
           <Button
             style="primary"
             type="submit"
             size="sm"
-            content={ 'Submit' }
+            content={'Submit'}
             arrowDirection="right"
-            onClick={ () => handleSubmit() }
+            onClick={() => handleSubmit()}
           />
         </div>
       </div>
