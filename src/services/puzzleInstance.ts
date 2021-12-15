@@ -1,4 +1,8 @@
 import Axios from './axios';
+import { Puzzle, PuzzleInstance } from '@prisma/client';
+import { User } from 'next-auth';
+import { puzzleSubmissionProps } from '../types/api/puzzles/submission';
+import { handleServiceError } from '../utils/error';
 
 const getPuzzleInstance = async (
   puzzleInstanceId: number,
@@ -14,18 +18,42 @@ const getPuzzleInstance = async (
       return res.data.puzzleInstance;
     }
   } catch (error) {
-    if (error.response.status === 404) {
-      return {
-        name: '404',
-        message: error.response.data.message
-      } as Error;
-    } else {
-      return {
-        name: '500',
-        message: error.response.data.message
-      } as Error;
-    }
+    return handleServiceError(
+      error.response.status,
+      error.response.data.message
+    );
   }
 };
 
-export { getPuzzleInstance };
+const submitPuzzleInstance = async (
+  answer: string,
+  puzzleInstance: PuzzleInstance,
+  puzzle: Puzzle,
+  randomSeed: number,
+  user: User
+) => {
+  const puzzleSubmissionDetails = {
+    answer: answer,
+    puzzleInstanceId: puzzleInstance.id,
+    puzzleId: puzzle.id,
+    randomSeed: randomSeed,
+    userEmail: user.email
+  } as puzzleSubmissionProps;
+
+  try {
+    const res = await Axios.post(
+      '/api/puzzles/instances/submit',
+      puzzleSubmissionDetails
+    );
+    if (res.status === 200) {
+      return res.data.submission;
+    }
+  } catch (error) {
+    return handleServiceError(
+      error.response.status,
+      error.response.data.message
+    );
+  }
+};
+
+export { getPuzzleInstance, submitPuzzleInstance };

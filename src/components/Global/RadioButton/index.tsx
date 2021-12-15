@@ -7,7 +7,9 @@ const getLabelColor = (difficulty: DIFFICULTY, isChecked: boolean) => {
   if (difficulty === 'easy')
     return isChecked ? styles.easyChecked + ' ' + styles.easy : styles.easy;
   if (difficulty === 'medium')
-    return isChecked ? styles.mediumChecked + ' ' + styles.medium : styles.medium;
+    return isChecked
+      ? styles.mediumChecked + ' ' + styles.medium
+      : styles.medium;
   if (difficulty === 'hard')
     return isChecked ? styles.hardChecked + ' ' + styles.hard : styles.hard;
 };
