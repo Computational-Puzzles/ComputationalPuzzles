@@ -1,8 +1,8 @@
 .container {
   display: flex;
   justify-content: space-between;
+  gap: 0.5rem;
 }
-
 .input {
-  width: 26.75rem;
+  flex: 1;
 }
