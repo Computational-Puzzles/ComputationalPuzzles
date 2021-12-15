@@ -6,7 +6,6 @@ const requireEnv = [
   'NEXT_PUBLIC_BASE_URL',
 ];
 
-
 requireEnv.forEach(env => {
   if (this) return; // check if this has already loaded
   if (!process.env[env]) {
