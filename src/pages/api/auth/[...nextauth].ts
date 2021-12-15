@@ -59,7 +59,11 @@ const Auth = NextAuth({
       clientId: google.clientId,
       clientSecret: google.clientSecret
     })
-  ]
+  ],
+  pages: {
+    signIn: '/auth/login',
+    error: '/auth/login'
+  }
 });
 
 export default Auth;
