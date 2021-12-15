@@ -25,6 +25,37 @@ const getPuzzleInstance = async (
   }
 };
 
+const createPuzzleInstance = async (
+  puzzleId: number,
+  longitude: number,
+  latitude: number,
+  address: string,
+  hint?: string
+) => {
+  const createPuzzleInstanceData = {
+    puzzleId,
+    longitude,
+    latitude,
+    address,
+    hint
+  } as PuzzleInstance;
+
+  try {
+    const res = await Axios.post(
+      `api/puzzles/instances/create`,
+      createPuzzleInstanceData
+    );
+    if (res.status === 200) {
+      return res.data;
+    }
+  } catch (error) {
+    return handleServiceError(
+      error.response.status,
+      error.response.data.message
+    );
+  }
+};
+
 const submitPuzzleInstance = async (
   answer: string,
   puzzleInstance: PuzzleInstance,
@@ -56,4 +87,4 @@ const submitPuzzleInstance = async (
   }
 };
 
-export { getPuzzleInstance, submitPuzzleInstance };
+export { getPuzzleInstance, createPuzzleInstance, submitPuzzleInstance };
