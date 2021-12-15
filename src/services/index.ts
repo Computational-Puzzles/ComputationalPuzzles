@@ -1,7 +1,11 @@
 import { signUp } from './signup';
 import { resetPassword } from './resetPassword';
 import { getAllPuzzles } from './puzzle';
-import { getPuzzleInstance, submitPuzzleInstance } from './puzzleInstance';
+import {
+  getPuzzleInstance,
+  createPuzzleInstance,
+  submitPuzzleInstance
+} from './puzzleInstance';
 import { isAdmin } from './admin';
 
 export {
@@ -9,6 +13,7 @@ export {
   resetPassword,
   getAllPuzzles,
   getPuzzleInstance,
+  createPuzzleInstance,
   submitPuzzleInstance,
   isAdmin
 };

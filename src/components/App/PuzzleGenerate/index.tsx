@@ -2,32 +2,34 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
 import { Button, Input } from '../../Global';
+import { QRGenerator } from '..';
 import { createPuzzleInstance, getAllPuzzles } from '../../../services';
 
 const PuzzleGenerate = () => {
   const [puzzleList, setPuzzleList] = useState([]);
   const [hint, setHint] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
   const [address, setAddress] = useState('');
   const [puzzleId, setPuzzleId] = useState('');
+  const [puzzleInstanceData, setPuzzleInstanceData] = useState();
 
   const handleSubmit = () => {
-    console.log(hint, latitude, longitude, address, puzzleId);
-    createPuzzleInstance(
-      parseInt(puzzleId),
-      parseInt(longitude),
-      parseInt(latitude),
-      address,
-      hint
-    ).then(puzzleInstance => console.log(puzzleInstance));
+    puzzleId &&
+      createPuzzleInstance(
+        parseInt(puzzleId),
+        longitude,
+        latitude,
+        address,
+        hint
+      ).then(puzzleInstance => setPuzzleInstanceData(puzzleInstance));
   };
 
   useEffect(() => {
     const fetchPuzzles = async () => {
       const puzzles = await getAllPuzzles();
       setPuzzleList(puzzles);
-      setPuzzleId(puzzles[0].id);
+      puzzles.length > 0 && setPuzzleId(puzzles[0].id);
     };
     fetchPuzzles();
   }, []);
@@ -93,6 +95,13 @@ const PuzzleGenerate = () => {
             onClick={() => handleSubmit()}
           />
         </div>
+        {puzzleInstanceData && (
+          <div className={styles.qrCode}>
+            {/** TODO: Create link to puzzle map page */}
+            {/** TODO: Make it copiable */}
+            <QRGenerator text={JSON.stringify(puzzleInstanceData)} />
+          </div>
+        )}
       </div>
     </>
   );

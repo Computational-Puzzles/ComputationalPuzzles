@@ -34,7 +34,6 @@ const Admin = () => {
           <h1> ADMIN PAGE 🤓 </h1>
           {/** TODO: Create Header for admin page  */}
           <div className={styles.contentWrap}>
-            <QRGenerator />
             <PuzzleGenerate />
           </div>
         </>
