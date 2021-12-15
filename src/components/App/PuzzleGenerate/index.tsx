@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
 import { Button, Input } from '../../Global';
-import { getAllPuzzles } from '../../../services';
+import { createPuzzleInstance, getAllPuzzles } from '../../../services';
 
 const PuzzleGenerate = () => {
   const [puzzleList, setPuzzleList] = useState([]);
@@ -10,18 +10,20 @@ const PuzzleGenerate = () => {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [address, setAddress] = useState('');
-  const [puzzle, setPuzzle] = useState('');
+  const [puzzleId, setPuzzleId] = useState('');
 
   const handleSubmit = () => {
-    console.log(hint, latitude, longitude, address, puzzle);
-    createPuzzleInstance(puzzle, longitude, latitude, address, hint).then(puzzleInstance =>
+    console.log(hint, latitude, longitude, address, puzzleId);
+    createPuzzleInstance(parseInt(puzzleId), parseInt(longitude), parseInt(latitude), address, hint).then(puzzleInstance =>
       console.log(puzzleInstance)
     );
   };
 
   useEffect(() => {
     const fetchPuzzles = async () => {
-      setPuzzleList(await getAllPuzzles());
+      const puzzles = await getAllPuzzles();
+      setPuzzleList(puzzles);
+      setPuzzleId(puzzles[0].id);
     };
     fetchPuzzles();
   }, []);
@@ -38,11 +40,11 @@ const PuzzleGenerate = () => {
         </div>
         <div>
           { puzzleList.length > 0 && (
-            <select className={ styles.selections } value={ puzzle } onChange={ (e) => setPuzzle(e.currentTarget.value) }>
+            <select className={ styles.selections } value={ puzzleId } onChange={ (e) => setPuzzleId(e.currentTarget.value) } >
               <optgroup label="Choose a puzzle from the puzzles below">
-                { puzzleList.map((pzl, index) => (
-                  <option value={ pzl.name } key={ `puzzle${index}` }>
-                    { pzl.name }
+                { puzzleList.map((puzzle, index) => (
+                  <option value={ puzzle.id } key={ `puzzle${index}` }>
+                    { puzzle.name }
                   </option>
                 )) }
               </optgroup>
