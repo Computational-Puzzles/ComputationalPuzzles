@@ -1,14 +1,14 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Geocoder } from '@maptiler/geocoder';
-import { Anchor } from '../MapRenderer';
 import { Button, Input } from '../../Global';
 
 import mapGeocoderStyles from './MapGeocoder.module.scss';
+import {MapAnchor} from "../../../types/mapRenderer";
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 
 type MapGeocoderProps = {
-  setMapCenter: Dispatch<SetStateAction<Anchor>>;
+  setMapCenter: Dispatch<SetStateAction<MapAnchor>>;
 };
 
 const MapGeocoder = ({ setMapCenter }: MapGeocoderProps) => {

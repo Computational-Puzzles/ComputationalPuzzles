@@ -2,21 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { CardList, MapGeocoder, MapRenderer } from '../../../components/App';
 import { GetServerSideProps } from 'next';
 import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
-import {
-  Anchor,
-  Marker,
-  PuzzleInstance
-} from '../../../components/App/MapRenderer';
 import { Filter, Header } from '../../../components/Global';
 import { getAllPuzzleInstances } from '../../../services/puzzleInstance';
+import {PuzzleMapProps} from "../../../types/puzzle";
+import {MapAnchor, MapMarker} from "../../../types/mapRenderer";
 
-type PuzzleMapTypes = {
-  puzzleInstances: PuzzleInstance[];
-};
-
-const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
-  const [userMarker, setUserMarker] = useState<Marker>(null);
-  const [mapCenter, setMapCenter] = useState<Anchor>(null);
+const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
+  const [userMarker, setUserMarker] = useState<MapMarker>(null);
+  const [mapCenter, setMapCenter] = useState<MapAnchor>(null);
   const [difficultySelected, setDifficultySelected] = useState<{
     EASY: boolean;
     MEDIUM: boolean;
@@ -26,7 +19,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
   useEffect((): void => {
     navigator.geolocation.getCurrentPosition(
       position => {
-        const anchor: Anchor = [
+        const anchor: MapAnchor = [
           position.coords.latitude,
           position.coords.longitude
         ];
@@ -35,7 +28,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
         setMapCenter(anchor);
       },
       () => {
-        const anchor: Anchor = [49.88307, -119.48568];
+        const anchor: MapAnchor = [49.88307, -119.48568];
         setMapCenter(anchor);
       }
     );
@@ -43,12 +36,12 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
 
   const setMapCenterFromInstanceIndex = (instanceIndex: number): void => {
     const puzzleInstance = puzzleInstances[instanceIndex];
-    const anchor: Anchor = [puzzleInstance.latitude, puzzleInstance.longitude];
+    const anchor: MapAnchor = [puzzleInstance.latitude, puzzleInstance.longitude];
     setMapCenter(anchor);
   };
 
   const getDistanceFromCenter = useCallback(
-    (anchor: Anchor): number => {
+    (anchor: MapAnchor): number => {
       const distLatitude = anchor[0] - mapCenter[0];
       const distLongitude = anchor[1] - mapCenter[1];
       return Math.sqrt(Math.pow(distLatitude, 2) + Math.pow(distLongitude, 2));
@@ -109,7 +102,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
                     {
                       text: 'Solve Online',
                       style: 'primary',
-                      link: '/puzzles'
+                      link: `/puzzles/${instance.id}`
                     },
                     {
                       text: 'View On Map',
