@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
+const getPuzzleById = async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.query;
   try {
     const puzzle = await prisma.puzzle.findUnique({
@@ -14,4 +15,6 @@ export default async function handler(req, res) {
   } catch (err) {
     res.status(500).json({ error: 'Unable to find puzzle with ID' });
   }
-}
+};
+
+export default getPuzzleById;
