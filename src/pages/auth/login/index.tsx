@@ -14,9 +14,11 @@ export default function LoginPage({ providers, csrfToken }) {
   const passwordMinLength = 8;
   const { error } = useRouter().query;
 
-  const loginWithGoogle = event => {
-    signIn('google');
-    // TODO: save session into db
+  const loginWithGoogle = () => {
+    signIn('google').then(r => {
+      // TODO: save session into db (?)
+      console.log('Signed in with Google');
+    });
   };
   return (
     <>
@@ -26,7 +28,8 @@ export default function LoginPage({ providers, csrfToken }) {
       <div className={styles.mainSec}>
         <h2 className={styles.title}>Login</h2>
         {error && <SignInError error={error} />}
-        <form method="post" action="/api/auth/callback/credentials"> {/*TODO: save session into db*/}
+        <form method="post" action={'/api/auth/callback/credentials'}>
+          {/*TODO: save session into db*/}
           <div className={styles.inputContainer}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <Input
@@ -47,16 +50,13 @@ export default function LoginPage({ providers, csrfToken }) {
             <a href={'/auth/signup'}>Do not have an account?</a>
           </p>
           <div className={styles.container}>
-            <button
-              type='submit'
-              className={styles.button}
-            >
+            <button type="submit" className={styles.button}>
               Sign in with Credentials
             </button>
             <button
-              type='button'
+              type="button"
               className={styles.button}
-              onClick={() => loginWithGoogle(event)}
+              onClick={() => loginWithGoogle()}
             >
               Sign in with Google
             </button>
