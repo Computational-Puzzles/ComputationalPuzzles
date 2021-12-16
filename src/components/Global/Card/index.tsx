@@ -2,50 +2,72 @@ import * as React from 'react';
 
 import { Button } from '../';
 
-import styles from './Card.module.scss';
-import { CardProps } from '../../../types/cards';
-import { DIFFICULTY } from '../../../types/global';
+import styles from './mapCard.module.scss';
+import { CARD_TYPE, CardProps, DIFFICULTY } from '../../../types/cards';
 
-const Difficulty = ({ difficulty }: { difficulty: DIFFICULTY }) => {
-  if (difficulty === 'EASY') {
+/**
+ * Show 1 or 2 buttons depending on the type of the card
+ */
+const Buttons = ({ type, link }: { type: CARD_TYPE; link: string }) => {
+  if (type === 'list') {
+    return (
+      <Button
+        style="primary"
+        content="Solve online"
+        arrowDirection="right"
+        link={link}
+      />
+    );
+  } else if (type === 'grid') {
+    return (
+      <div className={styles.buttonWrap}>
+        <Button
+          style="secondary"
+          content="View map"
+          arrowDirection="right"
+          onClick={() => alert('View map')}
+        />
+        <Button
+          style="primary"
+          content="Solve online"
+          arrowDirection="right"
+          link={link}
+        />
+      </div>
+    );
+  }
+};
+
+/**
+ * Adjust color of the difficulty text
+ */
+const Difficulty = ({ diff }: { diff: DIFFICULTY }) => {
+  if (diff === 'easy') {
     return <span className={styles.easy}>Easy</span>;
   }
-  if (difficulty === 'MEDIUM') {
+  if (diff === 'medium') {
     return <span className={styles.medium}>Medium</span>;
   }
-  if (difficulty === 'HARD') {
+  if (diff === 'hard') {
     return <span className={styles.hard}>Hard</span>;
   }
 };
 
-const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
+const Card = ({ title, desc, diff, type, link }: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
-        buttonActions ? styles.cardHeightButton : styles.cardHeightDefault
+        type ? styles.cardHeightButton : styles.cardHeightDefault
       }`}
     >
       <div className={styles.cardHeader}>
-        <p className={styles.title}>{name}</p>
+        <p className={styles.title}>{title}</p>
         <p className={styles.difficulty}>
-          Difficulty: <Difficulty difficulty={difficulty} />
+          Difficulty: <Difficulty diff={diff} />
         </p>
       </div>
-      {content}
-      <div className={styles.cardFooter}>
-        <div className={styles.buttonWrap}>
-          {buttonActions.map((buttonAction, index) => (
-            <Button
-              key={`card_buttons_${index}`}
-              style={buttonAction.style}
-              link={buttonAction.link}
-              onClick={buttonAction.action}
-              content={buttonAction.text}
-              arrowDirection="right"
-            />
-          ))}
-        </div>
-      </div>
+      {desc}
+      {type && <Buttons type={type} link={link} />}
     </div>
   );
 };
