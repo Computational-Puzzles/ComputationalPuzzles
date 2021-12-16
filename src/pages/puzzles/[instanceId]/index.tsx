@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
-import { Prisma, Puzzle } from '@prisma/client';
+import { Prisma, Puzzle, Submission } from '@prisma/client';
 import { Button, Header } from '../../../components/Global';
 import { PuzzleInput, FeedbackGif } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
@@ -65,6 +65,7 @@ const PuzzlePage = ({
 
       setIsRecentCorrect(success);
       setFeedbackGifSrc(getRandomGifSrc(feedbackGifs, success));
+
     } else {
       alert('You must be logged in to submit puzzles!');
       // TODO: should be an alert dialog w/ link to login page
