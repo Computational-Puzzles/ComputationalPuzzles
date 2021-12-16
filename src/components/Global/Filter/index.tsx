@@ -4,18 +4,18 @@ import styles from './Filter.module.scss';
 import { FilterProps } from '../../../types/filter';
 
 const Filter = ({ setFilterFields }: FilterProps) => {
-  const [easyChecked, setEasyChecked] = useState(true);
-  const [mediumChecked, setMediumChecked] = useState(true);
-  const [hardChecked, setHardChecked] = useState(true);
+  const [easyChecked, setEasyChecked] = useState(false);
+  const [mediumChecked, setMediumChecked] = useState(false);
+  const [hardChecked, setHardChecked] = useState(false);
 
   useEffect(() => {
     setFilterFields &&
       setFilterFields({
-        EASY: easyChecked,
-        MEDIUM: mediumChecked,
-        HARD: hardChecked
+        easy: easyChecked,
+        medium: mediumChecked,
+        hard: hardChecked
       });
-  }, [easyChecked, mediumChecked, hardChecked, setFilterFields]);
+  }, [easyChecked, mediumChecked, hardChecked]);
 
   return (
     <div>
@@ -23,7 +23,8 @@ const Filter = ({ setFilterFields }: FilterProps) => {
         <RadioButton
           id={'radioEasy'}
           name={'filter'}
-          difficulty={'EASY'}
+          difficulty={'easy'}
+          checked={easyChecked}
           onClick={() => {
             setEasyChecked(wasChecked => !wasChecked);
           }}
@@ -31,7 +32,8 @@ const Filter = ({ setFilterFields }: FilterProps) => {
         <RadioButton
           id={'radioMedium'}
           name={'filter'}
-          difficulty={'MEDIUM'}
+          difficulty={'medium'}
+          checked={mediumChecked}
           onClick={() => {
             setMediumChecked(wasChecked => !wasChecked);
           }}
@@ -39,7 +41,8 @@ const Filter = ({ setFilterFields }: FilterProps) => {
         <RadioButton
           id={'radioHard'}
           name={'filter'}
-          difficulty={'HARD'}
+          difficulty={'hard'}
+          checked={hardChecked}
           onClick={() => {
             setHardChecked(wasChecked => !wasChecked);
           }}

@@ -1,18 +1,15 @@
 @import 'src/styles/abstracts/_variables';
-@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/_mixins/text';
 
-.checkboxHidden {
+.gone {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
 }
-
-.defaultRadioButton {
+.normal {
   @include font-button;
-  @include smooth-transition;
-
   display: inline-block;
   padding: 0.625rem 1.25rem;
   margin: 0;
@@ -22,48 +19,36 @@
   cursor: pointer;
 
   &:hover {
-    border-color: $black;
-  }
-
-  input[type='checkbox']:checked + & {
-    &:hover {
-      border-color: $black;
-    }
+    text-decoration: underline;
   }
 }
-
 .easy {
-  @extend .defaultRadioButton;
+  @extend .normal;
+  border-color: $green;
+  color: $green;
+}
+.medium {
+  @extend .normal;
+  border-color: $secondary-100;
+  color: $secondary-100;
+}
+.hard {
+  @extend .normal;
+  border-color: $red;
+  color: $red;
+}
+.easyChecked {
+  text-decoration: initial;
   background-color: $green;
   color: $white;
-
-  input[type='checkbox']:checked + & {
-    background-color: transparent;
-    border-color: $green;
-    color: $green;
-  }
 }
-
-.medium {
-  @extend .defaultRadioButton;
+.mediumChecked {
+  text-decoration: initial;
   background-color: $secondary-100;
   color: $white;
-
-  input[type='checkbox']:checked + & {
-    background-color: transparent;
-    border-color: $secondary-100;
-    color: $secondary-100;
-  }
 }
-
-.hard {
-  @extend .defaultRadioButton;
+.hardChecked {
+  text-decoration: initial;
   background-color: $red;
   color: $white;
-
-  input[type='checkbox']:checked + & {
-    background-color: transparent;
-    border-color: $red;
-    color: $red;
-  }
 }
