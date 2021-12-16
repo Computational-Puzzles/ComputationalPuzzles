@@ -1,21 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { CardList, MapGeocoder, MapRenderer } from '../../../components/App';
 import { GetServerSideProps } from 'next';
-import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
-import {
-  Anchor,
-  Marker,
-  PuzzleInstance
-} from '../../../components/App/MapRenderer';
 import { Filter, Header } from '../../../components/Global';
 import { getAllPuzzleInstances } from '../../../services/puzzleInstance';
+import { Anchor, MapMarker } from '../../../types/map';
 
-type PuzzleMapTypes = {
-  puzzleInstances: PuzzleInstance[];
+import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
+import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
+
+type PuzzleMapProps = {
+  puzzleInstances: PuzzleInstanceCustom[];
 };
 
-const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
-  const [userMarker, setUserMarker] = useState<Marker>(null);
+const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
+  const [userMarker, setUserMarker] = useState<MapMarker>(null);
   const [mapCenter, setMapCenter] = useState<Anchor>(null);
   const [difficultySelected, setDifficultySelected] = useState<{
     EASY: boolean;
@@ -109,7 +107,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
                     {
                       text: 'Solve Online',
                       style: 'primary',
-                      link: '/puzzles'
+                      link: `/puzzles/${instance.id}`
                     },
                     {
                       text: 'View On Map',

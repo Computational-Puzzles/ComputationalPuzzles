@@ -1,15 +1,11 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import { Geocoder } from '@maptiler/geocoder';
-import { Anchor } from '../MapRenderer';
+import { MapGeocoderProps } from '../../../types/map';
 import { Button, Input } from '../../Global';
 
 import mapGeocoderStyles from './MapGeocoder.module.scss';
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
-
-type MapGeocoderProps = {
-  setMapCenter: Dispatch<SetStateAction<Anchor>>;
-};
 
 const MapGeocoder = ({ setMapCenter }: MapGeocoderProps) => {
   const [geocoderSearchValue, setGeocoderSearchValue] = useState<string>('');
