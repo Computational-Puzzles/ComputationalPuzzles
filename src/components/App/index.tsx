@@ -4,6 +4,7 @@ import QRGenerator from './QRGenerator';
 import PuzzleInput from './PuzzleInput';
 import MapRenderer from './MapRenderer';
 import MapGeocoder from './MapGeocoder';
+import FeedbackGif from './FeedbackGif';
 
 export {
   CardGrid,
@@ -11,5 +12,6 @@ export {
   QRGenerator,
   PuzzleInput,
   MapRenderer,
-  MapGeocoder
+  MapGeocoder,
+  FeedbackGif
 };
