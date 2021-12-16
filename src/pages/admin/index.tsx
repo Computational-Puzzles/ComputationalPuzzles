@@ -3,9 +3,9 @@ import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import { PuzzleGenerate, QRGenerator } from '../../components/App';
-import { isAdmin } from '../../services';
+import { getAllPuzzles, isAdmin } from '../../services';
 
-const Admin = () => {
+const Admin = ({ puzzlesList }) => {
   const { data: session, status } = useSession();
   const [validAdmin, setValidAdmin] = React.useState(null);
 
@@ -34,7 +34,8 @@ const Admin = () => {
           <h1> ADMIN PAGE 🤓 </h1>
           {/** TODO: Create Header for admin page  */}
           <div className={styles.contentWrap}>
-            <PuzzleGenerate />
+            <QRGenerator />
+            <PuzzleGenerate puzzlesList={puzzlesList} />
           </div>
         </>
       );
@@ -52,6 +53,14 @@ const Admin = () => {
       </>
     )
   );
+};
+
+import { GetServerSideProps } from 'next';
+export const getServerSideProps: GetServerSideProps = async context => {
+  const puzzlesList = await getAllPuzzles();
+  return {
+    props: { puzzlesList }
+  };
 };
 
 export default Admin;
