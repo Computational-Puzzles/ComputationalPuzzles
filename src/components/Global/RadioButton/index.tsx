@@ -3,35 +3,24 @@ import styles from './RadioButton.module.scss';
 import { RadioButtonProps } from '../../../types/radioButton';
 import { DIFFICULTY } from '../../../types/global';
 
-const getLabelColor = (difficulty: DIFFICULTY, isChecked: boolean) => {
-  if (difficulty === 'easy')
-    return isChecked ? styles.easyChecked + ' ' + styles.easy : styles.easy;
-  if (difficulty === 'medium')
-    return isChecked
-      ? styles.mediumChecked + ' ' + styles.medium
-      : styles.medium;
-  if (difficulty === 'hard')
-    return isChecked ? styles.hardChecked + ' ' + styles.hard : styles.hard;
+const getLabelColor = (difficulty: DIFFICULTY) => {
+  if (difficulty === 'EASY') return styles.easy;
+  if (difficulty === 'MEDIUM') return styles.medium;
+  if (difficulty === 'HARD') return styles.hard;
 };
 
-const RadioButton = ({
-  id,
-  name,
-  difficulty,
-  checked,
-  onClick
-}: RadioButtonProps) => {
+const RadioButton = ({ id, name, difficulty, onClick }: RadioButtonProps) => {
   return (
     <div className="radio">
       <input
-        className={styles.gone}
-        type="radio"
+        className={styles.checkboxHidden}
+        type="checkbox"
         id={id}
         name={name}
         value={difficulty}
         onClick={onClick}
       />
-      <label className={`${getLabelColor(difficulty, checked)}`} htmlFor={id}>
+      <label className={`${getLabelColor(difficulty)}`} htmlFor={id}>
         {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
       </label>
     </div>

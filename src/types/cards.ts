@@ -1,10 +1,12 @@
 import { DIFFICULTY } from './global';
 
+import { ButtonAction } from './button';
+
 export type CARD_TYPE = 'list' | 'grid';
 export type CardProps = {
-  title: string;
-  desc: string;
-  diff: DIFFICULTY;
+  name: string;
+  content: string;
+  difficulty: DIFFICULTY;
   type?: CARD_TYPE;
-  link: string;
+  buttonActions?: ButtonAction[];
 };

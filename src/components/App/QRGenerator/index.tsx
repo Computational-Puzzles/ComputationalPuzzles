@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styles from './QRGenerator.module.scss';
-import { useQRCode } from 'react-qrcodes';
+// import { useQRCode } from 'react-qrcodes';
 
 const QRCode = ({ text }: { text: string }) => {
   const options = {
@@ -14,12 +14,12 @@ const QRCode = ({ text }: { text: string }) => {
     }
   };
 
-  const [qrRef] = useQRCode({
-    text: text,
-    options: options
-  });
+  // const [qrRef] = useQRCode({
+  //   text: text,
+  //   options: options
+  // });
 
-  return <canvas ref={qrRef} />;
+  // return <canvas ref={qrRef} />;
 };
 
 const QRGenerator = () => {
@@ -35,7 +35,7 @@ const QRGenerator = () => {
         placeholder="Paste the link here 🙋🏻‍♂️"
       />
       {/** Might create a pointing down arrow */}
-      {text && <QRCode text={text} />}
+      {/*{text && <QRCode text={text} />}*/}
     </div>
   );
 };
