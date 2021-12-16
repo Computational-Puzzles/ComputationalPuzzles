@@ -9,7 +9,8 @@ export type ArrowType = {
 export type ButtonAction = {
   text: string;
   style: ButtonStyle;
-  action: () => any;
+  action?: () => any;
+  link?: string;
 };
 
 export type ButtonContentProps = {

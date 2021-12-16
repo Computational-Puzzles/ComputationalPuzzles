@@ -3,18 +3,9 @@ import * as React from 'react';
 import { Button } from '../';
 
 import styles from './Card.module.scss';
-import { CardProps, DIFFICULTY } from '../../../types/cards';
+import { CardProps } from '../../../types/cards';
+import { DIFFICULTY } from '../../../types/global';
 
-type ButtonAction = {
-  text: string;
-  style: ButtonStyle;
-  action?: () => any;
-  link?: string;
-};
-
-/**
- * Adjust color of the difficulty text
- */
 const Difficulty = ({ difficulty }: { difficulty: DIFFICULTY }) => {
   if (difficulty === 'EASY') {
     return <span className={styles.easy}>Easy</span>;

@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { CardList, MapGeocoder, MapRenderer } from '../../../components/App';
 import { GetServerSideProps } from 'next';
-import axios from 'axios';
 import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
 import {
   Anchor,
   Marker,
   PuzzleInstance
 } from '../../../components/App/MapRenderer';
-import { Header } from '../../../components/Global';
+import { Filter, Header } from '../../../components/Global';
+import { getAllPuzzleInstances } from '../../../services/puzzleInstance';
 
 type PuzzleMapTypes = {
   puzzleInstances: PuzzleInstance[];
@@ -24,21 +24,21 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
   }>({ EASY: true, MEDIUM: true, HARD: true });
 
   useEffect((): void => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const anchor: Anchor = [
-        position.coords.latitude,
-        position.coords.longitude
-      ];
-      const zoom = 16;
-      setUserMarker({ anchor, zoom });
-      setMapCenter(anchor);
-    }, () => {
-      const anchor: Anchor = [
-        49.88307,
-        -119.48568
-      ];
-      setMapCenter(anchor);
-    });
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const anchor: Anchor = [
+          position.coords.latitude,
+          position.coords.longitude
+        ];
+        const zoom = 16;
+        setUserMarker({ anchor, zoom });
+        setMapCenter(anchor);
+      },
+      () => {
+        const anchor: Anchor = [49.88307, -119.48568];
+        setMapCenter(anchor);
+      }
+    );
   }, []);
 
   const setMapCenterFromInstanceIndex = (instanceIndex: number): void => {
@@ -66,14 +66,6 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
     }
   }, [mapCenter, getDistanceFromCenter, puzzleInstances]);
 
-  const onDifficultyFilterChange = (event): void => {
-    const checked = event.target.checked;
-    const value = event.target.value;
-    let tempDiffSelected = difficultySelected;
-    tempDiffSelected[value] = checked;
-    setDifficultySelected({ ...tempDiffSelected });
-  };
-
   return (
     <main className={puzzleMapStyles.map}>
       <Header />
@@ -82,35 +74,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
           <h1>Puzzles Map</h1>
           <MapGeocoder setMapCenter={setMapCenter} />
         </div>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              value={'EASY'}
-              defaultChecked={true}
-              onChange={onDifficultyFilterChange}
-            />
-            Easy
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value={'MEDIUM'}
-              defaultChecked={true}
-              onChange={onDifficultyFilterChange}
-            />
-            Medium
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              value={'HARD'}
-              defaultChecked={true}
-              onChange={onDifficultyFilterChange}
-            />
-            Hard
-          </label>
-        </div>
+        <Filter setFilterFields={setDifficultySelected} />
       </div>
       <div className={puzzleMapStyles.content}>
         <MapRenderer
@@ -145,7 +109,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
                     {
                       text: 'Solve Online',
                       style: 'primary',
-                      action: () => alert('Solve online')
+                      link: '/puzzles'
                     },
                     {
                       text: 'View On Map',
@@ -163,16 +127,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapTypes) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const resInstances = await axios.get(
-    'http://localhost:3000/api/puzzle_instances'
-  );
-  const puzzleInstances = resInstances.data;
-  for (const puzzleInstance of puzzleInstances) {
-    const puzzle = await axios.get(
-      `http://localhost:3000/api/puzzles/${puzzleInstance.puzzleId}`
-    );
-    puzzleInstance.puzzle = puzzle.data;
-  }
+  const puzzleInstances = await getAllPuzzleInstances(true);
 
   return {
     props: {

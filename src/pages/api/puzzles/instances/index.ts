@@ -8,7 +8,23 @@ const listAllPuzzleInstancesHandler = async (
   res: NextApiResponse
 ) => {
   try {
-    const puzzleInstances = await prisma.puzzleInstance.findMany();
+    const { verbose } = req.query as {
+      verbose: string;
+    };
+    const isVerbose = verbose.toLowerCase() === 'true';
+
+    const puzzleInstances = await prisma.puzzleInstance.findMany({
+      include: isVerbose
+        ? {
+            puzzle: {
+              include: {
+                puzzleType: true
+              }
+            }
+          }
+        : undefined
+    });
+
     return res.status(200).json({
       puzzleInstances
     });
