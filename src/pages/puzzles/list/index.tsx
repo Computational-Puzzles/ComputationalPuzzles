@@ -4,13 +4,13 @@ import { getAllPuzzleInstances } from '../../../services/puzzleInstance';
 import { Header, SearchAndFilter } from '../../../components/Global';
 import { CardGrid } from '../../../components/App';
 import styles from '../../../styles/pages/PuzzleList.module.scss';
-import {PuzzleInstance} from '@prisma/client'
+import { PuzzleInstance } from '@prisma/client';
 
 type PuzzleListTypes = {
-    puzzleInstances: PuzzleInstance[]
-}
+  puzzleInstances: PuzzleInstance[];
+};
 
-const PuzzleList = ({puzzleInstances}: PuzzleListTypes  ) => {
+const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
   const [searchNFilter, setSearchNFilter] = useState<{
     searchText: string;
     filterFields: { EASY: boolean; MEDIUM: boolean; HARD: boolean };
