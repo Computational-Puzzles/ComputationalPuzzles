@@ -37,10 +37,9 @@ const MapGeocoder = ({ setMapCenter }: MapGeocoderProps) => {
         placeholder={'Search For A Location'}
       />
       <Button
-        style={'primary'}
+        style={'flat'}
         content={'Search'}
         onClick={onGeocoderSearch}
-        arrowDirection={'right'}
         size={'sm'}
       />
     </div>

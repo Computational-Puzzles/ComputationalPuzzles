@@ -86,7 +86,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
           mapCenter={mapCenter}
           setMapCenter={setMapCenter}
         />
-        <div>
+        <div className={puzzleMapStyles.cardListContainer}>
           Nearest Puzzles From Map Center
           <CardList
             cardList={puzzleInstances
@@ -97,7 +97,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
               .map((instance, index) => {
                 return {
                   ...instance.puzzle,
-                  content: instance.puzzle.content + ' at ' + instance.address,
+                  content: instance.address,
                   buttonActions: [
                     {
                       text: 'Solve Online',

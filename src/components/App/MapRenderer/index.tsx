@@ -8,7 +8,6 @@ const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 
 const mapTilerProvider = maptiler(MAPTILER_ACCESS_TOKEN, 'outdoor');
 
-
 const MapRenderer = ({
   markers,
   userMarker,
