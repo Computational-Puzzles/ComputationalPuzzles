@@ -3,9 +3,9 @@ import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import { PuzzleGenerate, QRGenerator } from '../../components/App';
-import { isAdmin } from '../../services';
+import { getAllPuzzles, isAdmin } from '../../services';
 
-const Admin = () => {
+const Admin = ({ puzzlesList }) => {
   const { data: session, status } = useSession();
   const [validAdmin, setValidAdmin] = React.useState(null);
 
@@ -32,10 +32,10 @@ const Admin = () => {
       return (
         <>
           <h1> ADMIN PAGE 🤓 </h1>
-          {/** TODO: Create Header for admin page  */}
-          <div className={styles.contentWrap}>
+          {/** TODO: Create Header for admin page  */ }
+          <div className={ styles.contentWrap }>
             <QRGenerator />
-            <PuzzleGenerate />
+            <PuzzleGenerate puzzlesList={ puzzlesList } />
           </div>
         </>
       );
@@ -47,12 +47,20 @@ const Admin = () => {
   return (
     status === 'unauthenticated' && (
       <>
-        {/** TODO: Create Header for admin page  */}
+        {/** TODO: Create Header for admin page  */ }
         You are not authenticated <br />
-        <button onClick={() => Router.push('/')}>Home</button>
+        <button onClick={ () => Router.push('/') }>Home</button>
       </>
     )
   );
+};
+
+import { GetServerSideProps } from 'next';
+export const getServerSideProps: GetServerSideProps = async context => {
+  const puzzlesList = await getAllPuzzles();
+  return {
+    props: { puzzlesList }
+  };
 };
 
 export default Admin;

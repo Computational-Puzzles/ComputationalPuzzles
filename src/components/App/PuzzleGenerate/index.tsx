@@ -1,19 +1,17 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
 import { Button, Input } from '../../Global';
-import { createPuzzleInstance, getAllPuzzles } from '../../../services';
+import { createPuzzleInstance } from '../../../services';
 
-const PuzzleGenerate = () => {
-  const [puzzleList, setPuzzleList] = useState([]);
+const PuzzleGenerate = ({ puzzlesList }) => {
   const [hint, setHint] = useState('');
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
   const [address, setAddress] = useState('');
-  const [puzzleId, setPuzzleId] = useState('');
+  const [puzzleId, setPuzzleId] = useState(puzzlesList.length > 0 && puzzlesList[0].id);
 
   const handleSubmit = () => {
-    console.log(hint, latitude, longitude, address, puzzleId);
     puzzleId &&
       createPuzzleInstance(
         parseInt(puzzleId),
@@ -23,15 +21,6 @@ const PuzzleGenerate = () => {
         hint
       ).then(puzzleInstance => console.log(puzzleInstance));
   };
-
-  useEffect(() => {
-    const fetchPuzzles = async () => {
-      const puzzles = await getAllPuzzles();
-      setPuzzleList(puzzles);
-      puzzles.length > 0 && setPuzzleId(puzzles[0].id);
-    };
-    fetchPuzzles();
-  }, []);
 
   return (
     <>
@@ -68,14 +57,14 @@ const PuzzleGenerate = () => {
           />
         </div>
         <div>
-          {puzzleList.length > 0 && (
+          {puzzlesList.length > 0 && (
             <select
               className={styles.selections}
               value={puzzleId}
               onChange={e => setPuzzleId(e.currentTarget.value)}
             >
               <optgroup label="Choose a puzzle from the puzzles below">
-                {puzzleList.map((puzzle, index) => (
+                {puzzlesList.map((puzzle, index) => (
                   <option value={puzzle.id} key={`puzzle${index}`}>
                     {puzzle.name}
                   </option>
