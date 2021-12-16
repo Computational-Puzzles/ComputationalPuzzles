@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
 import {GetServerSideProps} from "next";
 import {getAllPuzzleInstances} from "../../../services/puzzleInstance";
-import {PuzzleInstance} from "../../../components/App/MapRenderer";
 import {Header, SearchAndFilter} from "../../../components/Global";
-import {CardGrid, CardList} from "../../../components/App";
-import {DIFFICULTY} from "../../../types/global";
-import {ButtonAction, ButtonStyle} from "../../../types/button";
-import {CARD_TYPE} from "../../../types/cards";
+import {CardGrid} from "../../../components/App";
 
 // type PuzzleListTypes = {
 //     puzzleInstances: PuzzleInstance[];
@@ -29,7 +25,31 @@ const PuzzleList = ({puzzleInstances}) => {
             {/*if users did not select filter + seach*/}
 
             {/*if users did select filter + search}*/}
-
+            <CardGrid cardList={
+                puzzleInstances
+                    .filter(instance =>
+                        searchNFilter.filterFields[instance.puzzle.difficulty] === true
+                    ).map(instance=>{ //return a card prop object for each instance
+                        return{
+                            name: instance.puzzle.name,
+                            content: instance.puzzle.content,
+                            difficulty: instance.puzzle.difficulty,
+                            buttonActions:[
+                                {
+                                    text: 'View On Map',
+                                    style: 'secondary',
+                                    // action?: () => any, TODO: pass the instanceId to the map page, so user don't to filter again
+                                    link: '/puzzles/map',
+                                },
+                                {
+                                    text: 'Solve Online',
+                                    style: 'primary',
+                                    link: `/puzzles/[${instance.id}]`,
+                                }
+                            ]
+                        };
+                    })
+            }/>
         </>
     );
 };
