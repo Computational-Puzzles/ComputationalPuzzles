@@ -9,7 +9,9 @@ const PuzzleGenerate = ({ puzzlesList }) => {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
   const [address, setAddress] = useState('');
-  const [puzzleId, setPuzzleId] = useState(puzzlesList.length > 0 && puzzlesList[0].id);
+  const [puzzleId, setPuzzleId] = useState(
+    puzzlesList.length > 0 && puzzlesList[0].id
+  );
 
   const handleSubmit = () => {
     puzzleId &&

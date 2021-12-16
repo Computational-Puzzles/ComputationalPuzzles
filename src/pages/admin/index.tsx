@@ -32,10 +32,10 @@ const Admin = ({ puzzlesList }) => {
       return (
         <>
           <h1> ADMIN PAGE 🤓 </h1>
-          {/** TODO: Create Header for admin page  */ }
-          <div className={ styles.contentWrap }>
+          {/** TODO: Create Header for admin page  */}
+          <div className={styles.contentWrap}>
             <QRGenerator />
-            <PuzzleGenerate puzzlesList={ puzzlesList } />
+            <PuzzleGenerate puzzlesList={puzzlesList} />
           </div>
         </>
       );
@@ -47,9 +47,9 @@ const Admin = ({ puzzlesList }) => {
   return (
     status === 'unauthenticated' && (
       <>
-        {/** TODO: Create Header for admin page  */ }
+        {/** TODO: Create Header for admin page  */}
         You are not authenticated <br />
-        <button onClick={ () => Router.push('/') }>Home</button>
+        <button onClick={() => Router.push('/')}>Home</button>
       </>
     )
   );

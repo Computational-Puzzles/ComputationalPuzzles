@@ -7,6 +7,7 @@ import Header from './Header';
 import Card from './Card';
 import ErrorDisplay from './ErrorDisplay';
 import LogStatusButton from './LogStatusButton';
+import SearchAndFilter from './SearchAndFilter';
 
 export {
   Button,
@@ -17,5 +18,6 @@ export {
   RadioButton,
   Filter,
   ErrorDisplay,
-  LogStatusButton
+  LogStatusButton,
+  SearchAndFilter
 };
