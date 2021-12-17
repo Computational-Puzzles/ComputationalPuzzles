@@ -90,7 +90,6 @@ const PuzzleGenerate = ({ puzzlesList }) => {
           <div className={ styles.qrCode }>
             {/** TODO: Create link to puzzle map page */ }
             {/** TODO: Make it copiable */ }
-            {/*<QRGenerator text={JSON.stringify(puzzleInstanceData)} />*/ }
             <QRGenerator text={ JSON.stringify(puzzleInstanceData) } />
           </div>
         ) }
