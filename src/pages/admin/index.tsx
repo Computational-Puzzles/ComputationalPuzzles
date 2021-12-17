@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
-import { PuzzleGenerate, QRGenerator } from '../../components/App';
+import { PuzzleGenerate } from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
 
 const Admin = ({ puzzlesList }) => {
@@ -34,7 +34,6 @@ const Admin = ({ puzzlesList }) => {
           <h1> ADMIN PAGE 🤓 </h1>
           {/** TODO: Create Header for admin page  */}
           <div className={styles.contentWrap}>
-            <QRGenerator />
             <PuzzleGenerate puzzlesList={puzzlesList} />
           </div>
         </>
