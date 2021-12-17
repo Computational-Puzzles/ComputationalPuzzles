@@ -1,4 +1,4 @@
-import {PuzzleInstance} from "./mapRenderer";
+import { PuzzleInstanceCustom } from './api/puzzles/instances/puzzleInstance';
 
 export type PuzzleInputProps = {
   type: 'TEXT' | 'MCQ';
@@ -8,5 +8,5 @@ export type PuzzleInputProps = {
 };
 
 export type PuzzleMapProps = {
-  puzzleInstances: PuzzleInstance[];
+  puzzleInstances: PuzzleInstanceCustom[];
 };

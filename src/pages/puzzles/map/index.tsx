@@ -4,8 +4,8 @@ import { GetServerSideProps } from 'next';
 import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
 import { Filter, Header } from '../../../components/Global';
 import { getAllPuzzleInstances } from '../../../services/puzzleInstance';
-import {PuzzleMapProps} from "../../../types/puzzle";
-import {MapAnchor, MapMarker} from "../../../types/mapRenderer";
+import { PuzzleMapProps } from '../../../types/puzzle';
+import { MapAnchor, MapMarker } from '../../../types/map';
 
 const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
   const [userMarker, setUserMarker] = useState<MapMarker>(null);
@@ -36,7 +36,10 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
 
   const setMapCenterFromInstanceIndex = (instanceIndex: number): void => {
     const puzzleInstance = puzzleInstances[instanceIndex];
-    const anchor: MapAnchor = [puzzleInstance.latitude, puzzleInstance.longitude];
+    const anchor: MapAnchor = [
+      puzzleInstance.latitude,
+      puzzleInstance.longitude
+    ];
     setMapCenter(anchor);
   };
 
