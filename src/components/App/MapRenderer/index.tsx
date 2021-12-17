@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Map, Marker, ZoomControl } from 'pigeon-maps';
 import { maptiler } from 'pigeon-maps/providers';
 import mapRendererStyles from './MapRenderer.module.scss';
-import { CardProps } from '../../Global';
+import { CardProps } from '../../../types/cards';
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 

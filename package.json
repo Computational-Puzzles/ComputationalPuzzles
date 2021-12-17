@@ -14,7 +14,7 @@
   "dependencies": {
     "@maptiler/geocoder": "^1.1.0",
     "@next-auth/prisma-adapter": "^0.5.2-next.19",
-    "@prisma/client": "^3.2.1",
+    "@prisma/client": "^3.6.0",
     "@types/react": "^17.0.27",
     "axios": "^0.24.0",
     "babel-plugin-superjson-next": "^0.4.2",
