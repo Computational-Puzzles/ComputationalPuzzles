@@ -43,7 +43,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
               }
             })
             .map(instance => {
-              //return a card prop object for each instance
+              // TODO: link to view on map
               return {
                 name: instance.puzzle.name,
                 content: instance.puzzle.content,
