@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Button, Logo } from '..';
 import { HeaderProps } from '../../../types/global';
-import { isAdmin } from '../../../services/admin';
+import { isAdmin } from '../../../services';
 import { useSession } from 'next-auth/react';
 
 const Header = ({ profilePicture }: HeaderProps) => {
@@ -53,11 +53,7 @@ const Header = ({ profilePicture }: HeaderProps) => {
           {validAdmin && (
             <Button style={'flat'} content={'Admin'} link={'/admin'} />
           )}
-          <Button
-            style={'outline'}
-            content={'Profile'}
-            link={'/auth/profile'}
-          />
+          <Button style={'flat'} content={'Profile'} link={'/auth/profile'} />
           {profilePicture ? (
             <Image
               className={styles.profileImg}

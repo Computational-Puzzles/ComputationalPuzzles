@@ -4,6 +4,8 @@ import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import { PuzzleGenerate } from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
+import { GetServerSideProps } from 'next';
+import {Header} from "../../components/Global";
 
 const Admin = ({ puzzlesList }) => {
   const { data: session, status } = useSession();
@@ -31,6 +33,7 @@ const Admin = ({ puzzlesList }) => {
     if (validAdmin) {
       return (
         <>
+          <Header/>
           <h1> ADMIN PAGE 🤓 </h1>
           {/** TODO: Create Header for admin page  */}
           <div className={styles.contentWrap}>
@@ -54,7 +57,6 @@ const Admin = ({ puzzlesList }) => {
   );
 };
 
-import { GetServerSideProps } from 'next';
 export const getServerSideProps: GetServerSideProps = async context => {
   const puzzlesList = await getAllPuzzles();
   return {
