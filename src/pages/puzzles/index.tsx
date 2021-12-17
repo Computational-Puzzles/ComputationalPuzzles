@@ -50,12 +50,6 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
                 difficulty: instance.puzzle.difficulty,
                 buttonActions: [
                   {
-                    text: 'View On Map',
-                    style: 'secondary',
-                    // action?: () => any, TODO: pass the instanceId to the map page, so user don't to filter again
-                    link: '/puzzles/map'
-                  },
-                  {
                     text: 'Solve Online',
                     style: 'primary',
                     link: `/puzzles/${instance.id}`
