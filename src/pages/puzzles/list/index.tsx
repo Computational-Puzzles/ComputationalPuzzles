@@ -58,7 +58,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
                   {
                     text: 'Solve Online',
                     style: 'primary',
-                    link: `/puzzles/[${instance.id}]`
+                    link: `/puzzles/${instance.id}`
                   }
                 ]
               };
