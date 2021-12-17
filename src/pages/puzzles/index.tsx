@@ -4,7 +4,7 @@ import { getAllPuzzleInstances } from '../../services/puzzleInstance';
 import { Header, SearchAndFilter } from '../../components/Global';
 import { CardGrid } from '../../components/App';
 import styles from '../../styles/pages/PuzzleList.module.scss';
-import {PuzzleInstanceCustom} from "../../types/api/puzzles/instances/puzzleInstance";
+import { PuzzleInstanceCustom } from '../../types/api/puzzles/instances/puzzleInstance';
 
 type PuzzleListTypes = {
   puzzleInstances: PuzzleInstanceCustom[];

@@ -58,6 +58,7 @@ $bar-color: $primary-200;
     .right {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
 
       button {
         border-radius: 0.5rem;
