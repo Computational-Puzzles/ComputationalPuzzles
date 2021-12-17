@@ -1,0 +1,23 @@
+@import 'src/styles/abstracts/variables';
+
+.gifEmbed {
+  border-left: 0.6rem solid;
+  border-right: 0.6rem solid;
+  border-radius: 0.2rem;
+  height: auto;
+  width: auto;
+
+  div {
+    img {
+      width: 15rem !important;
+    }
+  }
+
+  &.correct {
+    border-color: $success;
+  }
+
+  &.incorrect {
+    border-color: $danger;
+  }
+}

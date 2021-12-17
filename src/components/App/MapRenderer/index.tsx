@@ -1,33 +1,12 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Map, Marker, ZoomControl } from 'pigeon-maps';
 import { maptiler } from 'pigeon-maps/providers';
 import mapRendererStyles from './MapRenderer.module.scss';
-import { CardProps } from '../../../types/cards';
+import { MapMarker, MapRendererProps } from '../../../types/map';
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 
 const mapTilerProvider = maptiler(MAPTILER_ACCESS_TOKEN, 'outdoor');
-
-export type Anchor = [number, number];
-
-export type Marker = {
-  anchor: Anchor;
-  zoom: number;
-};
-
-export type PuzzleInstance = {
-  longitude: number;
-  latitude: number;
-  address: string;
-  puzzle: CardProps;
-};
-
-type MapRendererProps = {
-  markers: Marker[];
-  userMarker: Marker;
-  mapCenter: Anchor;
-  setMapCenter: Dispatch<SetStateAction<Anchor>>;
-};
 
 const MapRenderer = ({
   markers,
@@ -35,7 +14,7 @@ const MapRenderer = ({
   mapCenter,
   setMapCenter
 }: MapRendererProps) => {
-  const setMapFocus = (marker: Marker): void => {
+  const setMapFocus = (marker: MapMarker): void => {
     setMapCenter(marker.anchor);
   };
 

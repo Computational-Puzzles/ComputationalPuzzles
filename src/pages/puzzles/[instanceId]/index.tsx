@@ -3,22 +3,29 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
-import { Prisma, Puzzle, Submission } from '@prisma/client';
+import { Prisma, Puzzle } from '@prisma/client';
 import { Button, Header } from '../../../components/Global';
-import { PuzzleInput } from '../../../components/App';
+import { FeedbackGif, PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 import styles from '../../../styles/pages/PuzzlePage.module.scss';
 import { HandledError } from '../../../types/error';
+import { initializeRandomGifSrc } from '../../../services/feedbackGif';
+import { FeedbackGifList } from '../../../types/feedbackGif';
+import { getRandomGifSrc } from '../../../utils/feedbackGif';
 
 const PuzzlePage = ({
-  puzzleInstance
+  puzzleInstance,
+  allFeedbackGifs
 }: {
   puzzleInstance: PuzzleInstanceCustom;
+  allFeedbackGifs: FeedbackGifList;
 }) => {
   const puzzle = puzzleInstance.puzzle as Puzzle & Prisma.PuzzleInclude;
   const randomSeed = Math.random();
   const [answer, setAnswer] = useState('');
+  const [feedbackGifSrc, setFeedbackGifSrc] = useState('');
+  const [isRecentCorrect, setIsRecentCorrect] = useState(null);
   const { data: session, status } = useSession();
   const user = session?.user as User;
   const isAuthenticated = status === 'authenticated';
@@ -42,14 +49,22 @@ const PuzzlePage = ({
       if ((submission as HandledError).error) {
         // TODO: handle errors from submitting
         alert(submission.message);
+        return;
       }
 
-      if ((submission as Submission).isCorrect) {
-        const correctnessMessage = submission.isCorrect.at(-1)
-          ? 'Correct! Nice work!'
-          : 'Almost there! Try Again.';
-        alert(`${correctnessMessage}`);
-      }
+      const success = submission.isCorrect.at(-1);
+
+      const correctnessMessage = success
+        ? 'Correct! Nice work!'
+        : 'Almost there! Try Again.';
+      alert(`${correctnessMessage}`);
+
+      const feedbackGifs = success
+        ? allFeedbackGifs.correct
+        : allFeedbackGifs.incorrect;
+
+      setIsRecentCorrect(success);
+      setFeedbackGifSrc(getRandomGifSrc(feedbackGifs, success));
     } else {
       alert('You must be logged in to submit puzzles!');
       // TODO: should be an alert dialog w/ link to login page
@@ -107,6 +122,9 @@ const PuzzlePage = ({
         <section className={styles.quest}>
           <h3 className={styles.title}>Quest</h3>
           <p className={styles.question}>{puzzle.question}</p>
+          {isRecentCorrect !== null && feedbackGifSrc && (
+            <FeedbackGif success={isRecentCorrect} src={feedbackGifSrc} />
+          )}
           <PuzzleInput
             type={puzzle.inputType}
             placeholder={'Enter your answer'}
@@ -158,8 +176,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
     }
   }
 
+  const allFeedbackGifs = initializeRandomGifSrc();
+
   return {
-    props: { puzzleInstance, session }
+    props: { puzzleInstance, allFeedbackGifs, session }
   };
 };
 

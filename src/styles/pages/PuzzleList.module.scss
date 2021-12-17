@@ -1,0 +1,10 @@
+@import 'src/styles/abstracts/_variables';
+.searchAndFilter {
+  padding: 0.9rem 0;
+  border-bottom: rgba($grey, 0.05) 1px solid;
+}
+.cardGrid {
+  margin: 1.5rem;
+  display: flex;
+  justify-content: center;
+}

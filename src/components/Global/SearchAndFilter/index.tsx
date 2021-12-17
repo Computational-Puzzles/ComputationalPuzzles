@@ -17,7 +17,7 @@ const SearchAndFilter = ({ setSearchNFilterVal }: SearchAndFilterProps) => {
         searchText: searchText,
         filterFields: filterFields
       });
-  }, [searchText, filterFields]);
+  }, [searchText, filterFields, setSearchNFilterVal]);
 
   return (
     <>
