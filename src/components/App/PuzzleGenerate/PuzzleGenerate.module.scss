@@ -1,0 +1,39 @@
+@import '../../../styles/abstracts/_mixins/text.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+  gap: 1rem;
+
+  & > input {
+    @include font-body;
+  }
+
+  & > h2 {
+    margin: 0;
+  }
+
+  .puzzleLocation {
+    display: flex;
+    gap: 1rem;
+
+    & > * {
+      @include font-body;
+      flex: 1;
+    }
+  }
+
+  .selections {
+    width: 50%;
+    height: 120%;
+    cursor: pointer;
+    @include font-body;
+  }
+
+  .qrCode {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+  }
+}

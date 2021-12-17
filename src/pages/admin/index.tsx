@@ -1,12 +1,15 @@
 import * as React from 'react';
+import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
-import { QRGenerator } from '../../components/App';
-import { isAdmin } from '../../services/admin';
+import { PuzzleGenerate } from '../../components/App';
+import { getAllPuzzles, isAdmin } from '../../services';
+import { GetServerSideProps } from 'next';
+import {Header} from "../../components/Global";
 
-const Admin = () => {
+const Admin = ({ puzzlesList }) => {
   const { data: session, status } = useSession();
-  const [validAdmin, setValidAdmin] = React.useState(false);
+  const [validAdmin, setValidAdmin] = React.useState(null);
 
   React.useEffect(() => {
     if (status === 'unauthenticated') {
@@ -19,7 +22,7 @@ const Admin = () => {
     const checkAdmin = async () => {
       setValidAdmin(await isAdmin(email));
     };
-    checkAdmin();
+    email && checkAdmin();
   }, [email]);
 
   if (status === 'loading') {
@@ -27,24 +30,38 @@ const Admin = () => {
   }
 
   if (status === 'authenticated') {
-    return validAdmin ? (
-      <>
-        <h1> ADMIN PAGE 🤓 </h1>
-        {/** TODO: Create Header for admin page  */}
-        <QRGenerator />
-      </>
-    ) : (
-      <h1> You are not allowed here </h1>
-    ); // This will need adjustment since it's just a prototype
+    if (validAdmin) {
+      return (
+        <>
+          <Header/>
+          <h1> ADMIN PAGE 🤓 </h1>
+          {/** TODO: Create Header for admin page  */}
+          <div className={styles.contentWrap}>
+            <PuzzleGenerate puzzlesList={puzzlesList} />
+          </div>
+        </>
+      );
+    } else {
+      validAdmin === false && Router.push('/403');
+    } // This will need adjustment since it's just a prototype
   }
 
   return (
-    <>
-      {/** TODO: Create Header for admin page  */}
-      You are not authenticated <br />
-      <button onClick={() => Router.push('/')}>Home</button>
-    </>
+    status === 'unauthenticated' && (
+      <>
+        {/** TODO: Create Header for admin page  */}
+        You are not authenticated <br />
+        <button onClick={() => Router.push('/')}>Home</button>
+      </>
+    )
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const puzzlesList = await getAllPuzzles();
+  return {
+    props: { puzzlesList }
+  };
 };
 
 export default Admin;

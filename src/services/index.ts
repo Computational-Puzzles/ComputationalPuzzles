@@ -1,5 +1,19 @@
 import { signUp } from './signup';
 import { resetPassword } from './resetPassword';
-import { getPuzzleInstance, submitPuzzleInstance } from './puzzleInstance';
+import { getAllPuzzles } from './puzzle';
+import {
+  getPuzzleInstance,
+  createPuzzleInstance,
+  submitPuzzleInstance
+} from './puzzleInstance';
+import { isAdmin } from './admin';
 
-export { signUp, resetPassword, getPuzzleInstance, submitPuzzleInstance };
+export {
+  signUp,
+  resetPassword,
+  getAllPuzzles,
+  getPuzzleInstance,
+  createPuzzleInstance,
+  submitPuzzleInstance,
+  isAdmin
+};

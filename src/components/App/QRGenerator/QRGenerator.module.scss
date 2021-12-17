@@ -6,6 +6,10 @@
   align-items: center;
   justify-content: center;
 
+  & > h2 {
+    margin: 0;
+  }
+
   .input {
     @include font-header-bold;
     height: 3rem;
