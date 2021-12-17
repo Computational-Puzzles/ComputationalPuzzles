@@ -4,12 +4,24 @@ import styles from './Header.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Logo } from '..';
+import { Button, Logo } from '..';
 import { HeaderProps } from '../../../types/global';
+import { isAdmin } from '../../../services/admin';
+import { useSession } from 'next-auth/react';
 
 const Header = ({ profilePicture }: HeaderProps) => {
   const [activeTab, setActiveTab] = React.useState<0 | 1>(0);
   const router = useRouter();
+  const [validAdmin, setValidAdmin] = React.useState(false);
+  const { data: session, status } = useSession();
+
+  const email = session?.user?.email;
+  React.useEffect(() => {
+    const checkAdmin = async () => {
+      setValidAdmin(await isAdmin(email));
+    };
+    checkAdmin();
+  }, [email]);
 
   return (
     <div className={styles.header}>
@@ -38,7 +50,14 @@ const Header = ({ profilePicture }: HeaderProps) => {
           </div>
         </div>
         <div className={styles.right}>
-          <Link href={'/auth/profile'}>Profile</Link>
+          {validAdmin && (
+            <Button style={'flat'} content={'Admin'} link={'/admin'} />
+          )}
+          <Button
+            style={'outline'}
+            content={'Profile'}
+            link={'/auth/profile'}
+          />
           {profilePicture ? (
             <Image
               className={styles.profileImg}
