@@ -4,6 +4,20 @@ import { User } from 'next-auth';
 import { puzzleSubmissionProps } from '../types/api/puzzles/submission';
 import { handleServiceError } from '../utils/error';
 
+const getAllPuzzleInstances = async (verbose: boolean = false) => {
+  try {
+    const res = await Axios.get(`api/puzzles/instances?verbose=${verbose}`);
+    if (res.status === 200) {
+      return res.data.puzzleInstances;
+    }
+  } catch (error) {
+    return handleServiceError(
+      error.response.status,
+      error.response.data.message
+    );
+  }
+};
+
 const getPuzzleInstance = async (
   puzzleInstanceId: number,
   verbose: boolean
@@ -56,4 +70,4 @@ const submitPuzzleInstance = async (
   }
 };
 
-export { getPuzzleInstance, submitPuzzleInstance };
+export { getPuzzleInstance, submitPuzzleInstance, getAllPuzzleInstances };

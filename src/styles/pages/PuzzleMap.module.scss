@@ -1,0 +1,42 @@
+@import '../abstracts/variables';
+
+.map {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    overflow-y: hidden;
+
+    .cardListContainer {
+      padding: 1rem 1.5rem;
+      border-left: $grey-transparency 1px solid;
+      overflow-y: scroll;
+    }
+  }
+}
+
+.subHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: $grey-transparency 1px solid;
+  padding: 1rem 1.5rem;
+
+  .leftContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      line-height: unset;
+      margin: 0;
+    }
+  }
+}

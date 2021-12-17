@@ -25,18 +25,18 @@ const QRCode = ({ text }: { text: string }) => {
 const QRGenerator = () => {
   const [text, setText] = React.useState('');
   return (
-      <div className={styles.qrWrapper}>
-        {/** TODO: Implement the Input component when it's merged */}
-        <input
-            className={styles.input}
-            type="text" // TODO: discuss about the url stuff and change this to url if needed
-            onChange={e => setText(e.currentTarget.value)}
-            value={text}
-            placeholder="Paste the link here 🙋🏻‍♂️"
-        />
-        {/** Might create a pointing down arrow */}
-        {/*{text && <QRCode text={text} />}*/}
-      </div>
+    <div className={styles.qrWrapper}>
+      {/** TODO: Implement the Input component when it's merged */}
+      <input
+        className={styles.input}
+        type="text" // TODO: discuss about the url stuff and change this to url if needed
+        onChange={e => setText(e.currentTarget.value)}
+        value={text}
+        placeholder="Paste the link here 🙋🏻‍♂️"
+      />
+      {/** Might create a pointing down arrow */}
+      {/*{text && <QRCode text={text} />}*/}
+    </div>
   );
 };
 
