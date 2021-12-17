@@ -34,7 +34,7 @@ const MapGeocoder = ({ setMapCenter }: MapGeocoderProps) => {
         id={'mapInput'}
         required={false}
         setInputVal={setGeocoderSearchValue}
-        placeholder={'Search For A Location'}
+        placeholder={'Search For a Location'}
       />
       <Button
         style={'flat'}

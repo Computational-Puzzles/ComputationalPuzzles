@@ -1,22 +1,10 @@
 import * as React from 'react';
 
 import { Button } from '../';
+import { Difficulty } from '../';
 
 import styles from './Card.module.scss';
 import { CardProps } from '../../../types/cards';
-import { DIFFICULTY } from '../../../types/global';
-
-const Difficulty = ({ difficulty }: { difficulty: DIFFICULTY }) => {
-  if (difficulty === 'EASY') {
-    return <span className={styles.easy}>Easy</span>;
-  }
-  if (difficulty === 'MEDIUM') {
-    return <span className={styles.medium}>Medium</span>;
-  }
-  if (difficulty === 'HARD') {
-    return <span className={styles.hard}>Hard</span>;
-  }
-};
 
 const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
   return (
@@ -31,7 +19,7 @@ const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
           Difficulty: <Difficulty difficulty={difficulty} />
         </p>
       </div>
-      {content}
+      <p>{content}</p>
       <div className={styles.cardFooter}>
         <div className={styles.buttonWrap}>
           {buttonActions.map((buttonAction, index) => (

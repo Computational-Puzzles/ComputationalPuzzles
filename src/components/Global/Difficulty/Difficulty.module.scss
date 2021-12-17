@@ -1,0 +1,19 @@
+@import '../../../styles/abstracts/variables';
+@import '../../../styles/abstracts/_mixins/text.scss';
+
+.difficulty {
+  @include font-header-bold;
+  font-size: 1rem;
+
+  .easy {
+    color: $green;
+  }
+
+  .medium {
+    color: $blue;
+  }
+
+  .hard {
+    color: $red;
+  }
+}

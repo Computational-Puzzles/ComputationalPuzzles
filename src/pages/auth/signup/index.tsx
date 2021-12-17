@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Router from 'next/router';
 import { signUp } from '../../../services';
-import { Logo, Input } from '../../../components/Global';
+import { Logo, Input, Button } from '../../../components/Global';
 import styles from '../../../styles/pages/signup.module.scss';
 
 const SignUpPage = () => {
@@ -32,47 +32,44 @@ const SignUpPage = () => {
     }
   };
   return (
-    <>
-      <div className={styles.logoLogin}>
-        <Logo showMark={true} showType={true} />
-      </div>
-      <div className={styles.mainSec}>
-        <h2 className={styles.title}>Sign Up Page</h2>
-        <form onSubmit={() => handleSignUp(event)}>
-          <div className={styles.inputContainer}>
-            <Input
-              type={'email'}
-              id={'email'}
-              required={true}
-              placeholder={'Email'}
-              setInputVal={setEmail}
-            />
-            <Input
-              type={'password'}
-              id={'password'}
-              required={true}
-              minLength={passwordMinLength}
-              placeholder={'Password'}
-              setInputVal={setPassword}
-            />
-            <Input
-              type={'password'}
-              id={'repeatPassword'}
-              required={true}
-              minLength={passwordMinLength}
-              placeholder={'Repeat Password'}
-              setInputVal={setRepeatPw}
-            />
-          </div>
-          <p className={styles.link}>
-            <a href={'/auth/login'}>Already have an account?</a>
-          </p>
-          <button type="submit" className={styles.button}>
-            Sign Up
-          </button>
-        </form>
-      </div>
-    </>
+    <main className={styles.signup}>
+      <Logo showMark={true} showType={true} link={true} />
+      <h2 className={styles.title}>Sign Up</h2>
+      <form
+        className={styles.signupSection}
+        onSubmit={event => handleSignUp(event)}
+      >
+        <Input
+          type={'email'}
+          id={'email'}
+          required={true}
+          placeholder={'Email'}
+          setInputVal={setEmail}
+        />
+        <Input
+          type={'password'}
+          id={'password'}
+          required={true}
+          minLength={passwordMinLength}
+          placeholder={'Password'}
+          setInputVal={setPassword}
+        />
+        <Input
+          type={'password'}
+          id={'repeatPassword'}
+          required={true}
+          minLength={passwordMinLength}
+          placeholder={'Repeat Password'}
+          setInputVal={setRepeatPw}
+        />
+        <a className={styles.link} href={'/auth/login'}>
+          Already have an account?
+        </a>
+        <div className={styles.buttonContainer}>
+          <Button style={'primary'} content={'Sign Up'} onClick={() => {}} />
+        </div>
+      </form>
+    </main>
   );
 };
 

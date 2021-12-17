@@ -21,9 +21,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
   return (
     <>
       <Header />
-      <div className={styles.searchAndFilter}>
-        <SearchAndFilter setSearchNFilterVal={setSearchNFilter} />
-      </div>
+      <SearchAndFilter setSearchNFilterVal={setSearchNFilter} />
 
       <div className={styles.cardGrid}>
         <CardGrid

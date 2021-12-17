@@ -1,9 +1,11 @@
 @import '../abstracts/variables';
+@import '../abstracts/mixins';
 
 .map {
   display: flex;
   flex-flow: column;
   height: 100vh;
+  overflow: hidden;
 
   .content {
     display: flex;
@@ -11,10 +13,23 @@
     flex: 1 1 auto;
     overflow-y: hidden;
 
-    .cardListContainer {
-      padding: 1rem 1.5rem;
-      border-left: $grey-transparency 1px solid;
+    .cardGridContainer {
       overflow-y: scroll;
+      max-width: 35rem;
+
+      .title {
+        @include font-header-black;
+        display: inline-block;
+        padding: 1rem 1.5rem 0;
+        font-size: 1.5rem;
+      }
+
+      .cardGrid {
+        display: inline-block;
+        padding: 1rem 1.5rem;
+        width: auto;
+        border-left: $grey-transparency 1px solid;
+      }
     }
   }
 }

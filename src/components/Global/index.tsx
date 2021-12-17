@@ -8,6 +8,7 @@ import Card from './Card';
 import ErrorDisplay from './ErrorDisplay';
 import LogStatusButton from './LogStatusButton';
 import SearchAndFilter from './SearchAndFilter';
+import Difficulty from './Difficulty';
 
 export {
   Button,
@@ -19,5 +20,6 @@ export {
   Filter,
   ErrorDisplay,
   LogStatusButton,
-  SearchAndFilter
+  SearchAndFilter,
+  Difficulty
 };

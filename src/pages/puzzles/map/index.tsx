@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { CardList, MapGeocoder, MapRenderer } from '../../../components/App';
+import { CardGrid, MapGeocoder, MapRenderer } from '../../../components/App';
 import { GetServerSideProps } from 'next';
 import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
 import { Filter, Header } from '../../../components/Global';
@@ -89,33 +89,37 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
           mapCenter={mapCenter}
           setMapCenter={setMapCenter}
         />
-        <div className={puzzleMapStyles.cardListContainer}>
-          Nearest Puzzles From Map Center
-          <CardList
-            cardList={puzzleInstances
-              .filter(
-                instance =>
-                  difficultySelected[instance.puzzle.difficulty] === true
-              )
-              .map((instance, index) => {
-                return {
-                  ...instance.puzzle,
-                  content: instance.address,
-                  buttonActions: [
-                    {
-                      text: 'Solve Online',
-                      style: 'primary',
-                      link: `/puzzles/${instance.id}`
-                    },
-                    {
-                      text: 'View On Map',
-                      style: 'secondary',
-                      action: () => setMapCenterFromInstanceIndex(index)
-                    }
-                  ]
-                };
-              })}
-          />
+        <div className={puzzleMapStyles.cardGridContainer}>
+          <span className={puzzleMapStyles.title}>
+            Nearest Puzzles From Map Center:
+          </span>
+          <div className={puzzleMapStyles.cardGrid}>
+            <CardGrid
+              cardList={puzzleInstances
+                .filter(
+                  instance =>
+                    difficultySelected[instance.puzzle.difficulty] === true
+                )
+                .map((instance, index) => {
+                  return {
+                    ...instance.puzzle,
+                    content: instance.address,
+                    buttonActions: [
+                      {
+                        text: 'Solve Online',
+                        style: 'primary',
+                        link: `/puzzles/${instance.id}`
+                      },
+                      {
+                        text: 'View On Map',
+                        style: 'secondary',
+                        action: () => setMapCenterFromInstanceIndex(index)
+                      }
+                    ]
+                  };
+                })}
+            />
+          </div>
         </div>
       </div>
     </main>

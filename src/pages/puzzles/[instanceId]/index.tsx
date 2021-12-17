@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
 import { Prisma, Puzzle } from '@prisma/client';
-import { Button, Header } from '../../../components/Global';
+import { Button, Difficulty, Header } from '../../../components/Global';
 import { FeedbackGif, PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
@@ -77,8 +77,10 @@ const PuzzlePage = ({
       <main className={`${styles.wrapper} ${styles.cardSpacer}`}>
         <section>
           <div>
-            <h2>{puzzle.name}</h2>
-            <p className={styles.difficulty}>{puzzle.difficulty}</p>
+            <h1>{puzzle.name}</h1>
+            <p>
+              Difficulty: <Difficulty difficulty={puzzle.difficulty} />
+            </p>
             <p>Find at: {puzzleInstance.address}</p>
             <p className={styles.hint}>Hint: {puzzleInstance.hint}</p>
           </div>
@@ -86,7 +88,7 @@ const PuzzlePage = ({
         <section className={`${styles.card}`}>
           <div className={styles.text}>
             <div className={styles.cardHeader}>
-              <h3 className={styles.title}>Description</h3>
+              <h2 className={styles.title}>Description</h2>
             </div>
             <div className={styles.cardContent}>
               <div>{puzzle.content}</div>
@@ -104,7 +106,7 @@ const PuzzlePage = ({
         <section className={`${styles.card}`}>
           <div className={styles.text}>
             <div className={styles.cardHeader}>
-              <h3 className={styles.title}>Example</h3>
+              <h2 className={styles.title}>Example</h2>
             </div>
             <div className={styles.cardContent}>
               <div>{puzzle.exampleContent}</div>
@@ -120,17 +122,19 @@ const PuzzlePage = ({
           </div>
         </section>
         <section className={styles.quest}>
-          <h3 className={styles.title}>Quest</h3>
+          <h2 className={styles.title}>Quest</h2>
           <p className={styles.question}>{puzzle.question}</p>
           {isRecentCorrect !== null && feedbackGifSrc && (
             <FeedbackGif success={isRecentCorrect} src={feedbackGifSrc} />
           )}
-          <PuzzleInput
-            type={puzzle.inputType}
-            placeholder={'Enter your answer'}
-            options={puzzle.variables['options']}
-            setAnswer={setAnswer}
-          />
+          <div className={styles.inputs}>
+            <PuzzleInput
+              type={puzzle.inputType}
+              placeholder={'Enter your answer'}
+              options={puzzle.variables['options']}
+              setAnswer={setAnswer}
+            />
+          </div>
           {isAuthenticated ? (
             <Button
               style={'primary'}
@@ -144,6 +148,7 @@ const PuzzlePage = ({
             <Button
               style={'primary'}
               content={'Login to Submit'}
+              arrowDirection={'right'}
               onClick={() => signIn()}
             />
           )}

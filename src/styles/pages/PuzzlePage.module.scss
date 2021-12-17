@@ -3,8 +3,7 @@
 @import 'src/styles/abstracts/_mixins/text';
 
 .wrapper {
-  @include wrapper;
-  margin: 0 5rem;
+  padding: 1rem 1.5rem;
 }
 
 .cardSpacer {
@@ -36,6 +35,8 @@
 
       .title {
         margin: 0;
+        font-size: 1.5rem;
+        line-height: 1rem;
       }
     }
 
@@ -60,23 +61,6 @@
   }
 }
 
-.difficulty {
-  @include font-header-bold;
-  font-size: 1rem;
-
-  .easy {
-    color: $green;
-  }
-
-  .medium {
-    color: $blue;
-  }
-
-  .hard {
-    color: $red;
-  }
-}
-
 .hint {
   color: $grey;
 }
@@ -84,11 +68,13 @@
 .quest {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   .title {
-    margin: 0 auto;
+    margin: 0.5rem 0;
+  }
+
+  .inputs {
+    margin-bottom: 1rem;
   }
 
   .question {

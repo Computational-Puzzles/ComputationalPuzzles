@@ -1,5 +1,7 @@
 import React from 'react';
 import { PuzzleInputProps } from '../../../types/puzzle';
+import { Input } from '../../Global';
+import { set } from 'next-auth/server/lib/cookie';
 
 const PuzzleInput = ({
   type,
@@ -9,11 +11,12 @@ const PuzzleInput = ({
 }: PuzzleInputProps) => {
   if (type === 'TEXT')
     return (
-      // TODO: use Input component
-      <input
-        name={'puzzleAnswer'}
+      <Input
+        type={'text'}
+        id={'puzzleAnswer'}
+        required={true}
         placeholder={placeholder}
-        onChange={e => setAnswer(e.currentTarget.value)}
+        setInputVal={setAnswer}
       />
     );
   if (type === 'MCQ') {
