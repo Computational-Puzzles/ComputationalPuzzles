@@ -1,10 +1,7 @@
 import axios from 'axios';
-import { env } from '../../next.config.js';
-
-const { baseUrl } = env;
 
 const Axios = axios.create({
-  baseURL: baseUrl,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   }

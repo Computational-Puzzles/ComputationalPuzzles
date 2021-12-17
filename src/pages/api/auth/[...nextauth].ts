@@ -8,10 +8,6 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 import { checkHash } from '../../../utils/password';
 
-import { env } from '../../../../next.config.js';
-
-const { google, authSecret } = env;
-
 const passwordMinLength = 8;
 
 const prisma = new PrismaClient();
@@ -19,9 +15,10 @@ const prisma = new PrismaClient();
 const Auth = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
+    // @ts-ignore
     jwt: true
   },
-  secret: authSecret,
+  secret: process.env.AUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -56,8 +53,8 @@ const Auth = NextAuth({
       }
     }),
     GoogleProvider({
-      clientId: google.clientId,
-      clientSecret: google.clientSecret
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     })
   ],
   pages: {
