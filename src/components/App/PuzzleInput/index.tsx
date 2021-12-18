@@ -1,7 +1,6 @@
 import React from 'react';
 import { PuzzleInputProps } from '../../../types/puzzle';
 import { Input } from '../../Global';
-import { set } from 'next-auth/server/lib/cookie';
 
 const PuzzleInput = ({
   type,
