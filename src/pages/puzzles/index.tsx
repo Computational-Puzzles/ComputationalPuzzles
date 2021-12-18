@@ -44,7 +44,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
               // TODO: link to view on map
               return {
                 name: instance.puzzle.name,
-                content: `${instance.puzzle.content[0]} ...`,
+                content: [`${instance.puzzle.content[0]} ...`],
                 difficulty: instance.puzzle.difficulty,
                 buttonActions: [
                   {
