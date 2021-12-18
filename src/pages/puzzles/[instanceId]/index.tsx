@@ -82,7 +82,6 @@ const PuzzlePage = ({
               Difficulty: <Difficulty difficulty={puzzle.difficulty} />
             </p>
             <p>Find at: {puzzleInstance.address}</p>
-            <p className={styles.hint}>Hint: {puzzleInstance.hint}</p>
           </div>
         </section>
         <section className={`${styles.card}`}>
@@ -91,7 +90,11 @@ const PuzzlePage = ({
               <h2 className={styles.title}>Description</h2>
             </div>
             <div className={styles.cardContent}>
-              <div>{puzzle.content}</div>
+              <div>
+                {puzzle.content.map((text, index) => (
+                  <p key={`content_text_${index}`}>{text}</p>
+                ))}
+              </div>
             </div>
           </div>
           <div className={styles.image}>
@@ -109,7 +112,11 @@ const PuzzlePage = ({
               <h2 className={styles.title}>Example</h2>
             </div>
             <div className={styles.cardContent}>
-              <div>{puzzle.exampleContent}</div>
+              <div>
+                {puzzle.exampleContent.map((text, index) => (
+                  <p key={`example_content_text_${index}`}>{text}</p>
+                ))}
+              </div>
             </div>
           </div>
           <div className={styles.image}>

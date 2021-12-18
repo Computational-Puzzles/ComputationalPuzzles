@@ -87,9 +87,9 @@ model Puzzle {
   createdAt       DateTime         @default(now()) @map(name: "created_at")
   updatedAt       DateTime         @updatedAt @map(name: "updated_at")
   difficulty      Difficulty       @default(EASY)
-  content         String?
+  content         String[]
   imageUrl        String?          @map(name: "image_url")
-  exampleContent  String?          @map(name: "example_content")
+  exampleContent  String[]         @map(name: "example_content")
   exampleImageUrl String?          @map(name: "example_image_url")
   isGenerated     Boolean          @map(name: "is_generated")
   question        String

@@ -4,8 +4,8 @@
   border-left: 0.6rem solid;
   border-right: 0.6rem solid;
   border-radius: 0.2rem;
-  height: auto;
-  width: auto;
+  display: flex;
+  justify-content: space-around;
 
   div {
     img {

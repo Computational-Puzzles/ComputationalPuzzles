@@ -103,7 +103,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
                 .map((instance, index) => {
                   return {
                     ...instance.puzzle,
-                    content: instance.address,
+                    content: `Find at: ${instance.address}`,
                     buttonActions: [
                       {
                         text: 'Solve Online',
