@@ -21,8 +21,8 @@ const SignUpPage = () => {
       return false;
     }
     if (status === 'authenticated') {
-      if (window.confirm('Would you like to make another account?'))
-        window.alert('Please log out before you make an other account.');
+      if (confirm('Would you like to make another account?'))
+        alert('Please log out before you make an other account.');
       event.preventDefault();
       return false;
     } else {
@@ -66,7 +66,7 @@ const SignUpPage = () => {
           Already have an account?
         </a>
         <div className={styles.buttonContainer}>
-          <Button style={'primary'} content={'Sign Up'} onClick={() => {}} />
+          <Button style={'primary'} content={'Sign Up'} type={'submit'} onClick={() => {}} />
         </div>
       </form>
     </main>
