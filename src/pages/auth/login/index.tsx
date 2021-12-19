@@ -46,7 +46,7 @@ export default function LoginPage({ providers, csrfToken }) {
           placeholder={'Password'}
         />
         <a className={styles.link} href={'/auth/signup'}>
-          Do not have an account?
+          Don&apos;t have an account?
         </a>
         <div className={styles.buttonContainer}>
           <Button
