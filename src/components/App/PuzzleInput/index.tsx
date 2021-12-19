@@ -2,12 +2,20 @@ import React from 'react';
 import { PuzzleInputProps } from '../../../types/puzzle';
 import { Input } from '../../Global';
 
+import styles from './PuzzleInput.module.scss';
+
 const PuzzleInput = ({
   type,
   placeholder,
   options,
+  answer,
   setAnswer
 }: PuzzleInputProps) => {
+  const handleCLick = e => {
+    const inputElement = e.currentTarget.getElementsByTagName('INPUT')[0];
+    setAnswer(inputElement.value);
+  };
+
   if (type === 'TEXT')
     return (
       <Input
@@ -20,17 +28,21 @@ const PuzzleInput = ({
     );
   if (type === 'MCQ') {
     return (
-      <div>
+      <div className={`${styles.answerOptionDrawer}`}>
         {options.map((option, i) => (
-          <label key={`answerOption${i}`}>
-            {option}
+          <div
+            key={`answerOption${i}`}
+            className={`${styles.answerOption} ${answer === option && styles.selected}`}
+            onClick={e => handleCLick(e)}
+          >
             <input
               name={'puzzleAnswer'}
               type="radio"
               value={option}
-              onChange={e => setAnswer(e.currentTarget.value)}
+              hidden={true}
             />
-          </label>
+            <label>{option}</label>
+          </div>
         ))}
       </div>
     );

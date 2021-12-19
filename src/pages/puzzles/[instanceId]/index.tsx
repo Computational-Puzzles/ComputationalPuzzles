@@ -139,6 +139,7 @@ const PuzzlePage = ({
               type={puzzle.inputType}
               placeholder={'Enter your answer'}
               options={puzzle.variables['options']}
+              answer={answer}
               setAnswer={setAnswer}
             />
           </div>

@@ -31,7 +31,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
                 return (
                   searchNFilter.filterFields[instance.puzzle.difficulty] ===
                     true &&
-                  instance.puzzle.name.includes(searchNFilter.searchText)
+                  instance.puzzle.name.toLowerCase().includes(searchNFilter.searchText.toLowerCase())
                 );
               } else {
                 return (
@@ -44,7 +44,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
               // TODO: link to view on map
               return {
                 name: instance.puzzle.name,
-                content: [`${instance.puzzle.content[0]} ...`],
+                content: [`${instance.puzzle.content.join('\n').slice(0, 150)} ...`],
                 difficulty: instance.puzzle.difficulty,
                 buttonActions: [
                   {
