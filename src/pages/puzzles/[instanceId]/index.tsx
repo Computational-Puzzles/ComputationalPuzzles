@@ -132,7 +132,9 @@ const PuzzlePage = ({
           <h2 className={styles.title}>Quest</h2>
           <p className={styles.question}>{puzzle.question}</p>
           {isRecentCorrect !== null && feedbackGifSrc && (
-            <FeedbackGif success={isRecentCorrect} src={feedbackGifSrc} />
+            <div className={styles.feedbackContainer}>
+              <FeedbackGif success={isRecentCorrect} src={feedbackGifSrc} />
+            </div>
           )}
           <div className={styles.inputs}>
             <PuzzleInput
