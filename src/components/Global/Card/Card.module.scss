@@ -14,12 +14,9 @@
   background-color: $white;
   border-radius: 0.8rem;
   border: 0.15rem solid $black;
-  max-width: 40rem;
+  width: 100%;
   height: auto;
   padding: 1.5rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 1;
 
   .cardHeader {
     display: flex;
@@ -31,23 +28,6 @@
       @include font-header-black;
       font-size: 2rem;
       margin: 0;
-    }
-
-    .difficulty {
-      @include font-header-bold;
-      font-size: 1rem;
-
-      .easy {
-        color: $green;
-      }
-
-      .medium {
-        color: $blue;
-      }
-
-      .hard {
-        color: $red;
-      }
     }
   }
 

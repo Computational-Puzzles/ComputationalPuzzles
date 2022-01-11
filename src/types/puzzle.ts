@@ -4,6 +4,7 @@ export type PuzzleInputProps = {
   type: 'TEXT' | 'MCQ';
   placeholder?: string;
   options?: string[];
+  answer: string;
   setAnswer: (value) => void;
 };
 

@@ -25,45 +25,41 @@ const Header = ({ profilePicture }: HeaderProps) => {
 
   return (
     <div className={styles.header}>
-      <div className={styles.content}>
-        <div className={styles.left}>
-          <Logo showMark={true} showType={true} link={true} />
-          <div className={styles.tabs}>
-            <Link href={'/puzzles/map'} passHref>
-              <button
-                className={
-                  router.asPath === '/puzzles/map' ? styles.active : ''
-                }
-                onClick={() => setActiveTab(0)}
-              >
-                <span>Puzzles Map</span>
-              </button>
-            </Link>
-            <Link href={'/puzzles'} passHref>
-              <button
-                className={router.asPath === '/puzzles' ? styles.active : ''}
-                onClick={() => setActiveTab(1)}
-              >
-                <span>Puzzles List</span>
-              </button>
-            </Link>
-          </div>
+      <div className={styles.left}>
+        <Logo showMark={true} showType={true} link={true} />
+        <div className={styles.tabs}>
+          <Link href={'/puzzles/map'} passHref>
+            <a
+              className={router.asPath === '/puzzles/map' ? styles.active : ''}
+              onClick={() => setActiveTab(0)}
+            >
+              <span>Puzzles Map</span>
+            </a>
+          </Link>
+          <Link href={'/puzzles'} passHref>
+            <a
+              className={router.asPath === '/puzzles' ? styles.active : ''}
+              onClick={() => setActiveTab(1)}
+            >
+              <span>Puzzles List</span>
+            </a>
+          </Link>
         </div>
-        <div className={styles.right}>
-          {validAdmin && (
-            <Button style={'flat'} content={'Admin'} link={'/admin'} />
-          )}
-          <Button style={'flat'} content={'Profile'} link={'/auth/profile'} />
-          {profilePicture ? (
-            <Image
-              className={styles.profileImg}
-              src={profilePicture}
-              alt="profile"
-            />
-          ) : (
-            <span className={styles.profileImg}> </span>
-          )}
-        </div>
+      </div>
+      <div className={styles.right}>
+        {validAdmin && (
+          <Button style={'flat'} content={'Admin'} link={'/admin'} />
+        )}
+        <Button style={'outline'} content={'Profile'} link={'/auth/profile'} />
+        {profilePicture ? (
+          <Image
+            className={styles.profileImg}
+            src={profilePicture}
+            alt="profile"
+          />
+        ) : (
+          <span className={styles.profileImg}> </span>
+        )}
       </div>
     </div>
   );

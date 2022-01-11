@@ -21,9 +21,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
   return (
     <>
       <Header />
-      <div className={styles.searchAndFilter}>
-        <SearchAndFilter setSearchNFilterVal={setSearchNFilter} />
-      </div>
+      <SearchAndFilter setSearchNFilterVal={setSearchNFilter} />
 
       <div className={styles.cardGrid}>
         <CardGrid
@@ -33,7 +31,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
                 return (
                   searchNFilter.filterFields[instance.puzzle.difficulty] ===
                     true &&
-                  instance.puzzle.name.includes(searchNFilter.searchText)
+                  instance.puzzle.name.toLowerCase().includes(searchNFilter.searchText.toLowerCase())
                 );
               } else {
                 return (
@@ -46,7 +44,7 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
               // TODO: link to view on map
               return {
                 name: instance.puzzle.name,
-                content: instance.puzzle.content,
+                content: [`${instance.puzzle.content.join('\n').slice(0, 150)} ...`],
                 difficulty: instance.puzzle.difficulty,
                 buttonActions: [
                   {

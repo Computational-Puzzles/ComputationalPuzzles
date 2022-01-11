@@ -1,79 +1,67 @@
 @import '../../../styles/abstracts/variables';
-@import '../../../styles/abstracts/_mixins/text';
-@import '../../../styles/abstracts/_mixins/transitions';
-
-$bar-color: $primary-200;
+@import '../../../styles/abstracts/mixins';
 
 .header {
-  max-width: 100vw;
+  width: 100vw;
   height: 5rem;
+  padding: 0 1.5rem;
   background-color: $white;
-  padding: 0 3vw;
   border-bottom: rgba($grey, 0.05) 1px solid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 
-  .content {
-    width: 100%;
-    height: 100%;
+  .left {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
 
-    .left {
+    .tabs {
+      margin-left: 5rem;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
+      gap: 1.5rem;
 
-      .tabs {
-        margin-left: 5rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
+      a {
+        @include smooth-transition;
+        @include center;
+        height: 5rem;
+        border: none;
+        border-bottom: 0.3rem solid $transparent;
 
-        button {
-          @include smooth-transition;
-          height: 4.8rem;
-          border: none;
-          border-bottom: 0.35rem solid $white;
-          display: flex;
-          align-items: center;
-          margin: 0 0.2rem;
-          background-color: $white;
-          cursor: pointer;
-
-          span {
-            @include font-header-bold;
-            font-size: 1.2rem;
-            margin: 0 0.5rem;
-          }
+        &:hover {
+          border-bottom: 0.3rem solid $grey-transparency;
         }
 
-        .active {
-          border-bottom: 0.35rem solid $bar-color;
+        span {
+          @include font-header-bold;
+          font-size: 1.2rem;
+          margin: 0 0.5rem;
+        }
+      }
+
+      .active {
+        border-bottom: 0.3rem solid $primary-200;
+
+        &:hover {
+          border-bottom: 0.3rem solid $primary-200;
         }
       }
     }
+  }
 
-    .right {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
+  .right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
-      button {
-        border-radius: 0.5rem;
-        width: 4rem;
-        background-color: transparent;
-        border: 0.13rem solid $black;
-      }
-
-      .profileImg {
-        height: 2rem;
-        width: 2rem;
-        border-radius: 10rem;
-        margin-left: 1rem;
-        border: 0.13rem solid $black;
-      }
+    .profileImg {
+      height: 3rem;
+      width: 3rem;
+      border-radius: 999px;
+      margin-left: 1rem;
+      border: 0.13rem solid $black;
     }
   }
 }

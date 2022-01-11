@@ -20,23 +20,21 @@ const SearchAndFilter = ({ setSearchNFilterVal }: SearchAndFilterProps) => {
   }, [searchText, filterFields, setSearchNFilterVal]);
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.input}>
-          <Input
-            type={'text'}
-            id={'search'}
-            required={false}
-            labelText={'Puzzle List'}
-            placeholder={'Search'}
-            setInputVal={setSearchText}
-          />
-        </div>
-        <div>
-          <Filter setFilterFields={setFilterFields} />
-        </div>
+    <div className={styles.subHeader}>
+      <div className={styles.leftContent}>
+        <h1>Puzzle List</h1>
+        <Input
+          type={'text'}
+          id={'search'}
+          required={false}
+          placeholder={'Search'}
+          setInputVal={setSearchText}
+        />
       </div>
-    </>
+      <div>
+        <Filter setFilterFields={setFilterFields} />
+      </div>
+    </div>
   );
 };
 

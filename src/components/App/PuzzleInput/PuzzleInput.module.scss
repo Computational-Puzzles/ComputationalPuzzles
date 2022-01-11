@@ -1,0 +1,31 @@
+@import '../../../styles/abstracts/_mixins/text.scss';
+@import '../../../styles/abstracts/variables';
+
+.answerOptionDrawer {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-between;
+
+  .answerOption {
+    @include font-button;
+    flex: 1;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border-radius: 0.8rem;
+    border: 0.15rem solid $black;
+
+    &:hover {
+      border-color: $primary !important;
+    }
+
+    &.selected {
+      color: $light;
+      background-color: $primary;
+
+      &:hover {
+        background-color: $primary-200;
+      }
+    }
+  }
+}

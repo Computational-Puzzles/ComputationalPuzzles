@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import { resetPassword } from '../../../services';
+import {Header} from "../../../components/Global";
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
@@ -13,13 +14,13 @@ const ProfilePage = () => {
   const [password, setPassword] = React.useState('');
   const [confirmPass, setConfirmPass] = React.useState('');
 
-  const handleChangePassword = () => {
+  const handleChangePassword = async () => {
     const email = session?.user?.email;
 
     if (!email || !oldPass || !password || !confirmPass) return;
     if (password !== confirmPass) return;
 
-    resetPassword({
+    const success = await resetPassword({
       email,
       oldPassword: oldPass,
       newPassword: password
@@ -34,6 +35,7 @@ const ProfilePage = () => {
 
   return (
     <>
+      <Header />
       <h1>Profile</h1>
       {status === 'authenticated' && (
         <>
@@ -59,7 +61,7 @@ const ProfilePage = () => {
           </p>
 
           <h2>Reset password</h2>
-          <form onSubmit={() => handleChangePassword()}>
+          <form>
             <input
               type="password"
               placeholder="Old password"
@@ -80,7 +82,7 @@ const ProfilePage = () => {
               value={confirmPass}
               onChange={e => setConfirmPass(e.target.value)}
             />
-            <button type="submit">Reset password</button>
+            <button type='button' onClick={handleChangePassword}>Reset password</button>
           </form>
         </>
       )}

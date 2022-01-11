@@ -3,8 +3,7 @@
 @import 'src/styles/abstracts/_mixins/text';
 
 .wrapper {
-  @include wrapper;
-  margin: 0 5rem;
+  padding: 1rem 1.5rem;
 }
 
 .cardSpacer {
@@ -23,6 +22,8 @@
   justify-content: space-between;
 
   .text {
+    flex: 0 0 65%;
+    max-width: 65%;
     width: 100%;
     padding: 2rem 2rem;
 
@@ -36,6 +37,8 @@
 
       .title {
         margin: 0;
+        font-size: 1.5rem;
+        line-height: 1rem;
       }
     }
 
@@ -49,31 +52,21 @@
   }
 
   .image {
+    flex: 0 0 35%;
+    max-width: 35%;
+    position: relative;
+    width: 100%;
+    height: auto;
+
     display: flex;
     flex-direction: row;
     align-items: center;
-    position: relative;
 
     img {
       border-radius: 0.8rem;
+      width: 100% !important;
+      height: auto !important;
     }
-  }
-}
-
-.difficulty {
-  @include font-header-bold;
-  font-size: 1rem;
-
-  .easy {
-    color: $green;
-  }
-
-  .medium {
-    color: $blue;
-  }
-
-  .hard {
-    color: $red;
   }
 }
 
@@ -84,14 +77,20 @@
 .quest {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   .title {
-    margin: 0 auto;
+    margin: 0.5rem 0;
+  }
+
+  .inputs {
+    margin-bottom: 1rem;
   }
 
   .question {
     @include font-header-bold;
   }
+}
+
+.feedbackContainer {
+  margin: 3rem 0;
 }

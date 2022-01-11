@@ -14,7 +14,7 @@ const FeedbackGif = ({ success, src }: FeedbackGifProps) => {
         layout={'intrinsic'}
         height={'100%'}
         width={'100%'}
-        objectFit={'contain'}
+        objectFit={'fill'}
         alt={`${success ? 'correct answer' : 'incorrect answer'}`}
       />
     </div>

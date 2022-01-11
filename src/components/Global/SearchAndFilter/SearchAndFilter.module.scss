@@ -1,8 +1,45 @@
-.container {
+@import '../../../styles/abstracts/variables';
+
+.subHeader {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  gap: 0.5rem;
+  align-items: center;
+  border-bottom: $grey-transparency 1px solid;
+  padding: 1rem 1.5rem;
+
+  .leftContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      line-height: unset;
+      margin: 0;
+    }
+  }
 }
-.input {
-  flex: 1;
+
+.subHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: $grey-transparency 1px solid;
+  padding: 1rem 1.5rem;
+
+  .leftContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      line-height: unset;
+      margin: 0;
+    }
+  }
 }
