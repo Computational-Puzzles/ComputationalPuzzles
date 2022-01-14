@@ -67,23 +67,25 @@ const PuzzlePage = ({
             throw new Error('Almost there! Try Again');
           }
         }
-      }
+      };
 
       toast.promise(submissionInstance(), {
         loading: 'Submitting your answer... ⏳',
         success: 'Correct! Nice work!',
-        error: (err) => {
+        error: err => {
           return err.message;
-        },
+        }
       });
     } else {
-      toast.error((t) => (
+      toast.error(t => (
         <span>
           You must be logged in to submit an answer.
-          <button onClick={ () => {
-            toast.dismiss(t.id);
-            Router.push('/auth/signin')
-          } }>
+          <button
+            onClick={() => {
+              toast.dismiss(t.id);
+              Router.push('/auth/signin');
+            }}
+          >
             Login
           </button>
         </span>
@@ -96,94 +98,98 @@ const PuzzlePage = ({
     <>
       <Header />
       <Toaster />
-      <main className={ `${styles.wrapper} ${styles.cardSpacer}` }>
+      <main className={`${styles.wrapper} ${styles.cardSpacer}`}>
         <section>
           <div>
-            <h1>{ puzzle.name }</h1>
+            <h1>{puzzle.name}</h1>
             <p>
-              Difficulty: <Difficulty difficulty={ puzzle.difficulty } />
+              Difficulty: <Difficulty difficulty={puzzle.difficulty} />
             </p>
-            <p>Find at: { puzzleInstance.address }</p>
+            <p>Find at: {puzzleInstance.address}</p>
           </div>
         </section>
-        <section className={ `${styles.card}` }>
-          <div className={ styles.text }>
-            <div className={ styles.cardHeader }>
-              <h2 className={ styles.title }>Description</h2>
+        <section className={`${styles.card}`}>
+          <div className={styles.text}>
+            <div className={styles.cardHeader}>
+              <h2 className={styles.title}>Description</h2>
             </div>
-            <div className={ styles.cardContent }>
+            <div className={styles.cardContent}>
               <div>
-                { puzzle.content.map((text, index) => (
-                  <p key={ `content_text_${index}` }>{ text }</p>
-                )) }
+                {puzzle.content.map((text, index) => (
+                  <p key={`content_text_${index}`}>{text}</p>
+                ))}
               </div>
             </div>
           </div>
-          { puzzle.imageUrl && <div className={ styles.image }>
-            <Image
-              src={ puzzle.imageUrl }
-              width={ 500 }
-              height={ 500 }
-              alt={ 'puzzle image' }
-            />
-          </div> }
-        </section>
-        <section className={ `${styles.card}` }>
-          <div className={ styles.text }>
-            <div className={ styles.cardHeader }>
-              <h2 className={ styles.title }>Example</h2>
+          {puzzle.imageUrl && (
+            <div className={styles.image}>
+              <Image
+                src={puzzle.imageUrl}
+                width={500}
+                height={500}
+                alt={'puzzle image'}
+              />
             </div>
-            <div className={ styles.cardContent }>
+          )}
+        </section>
+        <section className={`${styles.card}`}>
+          <div className={styles.text}>
+            <div className={styles.cardHeader}>
+              <h2 className={styles.title}>Example</h2>
+            </div>
+            <div className={styles.cardContent}>
               <div>
-                { puzzle.exampleContent.map((text, index) => (
-                  <p key={ `example_content_text_${index}` }>{ text }</p>
-                )) }
+                {puzzle.exampleContent.map((text, index) => (
+                  <p key={`example_content_text_${index}`}>{text}</p>
+                ))}
               </div>
             </div>
           </div>
-          { puzzle.exampleImageUrl && <div className={ styles.image }>
-            <Image
-              src={ puzzle.exampleImageUrl }
-              width={ 500 }
-              height={ 500 }
-              alt={ 'example image' }
-            />
-          </div> }
-        </section>
-        <section className={ styles.quest }>
-          <h2 className={ styles.title }>Quest</h2>
-          <p className={ styles.question }>{ puzzle.question }</p>
-          { isRecentCorrect !== null && feedbackGifSrc && (
-            <div className={ styles.feedbackContainer }>
-              <FeedbackGif success={ isRecentCorrect } src={ feedbackGifSrc } />
+          {puzzle.exampleImageUrl && (
+            <div className={styles.image}>
+              <Image
+                src={puzzle.exampleImageUrl}
+                width={500}
+                height={500}
+                alt={'example image'}
+              />
             </div>
-          ) }
-          <div className={ styles.inputs }>
+          )}
+        </section>
+        <section className={styles.quest}>
+          <h2 className={styles.title}>Quest</h2>
+          <p className={styles.question}>{puzzle.question}</p>
+          {isRecentCorrect !== null && feedbackGifSrc && (
+            <div className={styles.feedbackContainer}>
+              <FeedbackGif success={isRecentCorrect} src={feedbackGifSrc} />
+            </div>
+          )}
+          <div className={styles.inputs}>
             <PuzzleInput
-              type={ puzzle.inputType }
-              placeholder={ 'Enter your answer' }
-              options={ puzzle.variables['options'] }
-              answer={ answer }
-              setAnswer={ setAnswer }
+              type={puzzle.inputType}
+              placeholder={'Enter your answer'}
+              options={puzzle.variables['options']}
+              answer={answer}
+              setAnswer={setAnswer}
             />
           </div>
-          { isAuthenticated ? (
+          {isAuthenticated ? (
             <Button
-              style={ 'primary' }
-              type={ 'submit' }
-              content={ 'Submit' }
-              onClick={ () =>
+              style={'primary'}
+              type={'submit'}
+              content={'Submit'}
+              onClick={() =>
                 handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
               }
             />
           ) : (
             <Button
-              style={ 'primary' }
-              content={ 'Login to Submit' }
-              arrowDirection={ 'right' }
-              onClick={ () => signIn() }
+              style={'primary'}
+              content={'Login to Submit'}
+              arrowDirection={'right'}
+              onClick={() => signIn()}
             />
-          ) }
+          )}
         </section>
       </main>
     </>

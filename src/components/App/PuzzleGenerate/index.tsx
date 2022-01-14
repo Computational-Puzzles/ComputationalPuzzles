@@ -31,84 +31,81 @@ const PuzzleGenerate = ({ puzzlesList }) => {
         setPuzzleInstanceData(puzzleInstance);
       }
     };
-    toast.promise(
-      puzzleInstancePromise(),
-      {
-        loading: 'Hello',
-        success: 'Success',
-        error: 'Something went wrong :(',
-      }
-    );
+    toast.promise(puzzleInstancePromise(), {
+      loading: 'Hello',
+      success: 'Success',
+      error: 'Something went wrong :('
+    });
   };
 
   return (
     <>
-      <div className={ styles.form }>
+      <div className={styles.form}>
         <h2> Make a puzzle instance </h2>
         <Input
           type="text"
           id="puzzleHint"
-          required={ true }
+          required={true}
           placeholder="Hint"
-          setInputVal={ setHint }
+          setInputVal={setHint}
         />
-        <div className={ styles.puzzleLocation }>
+        <div className={styles.puzzleLocation}>
           <Input
             type="text"
             id="puzzleLatitude"
-            required={ true }
+            required={true}
             placeholder="Latitude"
-            setInputVal={ setLatitude }
+            setInputVal={setLatitude}
           />
           <Input
             type="text"
             id="puzzleLongitude"
-            required={ true }
+            required={true}
             placeholder="Longitude"
-            setInputVal={ setLongitude }
+            setInputVal={setLongitude}
           />
           <Input
             type="text"
             id="puzzleAddress"
-            required={ true }
+            required={true}
             placeholder="Address"
-            setInputVal={ setAddress }
+            setInputVal={setAddress}
           />
         </div>
         <div>
-          { puzzlesList.length > 0 && (
+          {puzzlesList.length > 0 && (
             <select
-              className={ styles.selections }
-              value={ puzzleId }
-              onChange={ e => setPuzzleId(e.currentTarget.value) }
+              className={styles.selections}
+              value={puzzleId}
+              onChange={e => setPuzzleId(e.currentTarget.value)}
             >
               <option selected>Choose a puzzle</option>
-              { puzzlesList.map((puzzle, index) => (
-                <option value={ puzzle.id } key={ `puzzle${index}` }>
-                  { puzzle.name }
+              {puzzlesList.map((puzzle, index) => (
+                <option value={puzzle.id} key={`puzzle${index}`}>
+                  {puzzle.name}
                 </option>
-              )) }
+              ))}
             </select>
-          ) }
+          )}
         </div>
         <div>
           <Button
             style="primary"
             type="submit"
             size="sm"
-            content={ 'Submit' }
+            content={'Submit'}
             arrowDirection="right"
-            onClick={ () => handleSubmit() }
+            onClick={() => handleSubmit()}
           />
           <Toaster />
         </div>
-        { puzzleInstanceData && (
-          <div className={ styles.qrCode }>
-            {/** TODO: Create link to puzzle map page */ }
-            {/** TODO: Make it copiable */ }
-            <QRGenerator text={ JSON.stringify(puzzleInstanceData) } />
+        {puzzleInstanceData && (
+          <div className={styles.qrCode}>
+            {/** TODO: Create link to puzzle map page */}
+            {/** TODO: Make it copiable */}
+            <QRGenerator text={JSON.stringify(puzzleInstanceData)} />
           </div>
-        ) }
+        )}
       </div>
     </>
   );
