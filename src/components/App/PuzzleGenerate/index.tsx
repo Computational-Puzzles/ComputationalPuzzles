@@ -1,100 +1,114 @@
 import * as React from 'react';
 import { useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
+import toast, { Toaster } from 'react-hot-toast';
+
 import { Button, Input } from '../../Global';
 import { QRGenerator } from '..';
 import { createPuzzleInstance } from '../../../services';
 
 const PuzzleGenerate = ({ puzzlesList }) => {
   const [hint, setHint] = useState('');
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
   const [address, setAddress] = useState('');
   const [puzzleId, setPuzzleId] = useState('');
   const [puzzleInstanceData, setPuzzleInstanceData] = useState();
 
   const handleSubmit = () => {
-    puzzleId &&
-      createPuzzleInstance(
+    const puzzleInstancePromise = async () => {
+      const puzzleInstance = await createPuzzleInstance(
         parseInt(puzzleId),
         parseFloat(longitude),
         parseFloat(latitude),
         address,
         hint
-      ).then(puzzleInstance => {
-        puzzleInstance.error
-          ? alert(`Error: ${puzzleInstance.message}`)
-          : setPuzzleInstanceData(puzzleInstance);
-      });
+      );
+
+      if (puzzleInstance.error) {
+        throw new Error(puzzleInstance.message);
+      } else {
+        setPuzzleInstanceData(puzzleInstance);
+      }
+    };
+    toast.promise(
+      puzzleInstancePromise(),
+      {
+        loading: 'Hello',
+        success: 'Success',
+        error: 'Something went wrong :(',
+      }
+    );
   };
 
   return (
     <>
-      <div className={styles.form}>
+      <div className={ styles.form }>
         <h2> Make a puzzle instance </h2>
         <Input
           type="text"
           id="puzzleHint"
-          required={true}
+          required={ true }
           placeholder="Hint"
-          setInputVal={setHint}
+          setInputVal={ setHint }
         />
-        <div className={styles.puzzleLocation}>
+        <div className={ styles.puzzleLocation }>
           <Input
             type="text"
             id="puzzleLatitude"
-            required={true}
+            required={ true }
             placeholder="Latitude"
-            setInputVal={setLatitude}
+            setInputVal={ setLatitude }
           />
           <Input
             type="text"
             id="puzzleLongitude"
-            required={true}
+            required={ true }
             placeholder="Longitude"
-            setInputVal={setLongitude}
+            setInputVal={ setLongitude }
           />
           <Input
             type="text"
             id="puzzleAddress"
-            required={true}
+            required={ true }
             placeholder="Address"
-            setInputVal={setAddress}
+            setInputVal={ setAddress }
           />
         </div>
         <div>
-          {puzzlesList.length > 0 && (
+          { puzzlesList.length > 0 && (
             <select
-              className={styles.selections}
-              value={puzzleId}
-              onChange={e => setPuzzleId(e.currentTarget.value)}
+              className={ styles.selections }
+              value={ puzzleId }
+              onChange={ e => setPuzzleId(e.currentTarget.value) }
             >
               <option selected>Choose a puzzle</option>
-              {puzzlesList.map((puzzle, index) => (
-                <option value={puzzle.id} key={`puzzle${index}`}>
-                  {puzzle.name}
+              { puzzlesList.map((puzzle, index) => (
+                <option value={ puzzle.id } key={ `puzzle${index}` }>
+                  { puzzle.name }
                 </option>
-              ))}
+              )) }
             </select>
-          )}
+          ) }
         </div>
         <div>
           <Button
             style="primary"
             type="submit"
             size="sm"
-            content={'Submit'}
+            content={ 'Submit' }
             arrowDirection="right"
-            onClick={() => handleSubmit()}
+            onClick={ () => handleSubmit() }
           />
+          <Toaster />
         </div>
-        {puzzleInstanceData && (
-          <div className={styles.qrCode}>
-            {/** TODO: Create link to puzzle map page */}
-            {/** TODO: Make it copiable */}
-            <QRGenerator text={JSON.stringify(puzzleInstanceData)} />
+        { puzzleInstanceData && (
+          <div className={ styles.qrCode }>
+            {/** TODO: Create link to puzzle map page */ }
+            {/** TODO: Make it copiable */ }
+            <QRGenerator text={ JSON.stringify(puzzleInstanceData) } />
           </div>
-        )}
+        ) }
       </div>
     </>
   );
