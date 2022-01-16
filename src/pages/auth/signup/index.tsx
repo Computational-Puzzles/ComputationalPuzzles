@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Router from 'next/router';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { signUp } from '../../../services';
 import { Logo, Input, Button } from '../../../components/Global';
 import styles from '../../../styles/pages/signup.module.scss';
@@ -30,7 +30,7 @@ const SignUpPage = () => {
         <span style={{ display: 'flex', flexDirection: 'column' }}>
           <b>This email has already been used.</b>
           <p style={{ fontSize: '.8rem', marginTop: '-.1rem' }}>
-            You might want to change your email
+            Would you like to make another account?
           </p>
           <div
             style={{
@@ -51,7 +51,24 @@ const SignUpPage = () => {
                 toast.dismiss(t.id);
               }}
             >
-              OK
+              No
+            </button>
+            <button
+              style={{
+                height: '1.8rem',
+                width: '3rem',
+                fontSize: '.8rem',
+                borderRadius: '.5rem'
+              }}
+              onClick={() => {
+                toast.dismiss(t.id);
+                toast('Please log out before you make an other account', {
+                  icon: '⚠️',
+                  duration: 2000
+                });
+              }}
+            >
+              Yes
             </button>
           </div>
         </span>
@@ -106,7 +123,6 @@ const SignUpPage = () => {
           />
         </div>
       </form>
-      <Toaster />
     </main>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { Button, Input } from '../../Global';
 import { QRGenerator } from '..';
@@ -32,7 +32,7 @@ const PuzzleGenerate = ({ puzzlesList }) => {
       }
     };
     toast.promise(puzzleInstancePromise(), {
-      loading: 'Hello',
+      loading: 'Making your puzzle instance... ⚙️',
       success: 'Success',
       error: 'Something went wrong :('
     });
@@ -97,7 +97,6 @@ const PuzzleGenerate = ({ puzzlesList }) => {
             arrowDirection="right"
             onClick={() => handleSubmit()}
           />
-          <Toaster />
         </div>
         {puzzleInstanceData && (
           <div className={styles.qrCode}>

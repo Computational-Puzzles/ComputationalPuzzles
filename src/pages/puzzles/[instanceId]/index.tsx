@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
 import { Prisma, Puzzle } from '@prisma/client';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { Button, Difficulty, Header } from '../../../components/Global';
 import { FeedbackGif, PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
@@ -97,7 +97,6 @@ const PuzzlePage = ({
   return (
     <>
       <Header />
-      <Toaster />
       <main className={`${styles.wrapper} ${styles.cardSpacer}`}>
         <section>
           <div>
