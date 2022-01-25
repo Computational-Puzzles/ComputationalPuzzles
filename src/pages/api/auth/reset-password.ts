@@ -51,7 +51,7 @@ const resetPasswordHandler = async (
       id: user.id
     },
     data: {
-      password: hashFunction(newPassword)
+      password: await hashFunction(newPassword)
     }
   });
 

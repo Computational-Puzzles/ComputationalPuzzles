@@ -1,11 +1,11 @@
-import { sha256 } from 'hash.js';
+import argon2 from "argon2";
 
-const hashFunction = (secret: string) => {
-  return sha256().update(secret).digest('hex');
+const hashFunction = async (secret: string) => {
+  return argon2.hash(secret, {type: argon2.argon2id});
 };
 
-const checkHash = (checker: string, hash: string) => {
-  return hashFunction(checker) === hash;
+const checkHash = async (checker: string, hash: string) => {
+  return await hashFunction(checker) === hash;
 };
 
 export { hashFunction, checkHash };

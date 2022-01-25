@@ -18,7 +18,7 @@ const signUpHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password } = req.body;
 
   try {
-    const hashPassword = hashFunction(password);
+    const hashPassword = await hashFunction(password);
     const user = await signUp({ email, password: hashPassword });
     res.status(200).json(user);
   } catch (err) {
