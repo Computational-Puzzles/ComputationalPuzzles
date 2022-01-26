@@ -30,6 +30,8 @@ services:
 volumes:
   app:
   db_data:
+  mock_db_data:
 
 networks:
   app_network:
+  test_network:
