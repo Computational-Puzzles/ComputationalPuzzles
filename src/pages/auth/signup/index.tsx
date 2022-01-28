@@ -66,7 +66,12 @@ const SignUpPage = () => {
           Already have an account?
         </a>
         <div className={styles.buttonContainer}>
-          <Button style={'primary'} content={'Sign Up'} type={'submit'} onClick={() => {}} />
+          <Button
+            style={'primary'}
+            content={'Sign Up'}
+            type={'submit'}
+            onClick={() => {}}
+          />
         </div>
       </form>
     </main>
