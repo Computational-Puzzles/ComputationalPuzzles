@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import Router from 'next/router';
 import toast from 'react-hot-toast';
 import { signUp } from '../../../services';
+import { SignUpDialog } from '../../../components/App';
 import { Logo, Input, Button } from '../../../components/Global';
 import styles from '../../../styles/pages/signup.module.scss';
 
@@ -27,51 +28,7 @@ const SignUpPage = () => {
     }
     if (status === 'authenticated') {
       toast(t => (
-        <span style={{ display: 'flex', flexDirection: 'column' }}>
-          <b>This email has already been used.</b>
-          <p style={{ fontSize: '.8rem', marginTop: '-.1rem' }}>
-            Would you like to make another account?
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              marginTop: '-.5rem'
-            }}
-          >
-            <button
-              style={{
-                height: '1.8rem',
-                width: '3rem',
-                fontSize: '.8rem',
-                borderRadius: '.5rem'
-              }}
-              onClick={() => {
-                toast.dismiss(t.id);
-              }}
-            >
-              No
-            </button>
-            <button
-              style={{
-                height: '1.8rem',
-                width: '3rem',
-                fontSize: '.8rem',
-                borderRadius: '.5rem'
-              }}
-              onClick={() => {
-                toast.dismiss(t.id);
-                toast('Please log out before you make an other account', {
-                  icon: '⚠️',
-                  duration: 2000
-                });
-              }}
-            >
-              Yes
-            </button>
-          </div>
-        </span>
+        <SignUpDialog t={ t } />
       ));
       return false;
     } else {

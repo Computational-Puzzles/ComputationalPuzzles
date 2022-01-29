@@ -51,8 +51,7 @@ const PuzzlePage = ({
         );
 
         if ((submission as HandledError).error) {
-          console.error((submission as HandledError).message);
-          throw new Error('Something went wrong :(');
+          throw new Error((submission as HandledError).message);
         } else {
           const success = submission.isCorrect[submission.isCorrect.length - 1];
 
@@ -72,9 +71,7 @@ const PuzzlePage = ({
       toast.promise(submissionInstance(), {
         loading: 'Submitting your answer... ⏳',
         success: 'Correct! Nice work!',
-        error: err => {
-          return err.message;
-        }
+        error: err => err.message
       });
     } else {
       toast.error(t => (

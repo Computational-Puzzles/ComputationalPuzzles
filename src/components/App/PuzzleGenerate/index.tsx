@@ -34,7 +34,7 @@ const PuzzleGenerate = ({ puzzlesList }) => {
     toast.promise(puzzleInstancePromise(), {
       loading: 'Making your puzzle instance... ⚙️',
       success: 'Success',
-      error: 'Something went wrong :('
+      error: err => err.message
     });
   };
 

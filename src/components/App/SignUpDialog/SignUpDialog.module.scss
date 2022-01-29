@@ -1,0 +1,35 @@
+@import '../../../styles/abstracts/variables';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .dialogTitle {
+    font-size: .8rem;
+    margin-top: -.1rem;
+  }
+
+  .dialogBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: -.5rem;
+  }
+
+  .dialogBtn > button {
+    height: 1.8rem;
+    width: 3rem;
+    font-size: .8rem;
+    border-radius: .5rem;
+    color: $white;
+    gap: 1rem;
+
+    &:first-child {
+      background-color: $primary;
+    }
+
+    &:last-child {
+      background-color: $secondary;
+    }
+  }
+}

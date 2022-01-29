@@ -5,6 +5,7 @@ import PuzzleInput from './PuzzleInput';
 import MapRenderer from './MapRenderer';
 import MapGeocoder from './MapGeocoder';
 import FeedbackGif from './FeedbackGif';
+import SignUpDialog from './SignUpDialog';
 
 export {
   CardGrid,
@@ -13,5 +14,6 @@ export {
   PuzzleInput,
   MapRenderer,
   MapGeocoder,
-  FeedbackGif
+  FeedbackGif,
+  SignUpDialog
 };
