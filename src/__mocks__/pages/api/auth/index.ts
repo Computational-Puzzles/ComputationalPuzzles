@@ -5,12 +5,22 @@ export type UserDataProp = {
   password: string;
 };
 
-export const userData: UserDataProp = {
-  email: faker.internet.email(),
-  password: faker.internet.password()
+export const mockEmail = () => {
+  return faker.internet.password();
 };
 
-export const manyUserData = (numUsers: number) => {
+export const mockPassword = () => {
+  return faker.internet.password();
+};
+
+export const mockUserData = () => {
+  return {
+    email: mockEmail(),
+    password: mockPassword()
+  } as UserDataProp;
+};
+
+export const mockManyUserData = (numUsers: number) => {
   const arr: UserDataProp[] = [];
   for (let i = 0; i < numUsers; i++) {
     arr.push({

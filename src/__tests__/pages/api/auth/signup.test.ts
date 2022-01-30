@@ -6,7 +6,10 @@ dotenv.config();
 
 import { PrismaClient } from '@prisma/client';
 import signUpHandler from '../../../../pages/api/auth/signup';
-import { userData, manyUserData } from '../../../../__mocks__/pages/api/auth';
+import {
+  mockUserData,
+  mockManyUserData
+} from '../../../../__mocks__/pages/api/auth';
 import type { UserDataProp } from '../../../../__mocks__/pages/api/auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -26,7 +29,7 @@ afterAll(async () => {
 
 describe('Successfully create user(s)', () => {
   it('Create user successs', async () => {
-    const { email, password } = userData;
+    const { email, password } = mockUserData();
     const req = {
       body: {
         email,
@@ -67,7 +70,7 @@ describe('Successfully create user(s)', () => {
 
   it('Create multiple users', async () => {
     const numUsers = Math.ceil(Math.random() * 10);
-    const usersData = manyUserData(numUsers);
+    const usersData = mockManyUserData(numUsers);
 
     const json = jest.fn();
 
@@ -118,7 +121,7 @@ describe('Successfully create user(s)', () => {
 
 describe('Failed to create user', () => {
   it('Email is null', async () => {
-    const { password } = userData;
+    const { password } = mockUserData();
     const email = null;
     const req = {
       body: {
@@ -147,7 +150,7 @@ describe('Failed to create user', () => {
   });
 
   it('Email is undefined', async () => {
-    const { password } = userData;
+    const { password } = mockUserData();
     const email = undefined;
     const req = {
       body: {
@@ -176,7 +179,7 @@ describe('Failed to create user', () => {
   });
 
   it('Password is null', async () => {
-    const { email } = userData;
+    const { email } = mockUserData();
     const password = null;
     const req = {
       body: {
@@ -205,7 +208,7 @@ describe('Failed to create user', () => {
   });
 
   it('Password is undefined', async () => {
-    const { email } = userData;
+    const { email } = mockUserData();
     const password = undefined;
     const req = {
       body: {
