@@ -20,7 +20,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await prisma.user.deleteMany();
-})
+});
 
 afterAll(async () => {
   await prisma.$disconnect();
@@ -32,7 +32,7 @@ describe('Successfully create user(s)', () => {
     const req = {
       body: {
         email,
-        password,
+        password
       }
     } as NextApiRequest;
 
@@ -43,21 +43,21 @@ describe('Successfully create user(s)', () => {
     });
 
     const res = {
-      status,
+      status
     } as unknown as NextApiResponse;
 
     await signUpHandler(req, res);
 
     expect(json.mock.calls[0][0]).toMatchObject({
       email,
-      password: expect.any(String),
+      password: expect.any(String)
     });
     expect(status.mock.calls[0]).toEqual([201]);
 
     const user = await prisma.user.findUnique({
       where: {
-        email,
-      },
+        email
+      }
     });
 
     expect(user).toBeDefined();
@@ -79,7 +79,7 @@ describe('Successfully create user(s)', () => {
     });
 
     const res = {
-      status,
+      status
     } as unknown as NextApiResponse;
 
     const createUserPromise = usersData.map((user: UserDataProp) => {
@@ -87,14 +87,16 @@ describe('Successfully create user(s)', () => {
       const req = {
         body: {
           email,
-          password,
+          password
         }
       } as NextApiRequest;
 
       return signUpHandler(req, res);
     });
 
-    const users = await Promise.all(createUserPromise).then(() => prisma.user.findMany());
+    const users = await Promise.all(createUserPromise).then(() =>
+      prisma.user.findMany()
+    );
 
     expect(json.mock.calls.length).toEqual(numUsers);
 
@@ -106,7 +108,7 @@ describe('Successfully create user(s)', () => {
           expect.arrayContaining([
             expect.objectContaining({
               email: user.email,
-              password: expect.any(String),
+              password: expect.any(String)
             })
           ])
         ])
@@ -114,7 +116,6 @@ describe('Successfully create user(s)', () => {
     });
 
     expect(users.length).toEqual(numUsers);
-
   });
 });
 
@@ -125,7 +126,7 @@ describe('Failed to create user', () => {
     const req = {
       body: {
         email,
-        password,
+        password
       }
     } as NextApiRequest;
 
@@ -136,7 +137,7 @@ describe('Failed to create user', () => {
     });
 
     const res = {
-      status,
+      status
     } as unknown as NextApiResponse;
 
     await signUpHandler(req, res);
@@ -154,7 +155,7 @@ describe('Failed to create user', () => {
     const req = {
       body: {
         email,
-        password,
+        password
       }
     } as NextApiRequest;
 
@@ -165,7 +166,7 @@ describe('Failed to create user', () => {
     });
 
     const res = {
-      status,
+      status
     } as unknown as NextApiResponse;
 
     await signUpHandler(req, res);
@@ -183,7 +184,7 @@ describe('Failed to create user', () => {
     const req = {
       body: {
         email,
-        password,
+        password
       }
     } as NextApiRequest;
 
@@ -194,7 +195,7 @@ describe('Failed to create user', () => {
     });
 
     const res = {
-      status,
+      status
     } as unknown as NextApiResponse;
 
     await signUpHandler(req, res);
@@ -207,33 +208,31 @@ describe('Failed to create user', () => {
   });
 
   it('Password is undefined', async () => {
-    it('Email is undefined', async () => {
-      const { email } = userData;
-      const password = undefined;
-      const req = {
-        body: {
-          email,
-          password,
-        }
-      } as NextApiRequest;
-  
-      const json = jest.fn();
-  
-      const status = jest.fn(() => {
-        return { json };
-      });
-  
-      const res = {
-        status,
-      } as unknown as NextApiResponse;
-  
-      await signUpHandler(req, res);
-  
-      expect(status.mock.calls[0]).toEqual([409]);
-  
-      const user = await prisma.user.findMany();
-  
-      expect(user.length).toEqual(0);
+    const { email } = userData;
+    const password = undefined;
+    const req = {
+      body: {
+        email,
+        password
+      }
+    } as NextApiRequest;
+
+    const json = jest.fn();
+
+    const status = jest.fn(() => {
+      return { json };
     });
+
+    const res = {
+      status
+    } as unknown as NextApiResponse;
+
+    await signUpHandler(req, res);
+
+    expect(status.mock.calls[0]).toEqual([409]);
+
+    const user = await prisma.user.findMany();
+
+    expect(user.length).toEqual(0);
   });
 });
