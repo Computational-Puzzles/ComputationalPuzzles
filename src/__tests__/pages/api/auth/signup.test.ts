@@ -1,16 +1,14 @@
 /**
  * @jest-environment node
  */
-import { PrismaClient } from '@prisma/client';
-import signUpHandler from '../../../../pages/api/auth/signup';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-// import { checkHash } from '../../../../utils/password';
+import { PrismaClient } from '@prisma/client';
+import signUpHandler from '../../../../pages/api/auth/signup';
 import { userData, manyUserData } from '../../../../__mocks__/pages/api/auth';
 import type { UserDataProp } from '../../../../__mocks__/pages/api/auth';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { checkHash } from '../../../../utils/password';
 
 const prisma = new PrismaClient();
 
@@ -63,9 +61,8 @@ describe('Successfully create user(s)', () => {
     expect(user).toBeDefined();
     expect(user.email).toEqual(email);
     expect(user.password).not.toBeNull();
-    expect(user.password).not.toBe(password);
+    expect(user.password).not.toEqual(password);
     expect(user.password).toBeDefined();
-    expect(checkHash(password, user.password)).toEqual(true);
   });
 
   it('Create multiple users', async () => {
@@ -146,7 +143,7 @@ describe('Failed to create user', () => {
 
     const user = await prisma.user.findMany();
 
-    expect(user.length).toEqual(0);
+    expect(user.length).toBe(0);
   });
 
   it('Email is undefined', async () => {
@@ -175,7 +172,7 @@ describe('Failed to create user', () => {
 
     const user = await prisma.user.findMany();
 
-    expect(user.length).toEqual(0);
+    expect(user.length).toBe(0);
   });
 
   it('Password is null', async () => {
@@ -204,7 +201,7 @@ describe('Failed to create user', () => {
 
     const user = await prisma.user.findMany();
 
-    expect(user.length).toEqual(0);
+    expect(user.length).toBe(0);
   });
 
   it('Password is undefined', async () => {
@@ -233,6 +230,6 @@ describe('Failed to create user', () => {
 
     const user = await prisma.user.findMany();
 
-    expect(user.length).toEqual(0);
+    expect(user.length).toBe(0);
   });
 });
