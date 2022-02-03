@@ -46,7 +46,6 @@
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.0.6",
-    "typescript": "^4.4.4",
-    "swr": "^1.1.2"
+    "typescript": "^4.4.4"
   }
 }

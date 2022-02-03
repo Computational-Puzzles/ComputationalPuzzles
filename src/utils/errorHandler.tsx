@@ -1,6 +1,5 @@
 import React from 'react';
-import Loading from '../components/Global/Loading';
-import ErrorDisplay from '../components/Global/ErrorDisplay';
+import { Loading, ErrorDisplay } from '../components/Global';
 
 const handleLoadingError = (isLoading, errorList) => {
   if (isLoading) return <Loading />;
@@ -10,4 +9,4 @@ const handleLoadingError = (isLoading, errorList) => {
   }
 };
 
-export {handleLoadingError};
+export { handleLoadingError };
