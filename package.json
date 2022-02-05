@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "npx prisma generate && next start",
     "lint": "next lint",
-    "test": "docker-compose up -d db && npx prisma migrate dev && jest && docker-compose down",
+    "test": "jest",
     "prettify": "npx prettier --write src/"
   },
   "dependencies": {

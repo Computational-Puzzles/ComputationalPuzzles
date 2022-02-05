@@ -6,7 +6,7 @@ export type UserDataProp = {
 };
 
 export const mockEmail = () => {
-  return faker.internet.password();
+  return faker.internet.email();
 };
 
 export const mockPassword = () => {
@@ -21,12 +21,12 @@ export const mockUserData = () => {
 };
 
 export const mockManyUserData = (numUsers: number) => {
-  const arr: UserDataProp[] = [];
+  const users: UserDataProp[] = [];
   for (let i = 0; i < numUsers; i++) {
-    arr.push({
+    users.push({
       email: faker.internet.email(),
       password: faker.internet.password()
     });
   }
-  return arr;
+  return users;
 };
