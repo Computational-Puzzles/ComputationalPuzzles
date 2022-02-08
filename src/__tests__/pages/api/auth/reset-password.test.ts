@@ -1,15 +1,15 @@
 import dotenv from 'dotenv';
 dotenv.config();
+import { PrismaClient } from '@prisma/client';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 import {
   mockUserData,
   mockPassword,
   mockEmail
 } from '../../../../__mocks__/pages/api/auth';
-import signUpHandler from '../../../../pages/api/auth/signup';
 import resetPasswordHandler from '../../../../pages/api/auth/reset-password';
-import { PrismaClient } from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { hashFunction } from '../../../../utils/password';
 import { resetPasswordProps } from '../../../../types/api/auth/reset-password';
 
@@ -22,24 +22,12 @@ beforeEach(async () => {
   email = userData.email;
   password = userData.password;
 
-  const req = {
-    body: {
-      email,
-      password
-    }
-  } as NextApiRequest;
+  const { createUser } = PrismaAdapter(prisma);
 
-  const json = jest.fn();
-
-  const status = jest.fn(() => {
-    return { json };
+  await createUser({
+    email,
+    password: hashFunction(password)
   });
-
-  const res = {
-    status
-  } as unknown as NextApiResponse;
-
-  await signUpHandler(req, res);
 });
 
 describe('Successfully change password', () => {
