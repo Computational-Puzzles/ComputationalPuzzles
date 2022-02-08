@@ -105,7 +105,7 @@ describe('Fail to change password', () => {
     const req = {
       body: {
         email: email,
-        oldPassword: 'wrongPassword',
+        oldPassword: `${password}wrongPassword`,
         newPassword: mockPassword()
       } as resetPasswordProps
     } as NextApiRequest;
@@ -130,7 +130,7 @@ describe('Fail to change password', () => {
     ]);
   });
 
-  it('Email not inside db', async () => {
+  it('Should not reset password of nonexistent user', async () => {
     const req = {
       body: {
         email: mockEmail(),
