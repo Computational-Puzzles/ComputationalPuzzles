@@ -1,9 +1,6 @@
 /**
  * @jest-environment node
  */
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import { PrismaClient } from '@prisma/client';
 import signUpHandler from '../../../../pages/api/auth/signup';
 import {
