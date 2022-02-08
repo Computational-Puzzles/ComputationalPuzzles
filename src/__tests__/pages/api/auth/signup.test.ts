@@ -12,16 +12,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
-beforeAll(async () => {
-  await prisma.$connect();
-});
-
 beforeEach(async () => {
   await prisma.user.deleteMany();
-});
-
-afterAll(async () => {
-  await prisma.$disconnect();
 });
 
 describe('Successfully create user(s)', () => {
@@ -96,6 +88,8 @@ describe('Successfully create user(s)', () => {
     );
 
     expect(json.mock.calls.length).toEqual(numUsers);
+
+    console.log(users);
 
     users.forEach((user: UserDataProp) => {
       expect(user).toBeDefined();
