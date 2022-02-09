@@ -10,14 +10,12 @@ import { mockEmail, mockPassword } from '../../../../__mocks__/pages/api/auth';
 const prisma = new PrismaClient();
 const { createUser } = PrismaAdapter(prisma);
 
-
 beforeEach(async () => {
   await prisma.user.deleteMany();
   await prisma.account.deleteMany();
 });
 
 describe('/api/admin/validate: Success', () => {
-
   const adminEmail = mockEmail();
 
   it('Sucessfully validate admin', async () => {
@@ -31,7 +29,7 @@ describe('/api/admin/validate: Success', () => {
         userId: parseInt(adminUser.id),
         type: 'admin',
         provider: '',
-        providerAccountId: adminEmail,
+        providerAccountId: adminEmail
       }
     });
 
@@ -43,12 +41,11 @@ describe('/api/admin/validate: Success', () => {
 
     const json = jest.fn();
     const status = jest.fn(() => {
-      return { json }
+      return { json };
     });
     const res = {
       status
     } as unknown as NextApiResponse;
-
 
     await adminValidate(req, res);
 
@@ -63,10 +60,9 @@ describe('/api/admin/validate: Success', () => {
       image: null,
       name: null,
       password: expect.any(String),
-      updatedAt: expect.any(Date),
+      updatedAt: expect.any(Date)
     });
   });
-
 
   const userEmail = mockEmail();
 
@@ -81,7 +77,7 @@ describe('/api/admin/validate: Success', () => {
         userId: parseInt(normalUser.id),
         type: 'user',
         provider: '',
-        providerAccountId: userEmail,
+        providerAccountId: userEmail
       }
     });
 
@@ -93,7 +89,7 @@ describe('/api/admin/validate: Success', () => {
 
     const json = jest.fn();
     const status = jest.fn(() => {
-      return { json }
+      return { json };
     });
     const res = {
       status
@@ -112,12 +108,9 @@ describe('/api/admin/validate: Success', () => {
       image: null,
       name: null,
       password: expect.any(String),
-      updatedAt: expect.any(Date),
+      updatedAt: expect.any(Date)
     });
-
-  })
+  });
 });
 
-describe('/api/admin/validate: Missing parameters for API', () => {
-
-})
+describe('/api/admin/validate: Missing parameters for API', () => {});

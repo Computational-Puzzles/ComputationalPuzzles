@@ -1,7 +1,10 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client'; 
+import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { mockEmail, mockPassword } from '../../../__mocks__/pages/api/auth/index';
+import {
+  mockEmail,
+  mockPassword
+} from '../../../__mocks__/pages/api/auth/index';
 
 import usersHandler from '../../../pages/api/user';
 
@@ -14,22 +17,22 @@ beforeEach(async () => {
   await prisma.user.deleteMany({});
   await createUser({
     email,
-    password: mockPassword(),
-  })
-})
+    password: mockPassword()
+  });
+});
 
 describe('Sucessfully retrieve user', () => {
   it('should return a user', async () => {
     const req = {
       query: {
-        email,
-      },
+        email
+      }
     } as unknown as NextApiRequest;
-  
+
     const json = jest.fn();
     const status = jest.fn().mockReturnValue({ json });
     const res = {
-      status,
+      status
     } as unknown as NextApiResponse;
     await usersHandler(req, res);
     expect(json).toHaveBeenCalledWith({
@@ -40,7 +43,7 @@ describe('Sucessfully retrieve user', () => {
       image: null,
       name: null,
       password: expect.any(String),
-      updatedAt: expect.any(Date),
+      updatedAt: expect.any(Date)
     });
     expect(json).toHaveBeenCalledTimes(1);
     expect(status).toHaveBeenCalledTimes(1);

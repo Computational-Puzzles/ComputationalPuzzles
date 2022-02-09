@@ -49,7 +49,7 @@ describe('Successfully create user(s)', () => {
       image: null,
       name: null,
       password: expect.any(String),
-      updatedAt: expect.any(Date),
+      updatedAt: expect.any(Date)
     });
 
     const user = await prisma.user.findUnique({
@@ -111,7 +111,7 @@ describe('Successfully create user(s)', () => {
               image: null,
               name: null,
               password: expect.any(String),
-              updatedAt: expect.any(Date),
+              updatedAt: expect.any(Date)
             })
           ])
         ])
@@ -181,7 +181,7 @@ describe('Failed to create user', () => {
     expect(status).toHaveBeenCalledWith(409);
 
     const user = await prisma.user.findMany();
-    
+
     expect(user.length).toBe(0);
   });
 
