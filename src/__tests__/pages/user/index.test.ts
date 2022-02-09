@@ -42,12 +42,8 @@ describe('Sucessfully retrieve user', () => {
       password: expect.any(String),
       updatedAt: expect.any(Date),
     });
-    expect(status).toHaveBeenCalledWith(200);
     expect(json).toHaveBeenCalledTimes(1);
     expect(status).toHaveBeenCalledTimes(1);
-    expect(json.mock.calls[0][0]).toMatchObject({
-      email,
-      password: expect.any(String),
-    });
+    expect(status).toHaveBeenCalledWith(200);
   });
 });

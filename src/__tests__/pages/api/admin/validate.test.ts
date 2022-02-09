@@ -52,11 +52,19 @@ describe('/api/admin/validate: Success', () => {
 
     await adminValidate(req, res);
 
-    expect(json.mock.calls[0][0]).toMatchObject({
+    expect(json).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenCalledWith(200);
+    expect(json).toHaveBeenCalledWith({
+      createdAt: expect.any(Date),
       email: adminEmail,
-      password: expect.any(String)
+      emailVerified: null,
+      id: expect.any(Number),
+      image: null,
+      name: null,
+      password: expect.any(String),
+      updatedAt: expect.any(Date),
     });
-    expect(status.mock.calls[0]).toEqual([200]);
   });
 
 
@@ -93,12 +101,20 @@ describe('/api/admin/validate: Success', () => {
 
     await adminValidate(req, res);
 
-    // expect(json.mock.calls[0][0]).toMatchObject({
-    //   email: userEmail,
-    //   password: expect.any(String)
-    // });
-    // console.log(json.mock.calls[0])
-    expect(status.mock.calls[0]).toEqual([403]);
+    expect(json).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenCalledWith(403);
+    expect(json).toHaveBeenCalledWith({
+      createdAt: expect.any(Date),
+      email: userEmail,
+      emailVerified: null,
+      id: expect.any(Number),
+      image: null,
+      name: null,
+      password: expect.any(String),
+      updatedAt: expect.any(Date),
+    });
+
   })
 });
 
