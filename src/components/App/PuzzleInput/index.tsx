@@ -32,7 +32,9 @@ const PuzzleInput = ({
         {options.map((option, i) => (
           <div
             key={`answerOption${i}`}
-            className={`${styles.answerOption} ${answer === option && styles.selected}`}
+            className={`${styles.answerOption} ${
+              answer === option && styles.selected
+            }`}
             onClick={e => handleCLick(e)}
           >
             <input

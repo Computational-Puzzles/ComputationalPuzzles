@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import { resetPassword } from '../../../services';
-import {Header} from "../../../components/Global";
+import { Header } from '../../../components/Global';
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
@@ -82,7 +82,9 @@ const ProfilePage = () => {
               value={confirmPass}
               onChange={e => setConfirmPass(e.target.value)}
             />
-            <button type='button' onClick={handleChangePassword}>Reset password</button>
+            <button type="button" onClick={handleChangePassword}>
+              Reset password
+            </button>
           </form>
         </>
       )}
