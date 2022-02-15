@@ -49,19 +49,13 @@ describe('/api/admin/validate: Success', () => {
 
     await adminValidate(req, res);
 
-    expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(200);
-    expect(json).toHaveBeenCalledWith({
-      createdAt: expect.any(Date),
-      email: adminEmail,
-      emailVerified: null,
-      id: expect.any(Number),
-      image: null,
-      name: null,
-      password: expect.any(String),
-      updatedAt: expect.any(Date)
-    });
+    expect(status).toHaveBeenNthCalledWith(1, 200);
+    expect(json).toHaveBeenNthCalledWith(1, 
+      expect.objectContaining({
+        email: adminEmail,
+        password: expect.any(String),
+      })
+    );
   });
 
   const userEmail = mockEmail();
@@ -97,20 +91,14 @@ describe('/api/admin/validate: Success', () => {
 
     await adminValidate(req, res);
 
-    expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(403);
-    expect(json).toHaveBeenCalledWith({
-      createdAt: expect.any(Date),
-      email: userEmail,
-      emailVerified: null,
-      id: expect.any(Number),
-      image: null,
-      name: null,
-      password: expect.any(String),
-      updatedAt: expect.any(Date)
-    });
+    expect(status).toHaveBeenNthCalledWith(1, 403);
+    expect(json).toHaveBeenNthCalledWith(1, 
+      expect.objectContaining({
+        email: userEmail,
+        password: expect.any(String),
+      })
+    );
   });
 });
 
-describe('/api/admin/validate: Missing parameters for API', () => {});
+// TODO: Create fail tests

@@ -35,16 +35,12 @@ describe('/api/user: Succeeded', () => {
     } as unknown as NextApiResponse;
   
     await usersHandler(req, res);
-    expect(json).toHaveBeenNthCalledWith(1, {
-      createdAt: expect.any(Date),
-      email,
-      emailVerified: null,
-      id: expect.any(Number),
-      image: null,
-      name: null,
-      password: expect.any(String),
-      updatedAt: expect.any(Date)
-    });
+    expect(json).toHaveBeenNthCalledWith(1, 
+      expect.objectContaining({
+        email,
+        password: expect.any(String),
+      })
+    );
     expect(status).toHaveBeenNthCalledWith(1, 200);
   });
 });

@@ -39,16 +39,12 @@ describe('Successfully create user(s)', () => {
     await signUpHandler(req, res);
 
     expect(status).toHaveBeenNthCalledWith(1, 201);
-    expect(json).toHaveBeenNthCalledWith(1, {
-      createdAt: expect.any(Date),
-      email,
-      emailVerified: null,
-      id: expect.any(Number),
-      image: null,
-      name: null,
-      password: expect.any(String),
-      updatedAt: expect.any(Date)
-    });
+    expect(json).toHaveBeenNthCalledWith(1,
+      expect.objectContaining({
+        email,
+        password: expect.any(String),
+      })
+    );
 
     const user = await prisma.user.findUnique({
       where: {
@@ -93,28 +89,18 @@ describe('Successfully create user(s)', () => {
       prisma.user.findMany()
     );
 
+    expect(status).toHaveBeenNthCalledWith(numUsers, 201);
+    expect(json).toHaveBeenCalledTimes(numUsers);
+    expect(users.length).toEqual(numUsers);
     users.forEach((user: UserDataProp) => {
       expect(user).toBeDefined();
-      expect(json.mock.calls).toEqual(
-        expect.arrayContaining([
-          expect.arrayContaining([
-            expect.objectContaining({
-              createdAt: expect.any(Date),
-              email: user.email,
-              emailVerified: null,
-              id: expect.any(Number),
-              image: null,
-              name: null,
-              password: expect.any(String),
-              updatedAt: expect.any(Date)
-            })
-          ])
-        ])
+      expect(json).toHaveBeenCalledWith(
+        expect.objectContaining({
+          email: user.email,
+          password: expect.any(String),
+        })
       );
     });
-    expect(json).toHaveBeenCalledTimes(numUsers);
-    expect(status).toHaveBeenNthCalledWith(numUsers, 201);
-    expect(users.length).toEqual(numUsers);
   });
 });
 
