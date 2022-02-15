@@ -1,31 +1,41 @@
 import * as React from 'react';
 import { useState } from 'react';
 import styles from './PuzzleGenerate.module.scss';
+import toast from 'react-hot-toast';
+
 import { Button, Input } from '../../Global';
 import { QRGenerator } from '..';
 import { createPuzzleInstance } from '../../../services';
 
 const PuzzleGenerate = ({ puzzlesList }) => {
   const [hint, setHint] = useState('');
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
   const [address, setAddress] = useState('');
   const [puzzleId, setPuzzleId] = useState('');
   const [puzzleInstanceData, setPuzzleInstanceData] = useState();
 
   const handleSubmit = () => {
-    puzzleId &&
-      createPuzzleInstance(
+    const puzzleInstancePromise = async () => {
+      const puzzleInstance = await createPuzzleInstance(
         parseInt(puzzleId),
         parseFloat(longitude),
         parseFloat(latitude),
         address,
         hint
-      ).then(puzzleInstance => {
-        puzzleInstance.error
-          ? alert(`Error: ${puzzleInstance.message}`)
-          : setPuzzleInstanceData(puzzleInstance);
-      });
+      );
+
+      if (puzzleInstance.error) {
+        throw new Error(puzzleInstance.message);
+      } else {
+        setPuzzleInstanceData(puzzleInstance);
+      }
+    };
+    toast.promise(puzzleInstancePromise(), {
+      loading: 'Making your puzzle instance... ⚙️',
+      success: 'Success',
+      error: err => err.message
+    });
   };
 
   return (

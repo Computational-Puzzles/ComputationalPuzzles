@@ -38,10 +38,8 @@ describe('Successfully create user(s)', () => {
 
     await signUpHandler(req, res);
 
-    expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(201);
-    expect(json).toHaveBeenCalledWith({
+    expect(status).toHaveBeenNthCalledWith(1, 201);
+    expect(json).toHaveBeenNthCalledWith(1, {
       createdAt: expect.any(Date),
       email,
       emailVerified: null,
@@ -95,9 +93,6 @@ describe('Successfully create user(s)', () => {
       prisma.user.findMany()
     );
 
-    expect(json.mock.calls.length).toEqual(numUsers);
-    expect(json).toHaveBeenCalledTimes(numUsers);
-
     users.forEach((user: UserDataProp) => {
       expect(user).toBeDefined();
       expect(json.mock.calls).toEqual(
@@ -117,6 +112,7 @@ describe('Successfully create user(s)', () => {
         ])
       );
     });
+    expect(json).toHaveBeenCalledTimes(numUsers);
     expect(status).toHaveBeenNthCalledWith(numUsers, 201);
     expect(users.length).toEqual(numUsers);
   });
@@ -146,8 +142,7 @@ describe('Failed to create user', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(409);
+    expect(status).toHaveBeenNthCalledWith(1, 409);
 
     const user = await prisma.user.findMany();
 
@@ -177,8 +172,7 @@ describe('Failed to create user', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(409);
+    expect(status).toHaveBeenNthCalledWith(1, 409);
 
     const user = await prisma.user.findMany();
 
@@ -208,8 +202,7 @@ describe('Failed to create user', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(409);
+    expect(status).toHaveBeenNthCalledWith(1, 409);
 
     const user = await prisma.user.findMany();
 
@@ -239,8 +232,7 @@ describe('Failed to create user', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(409);
+    expect(status).toHaveBeenNthCalledWith(1, 409);
 
     const user = await prisma.user.findMany();
 

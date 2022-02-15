@@ -21,21 +21,21 @@ beforeEach(async () => {
   });
 });
 
-describe('Sucessfully retrieve user', () => {
+describe('/api/user: Succeeded', () => {
   it('should return a user', async () => {
     const req = {
       query: {
         email
       }
     } as unknown as NextApiRequest;
-
     const json = jest.fn();
     const status = jest.fn().mockReturnValue({ json });
     const res = {
       status
     } as unknown as NextApiResponse;
+  
     await usersHandler(req, res);
-    expect(json).toHaveBeenCalledWith({
+    expect(json).toHaveBeenNthCalledWith(1, {
       createdAt: expect.any(Date),
       email,
       emailVerified: null,
@@ -45,8 +45,6 @@ describe('Sucessfully retrieve user', () => {
       password: expect.any(String),
       updatedAt: expect.any(Date)
     });
-    expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenCalledWith(200);
+    expect(status).toHaveBeenNthCalledWith(1, 200);
   });
 });
