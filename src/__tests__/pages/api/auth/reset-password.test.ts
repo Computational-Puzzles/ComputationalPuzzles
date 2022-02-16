@@ -89,7 +89,7 @@ describe('/api/auth/reset-password: Succeeded', () => {
 });
 
 describe('/api/auth/reset-password: Failed', () => {
-  it('has wrong old password', async () => {
+  it('returns an error if old password is incorrect', async () => {
     const req = {
       body: {
         email: email,
@@ -147,7 +147,7 @@ describe('/api/auth/reset-password: Failed', () => {
     ]);
   });
 
-  it('has null or undefined email', async () => {
+  it('returns an error if email is null or undefined', async () => {
     let req = {
       body: {
         email: null,
@@ -193,7 +193,7 @@ describe('/api/auth/reset-password: Failed', () => {
     ]);
   });
 
-  it('has null or undefined old password', async () => {
+  it('returns an error if old password is null or undefined', async () => {
     let req = {
       body: {
         email: email,
@@ -239,7 +239,7 @@ describe('/api/auth/reset-password: Failed', () => {
     ]);
   });
 
-  it('has null or undefined new password', async () => {
+  it('returns an error if new password is null or undefined', async () => {
     let req = {
       body: {
         email: email,

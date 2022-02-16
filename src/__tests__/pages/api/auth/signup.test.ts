@@ -68,7 +68,7 @@ describe('/api/auth/signup: Succeeded', () => {
     expect(user.password).toBeDefined();
   });
 
-  it('successfullt creates multiple users', async () => {
+  it('successfully creates multiple users', async () => {
     const numUsers = Math.ceil(Math.random() * 10);
     const usersData = mockManyUserData(numUsers);
 
@@ -120,7 +120,7 @@ describe('/api/auth/signup: Succeeded', () => {
 });
 
 describe('/api/auth/signup: Failed', () => {
-  it('has null email', async () => {
+  it('returns an error if email is null', async () => {
     const { password } = mockUserData();
     const email = null;
     const req = {
@@ -149,7 +149,7 @@ describe('/api/auth/signup: Failed', () => {
     expect(user.length).toBe(0);
   });
 
-  it('has undefined email', async () => {
+  it('returns an error if email is undefined', async () => {
     const { password } = mockUserData();
     const email = undefined;
     const req = {
@@ -178,7 +178,7 @@ describe('/api/auth/signup: Failed', () => {
     expect(user.length).toBe(0);
   });
 
-  it('has null password', async () => {
+  it('returns an error if password is null', async () => {
     const { email } = mockUserData();
     const password = null;
     const req = {
@@ -207,7 +207,7 @@ describe('/api/auth/signup: Failed', () => {
     expect(user.length).toBe(0);
   });
 
-  it('has undefined password', async () => {
+  it('returns an error if password is undefined', async () => {
     const { email } = mockUserData();
     const password = undefined;
     const req = {
