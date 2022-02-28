@@ -28,8 +28,8 @@ beforeEach(async () => {
   });
 });
 
-describe('Successfully change password', () => {
-  it('Change password successs', async () => {
+describe('/api/auth/reset-password: Succeeded', () => {
+  it('successfully changes password ', async () => {
     const hashPassword = (
       await prisma.user.findUnique({
         where: {
@@ -84,8 +84,8 @@ describe('Successfully change password', () => {
   });
 });
 
-describe('Fail to change password', () => {
-  it('Wrong oldPassword', async () => {
+describe('/api/auth/reset-password: Failed', () => {
+  it('returns an error if old password is incorrect', async () => {
     const req = {
       body: {
         email: email,
@@ -112,7 +112,7 @@ describe('Fail to change password', () => {
     });
   });
 
-  it('Should not reset password of nonexistent user', async () => {
+  it('should not reset password of nonexistent user', async () => {
     const req = {
       body: {
         email: mockEmail(),
@@ -139,7 +139,7 @@ describe('Fail to change password', () => {
     });
   });
 
-  it('Email is null or undefined', async () => {
+  it('returns an error if email is null or undefined', async () => {
     let req = {
       body: {
         email: null,
@@ -170,7 +170,7 @@ describe('Fail to change password', () => {
     });
   });
 
-  it('Old password is null or undefined', async () => {
+  it('returns an error if old password is null or undefined', async () => {
     let req = {
       body: {
         email: email,
@@ -201,7 +201,7 @@ describe('Fail to change password', () => {
     });
   });
 
-  it('New password is null or undefined', async () => {
+  it('returns an error if new password is null or undefined', async () => {
     let req = {
       body: {
         email: email,

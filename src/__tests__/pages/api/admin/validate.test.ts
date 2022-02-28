@@ -18,7 +18,7 @@ beforeEach(async () => {
 describe('/api/admin/validate: Success', () => {
   const adminEmail = mockEmail();
 
-  it('Sucessfully validate admin', async () => {
+  it('sucessfully validates admin', async () => {
     const adminUser = await createUser({
       email: adminEmail,
       password: mockPassword()
@@ -60,7 +60,7 @@ describe('/api/admin/validate: Success', () => {
 
   const userEmail = mockEmail();
 
-  it('Successfully reject non-admin users', async () => {
+  it('successfully rejects non-admin users', async () => {
     const normalUser = await createUser({
       email: userEmail,
       password: mockPassword()

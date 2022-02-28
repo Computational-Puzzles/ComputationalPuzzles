@@ -16,8 +16,8 @@ beforeEach(async () => {
   await prisma.user.deleteMany();
 });
 
-describe('Successfully create user(s)', () => {
-  it('Create user successs', async () => {
+describe('/api/auth/signup: Succeeded', () => {
+  it('sucessfully creates user', async () => {
     const { email, password } = mockUserData();
     const req = {
       body: {
@@ -59,7 +59,7 @@ describe('Successfully create user(s)', () => {
     expect(user.password).toBeDefined();
   });
 
-  it('Create multiple users', async () => {
+  it('successfully creates multiple users', async () => {
     const numUsers = Math.ceil(Math.random() * 10);
     const usersData = mockManyUserData(numUsers);
 
@@ -104,8 +104,8 @@ describe('Successfully create user(s)', () => {
   });
 });
 
-describe('Failed to create user', () => {
-  it('Email is null', async () => {
+describe('/api/auth/signup: Failed', () => {
+  it('returns an error if email is null', async () => {
     const { password } = mockUserData();
     const email = null;
     const req = {
@@ -135,7 +135,7 @@ describe('Failed to create user', () => {
     expect(user.length).toBe(0);
   });
 
-  it('Email is undefined', async () => {
+  it('returns an error if email is undefined', async () => {
     const { password } = mockUserData();
     const email = undefined;
     const req = {
@@ -165,7 +165,7 @@ describe('Failed to create user', () => {
     expect(user.length).toBe(0);
   });
 
-  it('Password is null', async () => {
+  it('returns an error if password is null', async () => {
     const { email } = mockUserData();
     const password = null;
     const req = {
@@ -195,7 +195,7 @@ describe('Failed to create user', () => {
     expect(user.length).toBe(0);
   });
 
-  it('Password is undefined', async () => {
+  it('returns an error if password is undefined', async () => {
     const { email } = mockUserData();
     const password = undefined;
     const req = {
