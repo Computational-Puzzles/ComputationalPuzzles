@@ -13,14 +13,18 @@ import {
   mockQuestion
 } from './instances/create';
 
-export const mockPuzzleInstance = (): Promise<PuzzleInstance> => {
+export const mockPuzzleInstance = (puzzle?: Puzzle): Promise<PuzzleInstance> => {
   return prisma.puzzleInstance.create({
     data: {
       hint: mockHint(),
       longitude: mockLongtitude(),
       latitude: mockLatitude(),
       address: mockAdress(),
-      puzzle: {
+      puzzle: puzzle ? {
+        connect: {
+          id: puzzle.id
+        }
+      } : {
         create: {
           name: mockName(),
           difficulty: mockDifficulty(),
