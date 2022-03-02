@@ -20,8 +20,8 @@ describe('testing the hashFunction', () => {
     expect(hashed1.length).toBe(hashed2.length);
   });
 });
-describe('testing the hashFunction', () => {
-  it('should return the same results', async () => {
+describe('testing the checkHash', () => {
+  it('should have the same hashed values for the same secret input', async () => {
     expect(checkHash('password', await hashFunction('password'))).toBeTruthy();
   });
 });
