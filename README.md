@@ -24,6 +24,10 @@ Then run the following lines in the terminal
 npm i
 npm run dev
 ```
+If you want to have some puzzle without inputing every of them manually, run:
+```bash
+npx prisma db seed
+```
 To add database manually
 ```bash
 npx prisma studio
