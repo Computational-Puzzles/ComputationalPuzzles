@@ -9,7 +9,6 @@ const MyApp = ({
   Component,
   pageProps: { session, initStore, ...pageProps }
 }: AppProps) => {
-
   const TOAST_LIMIT = 1;
   const { toasts } = useToasterStore();
 
@@ -17,15 +16,15 @@ const MyApp = ({
   // Solution is proposed by @timolins from https://github.com/timolins/react-hot-toast/issues/31#issuecomment-803359550
   useEffect(() => {
     toasts
-      .filter((t) => t.visible)
+      .filter(t => t.visible)
       .filter((_, i) => i >= TOAST_LIMIT)
-      .forEach((t) => toast.dismiss(t.id));
+      .forEach(t => toast.dismiss(t.id));
   }, [toasts]);
 
   return (
-    <SessionProvider session={ session }>
-      <Toaster position='top-right' />
-      <Component { ...pageProps } />
+    <SessionProvider session={session}>
+      <Toaster position="top-right" />
+      <Component {...pageProps} />
     </SessionProvider>
   );
 };
