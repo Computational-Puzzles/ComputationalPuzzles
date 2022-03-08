@@ -8,8 +8,9 @@
     "build": "next build",
     "start": "npx prisma generate && next start",
     "lint": "next lint",
-    "test": "jest",
-    "prettify": "npx prettier --write src/"
+    "test": "jest --runInBand",
+    "prettify": "npx prettier --write src/",
+    "db:push": "prisma db push"
   },
   "dependencies": {
     "@maptiler/geocoder": "^1.1.0",
