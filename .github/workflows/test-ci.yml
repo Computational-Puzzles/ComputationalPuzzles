@@ -5,6 +5,7 @@ name: Run test for any push
 
 on:
   pull-request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   test:
