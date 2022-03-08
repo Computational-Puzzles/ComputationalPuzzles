@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "npx prisma generate && next start",
     "lint": "next lint",
-    "test": "jest",
+    "test": "jest --runInBand",
     "prettify": "npx prettier --write src/",
     "db:push": "prisma db push --preview-feature"
   },

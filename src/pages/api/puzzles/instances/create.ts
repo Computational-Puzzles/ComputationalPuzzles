@@ -24,7 +24,7 @@ const createPuzzleHandler = async (
 
   if (!puzzle) {
     return res.status(404).json({
-      message: 'Puzzle not found.'
+      message: 'Puzzle not found'
     });
   }
 
@@ -38,7 +38,7 @@ const createPuzzleHandler = async (
     }
   });
 
-  return res.status(200).json({
+  return res.status(201).json({
     message: 'PuzzleInstance generated successfully',
     puzzleInstance: puzzleInstance
   });
