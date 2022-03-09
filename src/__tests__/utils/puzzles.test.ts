@@ -1,29 +1,18 @@
 import { checkPuzzleAnswer } from '../../utils/puzzles';
-import { Puzzle } from '@prisma/client';
+import puzzle from '../mocks/mock_puzzle';
 
 it('should compare the user submitted puzzle answer with the ans key in the puzzle (from the db)', () => {
-  const puzzle = {
-    id: 1,
-    name: 'fake1',
-    createdAt: new Date(Date.now()),
-    updatedAt: new Date(Date.now()),
-    difficulty: 'EASY',
-    content: [],
-    imageUrl: null,
-    exampleContent: [],
-    exampleImageUrl: null,
-    isGenerated: true,
-    question: 'What is 1+1?',
-    inputType: 'TEXT',
-    published: false,
-    variables: {
-      answer: '2'
-    },
-    puzzleType: {},
-    puzzleTypeId: 1,
-    puzzleInstances: []
-  } as Puzzle;
-
-  expect(checkPuzzleAnswer(puzzle, 1, '3')).toBeFalsy();
-  expect(checkPuzzleAnswer(puzzle, 1, '2')).toBeTruthy();
+  const answer = puzzle.variables.answer;
+  const notAns = getRandomNumber(answer);
+  expect(checkPuzzleAnswer(puzzle, 1, notAns)).toBe(false);
+  expect(checkPuzzleAnswer(puzzle, 1, answer)).toBe(true);
 });
+
+//get random number that does not equal to the answer
+const getRandomNumber =(ans)=> {
+  let num ;
+  do{
+    num = Math.round(Math.random()*99);
+  }while(num === ans);
+  return num;
+}
