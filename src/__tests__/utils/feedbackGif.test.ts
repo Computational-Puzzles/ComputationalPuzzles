@@ -1,6 +1,6 @@
 import { getRandomGifSrc } from '../../utils/feedbackGif';
 
-const arr = [0, 1, 3];
+const arr = ['0.gif', '1.gif', '3.gif'];
 let isCorrect = true;
 describe('randomly generating the correct/incorrect gifs:', () => {
   it('from the correct-gif & its path', () => {
