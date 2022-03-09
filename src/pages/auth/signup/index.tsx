@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Router from 'next/router';
+import toast from 'react-hot-toast';
 import { signUp } from '../../../services';
+import { SignUpDialog } from '../../../components/App';
 import { Logo, Input, Button } from '../../../components/Global';
 import styles from '../../../styles/pages/signup.module.scss';
 
@@ -13,17 +15,21 @@ const SignUpPage = () => {
   const passwordMinLength = 8;
 
   const handleSignUp = event => {
+    event.preventDefault();
     if (password !== repeatPw) {
-      alert(
-        'password and repeated password do not match. please try retyping both.'
+      toast(
+        'Password and repeated password do not match! Please try retyping both.',
+        {
+          icon: '⚠️',
+          duration: 3000
+        }
       );
-      event.preventDefault();
       return false;
     }
     if (status === 'authenticated') {
-      if (confirm('Would you like to make another account?'))
-        alert('Please log out before you make an other account.');
-      event.preventDefault();
+      toast(t => (
+        <SignUpDialog t={ t } />
+      ));
       return false;
     } else {
       signUp({ email, password });
@@ -66,7 +72,12 @@ const SignUpPage = () => {
           Already have an account?
         </a>
         <div className={styles.buttonContainer}>
-          <Button style={'primary'} content={'Sign Up'} type={'submit'} onClick={() => {}} />
+          <Button
+            style={'primary'}
+            content={'Sign Up'}
+            type={'submit'}
+            onClick={() => {}}
+          />
         </div>
       </form>
     </main>

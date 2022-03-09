@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
-import { getAllPuzzleInstances } from '../../services/puzzleInstance';
 import { Header, SearchAndFilter } from '../../components/Global';
 import { CardGrid } from '../../components/App';
 import styles from '../../styles/pages/PuzzleList.module.scss';
-import { PuzzleInstanceCustom } from '../../types/api/puzzles/instances/puzzleInstance';
+import { usePuzzleInstances } from '../../hooks/usePuzzleInstances';
+import { handleLoadingError } from '../../utils/errorHandler';
 
-type PuzzleListTypes = {
-  puzzleInstances: PuzzleInstanceCustom[];
-};
-
-const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
+const PuzzleList = () => {
+  const { puzzleInstances, loadingPuzzleInstances, errorPuzzleInstances } =
+    usePuzzleInstances(true);
   const [searchNFilter, setSearchNFilter] = useState<{
     searchText: string;
     filterFields: { EASY: boolean; MEDIUM: boolean; HARD: boolean };
@@ -18,6 +15,10 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
     searchText: '',
     filterFields: { EASY: true, MEDIUM: true, HARD: true }
   });
+
+  if (loadingPuzzleInstances || errorPuzzleInstances)
+    return handleLoadingError(loadingPuzzleInstances, [errorPuzzleInstances]);
+
   return (
     <>
       <Header />
@@ -31,7 +32,9 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
                 return (
                   searchNFilter.filterFields[instance.puzzle.difficulty] ===
                     true &&
-                  instance.puzzle.name.toLowerCase().includes(searchNFilter.searchText.toLowerCase())
+                  instance.puzzle.name
+                    .toLowerCase()
+                    .includes(searchNFilter.searchText.toLowerCase())
                 );
               } else {
                 return (
@@ -42,9 +45,12 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
             })
             .map(instance => {
               // TODO: link to view on map
+              // TODO: properly handle truncations (i.e. the ... at the end of sliced strings)
               return {
                 name: instance.puzzle.name,
-                content: [`${instance.puzzle.content.join('\n').slice(0, 150)} ...`],
+                content: [
+                  `${instance.puzzle.content.join('\n').slice(0, 150)} ...`
+                ],
                 difficulty: instance.puzzle.difficulty,
                 buttonActions: [
                   {
@@ -62,10 +68,3 @@ const PuzzleList = ({ puzzleInstances }: PuzzleListTypes) => {
 };
 
 export default PuzzleList;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const puzzleInstances = await getAllPuzzleInstances(true);
-  return {
-    props: { puzzleInstances }
-  };
-};

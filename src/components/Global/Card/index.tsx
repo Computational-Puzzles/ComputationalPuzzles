@@ -19,9 +19,9 @@ const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
           Difficulty: <Difficulty difficulty={difficulty} />
         </p>
       </div>
-      {content.map((text, index) =>
+      {content.map((text, index) => (
         <p key={`card_content_${index}`}>{text}</p>
-      )}
+      ))}
       <div className={styles.cardFooter}>
         <div className={styles.buttonWrap}>
           {buttonActions.map((buttonAction, index) => (

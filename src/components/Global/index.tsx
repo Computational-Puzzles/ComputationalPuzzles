@@ -9,6 +9,7 @@ import ErrorDisplay from './ErrorDisplay';
 import LogStatusButton from './LogStatusButton';
 import SearchAndFilter from './SearchAndFilter';
 import Difficulty from './Difficulty';
+import Loading from './Loading';
 
 export {
   Button,
@@ -21,5 +22,6 @@ export {
   ErrorDisplay,
   LogStatusButton,
   SearchAndFilter,
-  Difficulty
+  Difficulty,
+  Loading
 };

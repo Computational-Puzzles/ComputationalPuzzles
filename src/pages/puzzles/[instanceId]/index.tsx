@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
 import { Prisma, Puzzle } from '@prisma/client';
+import toast from 'react-hot-toast';
 import { Button, Difficulty, Header } from '../../../components/Global';
 import { FeedbackGif, PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
@@ -13,6 +14,7 @@ import { HandledError } from '../../../types/error';
 import { initializeRandomGifSrc } from '../../../services/feedbackGif';
 import { FeedbackGifList } from '../../../types/feedbackGif';
 import { getRandomGifSrc } from '../../../utils/feedbackGif';
+import Router from 'next/router';
 
 const PuzzlePage = ({
   puzzleInstance,
@@ -26,6 +28,7 @@ const PuzzlePage = ({
   const [answer, setAnswer] = useState('');
   const [feedbackGifSrc, setFeedbackGifSrc] = useState('');
   const [isRecentCorrect, setIsRecentCorrect] = useState(null);
+
   const { data: session, status } = useSession();
   const user = session?.user as User;
   const isAuthenticated = status === 'authenticated';
@@ -38,35 +41,52 @@ const PuzzlePage = ({
     user
   ) => {
     if (isAuthenticated) {
-      const submission = await submitPuzzleInstance(
-        answer,
-        puzzleInstance,
-        puzzle,
-        randomSeed,
-        user
-      );
+      const submissionInstance = async () => {
+        const submission = await submitPuzzleInstance(
+          answer,
+          puzzleInstance,
+          puzzle,
+          randomSeed,
+          user
+        );
 
-      if ((submission as HandledError).error) {
-        // TODO: handle errors from submitting
-        alert(submission.message);
-        return;
-      }
+        if ((submission as HandledError).error) {
+          throw new Error((submission as HandledError).message);
+        } else {
+          const success = submission.isCorrect[submission.isCorrect.length - 1];
 
-      const success = submission.isCorrect.at(-1);
+          const feedbackGifs = success
+            ? allFeedbackGifs.correct
+            : allFeedbackGifs.incorrect;
 
-      const correctnessMessage = success
-        ? 'Correct! Nice work!'
-        : 'Almost there! Try Again.';
-      alert(`${correctnessMessage}`);
+          setIsRecentCorrect(success);
+          setFeedbackGifSrc(getRandomGifSrc(feedbackGifs, success));
 
-      const feedbackGifs = success
-        ? allFeedbackGifs.correct
-        : allFeedbackGifs.incorrect;
+          if (!success) {
+            throw new Error('Almost there! Try Again');
+          }
+        }
+      };
 
-      setIsRecentCorrect(success);
-      setFeedbackGifSrc(getRandomGifSrc(feedbackGifs, success));
+      toast.promise(submissionInstance(), {
+        loading: 'Submitting your answer... ⏳',
+        success: 'Correct! Nice work!',
+        error: err => err.message
+      });
     } else {
-      alert('You must be logged in to submit puzzles!');
+      toast.error(t => (
+        <span>
+          You must be logged in to submit an answer.
+          <button
+            onClick={() => {
+              toast.dismiss(t.id);
+              Router.push('/auth/signin');
+            }}
+          >
+            Login
+          </button>
+        </span>
+      ));
       // TODO: should be an alert dialog w/ link to login page
     }
   };
@@ -97,14 +117,16 @@ const PuzzlePage = ({
               </div>
             </div>
           </div>
-          <div className={styles.image}>
-            <Image
-              src={puzzle.imageUrl}
-              width={500}
-              height={500}
-              alt={'puzzle image'}
-            />
-          </div>
+          {puzzle.imageUrl && (
+            <div className={styles.image}>
+              <Image
+                src={puzzle.imageUrl}
+                width={500}
+                height={500}
+                alt={'puzzle image'}
+              />
+            </div>
+          )}
         </section>
         <section className={`${styles.card}`}>
           <div className={styles.text}>
@@ -119,14 +141,16 @@ const PuzzlePage = ({
               </div>
             </div>
           </div>
-          <div className={styles.image}>
-            <Image
-              src={puzzle.exampleImageUrl}
-              width={500}
-              height={500}
-              alt={'example image'}
-            />
-          </div>
+          {puzzle.exampleImageUrl && (
+            <div className={styles.image}>
+              <Image
+                src={puzzle.exampleImageUrl}
+                width={500}
+                height={500}
+                alt={'example image'}
+              />
+            </div>
+          )}
         </section>
         <section className={styles.quest}>
           <h2 className={styles.title}>Quest</h2>
