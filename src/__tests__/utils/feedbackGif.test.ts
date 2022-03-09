@@ -1,22 +1,21 @@
 import { getRandomGifSrc } from '../../utils/feedbackGif';
 
-const arr = ['0.gif', '1.gif', '3.gif'];
-let isCorrect = true;
-describe('randomly generating the correct/incorrect gifs:', () => {
-  it('from the correct-gif & its path', () => {
-    expect([
-      `/feedbackGifs/correct/0`,
-      `/feedbackGifs/correct/1`,
-      `/feedbackGifs/correct/3`
-    ]).toContain(getRandomGifSrc(arr, isCorrect));
+  //returns a path from a provided array
+  it('returns a path from a provided array. Either correct/incorrect gif paths', () => {
+    const arr = getRandomArray();
+    const gifSrcCorrect = getRandomGifSrc(arr, true); 
+    expect(gifSrcCorrect.startsWith('/feedbackGifs/correct')).toBe(true);
+
+    const gifSrcWrong = getRandomGifSrc(arr, false);
+    expect(gifSrcWrong.startsWith('/feedbackGifs/incorrect')).toBe(true);
   });
 
-  it('from the incorrect-gif path & its path', () => {
-    isCorrect = false;
-    expect([
-      `/feedbackGifs/incorrect/0`,
-      `/feedbackGifs/incorrect/1`,
-      `/feedbackGifs/incorrect/3`
-    ]).toContain(getRandomGifSrc(arr, isCorrect));
-  });
-});
+//random length 1-10, and random values
+const getRandomArray = () =>{
+  const len = Math.floor(Math.random()*10 + 1);
+  let arr = [];
+  for(let i=0; i< len; i++){
+    arr[i] = Math.floor(Math.random()*10 );
+  }
+  return arr;
+}
