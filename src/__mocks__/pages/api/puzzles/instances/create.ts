@@ -1,6 +1,7 @@
 import * as faker from 'faker';
 import { DIFFICULTY } from '../../../../../types/global';
 
+// TODO: Ensure this list matches DB's configuration
 const DIFFICULTY_LIST = ['EASY', 'MEDIUM', 'HARD'];
 
 export const mockName = (): string => {

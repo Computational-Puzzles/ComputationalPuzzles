@@ -141,7 +141,7 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([409]);
+    expect(status.mock.calls[0]).toEqual([400]);
 
     const user = await prisma.user.findMany();
 
@@ -170,7 +170,7 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([409]);
+    expect(status.mock.calls[0]).toEqual([400]);
 
     const user = await prisma.user.findMany();
 
@@ -199,7 +199,7 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([409]);
+    expect(status.mock.calls[0]).toEqual([400]);
 
     const user = await prisma.user.findMany();
 
@@ -228,7 +228,7 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([409]);
+    expect(status.mock.calls[0]).toEqual([400]);
 
     const user = await prisma.user.findMany();
 
