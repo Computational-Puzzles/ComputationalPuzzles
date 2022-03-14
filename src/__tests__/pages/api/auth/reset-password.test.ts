@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 import {
   mockUserData,
@@ -10,7 +9,7 @@ import {
   mockEmail
 } from '../../../../__mocks__/pages/api/auth';
 import resetPasswordHandler from '../../../../pages/api/auth/reset-password';
-import { hashFunction } from '../../../../utils/password';
+import { checkHash, hashFunction } from '../../../../utils/password';
 import { resetPasswordProps } from '../../../../types/api/auth/reset-password';
 
 const prisma = new PrismaClient();
@@ -22,11 +21,11 @@ beforeEach(async () => {
   email = userData.email;
   password = userData.password;
 
-  const { createUser } = PrismaAdapter(prisma);
-
-  await createUser({
-    email,
-    password: hashFunction(password)
+  await prisma.user.create({
+    data: {
+      email,
+      password: await hashFunction(password)
+    }
   });
 });
 
@@ -84,7 +83,7 @@ describe('/api/auth/reset-password: Succeeded', () => {
     ).password;
 
     expect(hashPassword).not.toEqual(currentPassword);
-    expect(hashFunction(newPassword)).toEqual(currentPassword);
+    expect(await checkHash(newPassword, currentPassword)).toBe(true);
   });
 });
 
