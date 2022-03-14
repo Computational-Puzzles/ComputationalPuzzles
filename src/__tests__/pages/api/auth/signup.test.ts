@@ -128,7 +128,7 @@ describe('/api/auth/signup: Failed', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenNthCalledWith(1, 409);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 
@@ -158,7 +158,7 @@ describe('/api/auth/signup: Failed', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenNthCalledWith(1, 409);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 
@@ -188,7 +188,7 @@ describe('/api/auth/signup: Failed', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenNthCalledWith(1, 409);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 
@@ -218,7 +218,7 @@ describe('/api/auth/signup: Failed', () => {
     await signUpHandler(req, res);
 
     expect(json).toHaveBeenCalledTimes(1);
-    expect(status).toHaveBeenNthCalledWith(1, 409);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 
