@@ -5,7 +5,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  // previewFeatures = ["referentialIntegrity"]
 }
 
 model Account {
@@ -121,9 +121,9 @@ model Submission {
   id               Int            @id @default(autoincrement())
   createdAt        DateTime       @default(now()) @map(name: "created_at")
   updatedAt        DateTime       @updatedAt @map(name: "updated_at")
-  puzzleInstance   PuzzleInstance @relation(fields: [puzzleInstanceId], references: [id])
+  puzzleInstance   PuzzleInstance @relation(fields: [puzzleInstanceId], references: [id], onDelete: Cascade)
   puzzleInstanceId Int            @map(name: "puzzle_instance_id")
-  user             User           @relation(fields: [userId], references: [id])
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           Int            @map(name: "user_id")
   answers          String[]
   isCorrect        Boolean[]      @map(name: "is_correct")
