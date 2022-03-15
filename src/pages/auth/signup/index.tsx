@@ -27,9 +27,7 @@ const SignUpPage = () => {
       return false;
     }
     if (status === 'authenticated') {
-      toast(t => (
-        <SignUpDialog t={ t } />
-      ));
+      toast(t => <SignUpDialog t={t} />);
       return false;
     } else {
       signUp({ email, password });

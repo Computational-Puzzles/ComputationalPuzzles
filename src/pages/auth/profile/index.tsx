@@ -22,15 +22,18 @@ const ProfilePage = () => {
     if (!userEmail || !oldPass || !password || !confirmPass) return;
     if (password !== confirmPass) return;
     try {
-      await toast.promise(resetPassword({
-        email: userEmail,
-        oldPassword: oldPass,
-        newPassword: password
-      }), {
-        loading: 'Changing password',
-        success: 'Password changed successfully',
-        error: (err) => `Error: ${err.message}`
-      })
+      await toast.promise(
+        resetPassword({
+          email: userEmail,
+          oldPassword: oldPass,
+          newPassword: password
+        }),
+        {
+          loading: 'Changing password',
+          success: 'Password changed successfully',
+          error: err => `Error: ${err.message}`
+        }
+      );
     } catch (err) {
       console.error(err);
     }
@@ -58,40 +61,51 @@ const ProfilePage = () => {
         <div className={styles.profileDetailsWrapper}>
           <h3>Info</h3>
           <div className={styles.profileDetails}>
-            {userImg ? <Image
-              alt="profile image"
-              loader={() => userImg}
-              src={userImg}
-              width={200}
-              height={200}
-            /> : <div className={styles.imgPlaceholder}></div>
-            }
+            {userImg ? (
+              <Image
+                alt="profile image"
+                loader={() => userImg}
+                src={userImg}
+                width={200}
+                height={200}
+              />
+            ) : (
+              <div className={styles.imgPlaceholder}></div>
+            )}
             <div className={styles.profileDetailsText}>
               <div className={styles.profileDetailsInfo}>
                 <span>Email:</span>
-                <div>
-                  {userEmail}
-                </div>
+                <div>{userEmail}</div>
               </div>
               <div className={styles.profileDetailsInfo}>
                 <span>Username:</span>
-                <Input type='text' id='username' placeholder={username || ''} required={false} />
+                <Input
+                  type="text"
+                  id="username"
+                  placeholder={username || ''}
+                  required={false}
+                />
                 <Button
                   onClick={() => alert('Hi')}
-                  style='primary'
-                  content='Update'
-                  arrowDirection='right'
+                  style="primary"
+                  content="Update"
+                  arrowDirection="right"
                 />
               </div>
               <div className={styles.profileDetailsInfo}>
                 <span>Birth year:</span>
                 {/* TODO: Load birthyear */}
-                <Input type='text' id='birthyear' placeholder={''} required={false} />
+                <Input
+                  type="text"
+                  id="birthyear"
+                  placeholder={''}
+                  required={false}
+                />
                 <Button
                   onClick={() => alert('Hi')}
-                  style='primary'
-                  content='Update'
-                  arrowDirection='right'
+                  style="primary"
+                  content="Update"
+                  arrowDirection="right"
                 />
               </div>
             </div>
@@ -101,14 +115,14 @@ const ProfilePage = () => {
             <h3>Reset password</h3>
             <form className={styles.resetPasswordForm}>
               <Input
-                id='oldPassword'
+                id="oldPassword"
                 type="password"
                 placeholder="Old password"
                 setInputVal={setOldPass}
                 required={true}
               />
               <Input
-                id='newPassword'
+                id="newPassword"
                 type="password"
                 placeholder="New password"
                 minLength={passwordMinLength}
@@ -116,7 +130,7 @@ const ProfilePage = () => {
                 required={true}
               />
               <Input
-                id='confirmNewPassword'
+                id="confirmNewPassword"
                 type="password"
                 placeholder="Confirm new password"
                 minLength={passwordMinLength}
@@ -126,9 +140,9 @@ const ProfilePage = () => {
               <div>
                 <Button
                   onClick={handleChangePassword}
-                  style='primary'
-                  content='Reset'
-                  arrowDirection='right'
+                  style="primary"
+                  content="Reset"
+                  arrowDirection="right"
                 />
               </div>
             </form>
