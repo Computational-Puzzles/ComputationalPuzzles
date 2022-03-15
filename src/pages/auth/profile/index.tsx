@@ -2,12 +2,16 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
+import toast from 'react-hot-toast';
 import { resetPassword } from '../../../services';
-import { Header } from '../../../components/Global';
+import { Header, Input, Button } from '../../../components/Global';
+import styles from '../../../styles/pages/profile.module.scss';
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
-  const userImage = `${session?.user?.image}#site.com/image.jpg`;
+  const [username, setUsername] = React.useState('');
+  const [userImg, setUserImg] = React.useState('');
+  const [userEmail, setUserEmail] = React.useState('');
   const passwordMinLength = 8;
 
   const [oldPass, setOldPass] = React.useState('');
@@ -15,17 +19,29 @@ const ProfilePage = () => {
   const [confirmPass, setConfirmPass] = React.useState('');
 
   const handleChangePassword = async () => {
-    const email = session?.user?.email;
-
-    if (!email || !oldPass || !password || !confirmPass) return;
+    if (!userEmail || !oldPass || !password || !confirmPass) return;
     if (password !== confirmPass) return;
-
-    const success = await resetPassword({
-      email,
-      oldPassword: oldPass,
-      newPassword: password
-    });
+    try {
+      await toast.promise(resetPassword({
+        email: userEmail,
+        oldPassword: oldPass,
+        newPassword: password
+      }), {
+        loading: 'Changing password',
+        success: 'Password changed successfully',
+        error: (err) => `Error: ${err.message}`
+      })
+    } catch (err) {
+      console.error(err);
+    }
   };
+
+  useEffect(() => {
+    if (!session) return;
+    setUsername(session.user.name);
+    setUserImg(session.user.image);
+    setUserEmail(session.user.email);
+  }, [session]);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -34,61 +50,92 @@ const ProfilePage = () => {
   }, [status]);
 
   return (
-    <>
+    <div className={styles.profileWrapper}>
       <Header />
-      <h1>Profile</h1>
+      <h2>{username || userEmail}</h2>
+      <hr />
       {status === 'authenticated' && (
-        <>
-          <h2>Information</h2>
-          <p>
-            <strong>Name:</strong> {session.user.name}
-            <br />
-            <strong>Email:</strong> {session.user.email}
-            <br />
-            {session.user.image && (
-              <>
-                <strong>Profile image:</strong>
-                <Image
-                  alt="profile image"
-                  loader={() => userImage}
-                  src={userImage}
-                  width={200}
-                  height={200}
+        <div className={styles.profileDetailsWrapper}>
+          <h3>Info</h3>
+          <div className={styles.profileDetails}>
+            {userImg ? <Image
+              alt="profile image"
+              loader={() => userImg}
+              src={userImg}
+              width={200}
+              height={200}
+            /> : <div className={styles.imgPlaceholder}></div>
+            }
+            <div className={styles.profileDetailsText}>
+              <div className={styles.profileDetailsInfo}>
+                <span>Email:</span>
+                <div>
+                  {userEmail}
+                </div>
+              </div>
+              <div className={styles.profileDetailsInfo}>
+                <span>Username:</span>
+                <Input type='text' id='username' placeholder={username || ''} required={false} />
+                <Button
+                  onClick={() => alert('Hi')}
+                  style='primary'
+                  content='Update'
+                  arrowDirection='right'
                 />
-                <br />
-              </>
-            )}
-          </p>
+              </div>
+              <div className={styles.profileDetailsInfo}>
+                <span>Birth year:</span>
+                {/* TODO: Load birthyear */}
+                <Input type='text' id='birthyear' placeholder={''} required={false} />
+                <Button
+                  onClick={() => alert('Hi')}
+                  style='primary'
+                  content='Update'
+                  arrowDirection='right'
+                />
+              </div>
+            </div>
+          </div>
 
-          <h2>Reset password</h2>
-          <form>
-            <input
-              type="password"
-              placeholder="Old password"
-              value={oldPass}
-              onChange={e => setOldPass(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="New password"
-              minLength={passwordMinLength}
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Confirm new password"
-              minLength={passwordMinLength}
-              value={confirmPass}
-              onChange={e => setConfirmPass(e.target.value)}
-            />
-            <button type="button" onClick={handleChangePassword}>
-              Reset password
-            </button>
-          </form>
-        </>
+          <div className={styles.resetPasswordFormWrapper}>
+            <h3>Reset password</h3>
+            <form className={styles.resetPasswordForm}>
+              <Input
+                id='oldPassword'
+                type="password"
+                placeholder="Old password"
+                setInputVal={setOldPass}
+                required={true}
+              />
+              <Input
+                id='newPassword'
+                type="password"
+                placeholder="New password"
+                minLength={passwordMinLength}
+                setInputVal={setPassword}
+                required={true}
+              />
+              <Input
+                id='confirmNewPassword'
+                type="password"
+                placeholder="Confirm new password"
+                minLength={passwordMinLength}
+                setInputVal={setConfirmPass}
+                required={true}
+              />
+              <div>
+                <Button
+                  onClick={handleChangePassword}
+                  style='primary'
+                  content='Reset'
+                  arrowDirection='right'
+                />
+              </div>
+            </form>
+          </div>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 
