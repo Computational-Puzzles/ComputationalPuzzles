@@ -3,12 +3,14 @@ import Image from 'next/image';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
-import { resetPassword } from '../../../services';
+import { resetPassword, getUserByEmail, updateUsername } from '../../../services';
 import { Header, Input, Button } from '../../../components/Global';
 import styles from '../../../styles/pages/profile.module.scss';
 
 const ProfilePage = () => {
   const { data: session, status } = useSession();
+  const [hasPassword, setHasPassword] = React.useState(false);
+  const [newUsername, setNewUserName] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [userImg, setUserImg] = React.useState('');
   const [userEmail, setUserEmail] = React.useState('');
@@ -41,6 +43,8 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (!session) return;
+
+    console.log(session)
     setUsername(session.user.name);
     setUserImg(session.user.image);
     setUserEmail(session.user.email);
@@ -51,6 +55,41 @@ const ProfilePage = () => {
       Router.push('/auth/login');
     }
   }, [status]);
+
+  useEffect(() => {
+    getUserByEmail({ email: userEmail })
+      .then((user) => {
+        if (user?.password) setHasPassword(true);
+        if (user.name) setUsername(user.name)
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [userEmail]);
+
+  const handleUpdateUsername = async () => {
+    if (newUsername === '') {
+      toast.error('Username cannot be empty');
+      return;
+    }
+
+    if (newUsername === username) {
+      toast.error('Username cannot be the same as current username');
+      return;
+    }
+
+    toast.promise(updateUsername({
+      email: userEmail,
+      username: newUsername
+    }), {
+      loading: 'Updating username',
+      success: () => {
+        setUsername(newUsername);
+        return ('Username updated successfully')
+      },
+      error: err => `Error: ${err.message}`
+    });
+  }
 
   return (
     <div className={styles.profileWrapper}>
@@ -84,9 +123,10 @@ const ProfilePage = () => {
                   id="username"
                   placeholder={username || ''}
                   required={false}
+                  setInputVal={setNewUserName}
                 />
                 <Button
-                  onClick={() => alert('Hi')}
+                  onClick={async () => await handleUpdateUsername()}
                   style="primary"
                   content="Update"
                   arrowDirection="right"
@@ -96,13 +136,13 @@ const ProfilePage = () => {
                 <span>Birth year:</span>
                 {/* TODO: Load birthyear */}
                 <Input
-                  type="text"
+                  type="number"
                   id="birthyear"
                   placeholder={''}
                   required={false}
                 />
                 <Button
-                  onClick={() => alert('Hi')}
+                  onClick={() => toast('Place holder for update birthyear')}
                   style="primary"
                   content="Update"
                   arrowDirection="right"
@@ -110,43 +150,44 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-
-          <div className={styles.resetPasswordFormWrapper}>
-            <h3>Reset password</h3>
-            <form className={styles.resetPasswordForm}>
-              <Input
-                id="oldPassword"
-                type="password"
-                placeholder="Old password"
-                setInputVal={setOldPass}
-                required={true}
-              />
-              <Input
-                id="newPassword"
-                type="password"
-                placeholder="New password"
-                minLength={passwordMinLength}
-                setInputVal={setPassword}
-                required={true}
-              />
-              <Input
-                id="confirmNewPassword"
-                type="password"
-                placeholder="Confirm new password"
-                minLength={passwordMinLength}
-                setInputVal={setConfirmPass}
-                required={true}
-              />
-              <div>
-                <Button
-                  onClick={handleChangePassword}
-                  style="primary"
-                  content="Reset"
-                  arrowDirection="right"
+          {hasPassword && (
+            <div className={styles.resetPasswordFormWrapper}>
+              <h3>Reset password</h3>
+              <form className={styles.resetPasswordForm}>
+                <Input
+                  id="oldPassword"
+                  type="password"
+                  placeholder="Old password"
+                  setInputVal={setOldPass}
+                  required={true}
                 />
-              </div>
-            </form>
-          </div>
+                <Input
+                  id="newPassword"
+                  type="password"
+                  placeholder="New password"
+                  minLength={passwordMinLength}
+                  setInputVal={setPassword}
+                  required={true}
+                />
+                <Input
+                  id="confirmNewPassword"
+                  type="password"
+                  placeholder="Confirm new password"
+                  minLength={passwordMinLength}
+                  setInputVal={setConfirmPass}
+                  required={true}
+                />
+                <div>
+                  <Button
+                    onClick={handleChangePassword}
+                    style="primary"
+                    content="Reset"
+                    arrowDirection="right"
+                  />
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </div>

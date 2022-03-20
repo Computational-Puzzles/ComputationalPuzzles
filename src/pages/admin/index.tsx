@@ -20,7 +20,7 @@ const Admin = ({ puzzlesList }) => {
   const email = session?.user?.email;
   React.useEffect(() => {
     const checkAdmin = async () => {
-      setValidAdmin(await isAdmin(email));
+      setValidAdmin(await isAdmin({ email }));
     };
     email && checkAdmin();
   }, [email]);

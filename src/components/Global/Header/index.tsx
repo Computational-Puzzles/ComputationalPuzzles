@@ -18,7 +18,7 @@ const Header = ({ profilePicture }: HeaderProps) => {
   const email = session?.user?.email;
   React.useEffect(() => {
     const checkAdmin = async () => {
-      setValidAdmin(await isAdmin(email));
+      setValidAdmin(await isAdmin({ email }));
     };
     checkAdmin();
   }, [email]);
