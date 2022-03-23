@@ -1,7 +1,3 @@
-/**
- * @jest-environment node
- */
-import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import signUpHandler from '../../../../pages/api/auth/signup';
 import {
@@ -10,7 +6,7 @@ import {
 } from '../../../../__mocks__/pages/api/auth';
 import type { UserDataProp } from '../../../../__mocks__/pages/api/auth';
 
-const prisma = new PrismaClient();
+import { prisma } from '../../../../__mocks__';
 
 beforeEach(async () => {
   await prisma.user.deleteMany();

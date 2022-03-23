@@ -5,6 +5,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 model Account {
@@ -96,7 +97,7 @@ model Puzzle {
   inputType       InputType        @default(TEXT) @map(name: "input_type")
   published       Boolean          @default(false)
   variables       Json
-  puzzleType      PuzzleType       @relation(fields: [puzzleTypeId], references: [id])
+  puzzleType      PuzzleType       @relation(fields: [puzzleTypeId], references: [id], onDelete: Cascade)
   puzzleTypeId    Int              @map(name: "puzzle_type_id")
   puzzleInstances PuzzleInstance[]
 
@@ -105,7 +106,7 @@ model Puzzle {
 
 model PuzzleInstance {
   id          Int          @id @default(autoincrement())
-  puzzle      Puzzle       @relation(fields: [puzzleId], references: [id])
+  puzzle      Puzzle       @relation(fields: [puzzleId], references: [id], onDelete: Cascade)
   puzzleId    Int          @map(name: "puzzle_id")
   hint        String       @default("No hint")
   submissions Submission[]
@@ -120,9 +121,9 @@ model Submission {
   id               Int            @id @default(autoincrement())
   createdAt        DateTime       @default(now()) @map(name: "created_at")
   updatedAt        DateTime       @updatedAt @map(name: "updated_at")
-  puzzleInstance   PuzzleInstance @relation(fields: [puzzleInstanceId], references: [id])
+  puzzleInstance   PuzzleInstance @relation(fields: [puzzleInstanceId], references: [id], onDelete: Cascade)
   puzzleInstanceId Int            @map(name: "puzzle_instance_id")
-  user             User           @relation(fields: [userId], references: [id])
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           Int            @map(name: "user_id")
   answers          String[]
   isCorrect        Boolean[]      @map(name: "is_correct")
