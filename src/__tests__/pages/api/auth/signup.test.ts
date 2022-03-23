@@ -4,7 +4,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { PrismaClient } from '@prisma/client';
 import signUpHandler from '../../../../pages/api/auth/signup';
 import {
   mockUserData,
@@ -13,7 +12,7 @@ import {
 import type { UserDataProp } from '../../../../__mocks__/pages/api/auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
+import { prisma } from '../../../../__mocks__';
 
 beforeAll(async () => {
   await prisma.$connect();
