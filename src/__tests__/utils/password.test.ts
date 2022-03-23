@@ -1,8 +1,9 @@
 import { checkHash, hashFunction } from '../../utils/password';
 
 describe('testing the hashFunction', () => {
-  it('should compare the secret hashed and without', () => {
-    expect(hashFunction('secret_hi')).not.toBe('secret_hi');
+  it('should compare the secret hashed and without', async () => {
+    expect(await hashFunction('secret_hi')).not.toBe('secret_hi');
+    expect(await hashFunction('secret_hi')).not.toBe(await hashFunction('secret_hi'));
   });
 
   it('should compare the length of 2 hashed passwords', async () => {
@@ -20,7 +21,7 @@ describe('testing the hashFunction', () => {
 });
 describe('testing the checkHash', () => {
   it('should have the same hashed values for the same secret input', async () => {
-    expect(checkHash('password', await hashFunction('password'))).toBe(true);
+    expect(await checkHash('password', await hashFunction('password'))).toBe(true);
   });
 });
 

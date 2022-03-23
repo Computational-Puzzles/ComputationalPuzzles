@@ -39,7 +39,7 @@ const resetPasswordHandler = async (
     return;
   }
 
-  if (!checkHash(oldPassword, user.password)) {
+  if (!(await checkHash(oldPassword, user.password))) {
     res.status(400).json({
       message: 'Old password is incorrect'
     });
