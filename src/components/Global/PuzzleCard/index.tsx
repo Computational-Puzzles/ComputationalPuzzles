@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Button } from '../';
 import { Difficulty } from '../';
 
-import styles from './Card.module.scss';
+import styles from './PuzzleCard.module.scss';
 import { CardProps } from '../../../types/cards';
 
-const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
+const PuzzleCard = ({ name, content, difficulty, buttonActions }: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
@@ -16,7 +16,7 @@ const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
       <div className={styles.cardHeader}>
         <p className={styles.title}>{name}</p>
         <p className={styles.difficulty}>
-          Difficulty: <Difficulty difficulty={difficulty} />
+          <Difficulty difficulty={difficulty} />
         </p>
       </div>
       {content.map((text, index) => (
@@ -40,4 +40,4 @@ const Card = ({ name, content, difficulty, buttonActions }: CardProps) => {
   );
 };
 
-export default Card;
+export default PuzzleCard;
