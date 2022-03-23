@@ -12,8 +12,6 @@ describe('testing the hashFunction', () => {
     // generate random strings with the length above;
     const pw1 = getRandomString(len1);
     const pw2 = getRandomString(len2);
-    console.log("password 1 is " + pw1);
-    console.log("password 2 is " + pw2);
     //generate 2 hashed pw
     const hashed1 = await hashFunction(pw1);
     const hashed2 = await hashFunction(pw2);
