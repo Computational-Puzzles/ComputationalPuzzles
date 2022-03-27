@@ -1,19 +1,9 @@
-import CardGrid from './CardGrid';
-import QRGenerator from './QRGenerator';
-import PuzzleGenerate from './PuzzleGenerate';
-import PuzzleInput from './PuzzleInput';
-import MapRenderer from './MapRenderer';
-import MapGeocoder from './MapGeocoder';
-import FeedbackGif from './FeedbackGif';
-import SignUpDialog from './SignUpDialog';
-
-export {
-  CardGrid,
-  QRGenerator,
-  PuzzleGenerate,
-  PuzzleInput,
-  MapRenderer,
-  MapGeocoder,
-  FeedbackGif,
-  SignUpDialog
-};
+export { default as CardGrid } from './CardGrid';
+export { default as QRGenerator } from './QRGenerator';
+export { default as PuzzleGenerate } from './PuzzleGenerate';
+export { default as PuzzleInput } from './PuzzleInput';
+export { default as MapRenderer } from './MapRenderer';
+export { default as MapGeocoder } from './MapGeocoder';
+export { default as FeedbackGif } from './FeedbackGif';
+export { default as SignUpDialog } from './SignUpDialog';
+export { default as PuzzleInfomation } from './PuzzleInfomation';
