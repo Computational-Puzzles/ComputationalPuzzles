@@ -6,7 +6,12 @@ import { Difficulty } from '../';
 import styles from './PuzzleCard.module.scss';
 import { CardProps } from '../../../types/cards';
 
-const PuzzleCard = ({ name, content, difficulty, buttonActions }: CardProps) => {
+const PuzzleCard = ({
+  name,
+  content,
+  difficulty,
+  buttonActions
+}: CardProps) => {
   return (
     <div
       className={`${styles.card} ${
