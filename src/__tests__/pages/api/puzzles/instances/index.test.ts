@@ -47,7 +47,9 @@ describe('/api/puzzles/instances', () => {
         ])
       });
     });
-    expect(json.mock.calls[0][0].puzzleInstances.length).toEqual(numPuzzleInstances);
+    expect(json.mock.calls[0][0].puzzleInstances.length).toEqual(
+      numPuzzleInstances
+    );
   });
 });
 

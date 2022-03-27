@@ -10,27 +10,27 @@ beforeEach(async () => {
 });
 
 describe('/api/puzzles/[id]: Succeeded', () => {
-   it('sucessfully retrieves puzzle', async () => {
-      const newPuzzle = await mockPuzzle();
-      const json = jest.fn();
-      const status = jest.fn(() => {
-         return { json };
-      });
-      const res = {
-         status
-      } as unknown as NextApiResponse;
+  it('sucessfully retrieves puzzle', async () => {
+    const newPuzzle = await mockPuzzle();
+    const json = jest.fn();
+    const status = jest.fn(() => {
+      return { json };
+    });
+    const res = {
+      status
+    } as unknown as NextApiResponse;
 
-      const req = {
-         query: {
-            id: newPuzzle.id,
-         }
-      } as unknown as NextApiRequest;
+    const req = {
+      query: {
+        id: newPuzzle.id
+      }
+    } as unknown as NextApiRequest;
 
-      await getPuzzleById(req, res);
+    await getPuzzleById(req, res);
 
-      expect(json).toHaveBeenNthCalledWith(1, newPuzzle);
-      expect(status).toHaveBeenNthCalledWith(1, 200);
-   });
+    expect(json).toHaveBeenNthCalledWith(1, newPuzzle);
+    expect(status).toHaveBeenNthCalledWith(1, 200);
+  });
 });
 
 // TODO: Create failed tests
