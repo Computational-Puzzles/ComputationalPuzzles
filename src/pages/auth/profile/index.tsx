@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
@@ -8,43 +9,20 @@ import { Header, Input, Button } from '../../../components/Global';
 import styles from '../../../styles/pages/profile.module.scss';
 
 const ProfilePage = () => {
-  const { data: session, status } = useSession();
-  const [hasPassword, setHasPassword] = React.useState(false);
-  const [newUsername, setNewUserName] = React.useState('');
-  const [username, setUsername] = React.useState('');
-  const [userImg, setUserImg] = React.useState('');
-  const [userEmail, setUserEmail] = React.useState('');
   const passwordMinLength = 8;
+  const { data: session, status } = useSession();
 
-  const [oldPass, setOldPass] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPass, setConfirmPass] = React.useState('');
-
-  const handleChangePassword = async () => {
-    if (!userEmail || !oldPass || !password || !confirmPass) return;
-    if (password !== confirmPass) return;
-    try {
-      await toast.promise(
-        resetPassword({
-          email: userEmail,
-          oldPassword: oldPass,
-          newPassword: password
-        }),
-        {
-          loading: 'Changing password',
-          success: 'Password changed successfully',
-          error: err => `Error: ${err.message}`
-        }
-      );
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const [hasPassword, setHasPassword] = useState(false);
+  const [newUsername, setNewUserName] = useState('');
+  const [username, setUsername] = useState('');
+  const [userImg, setUserImg] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [oldPass, setOldPass] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPass, setConfirmPass] = useState('');
 
   useEffect(() => {
     if (!session) return;
-
-    console.log(session)
     setUsername(session.user.name);
     setUserImg(session.user.image);
     setUserEmail(session.user.email);
@@ -67,7 +45,29 @@ const ProfilePage = () => {
       });
   }, [userEmail]);
 
+  const handleChangePassword = async () => {
+    if (!userEmail || !oldPass || !password || !confirmPass) return;
+    if (password !== confirmPass) return;
+    try {
+      await toast.promise(
+        resetPassword({
+          email: userEmail,
+          oldPassword: oldPass,
+          newPassword: password
+        }),
+        {
+          loading: 'Changing password',
+          success: 'Password changed successfully',
+          error: err => `Error: ${err.message}`
+        }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleUpdateUsername = async () => {
+    // TODO: Regex for username
     if (newUsername === '') {
       toast.error('Username cannot be empty');
       return;
@@ -121,7 +121,7 @@ const ProfilePage = () => {
                 <Input
                   type="text"
                   id="username"
-                  placeholder={username || ''}
+                  placeholder={username || 'Enter username...'}
                   required={false}
                   setInputVal={setNewUserName}
                 />
