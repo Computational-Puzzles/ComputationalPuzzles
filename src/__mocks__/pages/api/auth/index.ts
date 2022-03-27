@@ -1,4 +1,6 @@
+import { User } from '@prisma/client';
 import * as faker from 'faker';
+import { prisma } from '../../..';
 
 export type UserDataProp = {
   email: string;
@@ -15,7 +17,7 @@ export const mockPassword = () => {
 
 export const mockUsername = () => {
   return faker.internet.userName();
-}
+};
 
 export const mockUserData = () => {
   return {
@@ -33,4 +35,14 @@ export const mockManyUserData = (numUsers: number) => {
     });
   }
   return users;
+};
+
+export const mockUser = (): Promise<User> => {
+  const userData = mockUserData();
+  return prisma.user.create({
+    data: {
+      email: userData.email,
+      password: userData.password
+    }
+  });
 };

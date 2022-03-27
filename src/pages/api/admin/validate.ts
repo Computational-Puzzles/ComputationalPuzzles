@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 const adminValidate = async (req: NextApiRequest, res: NextApiResponse) => {
   const userEmail = req.body.email as string;
-  
+
   try {
     const user = await prisma.user.findUnique({
       where: { email: userEmail }

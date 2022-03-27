@@ -1,30 +1,15 @@
-/**
- * @jest-environment node
- */
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-import { PrismaClient } from '@prisma/client';
+import { NextApiRequest, NextApiResponse } from 'next';
 import signUpHandler from '../../../../pages/api/auth/signup';
 import {
   mockUserData,
   mockManyUserData
 } from '../../../../__mocks__/pages/api/auth';
 import type { UserDataProp } from '../../../../__mocks__/pages/api/auth';
-import { NextApiRequest, NextApiResponse } from 'next';
 
-const prisma = new PrismaClient();
-
-beforeAll(async () => {
-  await prisma.$connect();
-});
+import { prisma } from '../../../../__mocks__';
 
 beforeEach(async () => {
   await prisma.user.deleteMany();
-});
-
-afterAll(async () => {
-  await prisma.$disconnect();
 });
 
 describe('/api/auth/signup: Succeeded', () => {
@@ -49,11 +34,14 @@ describe('/api/auth/signup: Succeeded', () => {
 
     await signUpHandler(req, res);
 
-    expect(json.mock.calls[0][0]).toMatchObject({
-      email,
-      password: expect.any(String)
-    });
-    expect(status.mock.calls[0]).toEqual([201]);
+    expect(status).toHaveBeenNthCalledWith(1, 201);
+    expect(json).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        email,
+        password: expect.any(String)
+      })
+    );
 
     const user = await prisma.user.findUnique({
       where: {
@@ -98,24 +86,18 @@ describe('/api/auth/signup: Succeeded', () => {
       prisma.user.findMany()
     );
 
-    expect(json.mock.calls.length).toEqual(numUsers);
-
+    expect(status).toHaveBeenNthCalledWith(numUsers, 201);
+    expect(json).toHaveBeenCalledTimes(numUsers);
+    expect(users.length).toEqual(numUsers);
     users.forEach((user: UserDataProp) => {
       expect(user).toBeDefined();
-      expect(status.mock.calls[0]).toEqual([201]);
-      expect(json.mock.calls).toEqual(
-        expect.arrayContaining([
-          expect.arrayContaining([
-            expect.objectContaining({
-              email: user.email,
-              password: expect.any(String)
-            })
-          ])
-        ])
+      expect(json).toHaveBeenCalledWith(
+        expect.objectContaining({
+          email: user.email,
+          password: expect.any(String)
+        })
       );
     });
-
-    expect(users.length).toEqual(numUsers);
   });
 });
 
@@ -142,7 +124,8 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
+    expect(json).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 
@@ -171,7 +154,8 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
+    expect(json).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 
@@ -200,7 +184,8 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
+    expect(json).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 
@@ -229,7 +214,8 @@ describe('/api/auth/signup: Failed', () => {
 
     await signUpHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
+    expect(json).toHaveBeenCalledTimes(1);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
 
     const user = await prisma.user.findMany();
 

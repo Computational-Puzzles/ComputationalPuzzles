@@ -4,7 +4,11 @@ import Image from 'next/image';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
-import { resetPassword, getUserByEmail, updateUsername } from '../../../services';
+import {
+  resetPassword,
+  getUserByEmail,
+  updateUsername
+} from '../../../services';
 import { Header, Input, Button } from '../../../components/Global';
 import styles from '../../../styles/pages/profile.module.scss';
 
@@ -36,11 +40,11 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getUserByEmail({ email: userEmail })
-      .then((user) => {
+      .then(user => {
         if (user?.password) setHasPassword(true);
-        if (user.name) setUsername(user.name)
+        if (user.name) setUsername(user.name);
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   }, [userEmail]);
@@ -78,18 +82,21 @@ const ProfilePage = () => {
       return;
     }
 
-    toast.promise(updateUsername({
-      email: userEmail,
-      username: newUsername
-    }), {
-      loading: 'Updating username',
-      success: () => {
-        setUsername(newUsername);
-        return ('Username updated successfully')
-      },
-      error: err => `Error: ${err.message}`
-    });
-  }
+    toast.promise(
+      updateUsername({
+        email: userEmail,
+        username: newUsername
+      }),
+      {
+        loading: 'Updating username',
+        success: () => {
+          setUsername(newUsername);
+          return 'Username updated successfully';
+        },
+        error: err => `Error: ${err.message}`
+      }
+    );
+  };
 
   return (
     <div className={styles.profileWrapper}>
