@@ -42,9 +42,9 @@ docker-compose up
 ## For testing
 Create another file named `.env.test`
 ```text
-NODE_ENV=development
+NODE_ENV=testing
 
-DATABASE_URL=postgresql://computational_puzzles:computational_puzzles@localhost:5432/mydb?schema=public
+DATABASE_URL=postgresql://computational_puzzles:computational_puzzles@localhost:5432/testdb?schema=public
 GOOGLE_CLIENT_ID=10889722286-8uek1esq4uicv31an6tehi60c7ev5lvp.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=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
 SECRET=secret

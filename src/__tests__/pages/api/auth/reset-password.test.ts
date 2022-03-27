@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
@@ -13,7 +10,7 @@ import resetPasswordHandler from '../../../../pages/api/auth/reset-password';
 import { hashFunction } from '../../../../utils/password';
 import { resetPasswordProps } from '../../../../types/api/auth/reset-password';
 
-const prisma = new PrismaClient();
+import { prisma } from '../../../../__mocks__';
 
 let email: string, password: string;
 
@@ -65,12 +62,10 @@ describe('/api/auth/reset-password: Succeeded', () => {
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([200]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Password changed'
-      }
-    ]);
+    expect(status).toHaveBeenNthCalledWith(1, 200);
+    expect(json).toHaveBeenNthCalledWith(1, {
+      message: 'Password changed'
+    });
 
     const currentPassword = (
       await prisma.user.findUnique({
@@ -110,12 +105,10 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Old password is incorrect'
-      }
-    ]);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
+    expect(json).toHaveBeenNthCalledWith(1, {
+      message: 'Old password is incorrect'
+    });
   });
 
   it('should not reset password of nonexistent user', async () => {
@@ -139,12 +132,10 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'User not found'
-      }
-    ]);
+    expect(status).toHaveBeenNthCalledWith(1, 400);
+    expect(json).toHaveBeenNthCalledWith(1, {
+      message: 'User not found'
+    });
   });
 
   it('returns an error if email is null or undefined', async () => {
@@ -168,29 +159,14 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Email, password and new password are required'
-      }
-    ]);
-
-    req = {
-      body: {
-        email: undefined,
-        oldPassword: password,
-        newPassword: mockPassword()
-      } as resetPasswordProps
-    } as NextApiRequest;
+    req = { ...req, body: { ...req.body, email: undefined } as resetPasswordProps } as NextApiRequest;
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Email, password and new password are required'
-      }
-    ]);
+    expect(status).toHaveBeenNthCalledWith(2, 400);
+    expect(json).toHaveBeenNthCalledWith(2, {
+      message: 'Email, password and new password are required'
+    });
   });
 
   it('returns an error if old password is null or undefined', async () => {
@@ -214,29 +190,14 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Email, password and new password are required'
-      }
-    ]);
-
-    req = {
-      body: {
-        email: email,
-        oldPassword: undefined,
-        newPassword: mockPassword()
-      } as resetPasswordProps
-    } as NextApiRequest;
+    req = { ...req, body: { ...req.body, oldPassword: undefined } as resetPasswordProps } as NextApiRequest;
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Email, password and new password are required'
-      }
-    ]);
+    expect(status).toHaveBeenNthCalledWith(2, 400);
+    expect(json).toHaveBeenNthCalledWith(2, {
+      message: 'Email, password and new password are required'
+    });
   });
 
   it('returns an error if new password is null or undefined', async () => {
@@ -260,28 +221,13 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Email, password and new password are required'
-      }
-    ]);
-
-    req = {
-      body: {
-        email: email,
-        oldPassword: password,
-        newPassword: undefined
-      } as resetPasswordProps
-    } as NextApiRequest;
+    req = { ...req, body: { ...req.body, newPassword: undefined } as resetPasswordProps } as NextApiRequest;
 
     await resetPasswordHandler(req, res);
 
-    expect(status.mock.calls[0]).toEqual([400]);
-    expect(json.mock.calls[0]).toEqual([
-      {
-        message: 'Email, password and new password are required'
-      }
-    ]);
+    expect(status).toHaveBeenNthCalledWith(2, 400);
+    expect(json).toHaveBeenNthCalledWith(2, {
+      message: 'Email, password and new password are required'
+    });
   });
 });

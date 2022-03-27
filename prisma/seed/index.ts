@@ -1,80 +1,68 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient, Puzzle, PuzzleType } from '@prisma/client';
 import * as faker from 'faker';
 
 const prisma = new PrismaClient();
 
-const main = async () => {
-  const puzzleType = await prisma.puzzleType.create({
-    data: {
-      name: 'Puzzle Type'
-    }
-  });
+import seedData from './seed.json';
+import type { DIFFICULTY } from '../../src/types/global';
+console.log(seedData);
 
-  const hardPuzzle = (index) =>
-    prisma.puzzle.create({
-      data: {
-        name: `${index}. Hard Puzzle`,
-        puzzleType: {
-          connect: {
-            id: puzzleType.id
-          }
-        },
-        difficulty: 'HARD',
-        content: ['This is a hard puzzle'],
-        variables: {
-          answer: 'Answer'
-        },
-        question: 'Question of hard puzzle?',
-        isGenerated: false
-      }
-    });
+const createPuzzleType = () => {
+  const puzzleTypes = seedData.puzzleType;
+  return Promise.all(
+    puzzleTypes.map(puzzleType =>
+      prisma.puzzleType.create({
+        data: {
+          name: puzzleType.name
+        }
+      })
+    )
+  );
+};
 
-  const mediumPuzzle = (index) =>
-    prisma.puzzle.create({
-      data: {
-        name: `${index}. Medium Puzzle`,
-        puzzleType: {
-          connect: {
-            id: puzzleType.id
-          }
-        },
-        difficulty: 'MEDIUM',
-        content: ['This is a medium puzzle'],
-        variables: {
-          answer: 'Answer'
-        },
-        question: 'Question of medium puzzle?',
-        isGenerated: false
-      }
-    });
+const difficulties: DIFFICULTY[] = ['EASY', 'MEDIUM', 'HARD'];
 
-  const easysPuzzle = (index) =>
-    prisma.puzzle.create({
-      data: {
-        name: `${index}. Easy Puzzle`,
-        puzzleType: {
-          connect: {
-            id: puzzleType.id
-          }
-        },
-        difficulty: 'EASY',
-        content: ['This is an easy puzzle'],
-        variables: {
-          answer: 'Answer'
-        },
-        question: 'Question of easy puzzle?',
-        isGenerated: false
-      }
-    });
+const createPuzzle = (createdPuzzleTypes: PuzzleType[]) => {
+  const puzzles = seedData.puzzle;
 
-  const puzzles = [hardPuzzle, mediumPuzzle, easysPuzzle];
+  return Promise.all(
+    puzzles.map(puzzle => {
+      // find puzzle type
+      const puzzleType = createdPuzzleTypes.find(
+        createdPuzzleType => createdPuzzleType.name === puzzle.type
+      );
 
-  for (let i = 0; i < 10; i++) {
-    const puzzle = await puzzles[Math.floor(Math.random() * 3)](i + 1);
+      puzzle.difficulty =
+        difficulties[Math.floor(Math.random() * difficulties.length)];
 
+      return prisma.puzzle.create({
+        data: {
+          name: puzzle.name,
+          puzzleType: {
+            connect: {
+              id: puzzleType.id
+            }
+          },
+          difficulty: puzzle.difficulty as DIFFICULTY,
+          content: puzzle.content,
+          variables: puzzle.variables,
+          question: puzzle.question,
+          isGenerated: puzzle.isGenerated
+        }
+      });
+    })
+  );
+};
+
+const createPuzzleInstance = (createdPuzzles: Puzzle[]) => {
+  const puzzleInstances = seedData.puzzleInstance;
+  puzzleInstances.forEach(async puzzleInstance => {
+    const puzzle = createdPuzzles.find(
+      createdPuzzle => createdPuzzle.name === puzzleInstance.puzzle
+    );
     await prisma.puzzleInstance.create({
       data: {
         puzzle: {
@@ -82,13 +70,19 @@ const main = async () => {
             id: puzzle.id
           }
         },
-        hint: `This is a hint (${i})`,
+        hint: puzzleInstance.hint,
         longitude: parseFloat(faker.address.longitude()),
         latitude: parseFloat(faker.address.latitude()),
-        address: faker.address.streetAddress(),
+        address: faker.address.streetAddress()
       }
-    })
-  }
+    });
+  });
 };
 
-main();
+const runAll = async () => {
+  const createdPuzzleTypes = await createPuzzleType();
+  const createdPuzzles = await createPuzzle(createdPuzzleTypes);
+  createPuzzleInstance(createdPuzzles);
+};
+
+runAll();
