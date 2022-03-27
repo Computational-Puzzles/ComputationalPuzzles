@@ -1,5 +1,29 @@
+@import '../abstracts/variables';
+
 .contentWrap {
   display: flex;
   padding: 0 3rem;
   gap: 5rem;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($grey, 0.8);;
+}
+
+.modal {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  margin-right: -50%;
+  padding: 2rem;
+  background-color: $white;
+  border-radius: 0.5rem;
 }

@@ -1,14 +1,21 @@
 import * as React from 'react';
+import { useState } from 'react';
 import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
-import { PuzzleGenerate, PuzzleInfomation } from '../../components/App';
+import Modal from 'react-modal';
+import { LocationSearchModal, PuzzleGenerate, PuzzleInfomation } from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
 import { GetServerSideProps } from 'next';
 import { Header } from '../../components/Global';
 import type { PuzzleCustom } from '../../types/api/puzzles/puzzle';
 
 const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
+
+  const [address, setAddress] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
   return (
     <>
       <Header />
@@ -19,6 +26,23 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
       <div className={styles.contentWrap}>
         <PuzzleInfomation puzzlesList={puzzlesList} />
       </div>
+      <button onClick={() => setModalIsOpen(true)}>Open Modal</button>
+      <Modal
+        className={styles.modal}
+        isOpen={modalIsOpen}
+        onRequestClose={() => {setModalIsOpen(false)}}
+        // style={customStyles}
+        contentLabel="Example Modal"
+        overlayClassName={styles.modalOverlay}
+      >
+        <LocationSearchModal 
+          address={address}
+          setAddress={setAddress}
+          setLatitude={setLatitude}
+          setLongitude={setLongitude}
+          setModalIsOpen={setModalIsOpen}
+        />
+      </Modal>
     </>
   )
 

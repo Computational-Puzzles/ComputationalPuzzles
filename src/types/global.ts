@@ -20,5 +20,7 @@ export type InputProps = {
   maxLength?: number;
   minLength?: number;
   labelText?: string;
+  value?: string;
   setInputVal?: Dispatch<SetStateAction<string>>;
+  disabled?: boolean;
 };
