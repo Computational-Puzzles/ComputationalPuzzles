@@ -3,13 +3,15 @@ import { checkHash, hashFunction } from '../../utils/password';
 describe('testing the hashFunction', () => {
   it('should compare the secret hashed and without', async () => {
     expect(await hashFunction('secret_hi')).not.toBe('secret_hi');
-    expect(await hashFunction('secret_hi')).not.toBe(await hashFunction('secret_hi'));
+    expect(await hashFunction('secret_hi')).not.toBe(
+      await hashFunction('secret_hi')
+    );
   });
 
   it('should compare the length of 2 hashed passwords', async () => {
     //add 2 random length passwords: 1-10
-    const len1 = Math.floor(Math.random()*10+1);
-    const len2 = Math.floor(Math.random()*10+1);
+    const len1 = Math.floor(Math.random() * 10 + 1);
+    const len2 = Math.floor(Math.random() * 10 + 1);
     // generate random strings with the length above;
     const pw1 = getRandomString(len1);
     const pw2 = getRandomString(len2);
@@ -21,15 +23,18 @@ describe('testing the hashFunction', () => {
 });
 describe('testing the checkHash', () => {
   it('should have the same hashed values for the same secret input', async () => {
-    expect(await checkHash('password', await hashFunction('password'))).toBe(true);
+    expect(await checkHash('password', await hashFunction('password'))).toBe(
+      true
+    );
   });
 });
 
-const getRandomString = (length) =>{
-  const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const getRandomString = length => {
+  const randomChars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let str = '';
-  for (let i=0; i<length; i++){
+  for (let i = 0; i < length; i++) {
     str += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
   }
   return str;
-}
+};

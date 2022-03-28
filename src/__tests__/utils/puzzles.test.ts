@@ -9,10 +9,10 @@ it('should compare the user submitted puzzle answer with the ans key in the puzz
 });
 
 //get random number that does not equal to the answer
-const getRandomNumber =(ans)=> {
-  let num ;
-  do{
-    num = Math.round(Math.random()*99);
-  }while(num === ans);
+const getRandomNumber = ans => {
+  let num;
+  do {
+    num = Math.round(Math.random() * 99);
+  } while (num === ans);
   return num;
-}
+};
