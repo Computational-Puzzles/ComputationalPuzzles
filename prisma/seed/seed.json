@@ -1,0 +1,85 @@
+{
+  "puzzleType": [
+    {
+      "name": "PuzzleType1"
+    },
+    {
+      "name": "PuzzleType2"
+    }
+  ],
+  "puzzle": [
+    {
+      "name": "Puzzle1",
+      "difficulty": "RANDOM",
+      "type": "PuzzleType1",
+      "content": "This is content of Puzzle1",
+      "exampleContent": "This is example content of Puzzle1",
+      "isGenerated": true,
+      "question": "This is question of Puzzle1",
+      "variables": {
+        "answer": "This is answer of Puzzle1"
+      }
+    },
+    {
+      "name": "Puzzle2",
+      "difficulty": "RANDOM",
+      "type": "PuzzleType2",
+      "content": "This is content of Puzzle2",
+      "exampleContent": "This is example content of Puzzle2",
+      "isGenerated": true,
+      "question": "This is question of Puzzle2",
+      "inputType": "MCQ",
+      "variables": {
+        "answer": "This is answer of Puzzle2",
+        "options": [
+          "This is option1 of Puzzle2",
+          "This is option2 of Puzzle2",
+          "This is option3 of Puzzle2",
+          "This is answer of Puzzle2"
+        ]
+      }
+    }
+  ],
+  "puzzleInstance": [{
+    "puzzle": "Puzzle1",
+    "hint": "This is hint of PuzzleInstance1",
+    "longtitude": "-119.39491098328962",
+    "latitude": "49.94117561303997",
+    "address": "University Way, Kelowna, BC V1V 1V8, Canada"
+  },
+  {
+    "puzzle": "Puzzle1",
+    "hint": "This is hint of PuzzleInstance2",
+    "longtitude": "-119.39740818702197",
+    "latitude": "49.938623690606",
+    "address": "3211 Athletics Ct, Kelowna, BC V1V 1V7, Canada"
+  },
+  {
+    "puzzle": "Puzzle1",
+    "hint": "This is hint of PuzzleInstance3",
+    "longtitude": "-119.39510302786809",
+    "latitude": "49.94338797588803",
+    "address": "1323 International Mews, Kelowna, BC V1V 1V8, Canada"
+  },
+  {
+    "puzzle": "Puzzle2",
+    "hint": "This is hint of PuzzleInstance4",
+    "longtitude": "-119.39470192357182",
+    "latitude": "49.939236142408234",
+    "address": "1137 Alumni Ave, Kelowna, BC V1V 1V7, Canada"
+  },
+  {
+    "puzzle": "Puzzle2",
+    "hint": "This is hint of PuzzleInstance5",
+    "longtitude": "-119.39509013054139",
+    "latitude": "49.940298572913086",
+    "address": "COM203, 3297 University Way, Kelowna, BC V1V 1V7, Canada"
+  },
+  {
+    "puzzle": "Puzzle2",
+    "hint": "This is hint of PuzzleInstance6",
+    "longtitude": "-119.3963500479668",
+    "latitude": "49.94000959781884",
+    "address": "Science Building, 1177 Research Rd, Kelowna, BC V1V 1V7, Canada"
+  }]
+}
