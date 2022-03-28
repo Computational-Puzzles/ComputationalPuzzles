@@ -1,4 +1,5 @@
 import { checkHash, hashFunction } from '../../utils/password';
+import {getRandomString} from "../../__mocks__/pages/api/getRandom";
 
 describe('testing the hashFunction', () => {
   it('should compare the secret hashed and without', async () => {
@@ -28,13 +29,3 @@ describe('testing the checkHash', () => {
     );
   });
 });
-
-const getRandomString = length => {
-  const randomChars =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let str = '';
-  for (let i = 0; i < length; i++) {
-    str += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
-  }
-  return str;
-};
