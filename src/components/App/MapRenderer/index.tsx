@@ -14,17 +14,17 @@ const MapRenderer = ({
   mapCenter,
   setMapCenter,
   tempMarker,
-  setTempMarker,
+  setTempMarker
 }: MapRendererProps) => {
   const setMapFocus = (marker: MapMarker): void => {
-    console.log(tempMarker)
+    console.log(tempMarker);
     setMapCenter(marker.anchor);
   };
 
   const handleOnClickMap = (latLng: MapAnchor) => {
     if (!setTempMarker) return;
     setTempMarker({ anchor: latLng, zoom: userMarker.zoom });
-  }
+  };
 
   return (
     <div className={mapRendererStyles.mapRenderer}>
@@ -37,7 +37,10 @@ const MapRenderer = ({
         onBoundsChanged={({ center }) => {
           setMapCenter(center);
         }}
-        onClick={({ event, latLng, pixel }) => { console.log(event); handleOnClickMap(latLng); }}
+        onClick={({ event, latLng, pixel }) => {
+          console.log(event);
+          handleOnClickMap(latLng);
+        }}
       >
         {markers.map((marker, index) => (
           <Marker
@@ -55,16 +58,14 @@ const MapRenderer = ({
             onClick={() => setMapFocus(userMarker)}
           />
         )}
-        {
-          tempMarker && (
-            <Marker
-              width={40}
-              color={'blue'}
-              anchor={tempMarker.anchor}
-              onClick={() => setMapFocus(tempMarker)}
-            />
-          )
-        }
+        {tempMarker && (
+          <Marker
+            width={40}
+            color={'blue'}
+            anchor={tempMarker.anchor}
+            onClick={() => setMapFocus(tempMarker)}
+          />
+        )}
         <ZoomControl />
       </Map>
     </div>

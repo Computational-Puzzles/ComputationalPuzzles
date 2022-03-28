@@ -9,13 +9,17 @@ import { QRGenerator } from '../../App';
 import toast from 'react-hot-toast';
 
 type DisplayPuzzleInstancesProps = {
-  puzzlesList: PuzzleCustom[],
-}
+  puzzlesList: PuzzleCustom[];
+};
 
-const DisplayPuzzleInstances = ({ puzzlesList }: DisplayPuzzleInstancesProps) => {
+const DisplayPuzzleInstances = ({
+  puzzlesList
+}: DisplayPuzzleInstancesProps) => {
   const [puzzleId, setPuzzleId] = useState<string>('');
   const [puzzleInstances, setPuzzleInstances] = useState<PuzzleInstance[]>([]);
-  const [displayPuzzleInstances, setDisplayPuzzleInstances] = useState<PuzzleInstance[]>([]);
+  const [displayPuzzleInstances, setDisplayPuzzleInstances] = useState<
+    PuzzleInstance[]
+  >([]);
 
   const getPuzzleInstances = async () => {
     const retrivedPuzzleInstances = await getAllPuzzleInstances();
@@ -36,7 +40,9 @@ const DisplayPuzzleInstances = ({ puzzlesList }: DisplayPuzzleInstancesProps) =>
     if (!puzzleId || puzzleId === '') {
       setDisplayPuzzleInstances(puzzleInstances);
     } else {
-      setDisplayPuzzleInstances(puzzleInstances.filter(pzl => pzl.puzzleId.toString() === puzzleId));
+      setDisplayPuzzleInstances(
+        puzzleInstances.filter(pzl => pzl.puzzleId.toString() === puzzleId)
+      );
     }
   }, [puzzleId, puzzleInstances, setDisplayPuzzleInstances]);
 
@@ -55,7 +61,9 @@ const DisplayPuzzleInstances = ({ puzzlesList }: DisplayPuzzleInstancesProps) =>
               value={puzzleId}
               onChange={e => setPuzzleId(e.currentTarget.value)}
             >
-              <option value='' key='all-puzzles' >All puzzles</option>
+              <option value="" key="all-puzzles">
+                All puzzles
+              </option>
               {puzzlesList.map((puzzle: PuzzleCustom, index: number) => (
                 <option value={puzzle.id} key={`puzzle${index}`}>
                   {puzzle.name}
@@ -65,9 +73,8 @@ const DisplayPuzzleInstances = ({ puzzlesList }: DisplayPuzzleInstancesProps) =>
           ) : (
             <select
               className={styles.puzzleInstancesHeaderSelect}
-              value='No puzzle available'
-            >
-            </select>
+              value="No puzzle available"
+            ></select>
           )}
         </div>
       </div>
@@ -83,40 +90,44 @@ const DisplayPuzzleInstances = ({ puzzlesList }: DisplayPuzzleInstancesProps) =>
 
         {/* 3 cols table content */}
         <div className={styles.puzzleInstancesBodyContent}>
-          {displayPuzzleInstances.length > 0 && (
-            displayPuzzleInstances.map((puzzleInstance: PuzzleInstance, index: number) => (
-              <div className={styles.puzzleInstancesBodyContentRow} key={`puzzleInstance${index}`}>
-                <div>
-                  {puzzleInstance.address}
-                </div>
-                <div>
-                  <QRGenerator
-                    className={styles.puzzleInstancesBodyContentQR}
-                    text={JSON.stringify(puzzleInstance)}
-                  />
-                </div>
+          {displayPuzzleInstances.length > 0 &&
+            displayPuzzleInstances.map(
+              (puzzleInstance: PuzzleInstance, index: number) => (
                 <div
-                  className={styles.puzzleInstancesBodyContentActions}
+                  className={styles.puzzleInstancesBodyContentRow}
+                  key={`puzzleInstance${index}`}
                 >
-                  <Button
-                    style='secondary'
-                    content='View on map'
-                    size='sm'
-                    type='button'
-                    arrowDirection='right'
-                    onClick={() => { toast('TODO: View on map') }}
-                  />
-                  <Button
-                    style='primary'
-                    content='Delete'
-                    size='sm'
-                    type='button'
-                    onClick={() => { toast('TODO: Delete puzzle instance by id') }}
-                  />
+                  <div>{puzzleInstance.address}</div>
+                  <div>
+                    <QRGenerator
+                      className={styles.puzzleInstancesBodyContentQR}
+                      text={JSON.stringify(puzzleInstance)}
+                    />
+                  </div>
+                  <div className={styles.puzzleInstancesBodyContentActions}>
+                    <Button
+                      style="secondary"
+                      content="View on map"
+                      size="sm"
+                      type="button"
+                      arrowDirection="right"
+                      onClick={() => {
+                        toast('TODO: View on map');
+                      }}
+                    />
+                    <Button
+                      style="primary"
+                      content="Delete"
+                      size="sm"
+                      type="button"
+                      onClick={() => {
+                        toast('TODO: Delete puzzle instance by id');
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
+              )
+            )}
         </div>
       </div>
     </div>

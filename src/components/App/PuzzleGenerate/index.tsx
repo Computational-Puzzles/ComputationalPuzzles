@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react';``
+import { useState } from 'react';
+``;
 import styles from './PuzzleGenerate.module.scss';
 import toast from 'react-hot-toast';
 import Modal from 'react-modal';
@@ -56,11 +57,10 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
               ))}
             </select>
           ) : (
-            <><select
-              className={styles.selections}
-              value='No puzzle available'
-            >\
-            </select>
+            <>
+              <select className={styles.selections} value="No puzzle available">
+                \
+              </select>
             </>
           )}
         </div>
@@ -75,9 +75,9 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
         </div>
         <div className={styles.addressWrapper}>
           <Input
-            id='address-displayer'
-            type='text'
-            placeholder='Address'
+            id="address-displayer"
+            type="text"
+            placeholder="Address"
             value={address}
             setInputVal={setAddress}
             required={false}
@@ -85,10 +85,10 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
             onClick={() => setModalIsOpen(true)}
           />
           <Button
-            style='secondary'
-            content='Set Location'
-            size='sm'
-            type='button'
+            style="secondary"
+            content="Set Location"
+            size="sm"
+            type="button"
             onClick={() => setModalIsOpen(true)}
           />
         </div>
@@ -105,7 +105,9 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
       <Modal
         className={styles.modal}
         isOpen={modalIsOpen}
-        onRequestClose={() => { setModalIsOpen(false) }}
+        onRequestClose={() => {
+          setModalIsOpen(false);
+        }}
         contentLabel="Example Modal"
         overlayClassName={styles.modalOverlay}
         appElement={document.getElementById('__next') as HTMLElement}

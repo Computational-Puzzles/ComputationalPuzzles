@@ -2,7 +2,11 @@ import * as React from 'react';
 import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
-import { DisplayPuzzleInstances, PuzzleGenerate, PuzzleInfomation } from '../../components/App';
+import {
+  DisplayPuzzleInstances,
+  PuzzleGenerate,
+  PuzzleInfomation
+} from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
 import { GetServerSideProps } from 'next';
 import { Header } from '../../components/Global';
@@ -14,21 +18,24 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
     <>
       <Header />
       {/** TODO: Create Header for admin page  */}
-      <h2 className={styles.adminTitle} > Admin Dashboard </h2>
+      <h2 className={styles.adminTitle}> Admin Dashboard </h2>
       <hr className={styles.adminHeaderSep} />
       <div className={styles.contentWrap}>
         <div className={styles.contentLeftWrap}>
-          <PuzzleGenerate puzzlesList={puzzlesList} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} />
+          <PuzzleGenerate
+            puzzlesList={puzzlesList}
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
+          />
           <PuzzleInfomation puzzlesList={puzzlesList} />
         </div>
         <div>
           <DisplayPuzzleInstances puzzlesList={puzzlesList} />
         </div>
       </div>
-      <span className={styles.adminSeperator} ></span>
+      <span className={styles.adminSeperator}></span>
     </>
-  )
-
+  );
 };
 
 const AdminValidation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
@@ -55,7 +62,7 @@ const AdminValidation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
 
   if (status === 'authenticated') {
     if (validAdmin) {
-      return <Admin puzzlesList={puzzlesList} />
+      return <Admin puzzlesList={puzzlesList} />;
     } else {
       validAdmin === false && Router.push('/403');
     } // This will need adjustment since it's just a prototype
@@ -70,7 +77,7 @@ const AdminValidation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
       </>
     )
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const puzzlesList = await getAllPuzzles();

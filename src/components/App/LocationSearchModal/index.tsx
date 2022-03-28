@@ -20,7 +20,15 @@ type LocationSearchModalProps = {
   setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const LocationSearchModal = ({ address, latitude, longtitude, setAddress, setLatitude, setLongitude, setModalIsOpen }: LocationSearchModalProps) => {
+const LocationSearchModal = ({
+  address,
+  latitude,
+  longtitude,
+  setAddress,
+  setLatitude,
+  setLongitude,
+  setModalIsOpen
+}: LocationSearchModalProps) => {
   const [userMarker, setUserMarker] = useState<MapMarker>(null);
   const [mapCenter, setMapCenter] = useState<MapAnchor>(null);
   const [tempMarker, setTempMarker] = useState<MapMarker>(null);
@@ -48,8 +56,8 @@ const LocationSearchModal = ({ address, latitude, longtitude, setAddress, setLat
 
     setTempMarker({
       anchor: [parseFloat(latitude), parseFloat(longtitude)],
-      zoom: userMarker.zoom,
-    })
+      zoom: userMarker.zoom
+    });
   }, [latitude, longtitude, userMarker, setTempMarker]);
 
   useEffect(() => {
@@ -73,19 +81,21 @@ const LocationSearchModal = ({ address, latitude, longtitude, setAddress, setLat
   return (
     <div className={styles.modalWraper}>
       <MapGeocoder setMapCenter={setMapCenter} />
-      {userMarker && <MapRenderer
-        markers={[userMarker]}
-        userMarker={userMarker}
-        mapCenter={mapCenter}
-        setMapCenter={setMapCenter}
-        tempMarker={tempMarker}
-        setTempMarker={setTempMarker}
-      />}
+      {userMarker && (
+        <MapRenderer
+          markers={[userMarker]}
+          userMarker={userMarker}
+          mapCenter={mapCenter}
+          setMapCenter={setMapCenter}
+          tempMarker={tempMarker}
+          setTempMarker={setTempMarker}
+        />
+      )}
       <div className={styles.reviewSubmit}>
         <Input
-          id='choosing-address'
-          type='text'
-          placeholder='Address'
+          id="choosing-address"
+          type="text"
+          placeholder="Address"
           value={address}
           setInputVal={setAddress}
           required={false}
@@ -104,6 +114,6 @@ const LocationSearchModal = ({ address, latitude, longtitude, setAddress, setLat
       </div>
     </div>
   );
-}
+};
 
 export default LocationSearchModal;

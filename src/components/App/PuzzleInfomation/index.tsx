@@ -15,14 +15,10 @@ const PuzzleInfomation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
       </div>
       <hr />
       <div className={styles.tableBody}>
-        {puzzlesList.map((puzzle) => (
+        {puzzlesList.map(puzzle => (
           <div className={styles.tableRow} key={puzzle.id}>
-            <div>
-              {puzzle.name}
-            </div>
-            <div>
-              {puzzle.difficulty}
-            </div>
+            <div>{puzzle.name}</div>
+            <div>{puzzle.difficulty}</div>
             <div>
               {/* TODO: Calculate success Rate */}
               N/A
@@ -40,6 +36,6 @@ const PuzzleInfomation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
       </div>
     </div>
   );
-}
+};
 
 export default PuzzleInfomation;

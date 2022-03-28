@@ -33,12 +33,13 @@ describe('/api/user: Succeeded', () => {
     const res = {
       status
     } as unknown as NextApiResponse;
-  
+
     await usersHandler(req, res);
-    expect(json).toHaveBeenNthCalledWith(1, 
+    expect(json).toHaveBeenNthCalledWith(
+      1,
       expect.objectContaining({
         email,
-        password: expect.any(String),
+        password: expect.any(String)
       })
     );
     expect(status).toHaveBeenNthCalledWith(1, 200);
