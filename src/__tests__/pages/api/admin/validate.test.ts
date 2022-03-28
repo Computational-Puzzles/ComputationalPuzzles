@@ -50,10 +50,11 @@ describe('/api/admin/validate: Success', () => {
     await adminValidate(req, res);
 
     expect(status).toHaveBeenNthCalledWith(1, 200);
-    expect(json).toHaveBeenNthCalledWith(1, 
+    expect(json).toHaveBeenNthCalledWith(
+      1,
       expect.objectContaining({
         email: adminEmail,
-        password: expect.any(String),
+        password: expect.any(String)
       })
     );
   });
@@ -92,10 +93,11 @@ describe('/api/admin/validate: Success', () => {
     await adminValidate(req, res);
 
     expect(status).toHaveBeenNthCalledWith(1, 403);
-    expect(json).toHaveBeenNthCalledWith(1, 
+    expect(json).toHaveBeenNthCalledWith(
+      1,
       expect.objectContaining({
         email: userEmail,
-        password: expect.any(String),
+        password: expect.any(String)
       })
     );
   });

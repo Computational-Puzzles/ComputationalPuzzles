@@ -35,10 +35,11 @@ describe('/api/auth/signup: Succeeded', () => {
     await signUpHandler(req, res);
 
     expect(status).toHaveBeenNthCalledWith(1, 201);
-    expect(json).toHaveBeenNthCalledWith(1,
+    expect(json).toHaveBeenNthCalledWith(
+      1,
       expect.objectContaining({
         email,
-        password: expect.any(String),
+        password: expect.any(String)
       })
     );
 
@@ -93,7 +94,7 @@ describe('/api/auth/signup: Succeeded', () => {
       expect(json).toHaveBeenCalledWith(
         expect.objectContaining({
           email: user.email,
-          password: expect.any(String),
+          password: expect.any(String)
         })
       );
     });
