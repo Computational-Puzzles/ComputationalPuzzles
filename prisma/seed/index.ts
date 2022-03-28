@@ -2,13 +2,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { PrismaClient, Puzzle, PuzzleType } from '@prisma/client';
-import * as faker from 'faker';
 
 const prisma = new PrismaClient();
 
 import seedData from './seed.json';
 import type { DIFFICULTY } from '../../src/types/global';
-console.log(seedData);
 
 const createPuzzleType = () => {
   const puzzleTypes = seedData.puzzleType;
@@ -71,9 +69,9 @@ const createPuzzleInstance = (createdPuzzles: Puzzle[]) => {
           }
         },
         hint: puzzleInstance.hint,
-        longitude: parseFloat(faker.address.longitude()),
-        latitude: parseFloat(faker.address.latitude()),
-        address: faker.address.streetAddress()
+        longitude: parseFloat(puzzleInstance.longtitude),
+        latitude: parseFloat(puzzleInstance.latitude),
+        address: puzzleInstance.address,
       }
     });
   });
