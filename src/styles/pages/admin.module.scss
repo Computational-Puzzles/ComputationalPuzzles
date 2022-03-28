@@ -1,5 +1,6 @@
 @import '../abstracts/variables';
 
+
 .adminTitle {
   padding: .5rem 3rem;
   margin: 0;
@@ -13,7 +14,7 @@
 
 .contentWrap {
   display: grid;
-  grid-template-columns: 6fr 3fr;
+  grid-template-columns: 5fr 3fr;
 
   .contentLeftWrap {
     display: flex;
@@ -26,9 +27,9 @@
 
 .adminSeperator {
   height: 100%;
-  border-left: 1px solid $grey;
+  border-left: 1px solid $grey-border;
   position: absolute;
   top: 0;
-  left: calc(100% / (6 + 3) * 6 - 2%);
-  z-index: -1000000000000;
+  left: calc(100% / (5 + 3) * 5 - 2%);
+  z-index: -1;
 }

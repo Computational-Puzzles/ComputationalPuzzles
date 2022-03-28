@@ -9,7 +9,7 @@
   .tableHeader {
     // make this a grid of 5 columns
     display: grid;
-    grid-template-columns: 3fr repeat(4, 1fr);
+    grid-template-columns: 2fr repeat(4, 1fr);
 
     h4 {
       @include font-header;
@@ -20,7 +20,7 @@
   .tableBody {
     .tableRow {
       display: grid;
-      grid-template-columns: 3fr repeat(4, 1fr);
+      grid-template-columns: 2fr repeat(4, 1fr);
       margin-bottom: .5rem;
     }
   }
