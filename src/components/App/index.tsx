@@ -8,3 +8,4 @@ export { default as FeedbackGif } from './FeedbackGif';
 export { default as SignUpDialog } from './SignUpDialog';
 export { default as PuzzleInfomation } from './PuzzleInfomation';
 export { default as LocationSearchModal } from './LocationSearchModal';
+export { default as DisplayPuzzleInstances } from './DisplayPuzzleInstances';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState } from 'react';``
 import styles from './PuzzleGenerate.module.scss';
 import toast from 'react-hot-toast';
 import Modal from 'react-modal';
@@ -45,7 +45,7 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
           {puzzlesList.length > 0 ? (
             <select
               className={styles.selections}
-              // value={puzzleId}
+              value={puzzleId}
               onChange={e => setPuzzleId(e.currentTarget.value)}
             >
               <option>Choose a puzzle</option>
@@ -59,7 +59,6 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
             <><select
               className={styles.selections}
               value='No puzzle available'
-              onChange={e => setPuzzleId(e.currentTarget.value)}
             >\
             </select>
             </>

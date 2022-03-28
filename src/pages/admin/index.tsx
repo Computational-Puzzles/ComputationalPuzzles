@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
-import { PuzzleGenerate, PuzzleInfomation } from '../../components/App';
+import { DisplayPuzzleInstances, PuzzleGenerate, PuzzleInfomation } from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
 import { GetServerSideProps } from 'next';
 import { Header } from '../../components/Global';
@@ -22,7 +22,7 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
           <PuzzleInfomation puzzlesList={puzzlesList} />
         </div>
         <div>
-          Hi
+          <DisplayPuzzleInstances puzzlesList={puzzlesList} />
         </div>
       </div>
       <span className={styles.adminSeperator} ></span>
