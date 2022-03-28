@@ -6,6 +6,7 @@ import { getAllPuzzleInstances } from '../../../services';
 import { PuzzleInstance } from '@prisma/client';
 import { Button } from '../../Global';
 import { QRGenerator } from '../../App';
+import toast from 'react-hot-toast';
 
 type DisplayPuzzleInstancesProps = {
   puzzlesList: PuzzleCustom[],
@@ -16,14 +17,18 @@ const DisplayPuzzleInstances = ({ puzzlesList }: DisplayPuzzleInstancesProps) =>
   const [puzzleInstances, setPuzzleInstances] = useState<PuzzleInstance[]>([]);
   const [displayPuzzleInstances, setDisplayPuzzleInstances] = useState<PuzzleInstance[]>([]);
 
-  useEffect(() => {
-    const getPuzzleInstances = async () => {
-      const retrivedPuzzleInstances = await getAllPuzzleInstances();
-      setPuzzleInstances(retrivedPuzzleInstances);
-    };
+  const getPuzzleInstances = async () => {
+    const retrivedPuzzleInstances = await getAllPuzzleInstances();
+    setPuzzleInstances(retrivedPuzzleInstances);
+  };
 
+  useEffect(() => {
     getPuzzleInstances();
   }, []);
+
+  useEffect(() => {
+    getPuzzleInstances();
+  }, [puzzlesList]);
 
   useEffect(() => {
     if (!puzzleInstances || !setDisplayPuzzleInstances) return;
@@ -90,13 +95,23 @@ const DisplayPuzzleInstances = ({ puzzlesList }: DisplayPuzzleInstancesProps) =>
                     text={JSON.stringify(puzzleInstance)}
                   />
                 </div>
-                <div>
+                <div
+                  className={styles.puzzleInstancesBodyContentActions}
+                >
+                  <Button
+                    style='secondary'
+                    content='View on map'
+                    size='sm'
+                    type='button'
+                    arrowDirection='right'
+                    onClick={() => { toast('TODO: View on map') }}
+                  />
                   <Button
                     style='primary'
                     content='Delete'
                     size='sm'
                     type='button'
-                    onClick={() => { }}
+                    onClick={() => { toast('TODO: Delete puzzle instance by id') }}
                   />
                 </div>
               </div>
