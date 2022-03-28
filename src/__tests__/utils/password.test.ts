@@ -1,5 +1,5 @@
 import { checkHash, hashFunction } from '../../utils/password';
-import {getRandomString} from "../../__mocks__/pages/api/getRandom";
+import { getRandomString } from '../../__mocks__/pages/api/getRandom';
 
 describe('testing the hashFunction', () => {
   it('should compare the secret hashed and without', async () => {
