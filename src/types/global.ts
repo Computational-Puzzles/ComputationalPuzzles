@@ -23,4 +23,5 @@ export type InputProps = {
   value?: string;
   setInputVal?: Dispatch<SetStateAction<string>>;
   disabled?: boolean;
+  onClick?: () => void
 };

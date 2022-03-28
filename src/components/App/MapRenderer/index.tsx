@@ -22,6 +22,7 @@ const MapRenderer = ({
   };
 
   const handleOnClickMap = (latLng: MapAnchor) => {
+    if (!setTempMarker) return;
     setTempMarker({ anchor: latLng, zoom: userMarker.zoom });
   }
 

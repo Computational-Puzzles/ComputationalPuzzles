@@ -13,6 +13,7 @@ const Input = ({
   value,
   setInputVal,
   disabled,
+  onClick
 }: InputProps) => {
   const [input, setInput] = useState('');
 
@@ -42,6 +43,7 @@ const Input = ({
             setInputVal(event.target.value);
           }}
           disabled={disabled} // This will be false if disabled is not passed in
+          onClick={onClick}
         />
       </div>
     </>
@@ -69,6 +71,7 @@ const Input = ({
             setInput(event.target.value);
           }}
           disabled={disabled} // This will be false if disabled is not passed in
+          onClick={onClick}
         />
       </div>
     </>

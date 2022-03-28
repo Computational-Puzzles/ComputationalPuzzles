@@ -12,13 +12,15 @@ const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 
 type LocationSearchModalProps = {
   address: string;
+  latitude: string;
+  longtitude: string;
   setAddress: React.Dispatch<React.SetStateAction<string>>;
   setLatitude: React.Dispatch<React.SetStateAction<string>>;
   setLongitude: React.Dispatch<React.SetStateAction<string>>;
   setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const LocationSearchModal = ({ address, setAddress, setLatitude, setLongitude, setModalIsOpen }: LocationSearchModalProps) => {
+const LocationSearchModal = ({ address, latitude, longtitude, setAddress, setLatitude, setLongitude, setModalIsOpen }: LocationSearchModalProps) => {
   const [userMarker, setUserMarker] = useState<MapMarker>(null);
   const [mapCenter, setMapCenter] = useState<MapAnchor>(null);
   const [tempMarker, setTempMarker] = useState<MapMarker>(null);
@@ -40,6 +42,15 @@ const LocationSearchModal = ({ address, setAddress, setLatitude, setLongitude, s
       }
     );
   }, []);
+
+  useEffect((): void => {
+    if (!latitude || !longtitude || !userMarker || !setTempMarker) return;
+
+    setTempMarker({
+      anchor: [parseFloat(latitude), parseFloat(longtitude)],
+      zoom: userMarker.zoom,
+    })
+  }, [latitude, longtitude, userMarker, setTempMarker]);
 
   useEffect(() => {
     if (!tempMarker) return;
@@ -74,7 +85,7 @@ const LocationSearchModal = ({ address, setAddress, setLatitude, setLongitude, s
         <Input
           id='choosing-address'
           type='text'
-          placeholder=''
+          placeholder='Address'
           value={address}
           setInputVal={setAddress}
           required={false}
