@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { PuzzleGenerate } from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
 import { GetServerSideProps } from 'next';
-import {AdminHeader, Header} from '../../components/Global';
+import { AdminHeader, Header } from '../../components/Global';
 
 const Admin = ({ puzzlesList }) => {
   const { data: session, status } = useSession();
@@ -34,7 +34,7 @@ const Admin = ({ puzzlesList }) => {
       return (
         <>
           <Header />
-          <AdminHeader/>
+          <AdminHeader />
           <h1> ADMIN PAGE 🤓 </h1>
           {/** TODO: Create Header for admin page  */}
           <div className={styles.contentWrap}>
