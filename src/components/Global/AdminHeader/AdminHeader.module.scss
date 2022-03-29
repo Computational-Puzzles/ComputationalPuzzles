@@ -1,0 +1,13 @@
+@import '../../../styles/abstracts/_mixins/text';
+@import '../../../styles/abstracts/variables';
+
+.pageName {
+  @include font-header-extra-bold;
+  width: 100vw;
+  height: 3.4rem;
+  padding: 0 1.5rem 3rem;
+  font-size: 1.5rem;
+  border-bottom: $grey-transparency 1px solid;
+
+
+}
