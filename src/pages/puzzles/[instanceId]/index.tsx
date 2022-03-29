@@ -171,21 +171,21 @@ const PuzzlePage = ({
           </div>
           <div>
             {isAuthenticated ? (
-                <Button
-                    style={'primary'}
-                    type={'submit'}
-                    content={'Submit'}
-                    onClick={() =>
-                        handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
-                    }
-                />
+              <Button
+                style={'primary'}
+                type={'submit'}
+                content={'Submit'}
+                onClick={() =>
+                  handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
+                }
+              />
             ) : (
-                <Button
-                    style={'primary'}
-                    content={'Login to Submit'}
-                    arrowDirection={'right'}
-                    onClick={() => signIn()}
-                />
+              <Button
+                style={'primary'}
+                content={'Login to Submit'}
+                arrowDirection={'right'}
+                onClick={() => signIn()}
+              />
             )}
           </div>
         </section>

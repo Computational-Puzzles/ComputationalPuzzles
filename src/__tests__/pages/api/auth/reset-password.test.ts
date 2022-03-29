@@ -159,7 +159,10 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    req = { ...req, body: { ...req.body, email: undefined } as resetPasswordProps } as NextApiRequest;
+    req = {
+      ...req,
+      body: { ...req.body, email: undefined } as resetPasswordProps
+    } as NextApiRequest;
 
     await resetPasswordHandler(req, res);
 
@@ -190,7 +193,10 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    req = { ...req, body: { ...req.body, oldPassword: undefined } as resetPasswordProps } as NextApiRequest;
+    req = {
+      ...req,
+      body: { ...req.body, oldPassword: undefined } as resetPasswordProps
+    } as NextApiRequest;
 
     await resetPasswordHandler(req, res);
 
@@ -221,7 +227,10 @@ describe('/api/auth/reset-password: Failed', () => {
 
     await resetPasswordHandler(req, res);
 
-    req = { ...req, body: { ...req.body, newPassword: undefined } as resetPasswordProps } as NextApiRequest;
+    req = {
+      ...req,
+      body: { ...req.body, newPassword: undefined } as resetPasswordProps
+    } as NextApiRequest;
 
     await resetPasswordHandler(req, res);
 
