@@ -1,19 +1,22 @@
 import { checkPuzzleAnswer } from '../../utils/puzzles';
 import { mockPuzzle } from '../../__mocks__/pages/api/puzzles';
 import { mockRandomSeed } from '../../__mocks__/pages/api/puzzles/instances/submit.ts';
-import { getRandomNumber } from '../../__mocks__/pages/api/getRandom';
+import {getRandomNumber, getRandomString} from '../../__mocks__/pages/api/getRandom';
+import puzzle from "../../__mocks__/mock_puzzle";
 
 it('should compare the user submitted puzzle answer with the ans key in the puzzle (from the db)', () => {
-  const puzzle = mockPuzzle();
-  const mockAns = mockPuzzle().variables?.answer;
-  if (!mockAns) {
-    console.log('Answer is not defined.');
+  let pzl;
+  let ans;
+  try{
+    pzl = pzl = mockPuzzle();
+    ans = mockPuzzle().variables?.answer;
+  }catch (e){
+    console.log(e);
+  }finally {
+    ans = puzzle.variables.answer;
   }
-  let notAns;
-  do {
-    notAns = getRandomNumber();
-  } while (mockAns === notAns);
+  const notAns = getRandomString(10);
   const mockSeed = mockRandomSeed();
-  expect(checkPuzzleAnswer(puzzle, mockSeed, notAns)).toBe(false);
-  expect(checkPuzzleAnswer(puzzle, mockSeed , mockAns)).toBe(true);
+  expect(checkPuzzleAnswer(pzl, mockSeed, notAns)).toBe(false);
+  expect(checkPuzzleAnswer(pzl, mockSeed , ans)).toBe(true);
 });
