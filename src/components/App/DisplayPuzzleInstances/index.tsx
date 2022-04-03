@@ -16,35 +16,28 @@ const DisplayPuzzleInstances = ({
   puzzlesList
 }: DisplayPuzzleInstancesProps) => {
   const [puzzleId, setPuzzleId] = useState<string>('');
-  const [puzzleInstances, setPuzzleInstances] = useState<PuzzleInstance[]>([]);
-  const [displayPuzzleInstances, setDisplayPuzzleInstances] = useState<
+  const [allPuzzleInstances, setAllPuzzleInstances] = useState<PuzzleInstance[]>([]);
+  const [puzzleInstances, setPuzzleInstances] = useState<
     PuzzleInstance[]
   >([]);
 
   const getPuzzleInstances = async () => {
-    const retrivedPuzzleInstances = await getAllPuzzleInstances();
-    setPuzzleInstances(retrivedPuzzleInstances);
+    setAllPuzzleInstances(await getAllPuzzleInstances());
   };
-
-  useEffect(() => {
-    getPuzzleInstances();
-  }, []);
 
   useEffect(() => {
     getPuzzleInstances();
   }, [puzzlesList]);
 
   useEffect(() => {
-    if (!puzzleInstances || !setDisplayPuzzleInstances) return;
+    if (!allPuzzleInstances || !setPuzzleInstances) return;
 
-    if (!puzzleId || puzzleId === '') {
-      setDisplayPuzzleInstances(puzzleInstances);
-    } else {
-      setDisplayPuzzleInstances(
-        puzzleInstances.filter(pzl => pzl.puzzleId.toString() === puzzleId)
-      );
-    }
-  }, [puzzleId, puzzleInstances, setDisplayPuzzleInstances]);
+    if (!puzzleId) return setPuzzleInstances(allPuzzleInstances);
+
+    setPuzzleInstances(
+      allPuzzleInstances.filter(instance => instance.puzzleId.toString() === puzzleId)
+    );
+  }, [puzzleId, allPuzzleInstances, setPuzzleInstances]);
 
   return (
     <div className={styles.puzzleInstancesWrapper}>
@@ -61,7 +54,7 @@ const DisplayPuzzleInstances = ({
               value={puzzleId}
               onChange={e => setPuzzleId(e.currentTarget.value)}
             >
-              <option value="" key="all-puzzles">
+              <option value="">
                 All puzzles
               </option>
               {puzzlesList.map((puzzle: PuzzleCustom, index: number) => (
@@ -73,7 +66,7 @@ const DisplayPuzzleInstances = ({
           ) : (
             <select
               className={styles.puzzleInstancesHeaderSelect}
-              value="No puzzle available"
+              value="No puzzles available"
             ></select>
           )}
         </div>
@@ -90,8 +83,8 @@ const DisplayPuzzleInstances = ({
 
         {/* 3 cols table content */}
         <div className={styles.puzzleInstancesBodyContent}>
-          {displayPuzzleInstances.length > 0 &&
-            displayPuzzleInstances.map(
+          {puzzleInstances.length > 0 &&
+            puzzleInstances.map(
               (puzzleInstance: PuzzleInstance, index: number) => (
                 <div
                   className={styles.puzzleInstancesBodyContentRow}
@@ -112,7 +105,8 @@ const DisplayPuzzleInstances = ({
                       type="button"
                       arrowDirection="right"
                       onClick={() => {
-                        toast('TODO: View on map');
+                        // TODO: View on map service
+                        toast('Coming soon ✨');
                       }}
                     />
                     <Button
@@ -121,7 +115,8 @@ const DisplayPuzzleInstances = ({
                       size="sm"
                       type="button"
                       onClick={() => {
-                        toast('TODO: Delete puzzle instance by id');
+                        // TODO: Delete puzzle instance service
+                        toast('Coming soon ✨');
                       }}
                     />
                   </div>

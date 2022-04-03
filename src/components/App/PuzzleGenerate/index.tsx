@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState } from 'react';
-``;
 import styles from './PuzzleGenerate.module.scss';
 import toast from 'react-hot-toast';
 import Modal from 'react-modal';
@@ -81,7 +80,6 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
             value={address}
             setInputVal={setAddress}
             required={false}
-            // disabled={true}
             onClick={() => setModalIsOpen(true)}
           />
           <Button
@@ -108,7 +106,7 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
         onRequestClose={() => {
           setModalIsOpen(false);
         }}
-        contentLabel="Example Modal"
+        contentLabel="Set Location Modal"
         overlayClassName={styles.modalOverlay}
         appElement={document.getElementById('__next') as HTMLElement}
       >

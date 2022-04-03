@@ -17,7 +17,6 @@ const MapRenderer = ({
   setTempMarker
 }: MapRendererProps) => {
   const setMapFocus = (marker: MapMarker): void => {
-    console.log(tempMarker);
     setMapCenter(marker.anchor);
   };
 
@@ -38,7 +37,6 @@ const MapRenderer = ({
           setMapCenter(center);
         }}
         onClick={({ event, latLng, pixel }) => {
-          console.log(event);
           handleOnClickMap(latLng);
         }}
       >
