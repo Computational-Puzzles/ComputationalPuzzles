@@ -10,7 +10,7 @@ import usersHandler from '../../../pages/api/user';
 
 const prisma = new PrismaClient();
 const { createUser } = PrismaAdapter(prisma);
-let email;
+let email: string;
 
 beforeEach(async () => {
   email = mockEmail();
