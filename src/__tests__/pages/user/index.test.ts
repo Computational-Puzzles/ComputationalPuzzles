@@ -10,7 +10,7 @@ import usersHandler from '../../../pages/api/user';
 
 const prisma = new PrismaClient();
 const { createUser } = PrismaAdapter(prisma);
-let email;
+let email: string;
 
 beforeEach(async () => {
   email = mockEmail();
@@ -24,10 +24,10 @@ beforeEach(async () => {
 describe('/api/user: Succeeded', () => {
   it('should return a user', async () => {
     const req = {
-      query: {
+      body: {
         email
       }
-    } as unknown as NextApiRequest;
+    } as NextApiRequest;
     const json = jest.fn();
     const status = jest.fn().mockReturnValue({ json });
     const res = {
