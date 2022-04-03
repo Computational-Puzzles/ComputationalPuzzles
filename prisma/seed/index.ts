@@ -1,6 +1,3 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import { PrismaClient, Puzzle, PuzzleType } from '@prisma/client';
 
 const prisma = new PrismaClient();

@@ -45,7 +45,7 @@ const ProfilePage = () => {
         if (user.name) setUsername(user.name);
       })
       .catch(err => {
-        console.error(err);
+        toast.error(err.message);
       });
   }, [userEmail]);
 
@@ -149,7 +149,7 @@ const ProfilePage = () => {
                   required={false}
                 />
                 <Button
-                  onClick={() => toast('Place holder for update birthyear')}
+                  onClick={() => toast('Coming soon ✨')}
                   style="primary"
                   content="Update"
                   arrowDirection="right"

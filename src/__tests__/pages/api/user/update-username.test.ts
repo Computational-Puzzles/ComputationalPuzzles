@@ -1,18 +1,12 @@
-import * as dotenv from 'dotenv';
-dotenv.config({ path: '.env.test' });
-// TODO: The above should be deleted when #110 and #111 are merged.
-
-import { PrismaClient, User } from '@prisma/client'; // This also need to be removed when #110 and #111 are merged.
 import { NextApiRequest, NextApiResponse } from 'next';
+import { User } from '@prisma/client';
 import {
   mockEmail,
   mockPassword,
   mockUsername
 } from '../../../../__mocks__/pages/api/auth';
-
 import updateUsernameHandler from '../../../../pages/api/user/update-username';
-
-const prisma = new PrismaClient();
+import { prisma } from '../../../../__mocks__';
 
 let user: User, userEmail: string;
 
