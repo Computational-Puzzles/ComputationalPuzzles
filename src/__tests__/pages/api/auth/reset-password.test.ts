@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 

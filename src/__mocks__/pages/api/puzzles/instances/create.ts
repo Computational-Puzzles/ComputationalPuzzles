@@ -18,9 +18,9 @@ export const mockDifficulty = (): DIFFICULTY => {
   ] as DIFFICULTY;
 };
 
-export  const mockOfficialAnswer = (): string =>{
+export const mockOfficialAnswer = (): string => {
   return faker.datatype.string();
-}
+};
 export const mockQuestion = (): string => {
   return faker.lorem.sentence();
 };

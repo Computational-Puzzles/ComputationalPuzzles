@@ -9,7 +9,8 @@ import {
   mockHint,
   mockLatitude,
   mockLongtitude,
-  mockName, mockOfficialAnswer,
+  mockName,
+  mockOfficialAnswer,
   mockQuestion
 } from './instances/create';
 
@@ -55,7 +56,7 @@ export const mockPuzzle = (): Promise<Puzzle> => {
       content: [mockContent(), mockContent(), mockContent()],
       question: mockQuestion(),
       variables: {
-        answer: mockOfficialAnswer(),
+        answer: mockOfficialAnswer()
       },
       isGenerated: mockBoolean(),
       puzzleType: {
