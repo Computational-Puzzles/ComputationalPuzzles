@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { CardGrid, MapGeocoder, MapRenderer } from '../../../components/App';
 import { GetServerSideProps } from 'next';
 import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
-import { Filter, Header } from '../../../components/Global';
+import { Filter, Navbar } from '../../../components/Global';
 import { getAllPuzzleInstances } from '../../../services/puzzleInstance';
 import { PuzzleMapProps } from '../../../types/puzzle';
 import { MapAnchor, MapMarker } from '../../../types/map';
@@ -64,7 +64,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
 
   return (
     <main className={puzzleMapStyles.map}>
-      <Header />
+      <Navbar />
       <div className={puzzleMapStyles.subHeader}>
         <div className={puzzleMapStyles.leftContent}>
           <h1>Puzzles Map</h1>
