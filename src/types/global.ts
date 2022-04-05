@@ -13,7 +13,7 @@ export type LogoProps = {
 };
 
 export type InputProps = {
-  type: 'text' | 'password' | 'email';
+  type: 'text' | 'password' | 'email' | 'number';
   id: string;
   required: boolean;
   placeholder?: string;

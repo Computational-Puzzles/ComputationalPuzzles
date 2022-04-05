@@ -1,14 +1,7 @@
-/**
- * @jest-environment node
- */
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import adminValidate from '../../../../pages/api/admin/validate';
 import { mockEmail, mockPassword } from '../../../../__mocks__/pages/api/auth';
-
-const prisma = new PrismaClient();
-const { createUser } = PrismaAdapter(prisma);
+import { prisma } from '../../../../__mocks__';
 
 beforeEach(async () => {
   await prisma.user.deleteMany();
@@ -19,14 +12,16 @@ describe('/api/admin/validate: Success', () => {
   const adminEmail = mockEmail();
 
   it('sucessfully validates admin', async () => {
-    const adminUser = await createUser({
-      email: adminEmail,
-      password: mockPassword()
+    const adminUser = await prisma.user.create({
+      data: {
+        email: adminEmail,
+        password: mockPassword()
+      }
     });
 
     await prisma.account.create({
       data: {
-        userId: parseInt(adminUser.id),
+        userId: adminUser.id,
         type: 'admin',
         provider: '',
         providerAccountId: adminEmail
@@ -62,14 +57,16 @@ describe('/api/admin/validate: Success', () => {
   const userEmail = mockEmail();
 
   it('successfully rejects non-admin users', async () => {
-    const normalUser = await createUser({
-      email: userEmail,
-      password: mockPassword()
+    const normalUser = await prisma.user.create({
+      data: {
+        email: userEmail,
+        password: mockPassword()
+      }
     });
 
     await prisma.account.create({
       data: {
-        userId: parseInt(normalUser.id),
+        userId: normalUser.id,
         type: 'user',
         provider: '',
         providerAccountId: userEmail

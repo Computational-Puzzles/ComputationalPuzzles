@@ -1,6 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-
 import {
   mockUserData,
   mockPassword,
@@ -9,7 +7,6 @@ import {
 import resetPasswordHandler from '../../../../pages/api/auth/reset-password';
 import { hashFunction } from '../../../../utils/password';
 import { resetPasswordProps } from '../../../../types/api/auth/reset-password';
-
 import { prisma } from '../../../../__mocks__';
 
 let email: string, password: string;
@@ -19,11 +16,11 @@ beforeEach(async () => {
   email = userData.email;
   password = userData.password;
 
-  const { createUser } = PrismaAdapter(prisma);
-
-  await createUser({
-    email,
-    password: hashFunction(password)
+  await prisma.user.create({
+    data: {
+      email,
+      password: hashFunction(password)
+    }
   });
 });
 

@@ -7,6 +7,8 @@ import {
   submitPuzzleInstance
 } from './puzzleInstance';
 import { isAdmin } from './admin';
+import { getUserByEmail } from './getUserByEmail';
+import { updateUsername } from './updateUsername';
 
 export {
   signUp,
@@ -15,5 +17,7 @@ export {
   getPuzzleInstance,
   createPuzzleInstance,
   submitPuzzleInstance,
-  isAdmin
+  isAdmin,
+  getUserByEmail,
+  updateUsername
 };
