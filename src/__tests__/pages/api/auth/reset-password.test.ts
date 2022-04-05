@@ -23,7 +23,7 @@ beforeEach(async () => {
 
   await createUser({
     email,
-    password: hashFunction(password)
+    password: await hashFunction(password)
   });
 });
 
@@ -79,7 +79,7 @@ describe('/api/auth/reset-password: Succeeded', () => {
     ).password;
 
     expect(hashPassword).not.toEqual(currentPassword);
-    expect(hashFunction(newPassword)).toEqual(currentPassword);
+    expect(await hashFunction(newPassword)).toEqual(currentPassword);
   });
 });
 
