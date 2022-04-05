@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './Header.module.scss';
+import styles from './Navbar.module.scss';
 
 import Link from 'next/link';
 import Image from 'next/image';
