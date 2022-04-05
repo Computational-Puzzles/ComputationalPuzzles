@@ -16,10 +16,10 @@ const DisplayPuzzleInstances = ({
   puzzlesList
 }: DisplayPuzzleInstancesProps) => {
   const [puzzleId, setPuzzleId] = useState<string>('');
-  const [allPuzzleInstances, setAllPuzzleInstances] = useState<PuzzleInstance[]>([]);
-  const [puzzleInstances, setPuzzleInstances] = useState<
+  const [allPuzzleInstances, setAllPuzzleInstances] = useState<
     PuzzleInstance[]
   >([]);
+  const [puzzleInstances, setPuzzleInstances] = useState<PuzzleInstance[]>([]);
 
   const getPuzzleInstances = async () => {
     setAllPuzzleInstances(await getAllPuzzleInstances());
@@ -35,7 +35,9 @@ const DisplayPuzzleInstances = ({
     if (!puzzleId) return setPuzzleInstances(allPuzzleInstances);
 
     setPuzzleInstances(
-      allPuzzleInstances.filter(instance => instance.puzzleId.toString() === puzzleId)
+      allPuzzleInstances.filter(
+        instance => instance.puzzleId.toString() === puzzleId
+      )
     );
   }, [puzzleId, allPuzzleInstances, setPuzzleInstances]);
 
@@ -54,9 +56,7 @@ const DisplayPuzzleInstances = ({
               value={puzzleId}
               onChange={e => setPuzzleId(e.currentTarget.value)}
             >
-              <option value="">
-                All puzzles
-              </option>
+              <option value="">All puzzles</option>
               {puzzlesList.map((puzzle: PuzzleCustom, index: number) => (
                 <option value={puzzle.id} key={`puzzle${index}`}>
                   {puzzle.name}

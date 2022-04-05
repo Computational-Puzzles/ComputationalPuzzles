@@ -57,8 +57,10 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
             </select>
           ) : (
             <>
-              <select className={styles.selections} value="No puzzle available">
-              </select>
+              <select
+                className={styles.selections}
+                value="No puzzle available"
+              ></select>
             </>
           )}
         </div>
