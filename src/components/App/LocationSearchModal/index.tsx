@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { Geocoder } from '@maptiler/geocoder';
 import styles from './LocationSearchModal.module.scss';
 import MapGeocoder from '../MapGeocoder';
 import type { MapAnchor, MapMarker } from '../../../types/map';
 import MapRenderer from '../MapRenderer';
 import { Button, Input } from '../../Global';
-import toast from 'react-hot-toast';
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
+const CENTRE_KELOWNA_LATNG: MapAnchor = [49.88307, -119.48568];
 
 type LocationSearchModalProps = {
   address: string;
@@ -45,7 +46,7 @@ const LocationSearchModal = ({
         setMapCenter(anchor);
       },
       () => {
-        const anchor: MapAnchor = [49.88307, -119.48568];
+        const anchor: MapAnchor = CENTRE_KELOWNA_LATNG;
         setMapCenter(anchor);
       }
     );

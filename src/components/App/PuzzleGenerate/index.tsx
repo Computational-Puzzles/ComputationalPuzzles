@@ -58,7 +58,6 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
           ) : (
             <>
               <select className={styles.selections} value="No puzzle available">
-                \
               </select>
             </>
           )}
@@ -74,7 +73,7 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
         </div>
         <div className={styles.addressWrapper}>
           <Input
-            id="address-displayer"
+            id="address_displayer"
             type="text"
             placeholder="Address"
             value={address}

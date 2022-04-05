@@ -48,7 +48,7 @@ const DisplayPuzzleInstances = ({
         </div>
         {/* Select puzzle */}
         <div className={styles.puzzleInstancesHeaderSelectWrapper}>
-          {puzzlesList.length > 0 ? (
+          {puzzlesList ? (
             <select
               className={styles.puzzleInstancesHeaderSelect}
               value={puzzleId}
@@ -83,7 +83,7 @@ const DisplayPuzzleInstances = ({
 
         {/* 3 cols table content */}
         <div className={styles.puzzleInstancesBodyContent}>
-          {puzzleInstances.length > 0 &&
+          {puzzleInstances &&
             puzzleInstances.map(
               (puzzleInstance: PuzzleInstance, index: number) => (
                 <div
