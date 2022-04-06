@@ -1,7 +1,7 @@
 import { checkPuzzleAnswer } from '../../utils/puzzles';
 import {mockMCQPuzzle, mockTxtPuzzle} from '../../__mocks__/pages/api/puzzles';
 import { mockRandomSeed } from '../../__mocks__/pages/api/puzzles/instances/submit';
-import {getRandomString} from '../../__mocks__/pages/api/getRandom';
+import {getRandomString} from '../../__mocks__/getRandom';
 
 describe('Comparing user submitted answer with the ans key in the puzzle (from the db) - ', () => {
     it('part1: MCQ', async () => {

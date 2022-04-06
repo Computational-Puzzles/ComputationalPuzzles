@@ -14,3 +14,17 @@ export const getRandomNumberMin = (min:number ):number => {
 export const getRandomNumberRange = (min:number, max:number ):number => {
     return faker.datatype.number({min: min, max: max});
 };
+
+export const getRandomNumber = ():number => {
+    return faker.datatype.number();
+};
+
+export const getRandomNumArray = (length?:number) => {
+    if(typeof length === 'undefined')
+        length = getRandomNumberRange(1, 10);
+    let arr = [];
+    for (let i = 0; i < length; i++) {
+        arr[i] = getRandomNumber();
+    }
+    return arr;
+};
