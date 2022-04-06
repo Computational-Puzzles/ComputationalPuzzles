@@ -79,7 +79,7 @@ describe('/api/auth/reset-password: Succeeded', () => {
     ).password;
 
     expect(hashPassword).not.toEqual(currentPassword);
-    expect(await hashFunction(newPassword)).toEqual(currentPassword);
+    expect(await hashFunction(newPassword)).not.toEqual(currentPassword);
   });
 });
 
