@@ -3,7 +3,7 @@ import {mockMCQPuzzle, mockTxtPuzzle} from '../../__mocks__/pages/api/puzzles';
 import { mockRandomSeed } from '../../__mocks__/pages/api/puzzles/instances/submit';
 import {getRandomString} from '../../__mocks__/getRandom';
 
-describe('Comparing user submitted answer with the ans key in the puzzle (from the db) - ', () => {
+describe('testing checkPuzzleAnswer: Comparing user submitted answer with the ans key in the puzzle (from the db) - ', () => {
     it('part1: MCQ', async () => {
         const mockSeed = mockRandomSeed();
         const pzl =  await mockMCQPuzzle();
