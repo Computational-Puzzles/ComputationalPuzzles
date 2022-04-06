@@ -1,5 +1,5 @@
 import { checkHash, hashFunction } from '../../utils/password';
-import {getRandomNumber, getRandomString} from '../../__mocks__/pages/api/getRandom';
+import {getRandomNumberMin, getRandomString} from '../../__mocks__/pages/api/getRandom';
 
 describe('testing the hashFunction', () => {
   it('should compare the secret hashed and without', async () => {
@@ -10,9 +10,9 @@ describe('testing the hashFunction', () => {
   });
 
   it('should compare the length of 2 hashed passwords', async () => {
-    //add 2 random length passwords: 1-10
-    const len1 = getRandomNumber({min:1}) ;
-    const len2 = getRandomNumber({min:1}) ;
+    //add 2 random length passwords with length >= 1
+    const len1 = getRandomNumberMin(1) ;
+    const len2 = getRandomNumberMin(1) ;
     // generate random strings with the length above;
     const pw1 = getRandomString(len1);
     const pw2 = getRandomString(len2);
