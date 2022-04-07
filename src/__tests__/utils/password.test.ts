@@ -1,14 +1,20 @@
 import { checkHash, hashFunction } from '../../utils/password';
 import { getRandomString } from '../../__mocks__/getRandom';
 
-describe('testing the hashFunction: ', () => {
-  it('should compare the secret hashed and without', async () => {
+describe('Validating the hash function, ', () => {
+  it('the hashed value should not equal the secret.', async () => {
     const secret = getRandomString();
     expect(await hashFunction(secret)).not.toBe(secret);
+  });
+});
+
+describe('When hashing secret strings, ', () => {
+  it('should not return the same hashed value twice for the same string', async () => {
+    const secret = getRandomString();
     expect(await hashFunction(secret)).not.toBe(await hashFunction(secret));
   });
 
-  it('should compare the length of 2 hashed passwords', async () => {;
+  it('should return hashed strings of the same length regardless of the strings passed', async () => {
     const pw1 = getRandomString();
     const pw2 = getRandomString();
     const hashed1 = await hashFunction(pw1);
@@ -17,7 +23,7 @@ describe('testing the hashFunction: ', () => {
   });
 });
 
-describe('testing the checkHash: ', () => {
+describe('Testing the checkHash: ', () => {
   it('should have the same hashed values for the same secret input', async () => {
     const secret = getRandomString();
     expect(await checkHash(secret, await hashFunction(secret))).toBe(true);
