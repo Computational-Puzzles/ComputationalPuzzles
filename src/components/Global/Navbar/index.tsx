@@ -4,7 +4,7 @@ import styles from './Navbar.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Button, Logo } from '..';
+import {Button, Logo, LogStatusButton} from '..';
 import { HeaderProps } from '../../../types/global';
 import { isAdmin } from '../../../services';
 import { useSession } from 'next-auth/react';
@@ -46,21 +46,27 @@ const Header = ({ profilePicture }: HeaderProps) => {
           </Link>
         </div>
       </div>
-      <div className={styles.right}>
-        {validAdmin && (
-          <Button style={'flat'} content={'Admin'} link={'/admin'} />
-        )}
-        <Button style={'outline'} content={'Profile'} link={'/auth/profile'} />
-        {profilePicture ? (
-          <Image
-            className={styles.profileImg}
-            src={profilePicture}
-            alt="profile"
-          />
-        ) : (
-          <span className={styles.profileImg}> </span>
-        )}
-      </div>
+      {status !== 'authenticated'? (
+          <div className={styles.right}>
+            <LogStatusButton status={status}/>
+          </div>
+      ):(
+          <div className={styles.right}>
+            {validAdmin && (
+                <Button style={'flat'} content={'Admin'} link={'/admin'} />
+            )}
+            <Button style={'outline'} content={'Profile'} link={'/auth/profile'} />
+            {profilePicture ? (
+                <Image
+                    className={styles.profileImg}
+                    src={profilePicture}
+                    alt="profile"
+                />
+            ) : (
+                <span className={styles.profileImg}> </span>
+            )}
+          </div>
+      )}
     </div>
   );
 };
