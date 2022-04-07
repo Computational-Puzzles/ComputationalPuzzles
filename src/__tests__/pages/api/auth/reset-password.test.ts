@@ -9,7 +9,6 @@ import {
 import resetPasswordHandler from '../../../../pages/api/auth/reset-password';
 import { hashFunction } from '../../../../utils/password';
 import { resetPasswordProps } from '../../../../types/api/auth/reset-password';
-
 import { prisma } from '../../../../__mocks__';
 
 let email: string, password: string;

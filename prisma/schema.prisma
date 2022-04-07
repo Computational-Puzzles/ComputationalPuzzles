@@ -48,7 +48,7 @@ model User {
   id            Int          @id @default(autoincrement())
   email         String?      @unique
   password      String?
-  name          String?
+  name          String?      @unique
   emailVerified DateTime?    @map(name: "emailVerified")
   image         String?
   createdAt     DateTime     @default(now()) @map(name: "createdAt")
