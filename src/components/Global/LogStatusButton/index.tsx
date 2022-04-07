@@ -1,27 +1,24 @@
 import { Button } from '../index';
 import { signIn, signOut } from 'next-auth/react';
 import React from 'react';
+import {LogStatusButtonProps} from "../../../types/logStatusButton";
 
-type LogStatusButtonProps = {
-  status: string;
-  usedInPage?: 'home' | 'others';
-}
 
-const LogStatusButton = ({ status , usedInPage}: LogStatusButtonProps ) => {
-  if( usedInPage === 'home'){
+const LogStatusButton = ({ status, usedInPage }: LogStatusButtonProps) => {
+  if (usedInPage === 'home') {
     return status === 'authenticated' ? (
-        <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
+      <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
     ) : (
-        <Button style={'flat'} content={'Sign In'} link={'/auth/signup'} />
+      <Button style={'flat'} content={'Sign In'} link={'/auth/signup'} />
     );
-  }else{ // usedInPage === 'others' or  usedInPage === 'undefined'
+  } else {
+    // usedInPage === 'others' or  usedInPage === 'undefined'
     return status === 'authenticated' ? (
-        <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
+      <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
     ) : (
-        <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
+      <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
     );
   }
-
 };
 
 export default LogStatusButton;
