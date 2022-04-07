@@ -7,7 +7,6 @@ import Navbar from './Navbar';
 import PuzzleCard from './PuzzleCard';
 import ErrorDisplay from './ErrorDisplay';
 import LogStatusButton from './LogStatusButton';
-import SignStatusButton from './SignStatusButton';
 import SearchAndFilter from './SearchAndFilter';
 import Difficulty from './Difficulty';
 import Loading from './Loading';
@@ -22,7 +21,6 @@ export {
   Filter,
   ErrorDisplay,
   LogStatusButton,
-  SignStatusButton,
   SearchAndFilter,
   Difficulty,
   Loading
