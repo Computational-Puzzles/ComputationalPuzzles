@@ -1,4 +1,4 @@
 export type LogStatusButtonProps = {
-    status: string;
-    usedInPage?: 'home' | 'others';
+  status: string;
+  usedInPage?: 'home' | 'others';
 };

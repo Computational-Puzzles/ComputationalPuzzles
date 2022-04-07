@@ -1,8 +1,7 @@
 import { Button } from '../index';
 import { signIn, signOut } from 'next-auth/react';
 import React from 'react';
-import {LogStatusButtonProps} from "../../../types/logStatusButton";
-
+import { LogStatusButtonProps } from '../../../types/logStatusButton';
 
 const LogStatusButton = ({ status, usedInPage }: LogStatusButtonProps) => {
   if (usedInPage === 'home') {
