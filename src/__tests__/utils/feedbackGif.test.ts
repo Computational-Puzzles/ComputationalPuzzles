@@ -1,5 +1,5 @@
 import { getRandomGifSrc } from '../../utils/feedbackGif';
-import {getRandomNumArray} from "../../__mocks__/getRandom";
+import { getRandomNumArray } from '../../__mocks__/getRandom';
 
 it('returns a path from a provided array. Either correct/incorrect gif paths', () => {
   const arr = getRandomNumArray();

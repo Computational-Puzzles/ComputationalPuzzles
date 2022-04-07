@@ -1,14 +1,13 @@
 import { difficultySentenceCase } from '../../utils/difficulty';
 
-describe('Difficulties are in lowercase except for the first letter.', ()=>{
-  it('Difficulty = EASY correct ', () => {
+describe('Difficulties are in lowercase except for the first letter.', () => {
+  it('Properly sentence cases EASY difficulty.', () => {
     expect(difficultySentenceCase('EASY')).toBe('Easy');
   });
-  it('Difficulty = MEDIUM correct ', () => {
+  it('Properly sentence cases MEDIUM difficulty.', () => {
     expect(difficultySentenceCase('MEDIUM')).toBe('Medium');
   });
-  it('Difficulty = HARD correct ', () => {
+  it('Properly sentence cases HARD difficulty.', () => {
     expect(difficultySentenceCase('HARD')).toBe('Hard');
   });
 });
-
