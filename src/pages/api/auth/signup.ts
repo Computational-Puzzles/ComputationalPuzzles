@@ -3,6 +3,9 @@ import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { hashFunction } from '../../../utils/password';
 import { signUpData } from '../../../types/api/auth/sign-up';
+import { EmailConfirmTemplate } from '../../../components/App';
+import { sendEmail } from './send-email';
+import { getConfirmationHash, renderReactToHTML } from '../../../utils';
 
 const prisma = new PrismaClient();
 
@@ -23,6 +26,20 @@ const signUpHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     else {
       const hashPassword = hashFunction(password);
       const user = await signUp({ email, password: hashPassword });
+      const confirmationEmailSubject =
+        '[Computational Puzzles] Confirm your email';
+      const confirmationHash = await getConfirmationHash(email);
+      const confirmationEmailContent: string = renderReactToHTML(
+        EmailConfirmTemplate({
+          userEmail: email,
+          hash: confirmationHash
+        })
+      );
+      await sendEmail(
+        email,
+        confirmationEmailSubject,
+        confirmationEmailContent
+      );
       res.status(201).json(user);
     }
   } catch (err) {
