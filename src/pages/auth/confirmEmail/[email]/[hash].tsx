@@ -8,22 +8,22 @@ const ConfirmEmail = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (typeof (email) !== 'string' || typeof (hash) !== 'string' || !router) {
+    if (typeof email !== 'string' || typeof hash !== 'string' || !router) {
       return;
     }
 
     const checkCallbackHash = async () => {
-      if (!await decodeConfirmationHash(email, hash)) {
+      if (!(await decodeConfirmationHash(email, hash))) {
         router.push('/403');
       } else {
         setIsLoading(false);
       }
-    }
+    };
     checkCallbackHash();
   }, [email, hash, router]);
 
-  if (typeof (email) !== 'string' || typeof (hash) !== 'string') {
-    return <p>Redirecting...</p>
+  if (typeof email !== 'string' || typeof hash !== 'string') {
+    return <p>Redirecting...</p>;
   }
 
   if (!isLoading) {
@@ -31,6 +31,6 @@ const ConfirmEmail = () => {
   }
 
   return <p>Loading...</p>;
-}
+};
 
 export default ConfirmEmail;

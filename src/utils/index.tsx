@@ -5,5 +5,5 @@ export { getRandomGifSrc, feedbackGifOptions } from './feedbackGif';
 export { handleLoadingError } from './errorHandler';
 export { handleServiceError } from './error';
 export { fetcher } from './swr';
-export { decodeConfirmationHash, getConfirmationHash } from './confimationHash'
+export { decodeConfirmationHash, getConfirmationHash } from './confimationHash';
 export { renderReactToHTML } from './renderReactToHTML';
