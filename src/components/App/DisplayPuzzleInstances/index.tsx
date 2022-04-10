@@ -12,6 +12,8 @@ type DisplayPuzzleInstancesProps = {
   puzzlesList: PuzzleCustom[];
 };
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 const DisplayPuzzleInstances = ({
   puzzlesList
 }: DisplayPuzzleInstancesProps) => {
@@ -94,7 +96,7 @@ const DisplayPuzzleInstances = ({
                   <div>
                     <QRGenerator
                       className={styles.puzzleInstancesBodyContentQR}
-                      text={JSON.stringify(puzzleInstance)}
+                      text={`${BASE_URL}/puzzles/${puzzleInstance.id}`}
                     />
                   </div>
                   <div className={styles.puzzleInstancesBodyContentActions}>
