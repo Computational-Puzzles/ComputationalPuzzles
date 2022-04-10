@@ -6,6 +6,7 @@ import MapRenderer from './MapRenderer';
 import MapGeocoder from './MapGeocoder';
 import FeedbackGif from './FeedbackGif';
 import SignUpDialog from './SignUpDialog';
+import EmailConfirmTemplate from './EmailConfirmTemplate';
 
 export {
   CardGrid,
@@ -15,5 +16,6 @@ export {
   MapRenderer,
   MapGeocoder,
   FeedbackGif,
-  SignUpDialog
+  SignUpDialog,
+  EmailConfirmTemplate
 };
