@@ -7,12 +7,11 @@ import { PuzzleInstance } from '@prisma/client';
 import { Button } from '../../Global';
 import { QRGenerator } from '../../App';
 import toast from 'react-hot-toast';
+import { getLinkToPuzzleInstance } from '../../../utils/getLinkToPuzzleInstance';
 
 type DisplayPuzzleInstancesProps = {
   puzzlesList: PuzzleCustom[];
 };
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const DisplayPuzzleInstances = ({
   puzzlesList
@@ -96,7 +95,7 @@ const DisplayPuzzleInstances = ({
                   <div>
                     <QRGenerator
                       className={styles.puzzleInstancesBodyContentQR}
-                      text={`${BASE_URL}/puzzles/${puzzleInstance.id}`}
+                      text={getLinkToPuzzleInstance(puzzleInstance.id)}
                     />
                   </div>
                   <div className={styles.puzzleInstancesBodyContentActions}>
