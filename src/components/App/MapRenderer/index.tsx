@@ -2,7 +2,7 @@ import React from 'react';
 import { Map, Marker, ZoomControl } from 'pigeon-maps';
 import { maptiler } from 'pigeon-maps/providers';
 import mapRendererStyles from './MapRenderer.module.scss';
-import { MapMarker, MapRendererProps } from '../../../types/map';
+import { MapAnchor, MapMarker, MapRendererProps } from '../../../types/map';
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 
@@ -12,10 +12,17 @@ const MapRenderer = ({
   markers,
   userMarker,
   mapCenter,
-  setMapCenter
+  setMapCenter,
+  tempMarker,
+  setTempMarker
 }: MapRendererProps) => {
   const setMapFocus = (marker: MapMarker): void => {
     setMapCenter(marker.anchor);
+  };
+
+  const handleOnClickMap = (latLng: MapAnchor) => {
+    if (!setTempMarker) return;
+    setTempMarker({ anchor: latLng, zoom: userMarker.zoom });
   };
 
   return (
@@ -28,6 +35,9 @@ const MapRenderer = ({
         attribution={false}
         onBoundsChanged={({ center }) => {
           setMapCenter(center);
+        }}
+        onClick={({ event, latLng, pixel }) => {
+          handleOnClickMap(latLng);
         }}
       >
         {markers.map((marker, index) => (
@@ -44,6 +54,14 @@ const MapRenderer = ({
             color={'red'}
             anchor={userMarker.anchor}
             onClick={() => setMapFocus(userMarker)}
+          />
+        )}
+        {tempMarker && (
+          <Marker
+            width={40}
+            color={'blue'}
+            anchor={tempMarker.anchor}
+            onClick={() => setMapFocus(tempMarker)}
           />
         )}
         <ZoomControl />
