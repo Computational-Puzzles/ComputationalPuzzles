@@ -73,7 +73,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
         <Filter setFilterFields={setDifficultySelected} />
       </div>
       <div className={puzzleMapStyles.content}>
-        <MapRenderer
+        {puzzleInstances && <MapRenderer
           markers={puzzleInstances
             .filter(
               instance =>
@@ -88,13 +88,13 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
           userMarker={userMarker}
           mapCenter={mapCenter}
           setMapCenter={setMapCenter}
-        />
+        />}
         <div className={puzzleMapStyles.cardGridContainer}>
           <span className={puzzleMapStyles.title}>
             Nearest Puzzles From Map Center:
           </span>
           <div className={puzzleMapStyles.cardGrid}>
-            <CardGrid
+            {puzzleInstances && <CardGrid
               cardList={puzzleInstances
                 .filter(
                   instance =>
@@ -121,7 +121,7 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
                     ]
                   };
                 })}
-            />
+            />}
           </div>
         </div>
       </div>
