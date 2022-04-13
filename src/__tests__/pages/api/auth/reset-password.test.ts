@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+
 import {
   mockUserData,
   mockPassword,
@@ -16,11 +18,11 @@ beforeEach(async () => {
   email = userData.email;
   password = userData.password;
 
-  await prisma.user.create({
-    data: {
-      email,
-      password: hashFunction(password)
-    }
+  const { createUser } = PrismaAdapter(prisma);
+
+  await createUser({
+    email,
+    password: await hashFunction(password)
   });
 });
 
@@ -76,7 +78,7 @@ describe('/api/auth/reset-password: Succeeded', () => {
     ).password;
 
     expect(hashPassword).not.toEqual(currentPassword);
-    expect(hashFunction(newPassword)).toEqual(currentPassword);
+    expect(await hashFunction(newPassword)).not.toEqual(currentPassword);
   });
 });
 

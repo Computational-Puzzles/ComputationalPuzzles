@@ -1,5 +1,6 @@
 import * as faker from 'faker';
 import { DIFFICULTY } from '../../../../../types/global';
+import { getRandomNumberRange, getRandomString } from '../../../../getRandom';
 
 // TODO: Ensure this list matches DB's configuration
 const DIFFICULTY_LIST = ['EASY', 'MEDIUM', 'HARD'];
@@ -16,6 +17,15 @@ export const mockDifficulty = (): DIFFICULTY => {
   return DIFFICULTY_LIST[
     Math.floor(Math.random() * DIFFICULTY_LIST.length)
   ] as DIFFICULTY;
+};
+
+export const mockOfficialAnswer = (): string => {
+  return faker.datatype.string();
+};
+
+export const mockOptionsNoAns = (): string[] => {
+  const str = getRandomString(getRandomNumberRange(1, 4));
+  return Array.from(str);
 };
 
 export const mockQuestion = (): string => {

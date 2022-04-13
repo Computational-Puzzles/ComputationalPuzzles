@@ -39,8 +39,8 @@
 
   input[type='checkbox']:checked + & {
     background-color: transparent;
-    border-color: $green;
-    color: $green;
+    border-color: $grey;
+    color: $grey;
   }
 }
 
@@ -51,8 +51,8 @@
 
   input[type='checkbox']:checked + & {
     background-color: transparent;
-    border-color: $secondary-100;
-    color: $secondary-100;
+    border-color: $grey;
+    color: $grey;
   }
 }
 
@@ -63,7 +63,7 @@
 
   input[type='checkbox']:checked + & {
     background-color: transparent;
-    border-color: $red;
-    color: $red;
+    border-color: $grey;
+    color: $grey;
   }
 }
