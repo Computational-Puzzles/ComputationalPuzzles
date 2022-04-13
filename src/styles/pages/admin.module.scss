@@ -1,5 +1,34 @@
+@import '../abstracts/variables';
+
+.adminTitle {
+  padding: 0.5rem 3rem;
+  margin: 0;
+  background-color: $white;
+}
+
+.adminHeaderSep {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
 .contentWrap {
-  display: flex;
-  padding: 0 3rem;
-  gap: 5rem;
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+
+  .contentLeftWrap {
+    display: flex;
+    flex-direction: column;
+    padding: 0 3rem;
+    gap: 3rem;
+    margin-right: 5rem;
+  }
+}
+
+.adminSeperator {
+  height: 100%;
+  border-left: 1px solid $grey-border;
+  position: absolute;
+  top: 0;
+  left: calc(100% / (5 + 3) * 5 - 2%);
+  z-index: -1;
 }

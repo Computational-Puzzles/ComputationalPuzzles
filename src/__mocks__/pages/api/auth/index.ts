@@ -15,6 +15,10 @@ export const mockPassword = () => {
   return faker.internet.password();
 };
 
+export const mockUsername = () => {
+  return faker.internet.userName();
+};
+
 export const mockUserData = () => {
   return {
     email: mockEmail(),
