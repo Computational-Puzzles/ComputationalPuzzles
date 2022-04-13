@@ -1,7 +1,7 @@
 import { getRandomGifSrc } from '../../utils/feedbackGif';
 import { getRandomNumArray } from '../../__mocks__/getRandom';
 
-describe('Returns a valid path from a provided array for ', ()=>{
+describe('Returns a valid path from a provided array for ', () => {
   it('correct gif paths', () => {
     const arr = getRandomNumArray();
     const gifSrcCorrect = getRandomGifSrc(arr, true);
@@ -12,5 +12,4 @@ describe('Returns a valid path from a provided array for ', ()=>{
     const gifSrcWrong = getRandomGifSrc(arr, false);
     expect(gifSrcWrong.startsWith('/feedbackGifs/incorrect')).toBe(true);
   });
-})
-
+});

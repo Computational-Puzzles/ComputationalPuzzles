@@ -6,7 +6,7 @@ import {
 import { mockRandomSeed } from '../../__mocks__/pages/api/puzzles/instances/submit';
 import { getRandomString } from '../../__mocks__/getRandom';
 
-describe("Correctly validates answer for MCQ puzzles for ", () => {
+describe('Correctly validates answer for MCQ puzzles for ', () => {
   it('MCQ puzzles', async () => {
     const mockSeed = mockRandomSeed();
     const pzl = await mockMCQPuzzle();
