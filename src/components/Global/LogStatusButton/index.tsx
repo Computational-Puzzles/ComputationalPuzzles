@@ -3,19 +3,18 @@ import { signIn, signOut } from 'next-auth/react';
 import React from 'react';
 import { LogStatusButtonProps } from '../../../types/logStatusButton';
 
-const LogStatusButton = ({ status, usedInPage }: LogStatusButtonProps) => {
-  if (usedInPage === 'home') {
+const LogStatusButton = ({ status, useLogIn }: LogStatusButtonProps) => {
+  if (useLogIn) {
     return status === 'authenticated' ? (
-      <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
+        <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
     ) : (
-      <Button style={'flat'} content={'Sign In'} link={'/auth/signup'} />
+        <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
     );
   } else {
-    // usedInPage === 'others' or  usedInPage === 'undefined'
     return status === 'authenticated' ? (
-      <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
+        <Button style={'flat'} content={'Logout'} onClick={() => signOut()} />
     ) : (
-      <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
+        <Button style={'flat'} content={'Sign In'} link={'/auth/signup'} />
     );
   }
 };
