@@ -10,7 +10,10 @@
     "lint": "next lint",
     "test": "jest --runInBand",
     "prettify": "npx prettier --write src/",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "migrate:prod": "prisma migrate deploy",
+    "db:seed": "ts-node prisma/seed/index.ts"
   },
   "dependencies": {
     "@maptiler/geocoder": "^1.1.0",
