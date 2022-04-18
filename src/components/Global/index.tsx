@@ -3,7 +3,7 @@ import Button from './Button';
 import RadioButton from './RadioButton';
 import Filter from './Filter';
 import Input from './Input';
-import Header from './Header';
+import Navbar from './Navbar';
 import PuzzleCard from './PuzzleCard';
 import ErrorDisplay from './ErrorDisplay';
 import LogStatusButton from './LogStatusButton';
@@ -14,7 +14,7 @@ import Loading from './Loading';
 export {
   Button,
   PuzzleCard,
-  Header,
+  Navbar,
   Logo,
   Input,
   RadioButton,

@@ -13,7 +13,7 @@ const Header = () => {
         <div className={`${productStyles.wrapper} ${headerStyles.content}`}>
           <Logo showMark={true} showType={true} link={true} />
           <div className={headerStyles.actions}>
-            <LogStatusButton status={status} />
+            <LogStatusButton status={status} useLogIn={false} />
             <Button
               style={'outline'}
               content={'Get Started'}
