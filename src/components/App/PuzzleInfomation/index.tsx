@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
+import type { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
 import styles from './PuzzleInfomation.module.scss';
 
 const PuzzleInfomation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {

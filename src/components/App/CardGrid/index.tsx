@@ -3,7 +3,7 @@ import * as React from 'react';
 import { PuzzleCard } from '../../Global';
 
 import styles from './CardGrid.module.scss';
-import { CardProps } from '../../../types/cards';
+import type { CardProps } from '../../../types/cards';
 
 const CardGrid = ({ cardList }: { cardList: CardProps[] }) => {
   return (

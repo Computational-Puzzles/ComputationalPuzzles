@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RadioButton from '../RadioButton';
 import styles from './Filter.module.scss';
-import { FilterProps } from '../../../types/filter';
+import type { FilterProps } from '../../../types/filter';
 
 const Filter = ({ setFilterFields }: FilterProps) => {
   const [easyChecked, setEasyChecked] = useState(true);

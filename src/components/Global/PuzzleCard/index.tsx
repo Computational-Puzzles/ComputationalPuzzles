@@ -1,10 +1,9 @@
 import * as React from 'react';
 
-import { Button } from '../';
-import { Difficulty } from '../';
+import { Button, Difficulty } from '../';
 
 import styles from './PuzzleCard.module.scss';
-import { CardProps } from '../../../types/cards';
+import type { CardProps } from '../../../types/cards';
 
 const PuzzleCard = ({
   name,

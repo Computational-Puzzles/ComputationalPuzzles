@@ -3,7 +3,7 @@ import { Geocoder } from '@maptiler/geocoder';
 import { Button, Input } from '../../Global';
 
 import mapGeocoderStyles from './MapGeocoder.module.scss';
-import { MapAnchor } from '../../../types/map';
+import type { MapAnchor } from '../../../types/map';
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 

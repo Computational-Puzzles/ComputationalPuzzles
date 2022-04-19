@@ -1,6 +1,6 @@
-import { DIFFICULTY } from '../types/global';
+import { Difficulty } from "@prisma/client";
 
-const difficultySentenceCase = (difficulty: DIFFICULTY) => {
+const difficultySentenceCase = (difficulty: Difficulty) => {
   return difficulty.charAt(0).toUpperCase() + difficulty.slice(1).toLowerCase();
 };
 

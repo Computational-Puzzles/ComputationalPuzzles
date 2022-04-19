@@ -1,10 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Difficulty } from '@prisma/client';
 import type { Puzzle, PuzzleType } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 import seedData from './seed.json';
-import type { DIFFICULTY } from '../../src/types/global';
 
 const createPuzzleType = () => {
   const puzzleTypes = seedData.puzzleType;
@@ -19,7 +18,7 @@ const createPuzzleType = () => {
   );
 };
 
-const difficulties: DIFFICULTY[] = ['EASY', 'MEDIUM', 'HARD'];
+const difficulties: Difficulty[] = Object.values(Difficulty);
 
 const createPuzzle = (createdPuzzleTypes: PuzzleType[]) => {
   const puzzles = seedData.puzzle;
@@ -42,7 +41,7 @@ const createPuzzle = (createdPuzzleTypes: PuzzleType[]) => {
               id: puzzleType.id
             }
           },
-          difficulty: puzzle.difficulty as DIFFICULTY,
+          difficulty: puzzle.difficulty as Difficulty,
           content: puzzle.content,
           variables: puzzle.variables,
           question: puzzle.question,

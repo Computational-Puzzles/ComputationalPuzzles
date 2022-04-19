@@ -4,10 +4,10 @@ import styles from './Navbar.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Button, Logo, LogStatusButton } from '..';
-import { HeaderProps } from '../../../types/global';
-import { isAdmin } from '../../../services';
 import { useSession } from 'next-auth/react';
+import { Button, Logo, LogStatusButton } from '..';
+import type { HeaderProps } from '../../../types/global';
+import { isAdmin } from '../../../services';
 
 const Header = ({ profilePicture }: HeaderProps) => {
   const [activeTab, setActiveTab] = React.useState<0 | 1>(0);

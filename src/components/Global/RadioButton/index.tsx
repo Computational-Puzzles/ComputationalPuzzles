@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './RadioButton.module.scss';
 import { RadioButtonProps } from '../../../types/radioButton';
-import { DIFFICULTY } from '../../../types/global';
+import type { Difficulty } from '@prisma/client';
 
-const getLabelColor = (difficulty: DIFFICULTY) => {
+const getLabelColor = (difficulty: Difficulty) => {
   if (difficulty === 'EASY') return styles.easy;
   if (difficulty === 'MEDIUM') return styles.medium;
   if (difficulty === 'HARD') return styles.hard;

@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import { Button, Input } from '../../Global';
 import { LocationSearchModal } from '..';
 import { createPuzzleInstance } from '../../../services';
-import { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
+import type { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
 
 const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
   const [hint, setHint] = useState('');

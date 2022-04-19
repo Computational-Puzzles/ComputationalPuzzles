@@ -1,5 +1,5 @@
 import { handleServiceError } from '../../utils/error';
-import { HandledError } from '../../types/error';
+import type { HandledError } from '../../types/error';
 
 describe('HTTP response status', () => {
   it('is 400', () => {

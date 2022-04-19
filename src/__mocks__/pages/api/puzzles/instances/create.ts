@@ -1,8 +1,6 @@
 import * as faker from 'faker';
-import { DIFFICULTY } from '../../../../../types/global';
-import { getRandomNumberRange, getRandomString } from '../../../../getRandom';
-
 import { Difficulty } from '@prisma/client';
+import { getRandomNumberRange, getRandomString } from '../../../../getRandom';
 
 const DIFFICULTY_LIST = Object.values(Difficulty);
 
@@ -14,10 +12,10 @@ export const mockContent = (): string => {
   return faker.lorem.paragraph();
 };
 
-export const mockDifficulty = (): DIFFICULTY => {
+export const mockDifficulty = (): Difficulty => {
   return DIFFICULTY_LIST[
     Math.floor(Math.random() * DIFFICULTY_LIST.length)
-  ] as DIFFICULTY;
+  ] as Difficulty;
 };
 
 export const mockOfficialAnswer = (): string => {

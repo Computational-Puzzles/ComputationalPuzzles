@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Input.module.scss';
-import { InputProps } from '../../../types/global';
+import type { InputProps } from '../../../types/global';
 
 const Input = ({
   type,

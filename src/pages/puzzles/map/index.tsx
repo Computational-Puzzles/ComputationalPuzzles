@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import puzzleMapStyles from '../../../styles/pages/PuzzleMap.module.scss';
 import { Filter, Navbar } from '../../../components/Global';
 import { getAllPuzzleInstances } from '../../../services/puzzleInstance';
-import { PuzzleMapProps } from '../../../types/puzzle';
+import type { PuzzleMapProps } from '../../../types/puzzle';
 import type { MapAnchor, MapMarker } from '../../../types/map';
 
 const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
