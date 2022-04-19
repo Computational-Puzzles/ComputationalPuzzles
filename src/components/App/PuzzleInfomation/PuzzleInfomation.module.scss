@@ -1,6 +1,8 @@
 @import '../../../styles/abstracts/_mixins/text.scss';
 
 .contentWrap {
+  overflow: scroll;
+
   h3 {
     @include font-header;
     margin: 1rem 0;

@@ -18,8 +18,7 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
     <>
       <Header />
       {/** TODO: Create Header for admin page  */}
-      <h2 className={styles.adminTitle}> Admin Dashboard </h2>
-      <hr className={styles.adminHeaderSep} />
+      <h1 className={styles.adminTitle}>Admin Dashboard</h1>
       <div className={styles.contentWrap}>
         <div className={styles.contentLeftWrap}>
           <PuzzleGenerate
@@ -33,7 +32,7 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
           <DisplayPuzzleInstances puzzlesList={puzzlesList} />
         </div>
       </div>
-      <span className={styles.adminSeperator}></span>
+      <span className={styles.adminSeperator} />
     </>
   );
 };

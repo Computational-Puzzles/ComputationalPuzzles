@@ -1,5 +1,6 @@
-@import '../../../styles/abstracts/_mixins/text.scss';
+@import '../../../styles/abstracts/mixins';
 @import '../../../styles/abstracts/variables';
+
 .form {
   display: flex;
   flex-direction: column;
@@ -98,5 +99,9 @@
     padding: 2rem;
     background-color: $white;
     border-radius: 0.5rem;
+
+    @include mobile() {
+      width: 90%;
+    }
   }
 }

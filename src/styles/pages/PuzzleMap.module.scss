@@ -13,9 +13,17 @@
     flex: 1 1 auto;
     overflow-y: hidden;
 
+    @include mobile() {
+      flex-direction: column;
+    }
+
     .cardGridContainer {
       overflow-y: scroll;
       max-width: 35rem;
+
+      @include mobile() {
+        max-width: unset;
+      }
 
       .title {
         @include font-header-black;
@@ -29,29 +37,11 @@
         padding: 1rem 1.5rem;
         width: auto;
         border-left: $grey-transparency 1px solid;
+
+        @include mobile() {
+          width: 100vw;
+        }
       }
-    }
-  }
-}
-
-.subHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: $grey-transparency 1px solid;
-  padding: 1rem 1.5rem;
-
-  .leftContent {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-
-    h1 {
-      font-size: 2rem;
-      line-height: unset;
-      margin: 0;
     }
   }
 }

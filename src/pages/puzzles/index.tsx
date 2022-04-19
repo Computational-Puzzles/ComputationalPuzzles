@@ -22,8 +22,10 @@ const PuzzleList = () => {
   return (
     <>
       <Header />
-      <SearchAndFilter setSearchNFilterVal={setSearchNFilter} />
-
+      <SearchAndFilter
+        title={'Puzzle List'}
+        setSearchNFilterVal={setSearchNFilter}
+      />
       <div className={styles.cardGrid}>
         <CardGrid
           cardList={puzzleInstances

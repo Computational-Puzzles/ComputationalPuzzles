@@ -1,6 +1,12 @@
+@import '../../../styles/abstracts/mixins';
+
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
   grid-auto-flow: row dense;
   grid-gap: 1rem;
+
+  @include mobile() {
+    grid-template-columns: auto;
+  }
 }
