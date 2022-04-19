@@ -12,7 +12,7 @@ const getPuzzleInstanceHandler = async (
     verbose: string;
   };
 
-  const verboseBool = verbose.toLowerCase() === 'true'; // TODO: seems weak
+  const verboseBool = (/true/i).test(verbose.toLowerCase());
 
   if (!instanceId) {
     return res.status(400).json({
