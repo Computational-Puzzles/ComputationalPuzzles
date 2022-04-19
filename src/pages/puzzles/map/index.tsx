@@ -73,55 +73,59 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
         <Filter setFilterFields={setDifficultySelected} />
       </div>
       <div className={puzzleMapStyles.content}>
-        {puzzleInstances && <MapRenderer
-          markers={puzzleInstances
-            .filter(
-              instance =>
-                difficultySelected[instance.puzzle.difficulty] === true
-            )
-            .map(instance => {
-              return {
-                anchor: [instance.latitude, instance.longitude],
-                zoom: 16
-              };
-            })}
-          userMarker={userMarker}
-          mapCenter={mapCenter}
-          setMapCenter={setMapCenter}
-        />}
+        {puzzleInstances && (
+          <MapRenderer
+            markers={puzzleInstances
+              .filter(
+                instance =>
+                  difficultySelected[instance.puzzle.difficulty] === true
+              )
+              .map(instance => {
+                return {
+                  anchor: [instance.latitude, instance.longitude],
+                  zoom: 16
+                };
+              })}
+            userMarker={userMarker}
+            mapCenter={mapCenter}
+            setMapCenter={setMapCenter}
+          />
+        )}
         <div className={puzzleMapStyles.cardGridContainer}>
           <span className={puzzleMapStyles.title}>
             Nearest Puzzles From Map Center:
           </span>
           <div className={puzzleMapStyles.cardGrid}>
-            {puzzleInstances && <CardGrid
-              cardList={puzzleInstances
-                .filter(
-                  instance =>
-                    difficultySelected[instance.puzzle.difficulty] === true
-                )
-                .map((instance, index) => {
-                  return {
-                    ...instance.puzzle,
-                    content: [
-                      `Find at: ${instance.address}`,
-                      `Hint: ${instance.hint}`
-                    ],
-                    buttonActions: [
-                      {
-                        text: 'Solve Online',
-                        style: 'primary',
-                        link: `/puzzles/${instance.id}`
-                      },
-                      {
-                        text: 'View On Map',
-                        style: 'secondary',
-                        action: () => setMapCenterFromInstanceIndex(index)
-                      }
-                    ]
-                  };
-                })}
-            />}
+            {puzzleInstances && (
+              <CardGrid
+                cardList={puzzleInstances
+                  .filter(
+                    instance =>
+                      difficultySelected[instance.puzzle.difficulty] === true
+                  )
+                  .map((instance, index) => {
+                    return {
+                      ...instance.puzzle,
+                      content: [
+                        `Find at: ${instance.address}`,
+                        `Hint: ${instance.hint}`
+                      ],
+                      buttonActions: [
+                        {
+                          text: 'Solve Online',
+                          style: 'primary',
+                          link: `/puzzles/${instance.id}`
+                        },
+                        {
+                          text: 'View On Map',
+                          style: 'secondary',
+                          action: () => setMapCenterFromInstanceIndex(index)
+                        }
+                      ]
+                    };
+                  })}
+              />
+            )}
           </div>
         </div>
       </div>

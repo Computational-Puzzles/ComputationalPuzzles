@@ -1,6 +1,6 @@
-import { Button } from '../index';
 import { signIn, signOut } from 'next-auth/react';
 import React from 'react';
+import { Button } from '..';
 import type { LogStatusButtonProps } from '../../../types/logStatusButton';
 
 const LogStatusButton = ({ status, useLogIn }: LogStatusButtonProps) => {
