@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import type { User } from '@prisma/client';
 import * as faker from 'faker';
 import { prisma } from '../../..';
 

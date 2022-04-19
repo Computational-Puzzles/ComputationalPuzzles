@@ -2,8 +2,9 @@ import * as faker from 'faker';
 import { DIFFICULTY } from '../../../../../types/global';
 import { getRandomNumberRange, getRandomString } from '../../../../getRandom';
 
-// TODO: Ensure this list matches DB's configuration
-const DIFFICULTY_LIST = ['EASY', 'MEDIUM', 'HARD'];
+import { Difficulty } from '@prisma/client';
+
+const DIFFICULTY_LIST = Object.values(Difficulty);
 
 export const mockName = (): string => {
   return faker.random.word() + faker.random.word() + faker.random.word();

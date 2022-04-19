@@ -1,4 +1,4 @@
-import { Puzzle, PuzzleInstance, PuzzleType } from '@prisma/client';
+import type { Puzzle, PuzzleInstance, PuzzleType } from '@prisma/client';
 
 import { prisma } from '../../..';
 import {

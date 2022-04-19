@@ -1,4 +1,5 @@
-import { PrismaClient, Puzzle, PuzzleType } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import type { Puzzle, PuzzleType } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -68,7 +69,7 @@ const createPuzzleInstance = (createdPuzzles: Puzzle[]) => {
         hint: puzzleInstance.hint,
         longitude: parseFloat(puzzleInstance.longtitude),
         latitude: parseFloat(puzzleInstance.latitude),
-        address: puzzleInstance.address,
+        address: puzzleInstance.address
       }
     });
   });

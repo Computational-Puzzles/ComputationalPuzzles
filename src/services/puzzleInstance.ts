@@ -1,5 +1,5 @@
 import Axios from './axios';
-import { Puzzle, PuzzleInstance } from '@prisma/client';
+import type { Puzzle, PuzzleInstance } from '@prisma/client';
 import { User } from 'next-auth';
 import { puzzleSubmissionProps } from '../types/api/puzzles/submission';
 import { handleServiceError } from '../utils/error';

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { User } from '@prisma/client';
+import type { User } from '@prisma/client';
 import {
   mockEmail,
   mockPassword,
