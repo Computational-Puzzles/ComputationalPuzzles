@@ -1,16 +1,16 @@
-@import '../../../styles/abstracts/_mixins/text.scss';
+@import '../../../styles/abstracts/mixins';
+@import '../../../styles/abstracts/variables';
 
 .form {
   display: flex;
   flex-direction: column;
-  margin: 0 2rem;
-  gap: 1rem;
+  gap: 0.5rem;
 
   & > input {
     @include font-body;
   }
 
-  & > h2 {
+  & > h3 {
     margin: 0;
   }
 
@@ -24,16 +24,84 @@
     }
   }
 
-  .selections {
-    width: 50%;
-    height: 120%;
-    cursor: pointer;
-    @include font-body;
+  .selectionWrapper {
+    @include font-button;
+    color: $black;
+    display: inline-block;
+    overflow: hidden;
+    border: 2px solid #4b4b4b;
+    box-sizing: border-box;
+    border-radius: 999px;
+    width: 30rem;
+    flex: 1;
+    padding: 0.5rem 1rem;
+    position: relative;
+
+    .selections {
+      cursor: pointer;
+      font-size: 0.875rem;
+      width: 120%;
+      height: 120%;
+      outline: none;
+      border: 0;
+
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    &::after {
+      content: '▼';
+      font-size: 0.8rem;
+      pointer-events: none;
+      position: absolute;
+      right: 1rem;
+      top: 0.75rem;
+    }
+  }
+
+  .hintWrapper {
+    & > :first-child {
+      width: 30rem;
+    }
+  }
+
+  .addressWrapper {
+    & > :first-child {
+      width: 23rem;
+    }
+    display: flex;
+    gap: 1rem;
   }
 
   .qrCode {
     cursor: pointer;
     display: flex;
     justify-content: center;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($grey, 0.8);
+
+  .modal {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    margin-right: -50%;
+    padding: 2rem;
+    background-color: $white;
+    border-radius: 0.5rem;
+
+    @include mobile() {
+      width: 90%;
+    }
   }
 }

@@ -5,7 +5,7 @@ import { getSession, signIn, useSession } from 'next-auth/react';
 import { User } from 'next-auth';
 import { Prisma, Puzzle } from '@prisma/client';
 import toast from 'react-hot-toast';
-import { Button, Difficulty, Header } from '../../../components/Global';
+import { Button, Difficulty, Navbar } from '../../../components/Global';
 import { FeedbackGif, PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
 import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
@@ -93,7 +93,7 @@ const PuzzlePage = ({
 
   return (
     <>
-      <Header />
+      <Navbar />
       <main className={`${styles.wrapper} ${styles.cardSpacer}`}>
         <section>
           <div>

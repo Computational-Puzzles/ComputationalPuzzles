@@ -21,7 +21,7 @@ const signUpHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!password || !email)
       res.status(400).json({ error: 'Missing email or password' });
     else {
-      const hashPassword = hashFunction(password);
+      const hashPassword = await hashFunction(password);
       const user = await signUp({ email, password: hashPassword });
       res.status(201).json(user);
     }
