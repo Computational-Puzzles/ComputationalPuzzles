@@ -10,6 +10,7 @@ import LogStatusButton from './LogStatusButton';
 import SearchAndFilter from './SearchAndFilter';
 import Difficulty from './Difficulty';
 import Loading from './Loading';
+import Sidebar from './Sidebar';
 
 export {
   Button,
@@ -23,5 +24,6 @@ export {
   LogStatusButton,
   SearchAndFilter,
   Difficulty,
-  Loading
+  Loading,
+  Sidebar
 };

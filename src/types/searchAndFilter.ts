@@ -1,5 +1,16 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, ReactElement, SetStateAction } from 'react';
 
 export type SearchAndFilterProps = {
-  setSearchNFilterVal?: Dispatch<SetStateAction<object>>;
+  title: string;
+  searchElement?: ReactElement;
+  setSearchNFilterVal?: Dispatch<
+    SetStateAction<{
+      searchText: string;
+      filterFields: {
+        EASY: boolean;
+        MEDIUM: boolean;
+        HARD: boolean;
+      };
+    }>
+  >;
 };

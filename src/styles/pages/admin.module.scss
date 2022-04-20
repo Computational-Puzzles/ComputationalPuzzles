@@ -1,34 +1,38 @@
 @import '../abstracts/variables';
+@import '../abstracts/mixins';
 
 .adminTitle {
-  padding: 0.5rem 3rem;
+  padding: 1rem 1.5rem;
+  font-size: 2rem;
+  line-height: unset;
   margin: 0;
-  background-color: $white;
-}
-
-.adminHeaderSep {
-  margin: 0;
-  margin-bottom: 1rem;
+  border-bottom: $grey-transparency 1px solid;
 }
 
 .contentWrap {
   display: grid;
   grid-template-columns: 5fr 3fr;
 
+  @include tablet() {
+    grid-template-columns: auto;
+  }
+
+  & > * {
+    border-left: $grey-transparency 1px solid;
+    padding: 1rem 1.5rem;
+
+    @include tablet() {
+      border-left: none;
+    }
+  }
+
+  &:first-child {
+    border-left: none;
+  }
+
   .contentLeftWrap {
     display: flex;
     flex-direction: column;
-    padding: 0 3rem;
     gap: 3rem;
-    margin-right: 5rem;
   }
-}
-
-.adminSeperator {
-  height: 100%;
-  border-left: 1px solid $grey-border;
-  position: absolute;
-  top: 0;
-  left: calc(100% / (5 + 3) * 5 - 2%);
-  z-index: -1;
 }
