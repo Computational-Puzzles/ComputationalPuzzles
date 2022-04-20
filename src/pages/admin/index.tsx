@@ -9,7 +9,7 @@ import {
 } from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
 import { GetServerSideProps } from 'next';
-import { Header } from '../../components/Global';
+import { AdminHeader, Header } from '../../components/Global';
 import type { PuzzleCustom } from '../../types/api/puzzles/puzzle';
 
 const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
@@ -17,7 +17,7 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
   return (
     <>
       <Header />
-      {/** TODO: Create Header for admin page  */}
+      <AdminHeader />
       <h1 className={styles.adminTitle}>Admin Dashboard</h1>
       <div className={styles.contentWrap}>
         <div className={styles.contentLeftWrap}>
