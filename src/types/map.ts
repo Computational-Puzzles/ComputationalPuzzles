@@ -12,4 +12,6 @@ export type MapRendererProps = {
   userMarker: MapMarker;
   mapCenter: MapAnchor;
   setMapCenter: Dispatch<SetStateAction<MapAnchor>>;
+  tempMarker?: MapMarker;
+  setTempMarker?: Dispatch<SetStateAction<MapMarker>>;
 };

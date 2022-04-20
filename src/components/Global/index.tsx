@@ -3,19 +3,20 @@ import Button from './Button';
 import RadioButton from './RadioButton';
 import Filter from './Filter';
 import Input from './Input';
-import Header from './Header';
-import Card from './Card';
+import Navbar from './Navbar';
+import PuzzleCard from './PuzzleCard';
 import ErrorDisplay from './ErrorDisplay';
 import LogStatusButton from './LogStatusButton';
 import SearchAndFilter from './SearchAndFilter';
 import Difficulty from './Difficulty';
 import Loading from './Loading';
 import AdminHeader from './AdminHeader';
+import Sidebar from './Sidebar';
 
 export {
   Button,
-  Card,
-  Header,
+  PuzzleCard,
+  Navbar,
   Logo,
   Input,
   RadioButton,
@@ -26,4 +27,5 @@ export {
   Difficulty,
   Loading,
   AdminHeader
+  Sidebar
 };

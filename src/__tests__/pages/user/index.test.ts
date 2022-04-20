@@ -1,14 +1,12 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   mockEmail,
   mockPassword
 } from '../../../__mocks__/pages/api/auth/index';
-
 import usersHandler from '../../../pages/api/user';
+import { prisma } from '../../../__mocks__';
 
-const prisma = new PrismaClient();
 const { createUser } = PrismaAdapter(prisma);
 let email: string;
 

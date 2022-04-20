@@ -16,18 +16,18 @@
   display: inline-block;
   padding: 0.625rem 1.25rem;
   margin: 0;
-  border: 0.125rem solid;
-  border-radius: 0.625rem;
+  outline: 0.125rem solid transparent;
+  border-radius: 0.4em;
   text-align: center;
   cursor: pointer;
 
   &:hover {
-    border-color: $black;
+    outline-color: $black;
   }
 
   input[type='checkbox']:checked + & {
     &:hover {
-      border-color: $black;
+      outline-color: $black;
     }
   }
 }

@@ -43,7 +43,7 @@ const Auth = NextAuth({
 
         if (!user) return null;
 
-        const isPasswordCorrect = checkHash(
+        const isPasswordCorrect = await checkHash(
           credentials.password,
           user.password as string
         );

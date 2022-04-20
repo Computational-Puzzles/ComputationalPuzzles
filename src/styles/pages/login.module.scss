@@ -1,5 +1,5 @@
 @import 'src/styles/abstracts/_variables';
-@import 'src/styles/abstracts/_mixins/text';
+@import 'src/styles/abstracts/_mixins';
 
 .login {
   display: flex;
@@ -20,6 +20,11 @@
   flex-direction: column;
   gap: 1rem;
   width: 20rem;
+  padding: 1rem;
+
+  @include mobile() {
+    width: 100%;
+  }
 
   .link {
     font-size: 0.8rem;
@@ -40,6 +45,7 @@
 
     button {
       width: 100%;
+
       div {
         justify-content: center;
       }

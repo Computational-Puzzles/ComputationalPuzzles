@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Header, SearchAndFilter } from '../../components/Global';
+import { Navbar, SearchAndFilter } from '../../components/Global';
 import { CardGrid } from '../../components/App';
 import styles from '../../styles/pages/PuzzleList.module.scss';
 import { usePuzzleInstances } from '../../hooks/usePuzzleInstances';
@@ -21,9 +21,11 @@ const PuzzleList = () => {
 
   return (
     <>
-      <Header />
-      <SearchAndFilter setSearchNFilterVal={setSearchNFilter} />
-
+      <Navbar />
+      <SearchAndFilter
+        title={'Puzzle List'}
+        setSearchNFilterVal={setSearchNFilter}
+      />
       <div className={styles.cardGrid}>
         <CardGrid
           cardList={puzzleInstances

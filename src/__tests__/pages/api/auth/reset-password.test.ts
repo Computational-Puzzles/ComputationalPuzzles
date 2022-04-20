@@ -9,7 +9,6 @@ import {
 import resetPasswordHandler from '../../../../pages/api/auth/reset-password';
 import { hashFunction } from '../../../../utils/password';
 import { resetPasswordProps } from '../../../../types/api/auth/reset-password';
-
 import { prisma } from '../../../../__mocks__';
 
 let email: string, password: string;
@@ -23,7 +22,7 @@ beforeEach(async () => {
 
   await createUser({
     email,
-    password: hashFunction(password)
+    password: await hashFunction(password)
   });
 });
 
@@ -79,7 +78,7 @@ describe('/api/auth/reset-password: Succeeded', () => {
     ).password;
 
     expect(hashPassword).not.toEqual(currentPassword);
-    expect(hashFunction(newPassword)).toEqual(currentPassword);
+    expect(await hashFunction(newPassword)).not.toEqual(currentPassword);
   });
 });
 

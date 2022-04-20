@@ -2,12 +2,42 @@ import * as React from 'react';
 import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
-import { PuzzleGenerate } from '../../components/App';
+import {
+  DisplayPuzzleInstances,
+  PuzzleGenerate,
+  PuzzleInfomation
+} from '../../components/App';
 import { getAllPuzzles, isAdmin } from '../../services';
 import { GetServerSideProps } from 'next';
 import { AdminHeader, Header } from '../../components/Global';
+import type { PuzzleCustom } from '../../types/api/puzzles/puzzle';
 
-const Admin = ({ puzzlesList }) => {
+const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  return (
+    <>
+      <Header />
+      <AdminHeader />
+      <h1 className={styles.adminTitle}>Admin Dashboard</h1>
+      <div className={styles.contentWrap}>
+        <div className={styles.contentLeftWrap}>
+          <PuzzleGenerate
+            puzzlesList={puzzlesList}
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
+          />
+          <PuzzleInfomation puzzlesList={puzzlesList} />
+        </div>
+        <div>
+          <DisplayPuzzleInstances puzzlesList={puzzlesList} />
+        </div>
+      </div>
+      <span className={styles.adminSeperator} />
+    </>
+  );
+};
+
+const AdminValidation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
   const { data: session, status } = useSession();
   const [validAdmin, setValidAdmin] = React.useState(null);
 
@@ -20,7 +50,7 @@ const Admin = ({ puzzlesList }) => {
   const email = session?.user?.email;
   React.useEffect(() => {
     const checkAdmin = async () => {
-      setValidAdmin(await isAdmin(email));
+      setValidAdmin(await isAdmin({ email }));
     };
     email && checkAdmin();
   }, [email]);
@@ -31,17 +61,7 @@ const Admin = ({ puzzlesList }) => {
 
   if (status === 'authenticated') {
     if (validAdmin) {
-      return (
-        <>
-          <Header />
-          <AdminHeader />
-          <h1> ADMIN PAGE 🤓 </h1>
-          {/** TODO: Create Header for admin page  */}
-          <div className={styles.contentWrap}>
-            <PuzzleGenerate puzzlesList={puzzlesList} />
-          </div>
-        </>
-      );
+      return <Admin puzzlesList={puzzlesList} />;
     } else {
       validAdmin === false && Router.push('/403');
     } // This will need adjustment since it's just a prototype
@@ -65,4 +85,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
   };
 };
 
-export default Admin;
+export default AdminValidation;

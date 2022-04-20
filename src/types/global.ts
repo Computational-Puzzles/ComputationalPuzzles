@@ -13,12 +13,15 @@ export type LogoProps = {
 };
 
 export type InputProps = {
-  type: 'text' | 'password' | 'email';
+  type: 'text' | 'password' | 'email' | 'number';
   id: string;
   required: boolean;
   placeholder?: string;
   maxLength?: number;
   minLength?: number;
   labelText?: string;
+  value?: string;
   setInputVal?: Dispatch<SetStateAction<string>>;
+  disabled?: boolean;
+  onClick?: () => void;
 };

@@ -1,5 +1,38 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+.adminTitle {
+  padding: 1rem 1.5rem;
+  font-size: 2rem;
+  line-height: unset;
+  margin: 0;
+  border-bottom: $grey-transparency 1px solid;
+}
+
 .contentWrap {
-  display: flex;
-  padding: 0 3rem;
-  gap: 5rem;
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+
+  @include tablet() {
+    grid-template-columns: auto;
+  }
+
+  & > * {
+    border-left: $grey-transparency 1px solid;
+    padding: 1rem 1.5rem;
+
+    @include tablet() {
+      border-left: none;
+    }
+  }
+
+  &:first-child {
+    border-left: none;
+  }
+
+  .contentLeftWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
 }

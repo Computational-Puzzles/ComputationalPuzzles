@@ -10,6 +10,8 @@ import {
   mockLatitude,
   mockLongtitude,
   mockName,
+  mockOfficialAnswer,
+  mockOptionsNoAns,
   mockQuestion
 } from './instances/create';
 
@@ -54,7 +56,50 @@ export const mockPuzzle = (): Promise<Puzzle> => {
       difficulty: mockDifficulty(),
       content: [mockContent(), mockContent(), mockContent()],
       question: mockQuestion(),
-      variables: {}, // Not sure what to put here
+      variables: {},
+      isGenerated: mockBoolean(),
+      puzzleType: {
+        create: {
+          name: mockName()
+        }
+      }
+    }
+  });
+};
+
+export const mockMCQPuzzle = (): Promise<Puzzle> => {
+  const ans = mockOfficialAnswer();
+  return prisma.puzzle.create({
+    data: {
+      name: mockName(),
+      difficulty: mockDifficulty(),
+      content: [mockContent(), mockContent(), mockContent()],
+      question: mockQuestion(),
+      variables: {
+        answer: ans,
+        options: mockOptionsNoAns().push(ans)
+      },
+      isGenerated: mockBoolean(),
+      puzzleType: {
+        create: {
+          name: mockName()
+        }
+      }
+    }
+  });
+};
+
+export const mockTxtPuzzle = (): Promise<Puzzle> => {
+  return prisma.puzzle.create({
+    data: {
+      name: mockName(),
+      difficulty: mockDifficulty(),
+      content: [mockContent(), mockContent(), mockContent()],
+      question: mockQuestion(),
+      variables: {
+        answer: mockOfficialAnswer(),
+        options: []
+      },
       isGenerated: mockBoolean(),
       puzzleType: {
         create: {
