@@ -17,6 +17,7 @@ export default function LoginPage({ providers, csrfToken }) {
   const loginWithGoogle = () => {
     signIn('google').then(r => {
       // TODO: save session into db (?)
+      console.log(r);
       console.log('Signed in with Google');
     });
   };
@@ -53,7 +54,7 @@ export default function LoginPage({ providers, csrfToken }) {
             style={'primary'}
             content={'Log In'}
             type={'submit'}
-            onClick={() => {}}
+            onClick={() => { }}
           />
           <Button
             style={'secondary'}

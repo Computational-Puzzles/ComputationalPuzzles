@@ -48,7 +48,7 @@ const Header = ({ profilePicture }: HeaderProps) => {
       </div>
       {status !== 'authenticated' ? (
         <div className={styles.right}>
-          <LogStatusButton status={status} />
+          <LogStatusButton status={status} useLogIn={false} />
         </div>
       ) : (
         <div className={styles.right}>

@@ -1,8 +1,8 @@
-import { DIFFICULTY } from './global';
+import { Difficulty } from '@prisma/client';
 
 export type RadioButtonProps = {
   id: string;
   name: string;
-  difficulty: DIFFICULTY;
+  difficulty: Difficulty;
   onClick?: () => void;
 };
