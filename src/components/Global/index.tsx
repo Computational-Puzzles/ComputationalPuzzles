@@ -26,6 +26,6 @@ export {
   SearchAndFilter,
   Difficulty,
   Loading,
-  AdminHeader
+  AdminHeader,
   Sidebar
 };
