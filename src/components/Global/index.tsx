@@ -10,6 +10,7 @@ import LogStatusButton from './LogStatusButton';
 import SearchAndFilter from './SearchAndFilter';
 import Difficulty from './Difficulty';
 import Loading from './Loading';
+import AdminHeader from './AdminHeader';
 import Sidebar from './Sidebar';
 
 export {
@@ -25,5 +26,6 @@ export {
   SearchAndFilter,
   Difficulty,
   Loading,
+  AdminHeader
   Sidebar
 };
