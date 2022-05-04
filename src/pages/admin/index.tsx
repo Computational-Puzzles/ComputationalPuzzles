@@ -10,6 +10,11 @@ import {
 } from '../../components/App';
 import { Header } from '../../components/Product';
 import { getAllPuzzles, isAdmin } from '../../services';
+<<<<<<< HEAD
+=======
+import { GetServerSideProps } from 'next';
+import { Header } from '../../components/Product';
+>>>>>>> 305437f5d49daf9395796d4b8ed7cd98993371b8
 import type { PuzzleCustom } from '../../types/api/puzzles/puzzle';
 
 const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
