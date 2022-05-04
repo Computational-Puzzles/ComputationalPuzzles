@@ -18,15 +18,17 @@ services:
         SENDGRID_SENDER: ${SENDGRID_SENDER}
     env_file: .env.production
     image: computational_puzzles
+    volumes:
+      - ./:/app
     ports:
       - "3000:3000"
-    volumes:
-      - app:/app
     depends_on:
       - db
     networks:
       - app_network
-  
+    links:
+      - db:db
+
   db:
     image: postgres:9.6
     volumes:
@@ -42,7 +44,6 @@ services:
       - app_network
 
 volumes:
-  app:
   db_data:
 
 networks:

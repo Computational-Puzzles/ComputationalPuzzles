@@ -5,38 +5,37 @@ import styles from './PuzzleInfomation.module.scss';
 import { getAllPuzzleInstances, getAllSubmissions } from '../../../services';
 
 const PuzzleInfomation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
-  const allPuzzleInstances = React.useRef<PuzzleInstance[]>([]);
-  const allSubmissions = React.useRef<Submission[]>([]);
+  const [puzzleInstances, setPuzzleInstances] = React.useState<PuzzleInstance[]>([]);
+  const [submissions, setSubmissions] = React.useState<Submission[]>([]);
 
   // TODO: apply SWR
   React.useEffect(() => {
     getAllPuzzleInstances().then((res: PuzzleInstance[]) => {
-      allPuzzleInstances.current = res;
+      setPuzzleInstances(res);
     });
     getAllSubmissions().then((res: Submission[]) => {
-      allSubmissions.current = res;
+      setSubmissions(res);
     });
   }, []);
 
 
   const calculateSuccessRate = (puzzle: PuzzleCustom) => {
     const puzzleId = puzzle.id;
-    const puzzleAnswer = puzzle.variables['answer'];
-    const puzzleInstances = allPuzzleInstances.current;
-    const submissions = allSubmissions.current;
+    console.log(puzzle, puzzleInstances, submissions)
 
-    const filteredPuzzleInstances = puzzleInstances.filter((instance) => instance.puzzleId === puzzleId);
+    const filteredPuzzleInstances = puzzleInstances ? puzzleInstances.filter((instance) => instance.puzzleId === puzzleId) : [];
     let countSuccess = 0;
     let totalLength = 0;
-    filteredPuzzleInstances.forEach((puzzleInstance) => {
-      const filteredSubmissions = submissions.filter((submission) => submission.puzzleInstanceId === puzzleInstance.id);
+    filteredPuzzleInstances && filteredPuzzleInstances.forEach((puzzleInstance) => {
+      const filteredSubmissions = submissions ? submissions.filter((submission) => submission.puzzleInstanceId === puzzleInstance.id) : [];
+      console.log(puzzle.name, filteredSubmissions);
       totalLength += filteredSubmissions.length;
-      countSuccess += filteredSubmissions.filter((submission) => submission.isCorrect).length;
+      countSuccess += filteredSubmissions.reduce((a, b) => a + b.isCorrect.reduce((a, b) => a + (b ? 1 : 0), 0), 0);
     });
     if (totalLength === 0) {
       return 'No submission recorded';
     }
-    return `${countSuccess / totalLength}`;
+    return `${(countSuccess / totalLength) * 100}%`;
   }
 
   return (
@@ -51,7 +50,7 @@ const PuzzleInfomation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
       </div>
       <hr />
       <div className={styles.tableBody}>
-        {puzzlesList.map(puzzle => (
+        {puzzlesList && puzzlesList.map(puzzle => (
           <div className={styles.tableRow} key={puzzle.id}>
             <div>{puzzle.name}</div>
             <div>{puzzle.difficulty}</div>

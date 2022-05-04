@@ -8,8 +8,8 @@ const listAllSubmissions = async (
   res: NextApiResponse
 ) => {
   try {
-    const puzzles = await prisma.submission.findMany();
-    return res.status(200).json(puzzles);
+    const submissions = await prisma.submission.findMany();
+    return res.status(200).json(submissions);
   } catch (error) {
     return res.status(500).json({
       message: error.message

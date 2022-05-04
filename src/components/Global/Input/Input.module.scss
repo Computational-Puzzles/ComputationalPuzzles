@@ -4,6 +4,7 @@
 .container {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .label {
   box-sizing: border-box;
@@ -13,7 +14,6 @@
   @include font-button;
   color: $black;
   font-size: 0.875rem;
-  width: 100%;
   padding: 0.5rem 1rem;
   border: 2px solid $grey;
   box-sizing: border-box;

@@ -5,7 +5,8 @@ export const getAllSubmissions = async () => {
   try {
     const res = await Axios.get(`api/submissions`);
     if (res.status === 200) {
-      return res.data.puzzleInstances;
+      console.log('api', res);
+      return res.data;
     }
   } catch (error) {
     return handleServiceError(

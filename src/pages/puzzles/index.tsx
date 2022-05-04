@@ -22,16 +22,17 @@ const PuzzleList = () => {
   return (
     <>
       <Navbar />
-      <SearchAndFilter setSearchNFilterVal={setSearchNFilter} />
-
+      <SearchAndFilter
+        title={'Puzzle List'}
+        setSearchNFilterVal={setSearchNFilter}
+      />
       <div className={styles.cardGrid}>
-        <CardGrid
+        {puzzleInstances && <CardGrid
           cardList={puzzleInstances
             .filter(instance => {
               if (searchNFilter.searchText) {
                 return (
-                  searchNFilter.filterFields[instance.puzzle.difficulty] ===
-                    true &&
+                  searchNFilter.filterFields[instance.puzzle.difficulty] &&
                   instance.puzzle.name
                     .toLowerCase()
                     .includes(searchNFilter.searchText.toLowerCase())
@@ -61,7 +62,7 @@ const PuzzleList = () => {
                 ]
               };
             })}
-        />
+        />}
       </div>
     </>
   );

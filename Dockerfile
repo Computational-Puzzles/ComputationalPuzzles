@@ -15,7 +15,7 @@ ARG SENDGRID_SENDER
 
 COPY package*.json .
 RUN npm ci --production
-RUN npm i --save-dev typescript postcss ts-node
+RUN npm i --save-dev typescript postcss ts-node sharp
 COPY . .
 RUN npm run db:generate
 RUN npm run build

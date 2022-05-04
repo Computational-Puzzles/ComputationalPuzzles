@@ -27,7 +27,7 @@ const ProfilePage = () => {
   const [confirmPass, setConfirmPass] = useState('');
 
   useEffect(() => {
-    if (!session) return;
+    if (!session || !session.user) return;
     setUsername(session.user.name);
     setUserImg(session.user.image);
     setUserEmail(session.user.email);
@@ -42,6 +42,7 @@ const ProfilePage = () => {
   useEffect(() => {
     getUserByEmail({ email: userEmail })
       .then(user => {
+        if (!user) return;
         if (user?.password) setHasPassword(true);
         if (user.name) setUsername(user.name);
       })
@@ -102,22 +103,22 @@ const ProfilePage = () => {
   return (
     <div className={styles.profileWrapper}>
       <Header />
-      <h2>{username || userEmail}</h2>
-      <hr />
+      <h1>Profile</h1>
       {status === 'authenticated' && (
         <div className={styles.profileDetailsWrapper}>
-          <h3>Info</h3>
+          <h2>Details</h2>
           <div className={styles.profileDetails}>
             {userImg ? (
               <Image
                 alt="profile image"
                 loader={() => userImg}
                 src={userImg}
-                width={200}
-                height={200}
+                width={100}
+                height={100}
+                layout={'fixed'}
               />
             ) : (
-              <div className={styles.imgPlaceholder}></div>
+              <div className={styles.imgPlaceholder} />
             )}
             <div className={styles.profileDetailsText}>
               <div className={styles.profileDetailsInfo}>
