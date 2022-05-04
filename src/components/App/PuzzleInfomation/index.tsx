@@ -33,8 +33,8 @@ const PuzzleInfomation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
       filteredPuzzleInstances.forEach(puzzleInstance => {
         const filteredSubmissions = submissions
           ? submissions.filter(
-              submission => submission.puzzleInstanceId === puzzleInstance.id
-            )
+            submission => submission.puzzleInstanceId === puzzleInstance.id
+          )
           : [];
         console.log(puzzle.name, filteredSubmissions);
         totalLength += filteredSubmissions.length;
@@ -46,7 +46,7 @@ const PuzzleInfomation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
     if (totalLength === 0) {
       return 'No submission recorded';
     }
-    return `${(countSuccess / totalLength) * 100}%`;
+    return `${Math.round((countSuccess / totalLength) * 10000) / 100}%`; // Rounding float to 2 decimal place
   };
 
   return (

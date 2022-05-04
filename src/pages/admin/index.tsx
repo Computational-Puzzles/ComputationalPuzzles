@@ -19,7 +19,6 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
     <>
       <Header />
       <AdminHeader />
-      <h1 className={styles.adminTitle}>Admin Dashboard</h1>
       <div className={styles.contentWrap}>
         <div className={styles.contentLeftWrap}>
           <PuzzleGenerate

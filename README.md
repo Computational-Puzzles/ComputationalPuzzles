@@ -34,9 +34,23 @@ npx prisma studio
 ```
 
 ## Start production server
+Create a file named `.env.production`:
+```
+NODE_ENV=production
+
+DATABASE_URL=postgresql://computational_puzzles:computational_puzzles@db:5432/mydb?schema=public&connect_timeout=300
+GOOGLE_CLIENT_ID=10889722286-8uek1esq4uicv31an6tehi60c7ev5lvp.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+SECRET=secret
+AUTH_SECRET=secret
+AUTH_URL=http://localhost:3000
+
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN=uTyRuREEmko5kblSVwhb
+```
+Then, run the following command
 ```bash
-docker-compose build
-docker-compose up
+docker-compose up -- build
 ```
 
 ## For testing
