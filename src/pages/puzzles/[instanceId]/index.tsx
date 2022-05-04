@@ -172,23 +172,25 @@ const PuzzlePage = ({
               setAnswer={setAnswer}
             />
           </div>
-          {isAuthenticated ? (
-            <Button
-              style={'primary'}
-              type={'submit'}
-              content={'Submit'}
-              onClick={() =>
-                handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
-              }
-            />
-          ) : (
-            <Button
-              style={'primary'}
-              content={'Login to Submit'}
-              arrowDirection={'right'}
-              onClick={() => signIn()}
-            />
-          )}
+          <div>
+            {isAuthenticated ? (
+              <Button
+                style={'primary'}
+                type={'submit'}
+                content={'Submit'}
+                onClick={() =>
+                  handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
+                }
+              />
+            ) : (
+              <Button
+                style={'primary'}
+                content={'Login to Submit'}
+                arrowDirection={'right'}
+                onClick={() => signIn()}
+              />
+            )}
+          </div>
         </section>
       </main>
     </>
