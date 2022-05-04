@@ -1,4 +1,4 @@
-import { Puzzle, PuzzleType } from '@prisma/client';
+import type { Puzzle, PuzzleType } from '@prisma/client';
 
 export type PuzzleCustom = Puzzle & {
   puzzleType?: PuzzleType;

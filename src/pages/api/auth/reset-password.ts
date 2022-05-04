@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { checkHash, hashFunction } from '../../../utils/password';
-import { resetPasswordProps } from '../../../types/api/auth/reset-password';
+import type { resetPasswordProps } from '../../../types/api/auth/reset-password';
 
 const prisma = new PrismaClient();
 

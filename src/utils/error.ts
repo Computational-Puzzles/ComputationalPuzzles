@@ -1,4 +1,4 @@
-import { HandledError } from '../types/error';
+import type { HandledError } from '../types/error';
 
 const handleServiceError = (status, message?) => {
   if (status === 400) {

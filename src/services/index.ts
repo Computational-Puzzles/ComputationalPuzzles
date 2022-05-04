@@ -1,25 +1,13 @@
-import { signUp } from './signup';
-import { resetPassword } from './resetPassword';
-import { getAllPuzzles } from './puzzle';
-import {
+export { signUp } from './signup';
+export { resetPassword } from './resetPassword';
+export { getAllPuzzles } from './puzzle';
+export {
   getAllPuzzleInstances,
   getPuzzleInstance,
   createPuzzleInstance,
   submitPuzzleInstance
 } from './puzzleInstance';
-import { isAdmin } from './admin';
-import { getUserByEmail } from './getUserByEmail';
-import { updateUsername } from './updateUsername';
-
-export {
-  signUp,
-  resetPassword,
-  getAllPuzzles,
-  getAllPuzzleInstances,
-  getPuzzleInstance,
-  createPuzzleInstance,
-  submitPuzzleInstance,
-  isAdmin,
-  getUserByEmail,
-  updateUsername
-};
+export { isAdmin } from './admin';
+export { getUserByEmail } from './getUserByEmail';
+export { updateUsername } from './updateUsername';
+export { getAllSubmissions } from './submissions';

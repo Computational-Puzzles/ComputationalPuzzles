@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import { Button, Input } from '../../Global';
 import { LocationSearchModal } from '..';
 import { createPuzzleInstance } from '../../../services';
-import { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
+import type { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
 
 const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
   const [hint, setHint] = useState('');
@@ -42,7 +42,7 @@ const PuzzleGenerate = ({ puzzlesList, modalIsOpen, setModalIsOpen }) => {
       <div className={styles.form}>
         <h3> Set New Puzzle Location </h3>
         <div className={styles.selectionWrapper}>
-          {puzzlesList.length > 0 ? (
+          {puzzlesList ? (
             <select
               className={styles.selections}
               value={puzzleId}

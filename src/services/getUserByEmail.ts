@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import type { User } from '@prisma/client';
 import Axios from './axios';
 
 export const getUserByEmail = async (data: {

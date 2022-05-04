@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import styles from './DisplayPuzzleInstances.module.scss';
-import { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
+import type { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
 import { getAllPuzzleInstances } from '../../../services';
-import { PuzzleInstance } from '@prisma/client';
+import type { PuzzleInstance } from '@prisma/client';
 import { Button } from '../../Global';
 import { QRGenerator } from '../../App';
 import toast from 'react-hot-toast';

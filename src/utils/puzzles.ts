@@ -1,4 +1,4 @@
-import { Puzzle } from '@prisma/client';
+import type { Puzzle } from '@prisma/client';
 
 const checkPuzzleAnswer = (
   puzzle: Puzzle,

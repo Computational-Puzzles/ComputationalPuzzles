@@ -2,14 +2,14 @@ import * as React from 'react';
 import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
 import {
   DisplayPuzzleInstances,
   PuzzleGenerate,
   PuzzleInfomation
 } from '../../components/App';
+import { Header } from '../../components/Product';
 import { getAllPuzzles, isAdmin } from '../../services';
-import { GetServerSideProps } from 'next';
-import { Header } from '../../components/Global';
 import type { PuzzleCustom } from '../../types/api/puzzles/puzzle';
 
 const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {

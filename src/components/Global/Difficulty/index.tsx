@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DIFFICULTY } from '../../../types/global';
+import type { Difficulty as DIFFICULTY } from '@prisma/client';
 import { difficultySentenceCase } from '../../../utils/difficulty';
 import styles from './Difficulty.module.scss';
 

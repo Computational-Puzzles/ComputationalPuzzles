@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Filter, Input } from '../index';
 import styles from './SearchAndFilter.module.scss';
-import { SearchAndFilterProps } from '../../../types/searchAndFilter';
+import type { SearchAndFilterProps } from '../../../types/searchAndFilter';
 
 const SearchAndFilter = ({
   title,

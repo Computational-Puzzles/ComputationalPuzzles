@@ -9,7 +9,8 @@ import {
   getUserByEmail,
   updateUsername
 } from '../../../services';
-import { Header, Input, Button } from '../../../components/Global';
+import { Input, Button } from '../../../components/Global';
+import { Header } from '../../../components/Product';
 import styles from '../../../styles/pages/profile.module.scss';
 
 const ProfilePage = () => {
@@ -26,7 +27,7 @@ const ProfilePage = () => {
   const [confirmPass, setConfirmPass] = useState('');
 
   useEffect(() => {
-    if (!session) return;
+    if (!session || !session.user) return;
     setUsername(session.user.name);
     setUserImg(session.user.image);
     setUserEmail(session.user.email);
@@ -41,6 +42,7 @@ const ProfilePage = () => {
   useEffect(() => {
     getUserByEmail({ email: userEmail })
       .then(user => {
+        if (!user) return;
         if (user?.password) setHasPassword(true);
         if (user.name) setUsername(user.name);
       })

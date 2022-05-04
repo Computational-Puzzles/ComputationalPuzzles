@@ -2,7 +2,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { hashFunction } from '../../../utils/password';
-import { signUpData } from '../../../types/api/auth/sign-up';
+import type { signUpData } from '../../../types/api/auth/sign-up';
 
 const prisma = new PrismaClient();
 
