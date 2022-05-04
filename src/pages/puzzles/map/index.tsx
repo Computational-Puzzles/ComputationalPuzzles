@@ -67,9 +67,9 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
   const filteredPuzzleInstances = useMemo(() => {
     return puzzleInstances
       ? puzzleInstances.filter(
-        instance =>
-          searchNFilter.filterFields[instance.puzzle.difficulty] === true
-      )
+          instance =>
+            searchNFilter.filterFields[instance.puzzle.difficulty] === true
+        )
       : [];
   }, [puzzleInstances, searchNFilter.filterFields]);
 
@@ -121,10 +121,10 @@ const PuzzleMap = ({ puzzleInstances }: PuzzleMapProps) => {
                 };
               })}
             />
-          </div >
-        </div >
-      </div >
-    </main >
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 

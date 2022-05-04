@@ -57,7 +57,9 @@ const Header = ({ profilePicture }: HeaderProps) => {
             </div>
           ) : (
             <>
-              {validAdmin && <Button style={'flat'} content={'Admin'} link={'/admin'} />}
+              {validAdmin && (
+                <Button style={'flat'} content={'Admin'} link={'/admin'} />
+              )}
               <Button
                 style={'outline'}
                 content={'Profile'}
@@ -100,12 +102,12 @@ const Header = ({ profilePicture }: HeaderProps) => {
             d="M4 6h16M4 12h16M4 18h16"
           />
         </svg>
-      </button >
+      </button>
       <Sidebar sidebarOpen={menuOpen} setSidebarOpen={setMenuOpen}>
         <Logo showMark={true} showType={false} link={true} />
         {NavContent(true)}
       </Sidebar>
-    </div >
+    </div>
   );
 };
 

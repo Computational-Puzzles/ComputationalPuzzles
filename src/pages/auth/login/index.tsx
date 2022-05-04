@@ -54,7 +54,7 @@ export default function LoginPage({ providers, csrfToken }) {
             style={'primary'}
             content={'Log In'}
             type={'submit'}
-            onClick={() => { }}
+            onClick={() => {}}
           />
           <Button
             style={'secondary'}
