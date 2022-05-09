@@ -1,10 +1,11 @@
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
@@ -48,6 +49,7 @@ model User {
   id            Int          @id @default(autoincrement())
   email         String?      @unique
   password      String?
+  birthYear     String?
   name          String?      @unique
   emailVerified DateTime?    @map(name: "emailVerified")
   image         String?

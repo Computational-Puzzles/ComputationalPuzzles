@@ -13,7 +13,7 @@ export type LogoProps = {
 };
 
 export type InputProps = {
-  type: 'text' | 'password' | 'email' | 'number';
+  type: 'text' | 'password' | 'email';
   id: string;
   required: boolean;
   placeholder?: string;
@@ -24,4 +24,5 @@ export type InputProps = {
   setInputVal?: Dispatch<SetStateAction<string>>;
   disabled?: boolean;
   onClick?: () => void;
+  pattern?: string;
 };

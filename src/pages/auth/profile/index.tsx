@@ -9,7 +9,8 @@ import {
   getUserByEmail,
   updateUsername
 } from '../../../services';
-import { Header, Input, Button } from '../../../components/Global';
+import { Input, Button } from '../../../components/Global';
+import { Header } from '../../../components/Product';
 import styles from '../../../styles/pages/profile.module.scss';
 
 const ProfilePage = () => {
@@ -143,7 +144,7 @@ const ProfilePage = () => {
                 <span>Birth year:</span>
                 {/* TODO: Load birthyear */}
                 <Input
-                  type="number"
+                  type="text"
                   id="birthyear"
                   placeholder={''}
                   required={false}
