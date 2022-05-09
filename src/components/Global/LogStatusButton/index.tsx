@@ -9,7 +9,7 @@ const LogStatusButton = ({ status, useLogIn }: LogStatusButtonProps) => {
   ) : useLogIn ? (
     <Button style={'flat'} content={'Login'} onClick={() => signIn()} />
   ) : (
-    <Button style={'flat'} content={'Sign In'} link={'/auth/signup'} />
+    <Button style={'flat'} content={'Sign Up'} link={'/auth/signup'} />
   );
 };
 
