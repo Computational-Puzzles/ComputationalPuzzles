@@ -13,7 +13,8 @@ const Input = ({
   value,
   setInputVal,
   disabled,
-  onClick
+  onClick,
+  pattern
 }: InputProps) => {
   const [input, setInput] = useState('');
 
@@ -45,6 +46,7 @@ const Input = ({
             }}
             disabled={disabled} // This will be false if disabled is not passed in
             onClick={onClick}
+            pattern={pattern}
           />
         </div>
       </>
