@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../../../public/assets/logo.jpg';
 import logoStyles from './Logo.module.scss';
-import { LogoProps } from '../../../types/global';
+import type { LogoProps } from '../../../types/global';
 
 const LogoContent = ({ showMark, showType }: LogoProps) => {
   return (

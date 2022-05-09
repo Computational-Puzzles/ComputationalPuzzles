@@ -2,22 +2,39 @@ version: "3.6"
 
 services:
   app:
-    build: .
-    env_file: .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: ${NODE_ENV}
+        DATABASE_URL: ${DATABASE_URL}
+        GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+        GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+        AUTH_SECRET: ${AUTH_SECRET}
+        AUTH_URL: ${AUTH_URL}
+        NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
+        NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN: ${NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN}
+        SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+        SENDGRID_SENDER: ${SENDGRID_SENDER}
+    env_file: .env.production
+    image: computational_puzzles
+    volumes:
+      - ./:/app
     ports:
       - "3000:3000"
-    volumes:
-      - app:/app
     depends_on:
       - db
     networks:
       - app_network
-  
+    links:
+      - db:db
+
   db:
     image: postgres:9.6
+    container_name: computational_puzzle_db
     volumes:
       - db_data:/var/lib/postgresql/data
-    env_file: .env
+    env_file: .env.production
     environment:
       POSTGRES_USER: computational_puzzles
       POSTGRES_PASSWORD: computational_puzzles # This is used to create development database, please change when migrate to production
@@ -28,7 +45,6 @@ services:
       - app_network
 
 volumes:
-  app:
   db_data:
 
 networks:

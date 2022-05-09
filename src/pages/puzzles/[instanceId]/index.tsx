@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
+import styles from '../../../styles/pages/PuzzlePage.module.scss';
 import Image from 'next/image';
-import { getSession, signIn, useSession } from 'next-auth/react';
-import { User } from 'next-auth';
-import { Prisma, Puzzle } from '@prisma/client';
+import Router from 'next/router';
 import toast from 'react-hot-toast';
+
+import { Prisma } from '@prisma/client';
+import { GetServerSideProps } from 'next';
+import { User } from 'next-auth';
+import { getSession, signIn, useSession } from 'next-auth/react';
 import { Button, Difficulty, Navbar } from '../../../components/Global';
 import { FeedbackGif, PuzzleInput } from '../../../components/App';
 import { getPuzzleInstance, submitPuzzleInstance } from '../../../services';
-import { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
-import styles from '../../../styles/pages/PuzzlePage.module.scss';
-import { HandledError } from '../../../types/error';
 import { initializeRandomGifSrc } from '../../../services/feedbackGif';
-import { FeedbackGifList } from '../../../types/feedbackGif';
 import { getRandomGifSrc } from '../../../utils/feedbackGif';
-import Router from 'next/router';
+
+import type { Puzzle } from '@prisma/client';
+import type { HandledError } from '../../../types/error';
+import type { FeedbackGifList } from '../../../types/feedbackGif';
+import type { PuzzleInstanceCustom } from '../../../types/api/puzzles/instances/puzzleInstance';
 
 const PuzzlePage = ({
   puzzleInstance,
@@ -169,23 +172,25 @@ const PuzzlePage = ({
               setAnswer={setAnswer}
             />
           </div>
-          {isAuthenticated ? (
-            <Button
-              style={'primary'}
-              type={'submit'}
-              content={'Submit'}
-              onClick={() =>
-                handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
-              }
-            />
-          ) : (
-            <Button
-              style={'primary'}
-              content={'Login to Submit'}
-              arrowDirection={'right'}
-              onClick={() => signIn()}
-            />
-          )}
+          <div>
+            {isAuthenticated ? (
+              <Button
+                style={'primary'}
+                type={'submit'}
+                content={'Submit'}
+                onClick={() =>
+                  handleSubmit(answer, puzzleInstance, puzzle, randomSeed, user)
+                }
+              />
+            ) : (
+              <Button
+                style={'primary'}
+                content={'Login to Submit'}
+                arrowDirection={'right'}
+                onClick={() => signIn()}
+              />
+            )}
+          </div>
         </section>
       </main>
     </>

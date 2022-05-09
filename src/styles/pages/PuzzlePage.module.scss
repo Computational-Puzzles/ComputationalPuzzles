@@ -22,8 +22,6 @@
   justify-content: space-between;
 
   .text {
-    flex: 0 0 65%;
-    max-width: 65%;
     width: 100%;
     padding: 2rem 2rem;
 
@@ -52,8 +50,7 @@
   }
 
   .image {
-    flex: 0 0 35%;
-    max-width: 35%;
+    flex: 1;
     position: relative;
     width: 100%;
     height: auto;
@@ -93,4 +90,46 @@
 
 .feedbackContainer {
   margin: 3rem 0;
+}
+
+/* MEDIA QUERIES*/
+@media (max-width: 600px) {
+  .card {
+    max-width: 600px;
+    flex-direction: column;
+  }
+}
+@media (max-width: 768px) {
+  .card {
+    max-width: 720px;
+    flex-direction: column;
+  }
+}
+@media (max-width: 992px) {
+  .card {
+    max-width: 960px;
+    flex-direction: column;
+  }
+}
+@media (max-width: 1200px) {
+  .card {
+    max-width: 1140px;
+  }
+  .text {
+    flex: 0 0 65%;
+  }
+  .image {
+    flex: 0 0 35%;
+  }
+}
+@media (min-width: 1200px) {
+  .card {
+    min-width: 1140px;
+  }
+  .text {
+    flex: 0 0 65%;
+  }
+  .image {
+    flex: 0 0 35%;
+  }
 }

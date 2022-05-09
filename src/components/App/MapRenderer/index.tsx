@@ -2,7 +2,11 @@ import React from 'react';
 import { Map, Marker, ZoomControl } from 'pigeon-maps';
 import { maptiler } from 'pigeon-maps/providers';
 import mapRendererStyles from './MapRenderer.module.scss';
-import { MapAnchor, MapMarker, MapRendererProps } from '../../../types/map';
+import type {
+  MapAnchor,
+  MapMarker,
+  MapRendererProps
+} from '../../../types/map';
 
 const MAPTILER_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPTILER_ACCESS_TOKEN;
 

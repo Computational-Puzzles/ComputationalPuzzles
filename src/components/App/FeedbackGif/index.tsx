@@ -1,4 +1,4 @@
-import { FeedbackGifProps } from '../../../types/feedbackGif';
+import type { FeedbackGifProps } from '../../../types/feedbackGif';
 import Image from 'next/image';
 import styles from './FeedbackGif.module.scss';
 

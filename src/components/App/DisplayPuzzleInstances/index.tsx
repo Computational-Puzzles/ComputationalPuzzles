@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import styles from './DisplayPuzzleInstances.module.scss';
-import { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
+import type { PuzzleCustom } from '../../../types/api/puzzles/puzzle';
 import { getAllPuzzleInstances } from '../../../services';
-import { PuzzleInstance } from '@prisma/client';
+import type { PuzzleInstance } from '@prisma/client';
 import { Button } from '../../Global';
 import { QRGenerator } from '../../App';
 import toast from 'react-hot-toast';
 import { getLinkToPuzzleInstance } from '../../../utils/getLinkToPuzzleInstance';
+import Router from 'next/router';
 
 type DisplayPuzzleInstancesProps = {
   puzzlesList: PuzzleCustom[];
@@ -25,6 +26,11 @@ const DisplayPuzzleInstances = ({
   const getPuzzleInstances = async () => {
     setAllPuzzleInstances(await getAllPuzzleInstances());
   };
+
+  const handleRedirectToPuzzlePage = (puzzleInstanceId) => {
+    const linkToPuzzlePage = getLinkToPuzzleInstance(puzzleInstanceId);
+    Router.push(linkToPuzzlePage);
+  }
 
   useEffect(() => {
     getPuzzleInstances();
@@ -99,7 +105,7 @@ const DisplayPuzzleInstances = ({
                     />
                   </div>
                   <div className={styles.puzzleInstancesBodyContentActions}>
-                    <Button
+                    {/* <Button
                       style="secondary"
                       content="View on map"
                       size="sm"
@@ -108,6 +114,16 @@ const DisplayPuzzleInstances = ({
                       onClick={() => {
                         // TODO: View on map service
                         toast('Coming soon ✨');
+                      }}
+                    /> */}
+                    <Button
+                      style="secondary"
+                      content="View Puzzle"
+                      size="sm"
+                      type="button"
+                      arrowDirection="right"
+                      onClick={() => {
+                        handleRedirectToPuzzlePage(puzzleInstance.id);
                       }}
                     />
                     <Button

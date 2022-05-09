@@ -2,14 +2,15 @@ import * as React from 'react';
 import styles from '../../styles/pages/admin.module.scss';
 import Router from 'next/router';
 import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
 import {
   DisplayPuzzleInstances,
   PuzzleGenerate,
   PuzzleInfomation
 } from '../../components/App';
+import { Header } from '../../components/Product';
+import { AdminHeader } from '../../components/Global';
 import { getAllPuzzles, isAdmin } from '../../services';
-import { GetServerSideProps } from 'next';
-import { Header } from '../../components/Global';
 import type { PuzzleCustom } from '../../types/api/puzzles/puzzle';
 
 const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
@@ -17,8 +18,7 @@ const Admin = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
   return (
     <>
       <Header />
-      {/** TODO: Create Header for admin page  */}
-      <h1 className={styles.adminTitle}>Admin Dashboard</h1>
+      <AdminHeader />
       <div className={styles.contentWrap}>
         <div className={styles.contentLeftWrap}>
           <PuzzleGenerate
@@ -70,7 +70,6 @@ const AdminValidation = ({ puzzlesList }: { puzzlesList: PuzzleCustom[] }) => {
   return (
     status === 'unauthenticated' && (
       <>
-        {/** TODO: Create Header for admin page  */}
         You are not authenticated <br />
         <button onClick={() => Router.push('/')}>Home</button>
       </>

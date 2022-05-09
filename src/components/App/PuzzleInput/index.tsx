@@ -1,5 +1,5 @@
 import React from 'react';
-import { PuzzleInputProps } from '../../../types/puzzle';
+import type { PuzzleInputProps } from '../../../types/puzzle';
 import { Input } from '../../Global';
 
 import styles from './PuzzleInput.module.scss';
